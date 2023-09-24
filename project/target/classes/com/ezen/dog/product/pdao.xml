@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ezen.dog.product.Pservice">
+<select id="productouttotal" resultType="com.ezen.dog.product.ProductDTO">
+	select * from product where category1_id=#{param1}
+</select>
+<select id="productout" resultType="com.ezen.dog.product.ProductDTO">
+	select * from product where category1_id=#{param1} and category2_id=#{param2}
+</select>
+<select id="productdetail" resultType="com.ezen.dog.product.ProductDTO">
+	select * from product where product_id=#{param1}
+</select>
+
+</mapper>
