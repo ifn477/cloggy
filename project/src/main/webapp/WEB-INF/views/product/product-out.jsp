@@ -5,6 +5,12 @@
 <!DOCTYPE html>
 <html>
 <head>
+<style type="text/css">
+table{
+ margin-bottom: 150px;
+}
+
+</style>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>

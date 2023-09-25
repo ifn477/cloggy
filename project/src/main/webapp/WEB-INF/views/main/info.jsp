@@ -24,13 +24,13 @@
 <b>고객센터 이용시간</b> 월~금 09:00 ~ 18:00 (12:00 ~ 13:00 점심시간)<br>
 경기 파주시 회동길 125-11 효형출판 2층 (우)10881<br><br>
 
-<div id="map" style="width:500px;height:350px;"></div>
+<div id="map"></div>
 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=6b2e261752eb139b8bf49db8b9e7cf02"></script>
 <script>
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
     mapOption = { 
-        center: new kakao.maps.LatLng(37.707401, 126.687244), // 지도의 중심좌표
+        center: new kakao.maps.LatLng(37.706601, 126.687244), // 지도의 중심좌표
         level: 3 // 지도의 확대 레벨
     };
 
