@@ -40,4 +40,41 @@
 		<put-attribute name="body" value="/WEB-INF/views/main/info.jsp"/>
 	</definition>
 	
+		<definition name="memberinput" extends="baseLayout">
+		<put-attribute name="title" value="회원입력"/>
+		<put-attribute name="body" value="/WEB-INF/views/member/memberinput.jsp"/>
+	</definition>
+	
+	<definition name="qna-input" extends="baseLayout">
+		<put-attribute name="title" value="문의입력"/>
+		<put-attribute name="body" value="/WEB-INF/views/qna/qna-input.jsp"/>
+	</definition>
+	
+	<definition name="qna-out" extends="baseLayout">
+		<put-attribute name="title" value="문의출력"/>
+		<put-attribute name="body" value="/WEB-INF/views/qna/qna-out.jsp"/>
+	</definition>
+	
+	<definition name="qna-detail" extends="baseLayout">
+		<put-attribute name="title" value="문의내역"/>
+		<put-attribute name="body" value="/WEB-INF/views/qna/qna-detail.jsp"/>
+	</definition>
+	
+	<definition name="qna-replyview" extends="baseLayout">
+		<put-attribute name="title" value="문의답변"/>
+		<put-attribute name="body" value="/WEB-INF/views/qna/qna-replyview.jsp"/>
+	</definition>
+	
+	<definition name="qna-modifyForm" extends="baseLayout">
+		<put-attribute name="title" value="문의수정폼"/>
+		<put-attribute name="body" value="/WEB-INF/views/qna/qna-modifyForm.jsp"/>
+	</definition>
+	
+	<definition name="qna-searchview" extends="baseLayout">
+		<put-attribute name="title" value="문의검색"/>
+		<put-attribute name="body" value="/WEB-INF/views/qna/qna-searchview.jsp"/>
+	</definition>
+	
+	
+	
 </tiles-definitions>
