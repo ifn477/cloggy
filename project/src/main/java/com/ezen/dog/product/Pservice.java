@@ -8,5 +8,5 @@ public interface Pservice {
 	//대분류, 중분류
 	public ArrayList<ProductDTO> productout(int a, int b);
 	//제품 상세페이지
-	public ProductDTO productdetail(int a);
+	public ArrayList<ProductDTO> productdetail(int a);
 }

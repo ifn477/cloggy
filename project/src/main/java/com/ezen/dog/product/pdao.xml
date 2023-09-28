@@ -12,5 +12,4 @@
 <select id="productdetail" resultType="com.ezen.dog.product.ProductDTO">
 	select * from product where product_id=#{param1}
 </select>
-
 </mapper>

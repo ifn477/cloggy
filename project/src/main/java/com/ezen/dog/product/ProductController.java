@@ -23,7 +23,7 @@ public class ProductController {
 	SqlSession sqlsession;
 	
 	String imgPath = "C:\\Users\\dywlr\\OneDrive\\문서\\카카오톡 받은 파일\\3조\\project\\src\\main\\webapp\\image";
-	
+	ArrayList<ProductDTO> list;
 	
 	//전체보기
 	@RequestMapping(value = "/product-out-total")
@@ -52,13 +52,14 @@ public class ProductController {
 		return "product-out";
 	}
 	
+	//상품 상세보기
 	@RequestMapping(value = "/product-detail")
 	public String productdetail(HttpServletRequest request, Model mo) {
 		int product_id = Integer.parseInt(request.getParameter("product_id"));
 		
 		Pservice ps = sqlsession.getMapper(Pservice.class);
-		ProductDTO dto = ps.productdetail(product_id);
-		mo.addAttribute("dto", dto);
+		list = ps.productdetail(product_id);
+		mo.addAttribute("list", list);
 		
 		return "product-detail";
 	}
