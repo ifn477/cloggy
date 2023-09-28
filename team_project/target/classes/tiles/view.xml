@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+"-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+"http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+<tiles-definitions>
+	<definition name="baseLayout" template="/WEB-INF/views/main/layout.jsp">
+		<put-attribute name="title" value=""/>
+		<put-attribute name="top" value="/WEB-INF/views/main/top.jsp"/>
+		<put-attribute name="body" value=""/>
+		<put-attribute name="footer" value="/WEB-INF/views/main/footer.jsp"/>
+	</definition>
+	
+	<definition name="main" extends="baseLayout">
+		<put-attribute name="title" value="메인화면"/>
+		<put-attribute name="body" value="/WEB-INF/views/main/main.jsp"/>
+	</definition>
+	
+	<definition name="product-input" extends="baseLayout">
+		<put-attribute name="title" value="상품입력"/>
+		<put-attribute name="body" value="/WEB-INF/views/product/product-input.jsp"/>
+	</definition>
+	
+	<definition name="product-out" extends="baseLayout">
+		<put-attribute name="title" value="상품리스트"/>
+		<put-attribute name="body" value="/WEB-INF/views/product/product-out.jsp"/>
+	</definition>
+	
+	<definition name="product-detail" extends="baseLayout">
+		<put-attribute name="title" value="상품페이지"/>
+		<put-attribute name="body" value="/WEB-INF/views/product/product-detail.jsp"/>
+	</definition>
+	
+	<definition name="product-modifyForm" extends="baseLayout">
+		<put-attribute name="title" value="상품수정"/>
+		<put-attribute name="body" value="/WEB-INF/views/product/product-modifyForm.jsp"/>
+	</definition>
+	
+	<definition name="info" extends="baseLayout">
+		<put-attribute name="title" value="회사정보"/>
+		<put-attribute name="body" value="/WEB-INF/views/main/info.jsp"/>
+	</definition>
+	
+</tiles-definitions>

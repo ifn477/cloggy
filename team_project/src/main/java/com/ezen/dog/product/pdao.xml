@@ -1,0 +1,36 @@
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ezen.dog.product.PService">
+<!-- 상품입력 -->
+<insert id="productinput">
+insert into product values(product_id_seq.nextval,#{param1},#{param2},#{param3},#{param4}
+						   ,#{param5},#{param6},#{param7},sysdate,0,0)
+</insert>
+<!-- 상품리스트 -->
+<select id="productout" resultType="com.ezen.dog.product.ProductDTO">
+select * from product
+</select>
+<!-- 상품상세페이지 -->
+<select id="productdetail" resultType="com.ezen.dog.product.ProductDTO">
+select * from product where product_id=#{param1}
+</select>
+<!-- 상품조회수 -->
+<update id="productcount">
+update product set p_hits = p_hits+1 where product_id=#{param1}
+</update>
+<!-- 상품수정입력창 -->
+<select id="productmodifyForm" resultType="com.ezen.dog.product.ProductDTO">
+select * from product where product_id=#{param1}
+</select>
+<!-- 상품정보수정 -->
+<update id="productmodifyView">
+update product set category_id=#{param1}, p_name=#{param3}, p_price=#{param4}, p_info=#{param5},
+		           p_image=#{param6}, p_thumbnail=#{param7}, p_stock=#{param8},
+		           p_enroll=#{param9} where product_id=#{param2}
+</update>
+<delete id="productdelete">
+delete from product where product_id=#{param2}
+</delete>
+</mapper>
