@@ -18,6 +18,15 @@
       <a class="navbar-brand" href="main" id="maintext">MAIN</a>
     </div>
     <ul class="nav navbar-nav">
+    
+        <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">회원<span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li><a href="memberinput">회원입력</a></li>
+          <li><a href="#">카테1-2</a></li>
+          <li><a href="#">카테1-3</a></li>
+        </ul>
+      </li>
+    
         <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">관리자상품관리<span class="caret"></span></a>
         <ul class="dropdown-menu">
           <li><a href="product-input">상품입력</a></li>
@@ -99,7 +108,9 @@
 				data-toggle="dropdown" href="#">회사정보<span class="caret"></span></a>
 				<ul class="dropdown-menu">
 					<li><a href="info"> 회사정보 </a></li>
-					<li><a href="qna-out"> 문의 게시판 </a></li>
+					 <li><a href="qna-input">Q&A입력</a></li>
+        			 <li><a href="qna-out">Q&A게시판</a></li>
+       				 <li><a href="#">카테2-3</a></li>
 				</ul></li>	
       
      </ul>
