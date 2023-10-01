@@ -3,6 +3,7 @@ package com.ezen.dog.member;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +22,7 @@ public class Membercontroller {
 	@RequestMapping(value = "/memberinput")
 	public String memberinput()
 	{
-		return "memberinput";
+		return "member-input";
 	}
 
 	@RequestMapping(value = "/membersave",method = RequestMethod.POST)
@@ -36,7 +37,7 @@ public class Membercontroller {
 		String phone = request.getParameter("phone");
 		String address = request.getParameter("address");
 		Mservice ms = sqlSession.getMapper(Mservice.class);
-		ms.insertm(userId,password,userName,age,gender,email,phone,address);
+		ms.membersave(userId,password,userName,age,gender,email,phone,address);
 		
 		
 		return "redirect:main";
@@ -128,4 +129,42 @@ public class Membercontroller {
 				}
 				return bb;
 			}
+			
+		// 내정보 조회
+		@RequestMapping(value = "/member-info")
+		public String memberinfo(HttpServletRequest request, Model mo) {
+			String userId = request.getParameter("userId");
+			Mservice ms = sqlSession.getMapper(Mservice.class);
+			ArrayList<MemberDTO> list = ms.memberinfo(userId);
+			mo.addAttribute("list",list);
+		return "member-info";
+		}	
+		
+		// 회원 탈퇴
+		@RequestMapping(value = "/member-deleteSelf")
+		public String memberdeleteSelf(HttpServletRequest request) {
+				String userId = request.getParameter("userId");
+				Mservice ms = sqlSession.getMapper(Mservice.class);
+				ms.memberdeleteSelf(userId);
+
+
+				HttpSession hs = request.getSession();
+				hs.removeAttribute("member");
+				hs.setAttribute("loginstate", false);
+				return "redirect:/";
+
+		}
+			
+		// 주소 input
+		@RequestMapping(value = "/Sample")
+		public String Sample() {
+			return "Sample";
+		}
+			
+		// 주소 popup
+		@RequestMapping(value = "/jusoPopup")
+		public String jusoPopup() {
+			return "jusoPopup";
+		}
+		
 }

@@ -4,20 +4,21 @@
 
 <mapper namespace="com.ezen.dog.member.Mservice">
 
-<insert id="insertm">
-insert into member (userId,password,userName, age,gender,email,phone,address)  values (#{param1},#{param2},#{param3},#{param4},#{param5},#{param6},#{param7},#{param8})
+<insert id="membersave">
+insert into member values(#{param1},0,#{param2},#{param3},#{param4},#{param5},#{param6},#{param7},#{param8},sysdate,sysdate)
 </insert>
+
 <select id="memberout" resultType="com.ezen.dog.member.MemberDTO">
-select * from member
+select userId,password,userName,age,gender,email,phone,address,enroll_date,last_update from member
 </select>
 
 <select id="membermodifyForm" resultType="com.ezen.dog.member.MemberDTO">
-select * from member where userId=#{param1}
+select userId,password,userName,age,gender,email,phone,address,enroll_date from member where userId=#{param1}
 </select>
 
 <update id="membermodifyView" parameterType="com.ezen.dog.member.MemberDTO">
 update member set password=#{param2},userName=#{param3},age=#{param4},
-gender=#{param5},email=#{param6},phone=#{param7},address=#{param8} where userId=#{param1}
+gender=#{param5},email=#{param6},phone=#{param7},address=#{param8},last_update=sysdate where userId=#{param1}
 </update>
 
 <update id="memberdelete" parameterType="com.ezen.dog.member.MemberDTO">
@@ -25,19 +26,26 @@ delete from member where userId=#{param1}
 </update>
 
 <select id="membersearchViewId" resultType="com.ezen.dog.member.MemberDTO">
-select * from member where userId like '%' || #{param1} || '%'
+select userId,password,userName,age,gender,email,phone,address,enroll_date from member where userId like '%' || #{param1} || '%'
 </select>
 
 <select id="membersearchViewName" resultType="com.ezen.dog.member.MemberDTO">
-select * from member where userName like '%' || #{param1} || '%'
+select userId,password,userName,age,gender,email,phone,address,enroll_date from member where userName like '%' || #{param1} || '%'
 </select>
 
 <select id="membersearchViewEmail" resultType="com.ezen.dog.member.MemberDTO">
-select * from member where email like '%' || #{param1} || '%'
+select userId,password,userName,age,gender,email,phone,address,enroll_date from member where email like '%' || #{param1} || '%'
 </select>
 
 <select id="idcheck" resultType="int">
 select count(*) from member where userId=#{param1}
 </select>
 
+<select id="memberinfo" resultType="com.ezen.dog.member.MemberDTO">
+select userId,password,userName,age,gender,email,phone,address,enroll_date from member where userId=#{param1}
+</select>
+
+<delete id="memberdeleteSelf">
+delete from member where userId=#{param1}
+</delete>
 </mapper>

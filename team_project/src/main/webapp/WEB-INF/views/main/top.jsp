@@ -21,7 +21,7 @@
     
         <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">회원<span class="caret"></span></a>
         <ul class="dropdown-menu">
-          <li><a href="memberinput">회원입력</a></li>
+          <li><a href="member-input">회원가입</a></li>
           <li><a href="#">카테1-2</a></li>
           <li><a href="#">카테1-3</a></li>
         </ul>
@@ -123,8 +123,7 @@
 						<li><a href="member-out">출력/ 수정/ 삭제</a></li>
 						<li><a href="member-searchForm">검색</a></li>
 						<li class="divider">
-						<li><a href="member-searchForm">내정보</a></li>
-						<li><a href="member-searchForm">회원 탈퇴</a></li>
+						<li><a href="member-info?userId=${member.userId}">내정보</a></li>
 					</ul>
 				</li>
       			<li><a href="logout"><span class="glyphicon glyphicon-log-in"></span>Logout</a></li>

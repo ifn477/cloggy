@@ -40,9 +40,9 @@
 		<put-attribute name="body" value="/WEB-INF/views/main/info.jsp"/>
 	</definition>
 	
-		<definition name="memberinput" extends="baseLayout">
+		<definition name="member-input" extends="baseLayout">
 		<put-attribute name="title" value="회원입력"/>
-		<put-attribute name="body" value="/WEB-INF/views/member/memberinput.jsp"/>
+		<put-attribute name="body" value="/WEB-INF/views/member/member-input.jsp"/>
 	</definition>
 	
 	<definition name="qna-input" extends="baseLayout">
@@ -79,7 +79,12 @@
 		<put-attribute name="title" value="로그인폼"/>
 		<put-attribute name="body" value="/WEB-INF/views/login/login-input.jsp"/>
 	</definition>
-
+	
+	<definition name="login-input" extends="baseLayout">
+		<put-attribute name="title" value="메인화면"/>
+		<put-attribute name="body" value="/WEB-INF/views/login/login-input.jsp"/>
+	</definition>
+	
 	<definition name="member-out" extends="baseLayout">
 		<put-attribute name="title" value="회원목록"/>
 		<put-attribute name="body" value="/WEB-INF/views/member/member-out.jsp"/>
@@ -94,5 +99,16 @@
 		<put-attribute name="title" value="회원검색"/>
 		<put-attribute name="body" value="/WEB-INF/views/member/member-searchForm.jsp"/>
 	</definition>	
+	
+		<definition name="member-info" extends="baseLayout">
+		<put-attribute name="title" value="메인화면"/>
+		<put-attribute name="body" value="/WEB-INF/views/member/member-info.jsp"/>
+	</definition>
+	
+	<definition name="jusoPopup" extends="baseLayout">
+		<put-attribute name="title" value="메인화면"/>
+		<put-attribute name="body" value="/WEB-INF/views/juso/jusoPopup.jsp"/>
+	</definition>
+	
 	
 </tiles-definitions>

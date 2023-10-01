@@ -4,34 +4,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<script type="text/javascript">
-$(function(){
-	$("#button1").click(function(){
-		var userId = $("#userId").val();
-		$.ajax({
-			type:"post",
-			async:true,
-			url:"idcheck",
-			data:{"userId":userId},
-			success:function(result){
-				if(result=="ok"){
-					alert("사용가능 ID");
-				}
-				else{
-					alert("사용중인 ID");
-				}
-			},	
-			error:function(){
-				alert("에러")
-			}
-		});
-	});
-});
-</script>
+<script type="text/javascript" src="./js/member.js"></script>
 </head>
-<body>
 
-<form action="member-save">
+<body>
+<form action="member-save" method="post" id="form" name="form">
 <table border="1" align="center">
 <tr>
 <th>아이디</th><td><input type="text" name="userId" id="userId"></td>
@@ -46,7 +23,11 @@ $(function(){
 </td></tr>
 <tr><th>이메일</th><td colspan="2"><input type="text" name="email"></td></tr>
 <tr><th>핸드폰 번호</th><td colspan="2"><input type="text" name="phone"></td></tr>
-<tr><th>집주소</th><td colspan="2"><input type="text" name="address"></td></tr>
+<tr>
+<td>주소</td>
+<td><input type="text" id="roadFullAddr"  name="roadFullAddr" /></td>
+<td><input type="button" onClick="goPopup();" value="검색"/></td>
+</tr>
 <tr>
 <td colspan="3">
 <input type="submit" value="제출">
@@ -55,6 +36,7 @@ $(function(){
 </tr>
 </table>
 </form>
+<br>
 
 </body>
 </html>

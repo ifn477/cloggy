@@ -22,7 +22,7 @@
 </td></tr>
 <tr><th>이메일</th><td><input type="text" name="email" value="${dto.email}"></td></tr>
 <tr><th>핸드폰 번호</th><td><input type="text" name="phone" value="${dto.phone}"></td></tr>
-<tr><th>집주소</th><td><input type="text" name="address" value="${dto.address}"></td></tr>
+<tr><th>주소</th><td><input type="text" name="address" value="${dto.address}"></td></tr>
 <tr>
 <td colspan="2">
 <input type="submit" value="제출">
