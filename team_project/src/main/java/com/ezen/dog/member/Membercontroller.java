@@ -19,13 +19,13 @@ public class Membercontroller {
 	@Autowired
 	SqlSession sqlSession;
 	
-	@RequestMapping(value = "/memberinput")
+	@RequestMapping(value = "/member-input")
 	public String memberinput()
 	{
 		return "member-input";
 	}
 
-	@RequestMapping(value = "/membersave",method = RequestMethod.POST)
+	@RequestMapping(value = "/member-save",method = RequestMethod.POST)
 	public String membersave(HttpServletRequest request)
 	{
 		String userId = request.getParameter("userId");
@@ -35,10 +35,9 @@ public class Membercontroller {
 		String gender = request.getParameter("gender");
 		String email = request.getParameter("email");
 		String phone = request.getParameter("phone");
-		String address = request.getParameter("address");
+		String address = request.getParameter("roadFullAddr");
 		Mservice ms = sqlSession.getMapper(Mservice.class);
 		ms.membersave(userId,password,userName,age,gender,email,phone,address);
-		
 		
 		return "redirect:main";
 	}
@@ -73,7 +72,7 @@ public class Membercontroller {
 			String gender = request.getParameter("gender");
 			String email = request.getParameter("email");
 			String phone = request.getParameter("phone");
-			String address = request.getParameter("address");
+			String address = request.getParameter("roadFullAddr");
 			
 			Mservice ms = sqlSession.getMapper(Mservice.class);
 			ms.membermodifyView(userId, password, userName, age, gender, email, phone, address);
@@ -153,12 +152,6 @@ public class Membercontroller {
 				hs.setAttribute("loginstate", false);
 				return "redirect:/";
 
-		}
-			
-		// 林家 input
-		@RequestMapping(value = "/Sample")
-		public String Sample() {
-			return "Sample";
 		}
 			
 		// 林家 popup

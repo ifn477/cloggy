@@ -21,7 +21,6 @@
     
         <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">회원<span class="caret"></span></a>
         <ul class="dropdown-menu">
-          <li><a href="member-input">회원가입</a></li>
           <li><a href="#">카테1-2</a></li>
           <li><a href="#">카테1-3</a></li>
         </ul>
@@ -131,7 +130,7 @@
 	</c:when>
 	<c:otherwise>
 		    <ul class="nav navbar-nav navbar-right">
-      			<li><a href="memberinput"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+      			<li><a href="member-input"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
       			<li><a href="login-input"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
    			</ul>
 	</c:otherwise>

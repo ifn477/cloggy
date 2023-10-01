@@ -6,7 +6,6 @@
 <title>Insert title here</title>
 <% 
 	//request.setCharacterEncoding("UTF-8");  //한글깨지면 주석제거
-	//request.setCharacterEncoding("EUC-KR");  //해당시스템의 인코딩타입이 EUC-KR일경우에
 	String inputYn = request.getParameter("inputYn"); 
 	String roadFullAddr = request.getParameter("roadFullAddr"); 
 	String roadAddrPart1 = request.getParameter("roadAddrPart1"); 
@@ -45,6 +44,7 @@ function init(){
 	var confmKey = "U01TX0FVVEgyMDIzMDkyODIwNTIxMTExNDEzNjQ=";
 	var resultType = "4";
 	var inputYn= "<%=inputYn%>";
+	
 	if(inputYn != "Y"){
 		document.form.confmKey.value = confmKey;
 		document.form.returnUrl.value = url;

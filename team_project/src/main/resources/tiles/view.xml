@@ -71,8 +71,13 @@
 	</definition>
 	
 	<definition name="qna-searchview" extends="baseLayout">
-		<put-attribute name="title" value="문의목록"/>
+		<put-attribute name="title" value="문의검색"/>
 		<put-attribute name="body" value="/WEB-INF/views/qna/qna-searchview.jsp"/>
+	</definition>
+	
+	<definition name="member-input" extends="baseLayout">
+		<put-attribute name="title" value="회원입력"/>
+		<put-attribute name="body" value="/WEB-INF/views/member/member-input.jsp"/>
 	</definition>
 	
 		<definition name="login-input" extends="baseLayout">
@@ -100,7 +105,7 @@
 		<put-attribute name="body" value="/WEB-INF/views/member/member-searchForm.jsp"/>
 	</definition>	
 	
-		<definition name="member-info" extends="baseLayout">
+	<definition name="member-info" extends="baseLayout">
 		<put-attribute name="title" value="메인화면"/>
 		<put-attribute name="body" value="/WEB-INF/views/member/member-info.jsp"/>
 	</definition>
@@ -109,6 +114,6 @@
 		<put-attribute name="title" value="메인화면"/>
 		<put-attribute name="body" value="/WEB-INF/views/juso/jusoPopup.jsp"/>
 	</definition>
-	
+
 	
 </tiles-definitions>
