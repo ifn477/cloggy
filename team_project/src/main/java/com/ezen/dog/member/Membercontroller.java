@@ -1,16 +1,22 @@
 package com.ezen.dog.member;
 
+import java.io.IOException;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
@@ -115,19 +121,19 @@ public class Membercontroller {
 		}
 		
 		// 아이디 중복 검사
-			@ResponseBody
-			@RequestMapping(value="/idcheck")
-			public String idcheck(String userId) {
-				Mservice ms = sqlSession.getMapper(Mservice.class);
-				int count = ms.idcheck(userId);
-				String bb=null;
-				if(count==0) {
-					bb="ok";
-				}else {
-					bb="no";
-				}
-				return bb;
+		@ResponseBody
+		@RequestMapping(value="/idcheck")
+		public String idcheck(String userId) {
+			Mservice ms = sqlSession.getMapper(Mservice.class);
+			int count = ms.idcheck(userId);
+			String bb=null;
+			if(count==0) {
+				bb="ok";
+			}else {
+				bb="no";
 			}
+			return bb;
+		}
 			
 		// 내정보 조회
 		@RequestMapping(value = "/member-info")
@@ -153,11 +159,31 @@ public class Membercontroller {
 				return "redirect:/";
 
 		}
-			
-		// 주소 popup
+		
+		// 주소 팝업 api
 		@RequestMapping(value = "/jusoPopup")
 		public String jusoPopup() {
 			return "jusoPopup";
 		}
+
+		// 이메일 발송
+		@RequestMapping(value = "/mail-send")
+		public String Mailsend(HttpServletRequest request) throws IOException {
+			String email = request.getParameter("email");
+			MailSend.sendMail(email);
+			return "redirect:member-input";
+		}
 		
+		// 인증메일 확인
+		@ResponseBody
+		@RequestMapping(value = "/verifyKey", produces = "application/json; charset=utf8")
+		public boolean verifyKey(HttpServletRequest request) throws IOException {
+			String email = request.getParameter("email");
+			String userInputKey = request.getParameter("userInputKey");
+			System.out.println("메일 : "+email+" 인증 코드 : "+ userInputKey);
+			boolean codeCheck = MailSend.verifyKey(email, userInputKey);
+			System.out.println("일치 불일치 여부는 "+codeCheck);
+			return codeCheck;
+		}
 }
+		

@@ -47,9 +47,9 @@ function goPopup(){
 }
 
 
-function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAddr, jibunAddr, zipNo, admCd, rnMgtSn, bdMgtSn,detBdNmList,bdNm,bdKdcd,siNm,sggNm,emdNm,liNm,rn,udrtYn,buldMnnm,buldSlno,mtYn,lnbrMnnm,lnbrSlno,emdNo){
-		// 팝업페이지에서 주소입력한 정보를 받아서, 현 페이지에 정보를 등록
+function jusoCallBack(roadFullAddr,addrDetail){
 		document.form.roadFullAddr.value = roadFullAddr;
+		/**
 		document.form.roadAddrPart1.value = roadAddrPart1;
 		document.form.roadAddrPart2.value = roadAddrPart2;
 		document.form.addrDetail.value = addrDetail;
@@ -60,7 +60,6 @@ function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAdd
 		document.form.rnMgtSn.value = rnMgtSn;
 		document.form.bdMgtSn.value = bdMgtSn;
 		document.form.detBdNmList.value = detBdNmList;
-		/** 2017년 2월 추가제공 **/
 		document.form.bdNm.value = bdNm;
 		document.form.bdKdcd.value = bdKdcd;
 		document.form.siNm.value = siNm;
@@ -74,7 +73,64 @@ function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAdd
 		document.form.mtYn.value = mtYn;
 		document.form.lnbrMnnm.value = lnbrMnnm;
 		document.form.lnbrSlno.value = lnbrSlno;
-		/** 2017년 3월 추가제공 **/
 		document.form.emdNo.value = emdNo;
+		**/
 		
 }
+
+$(function(){
+    $("#button3").click(function(){
+        var confirmation = confirm('인증 번호를 이메일로 전송합니다.');
+        if (confirmation) {
+            var email = $("#email").val();
+            $.ajax({
+                url: "mail-send",
+                method: "POST",
+                data: { email: email },
+                success: function(data) {
+                        alert("메일 전송 성공! 인증 번호를 확인하세요.");
+                },
+                error: function(error) {
+                    alert("메일 전송 실패! 다시 시도해주세요.");
+                }
+            });
+        }
+        else {
+            console.log("Email sending canceled");
+        }
+    });
+});
+
+$(function() {
+    $("#button4").on("click", function() {
+        var email = $("#email").val();
+        var userInputKey = $("#userInputKey").val();
+
+        $.ajax({
+            type: "POST",
+            url: "verifyKey",
+            data: {
+                email: email,
+                userInputKey: userInputKey
+            },
+            success: function(result) {
+                if (result) {
+                    alert("인증 성공! 회원 가입을 계속 진행하세요.");
+                    $("#button4").prop("disabled", true);
+                } else {
+                    alert("인증 실패! 인증번호를 확인하세요.");
+                }
+            },
+            error: function(xhr, status, error) {
+                alert("에러");
+            }
+        });
+    });
+    
+    $("#form").submit(function(event) {
+        if (!$("#button4").prop("disabled")) {
+            event.preventDefault();
+            alert("메일 인증이 완료되어야 합니다.");
+        }
+    });
+});

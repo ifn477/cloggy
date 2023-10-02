@@ -8,9 +8,10 @@
 	//request.setCharacterEncoding("UTF-8");  //한글깨지면 주석제거
 	String inputYn = request.getParameter("inputYn"); 
 	String roadFullAddr = request.getParameter("roadFullAddr"); 
+	/**
 	String roadAddrPart1 = request.getParameter("roadAddrPart1"); 
 	String roadAddrPart2 = request.getParameter("roadAddrPart2"); 
-	String engAddr = request.getParameter("engAddr"); 
+	String engAddr = request.getParameter("engAddr");
 	String jibunAddr = request.getParameter("jibunAddr"); 
 	String zipNo = request.getParameter("zipNo"); 
 	String addrDetail = request.getParameter("addrDetail"); 
@@ -18,7 +19,6 @@
 	String rnMgtSn = request.getParameter("rnMgtSn");
 	String bdMgtSn  = request.getParameter("bdMgtSn");
 	String detBdNmList  = request.getParameter("detBdNmList");	
-	/** 2017년 2월 추가제공 **/
 	String bdNm  = request.getParameter("bdNm");
 	String bdKdcd  = request.getParameter("bdKdcd");
 	String siNm  = request.getParameter("siNm");
@@ -32,13 +32,12 @@
 	String mtYn  = request.getParameter("mtYn");
 	String lnbrMnnm  = request.getParameter("lnbrMnnm");
 	String lnbrSlno  = request.getParameter("lnbrSlno");
-	/** 2017년 3월 추가제공 **/
 	String emdNo  = request.getParameter("emdNo");
+	**/
 
 %>
 </head>
 <script language="javascript">
-
 function init(){
 	var url = location.href;
 	var confmKey = "U01TX0FVVEgyMDIzMDkyODIwNTIxMTExNDEzNjQ=";
@@ -53,7 +52,7 @@ function init(){
 		document.form.submit();
 
 	}else{
-		opener.jusoCallBack("<%=roadFullAddr%>","<%=roadAddrPart1%>","<%=addrDetail%>","<%=roadAddrPart2%>","<%=engAddr%>","<%=jibunAddr%>","<%=zipNo%>", "<%=admCd%>", "<%=rnMgtSn%>", "<%=bdMgtSn%>", "<%=detBdNmList%>", "<%=bdNm%>", "<%=bdKdcd%>", "<%=siNm%>", "<%=sggNm%>", "<%=emdNm%>", "<%=liNm%>", "<%=rn%>", "<%=udrtYn%>", "<%=buldMnnm%>", "<%=buldSlno%>", "<%=mtYn%>", "<%=lnbrMnnm%>", "<%=lnbrSlno%>", "<%=emdNo%>");
+		opener.jusoCallBack("<%=roadFullAddr%>");
 		window.close();
 		}
 }

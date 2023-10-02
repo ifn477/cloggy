@@ -2,7 +2,7 @@ package com.ezen.dog.member;
 
 import java.util.ArrayList;
 
-public interface Mservice {
+public interface MailService {
 	public void membersave(String userId,String password,String userName,int age,String gender,String email,String phone,String address);
 	public ArrayList<MemberDTO> memberout();
 	public ArrayList<MemberDTO> membermodifyForm(String userId);
