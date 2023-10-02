@@ -3,35 +3,12 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <script type="text/javascript" src="/dog/js/check.js"></script>
 <meta charset="UTF-8">
-<script type="text/javascript">
-$(function(){
-	$("#button1").click(function(){
-		var userId = $("#userId").val();
-		$.ajax({
-			type:"post",
-			async:true,
-			url:"idcheck",
-			data:{"userId":userId},
-			success:function(result){
-				if(result=="ok"){
-					alert("사용가능 ID");
-				}
-				else{
-					alert("사용중인 ID");
-				}
-			},	
-			error:function(){
-				alert("에러")
-			}
-		});
-	});
-});
-</script>
 </head>
 <body>
 
-<form action="member-save">
+<form action="member-save" method="post" name="memberincheck">
 <table border="1" align="center">
 <tr>
 <th>아이디</th><td><input type="text" name="userId" id="userId"></td>
@@ -49,7 +26,7 @@ $(function(){
 <tr><th>집주소</th><td colspan="2"><input type="text" name="address"></td></tr>
 <tr>
 <td colspan="3">
-<input type="submit" value="제출">
+<input type="button" value="확인" onclick="memcheck()">
 <input type="reset" value="취소">
 </td>
 </tr>

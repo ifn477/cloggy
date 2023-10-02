@@ -3,17 +3,18 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <script type="text/javascript" src="/dog/js/check.js"></script>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
-<form action="login">
+<form action="login" method="post" name="logincheck">
 <table border="1" align="center">
 <tr><th>아이디</th><td><input type="text" name="userId"></td></tr>
 <tr><th>비밀번호</th><td><input type="password" name="password"></td></tr>
 <tr>
 <td colspan="2">
-<input type="submit" value="제출">
+<input type="button" value="확인" onclick="check()">
 <input type="reset" value="취소">
 </td>
 </tr>

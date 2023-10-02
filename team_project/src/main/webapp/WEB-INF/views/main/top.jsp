@@ -132,7 +132,7 @@
 	</c:when>
 	<c:otherwise>
 		    <ul class="nav navbar-nav navbar-right">
-      			<li><a href="memberinput"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+      			<li><a href="member-input"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
       			<li><a href="login-input"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
    			</ul>
 	</c:otherwise>

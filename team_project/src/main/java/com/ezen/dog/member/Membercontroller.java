@@ -18,13 +18,13 @@ public class Membercontroller {
 	@Autowired
 	SqlSession sqlSession;
 	
-	@RequestMapping(value = "/memberinput")
+	@RequestMapping(value = "/member-input")
 	public String memberinput()
 	{
-		return "memberinput";
+		return "member-input";
 	}
 
-	@RequestMapping(value = "/membersave",method = RequestMethod.POST)
+	@RequestMapping(value = "/member-save",method = RequestMethod.POST)
 	public String membersave(HttpServletRequest request)
 	{
 		String userId = request.getParameter("userId");
