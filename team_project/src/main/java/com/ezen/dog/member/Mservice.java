@@ -13,4 +13,5 @@ public interface Mservice {
 	public ArrayList<MemberDTO> membersearchViewName(String userId);
 	public ArrayList<MemberDTO> membersearchViewEmail(String userId);
 	public int idcheck(String userId);
+	public void kakaomember(String nicknaem, String email);
 }

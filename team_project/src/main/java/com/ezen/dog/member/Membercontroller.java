@@ -1,8 +1,10 @@
 package com.ezen.dog.member;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +12,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
+
 
 @Controller
 public class Membercontroller {
@@ -127,5 +132,23 @@ public class Membercontroller {
 					bb="no";
 				}
 				return bb;
+			}
+			
+			
+			//ReqeustParam으로 code값 받아오기
+			@RequestMapping(value = "/kakaoMember", method = RequestMethod.GET)
+			public String kakaoLogin(@RequestParam(value = "code", required = false) String code,HttpServletRequest request) throws Throwable {
+				KakaoLoginService service = new KakaoLoginService();
+				
+				//code로 Token값 받아오기
+				String access_Token = service.getAccessToken(code);
+				//Token값으로 사용자 정보 가져오기
+				HashMap<String, Object> userInfo = service.getUserInfo(access_Token);
+				String nickname = (String)userInfo.get("nickname");
+				String email = (String)userInfo.get("email");
+				Mservice ms = sqlSession.getMapper(Mservice.class);
+				ms.kakaomember(nickname, email);
+				
+				return "redirect:main";
 			}
 }
