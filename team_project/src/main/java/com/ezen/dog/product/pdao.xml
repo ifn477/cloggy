@@ -5,8 +5,9 @@
 <mapper namespace="com.ezen.dog.product.PService">
 <!-- 상품입력 -->
 <insert id="productinput">
-insert into product values(product_id_seq.nextval,#{param1},#{param2},#{param3},#{param4}
-						   ,#{param5},#{param6},#{param7},sysdate,0,0)
+insert into product
+(product_id,category_id,p_name,p_price,p_info,p_image,p_thumbnail,p_stock,p_enroll,p_sell,p_hits)
+ values(product_id_seq.nextval,#{param1},#{param2},#{param3},#{param4},#{param5},#{param6},#{param7},sysdate,0,0)
 </insert>
 <!-- 상품리스트 -->
 <select id="productout" resultType="com.ezen.dog.product.ProductDTO">
