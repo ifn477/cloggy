@@ -48,7 +48,7 @@ public class Membercontroller {
 		return "redirect:main";
 	}
 	
-	// 회원 정보 출력
+	    // 회원 정보 출력
 		@RequestMapping(value = "/member-out")
 		public String memberout(HttpServletRequest request, Model mo) {
 			Mservice ms =sqlSession.getMapper(Mservice.class);
@@ -170,7 +170,7 @@ public class Membercontroller {
 		@RequestMapping(value = "/mail-send")
 		public String Mailsend(HttpServletRequest request) throws IOException {
 			String email = request.getParameter("email");
-			MailSend.sendMail(email);
+			MMailSend.sendMail(email);
 			return "redirect:member-input";
 		}
 		
@@ -181,7 +181,7 @@ public class Membercontroller {
 			String email = request.getParameter("email");
 			String userInputKey = request.getParameter("userInputKey");
 			System.out.println("메일 : "+email+" 인증 코드 : "+ userInputKey);
-			boolean codeCheck = MailSend.verifyKey(email, userInputKey);
+			boolean codeCheck = MMailSend.verifyKey(email, userInputKey);
 			System.out.println("일치 불일치 여부는 "+codeCheck);
 			return codeCheck;
 		}

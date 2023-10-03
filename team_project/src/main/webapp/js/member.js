@@ -1,4 +1,4 @@
-// 아이디 공백 입력 불가
+// 아이디 체크
 $(function(){
     $("#button1").click(function(){
         var userId = $("#userId").val();

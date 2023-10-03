@@ -19,7 +19,7 @@ import javax.mail.internet.MimeMessage;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-public class MailSend {
+public class MMailSend {
 	
 
 	 private static Map<String, String> authKeyMap = new HashMap<String, String>();
@@ -50,7 +50,7 @@ public class MailSend {
 	            msg.setFrom(from);
 	            InternetAddress to = new InternetAddress(email);
 	            msg.setRecipient(Message.RecipientType.TO, to);
-	            msg.setSubject("[cloggy]본인 인증 메일", "UTF-8");
+	            msg.setSubject("[cloggy] 본인 인증 메일", "UTF-8");
 	            
 	            String authKey = createKey();
 	            String emailBody = " cloggy 본인 인증 메일입니다. \n인증 코드: " + authKey;

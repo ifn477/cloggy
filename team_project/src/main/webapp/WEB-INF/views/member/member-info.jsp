@@ -10,7 +10,7 @@
 </head>
 <body>
 
-<table border="1" align="center" width="400px">
+<table border="1" align="center" width="500px">
 
 <c:forEach items="${list}" var="dto">
 <tr><th>아이디</th><td>${dto.userId}</td></tr>

@@ -85,11 +85,21 @@
 		<put-attribute name="body" value="/WEB-INF/views/login/login-input.jsp"/>
 	</definition>
 	
-	<definition name="login-input" extends="baseLayout">
+	<definition name="id-searchForm" extends="baseLayout">
 		<put-attribute name="title" value="메인화면"/>
-		<put-attribute name="body" value="/WEB-INF/views/login/login-input.jsp"/>
+		<put-attribute name="body" value="/WEB-INF/views/login/id-searchForm.jsp"/>
 	</definition>
-	
+
+	<definition name="id-searchView" extends="baseLayout">
+		<put-attribute name="title" value="메인화면"/>
+		<put-attribute name="body" value="/WEB-INF/views/login/id-searchView.jsp"/>
+	</definition>	
+
+	<definition name="pw-searchForm" extends="baseLayout">
+		<put-attribute name="title" value="메인화면"/>
+		<put-attribute name="body" value="/WEB-INF/views/login/pw-searchForm.jsp"/>
+	</definition>
+
 	<definition name="member-out" extends="baseLayout">
 		<put-attribute name="title" value="회원목록"/>
 		<put-attribute name="body" value="/WEB-INF/views/member/member-out.jsp"/>
