@@ -5,6 +5,9 @@
 <head>
 <meta charset="UTF-8">
 <script type="text/javascript">
+<c:if test="${loginFailed==true}">
+      alert('회원정보가 일치하지 않습니다.');
+</c:if>
 </script>
 </head>
 <body>
