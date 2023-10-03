@@ -3,6 +3,7 @@ package com.ezen.dog.qna;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,32 +11,54 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import com.ezen.dog.member.MemberDTO;
 
 
 
 
 @Controller
 public class QnaController {
+	
 	@Autowired
 	SqlSession sqlSession;
+	
 	ArrayList<QnaDTO>list = new ArrayList<QnaDTO>();
 	
+	//qnaï¿½ï¿½ï¿½ï¿½ï¿½Ô·ï¿½
 	@RequestMapping(value="/qna-input")
 	public String qnainput() {
 		return "qna-input";
 	}
-	//?¼?—?„œ ?…? ¥ë°›ì? ?ë£Œë?? ???¥...
+	
+	@RequestMapping(value="/qna-inputtest")
+	public String qnainputtest(HttpServletRequest request) {
+	    HttpSession hs = request.getSession();
+	    Object loginState = hs.getAttribute("loginstate");
+
+	    if (loginState != null && loginState instanceof Boolean && (Boolean) loginState) {
+	        return "qna-input";
+	    } else {
+	        return "error";
+	    }
+	}
+
+	
+	//qnaï¿½ï¿½ï¿½ï¿½
 	@RequestMapping(value="/qna-save",method = RequestMethod.POST)
 	public String qnasave(HttpServletRequest request) {
 		String q_userId=request.getParameter("userId");
 		String q_title=request.getParameter("q_title");
 		String q_content=request.getParameter("q_content").replace("\r \n","<br>");
+		boolean q_secret = request.getParameter("q_secret") != null;
 		Qservice qs =sqlSession.getMapper(Qservice.class);
-		qs.qnainsert(q_userId,q_title,q_content);
+		qs.qnainsert(q_userId,q_title,q_content,q_secret);
 		
 		return "redirect:main";
 	}
 	
+	//qna ï¿½ï¿½ï¿½
 	@RequestMapping(value="/qna-out")
 	public String qnaout(Model mo) {
 		
@@ -46,18 +69,20 @@ public class QnaController {
 		return "qna-out";
 	}
 	
+	//qnaï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	@RequestMapping(value = "/qna-detail")
 	public String qnadetil(HttpServletRequest request,Model mo) {
 		
-		String userId = request.getParameter("userId");
+		int q_number = Integer.parseInt(request.getParameter("q_number"));
 		
 		Qservice qs = sqlSession.getMapper(Qservice.class);
-	ArrayList<QnaDTO>list	= qs.qnadetail(userId);
+	ArrayList<QnaDTO>list	= qs.qnadetail(q_number);
 		mo.addAttribute("list", list);
 	
 		return "qna-detail";
 	}
 	
+	//qnaï¿½ï¿½ï¿½
 	@RequestMapping(value = "/qna-reply",method = RequestMethod.POST)
 	public String qnareply(HttpServletRequest request,Model mo) {
 				
@@ -69,6 +94,8 @@ public class QnaController {
 		return "qna-replyview";
 	}
 	
+	//qnaï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+
 	@RequestMapping(value = "/qna-replysave",method = RequestMethod.POST)
 	public String qnareplysave(HttpServletRequest request) {
 
@@ -148,7 +175,6 @@ public class QnaController {
 		}
 		
 	
-		
 		
 		
 	

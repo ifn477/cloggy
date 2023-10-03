@@ -10,7 +10,7 @@
 <script type="text/javascript">
 var cf = confirm("로그인 후 사용가능합니다");
 if(cf==true){
-	window.location='loginform';
+	window.location='login-input';
 }
 else{
 	window.location='main';

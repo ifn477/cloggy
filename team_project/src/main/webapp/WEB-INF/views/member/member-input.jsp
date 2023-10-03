@@ -31,7 +31,7 @@ $(function(){
 </head>
 <body>
 
-<form action="member-save">
+<form action="member-save" method="post">
 <table border="1" align="center">
 <tr>
 <th>아이디</th><td><input type="text" name="userId" id="userId"></td>
@@ -55,6 +55,5 @@ $(function(){
 </tr>
 </table>
 </form>
-
 </body>
 </html>
