@@ -180,9 +180,7 @@ public class Membercontroller {
 		public boolean verifyKey(HttpServletRequest request) throws IOException {
 			String email = request.getParameter("email");
 			String userInputKey = request.getParameter("userInputKey");
-			System.out.println("메일 : "+email+" 인증 코드 : "+ userInputKey);
 			boolean codeCheck = MMailSend.verifyKey(email, userInputKey);
-			System.out.println("일치 불일치 여부는 "+codeCheck);
 			return codeCheck;
 		}
 }
