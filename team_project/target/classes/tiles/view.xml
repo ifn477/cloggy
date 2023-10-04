@@ -15,6 +15,11 @@
 		<put-attribute name="body" value="/WEB-INF/views/main/main.jsp"/>
 	</definition>
 	
+	<definition name="error" extends="baseLayout">
+		<put-attribute name="title" value="에러창"/>
+		<put-attribute name="body" value="/WEB-INF/views/main/error.jsp"/>
+	</definition>
+	
 	<definition name="product-input" extends="baseLayout">
 		<put-attribute name="title" value="상품입력"/>
 		<put-attribute name="body" value="/WEB-INF/views/product/product-input.jsp"/>
@@ -93,6 +98,16 @@
 	<definition name="member-searchForm" extends="baseLayout">
 		<put-attribute name="title" value="회원검색"/>
 		<put-attribute name="body" value="/WEB-INF/views/member/member-searchForm.jsp"/>
+	</definition>	
+
+	<definition name="order" extends="baseLayout">
+		<put-attribute name="title" value="결제"/>
+		<put-attribute name="body" value="/WEB-INF/views/pay/order.jsp"/>
+	</definition>	
+	
+	<definition name="naverpay" extends="baseLayout">
+		<put-attribute name="title" value="네이버간편결제"/>
+		<put-attribute name="body" value="/WEB-INF/views/pay/naverpay.jsp"/>
 	</definition>	
 	
 </tiles-definitions>

@@ -47,7 +47,7 @@ public class Membercontroller {
 		return "redirect:main";
 	}
 	
-	// È¸¿ø Á¤º¸ Ãâ·Â
+	// È¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 		@RequestMapping(value = "/member-out")
 		public String memberout(HttpServletRequest request, Model mo) {
 			Mservice ms =sqlSession.getMapper(Mservice.class);
@@ -56,7 +56,7 @@ public class Membercontroller {
 			return "member-out";
 		}
 		
-		// È¸¿ø Á¤º¸ ¼öÁ¤ Æû
+		// È¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
 		@RequestMapping(value = "/member-modifyForm")
 		public String membermodifyForm(HttpServletRequest request, Model mo) {
 			String userId = request.getParameter("userId");
@@ -67,7 +67,7 @@ public class Membercontroller {
 			return "member-modifyForm";
 		}
 		
-		// È¸¿ø Á¤º¸ ¼öÁ¤ ÀúÀå
+		// È¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		@RequestMapping(value = "/member-modifyView")
 		public String membermodifyView(HttpServletRequest request, Model mo) {
 			String userId = request.getParameter("userId");
@@ -84,7 +84,7 @@ public class Membercontroller {
 			return "redirect:member-out";
 		}
 		
-		// È¸¿ø Á¤º¸ »èÁ¦
+		// È¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		@RequestMapping(value ="/member-delete")
 		public String memberdelete(HttpServletRequest request) {
 			String userId = request.getParameter("userId");
@@ -93,13 +93,13 @@ public class Membercontroller {
 			return "redirect:member-out";
 		}
 		
-		// È¸¿ø Á¤º¸ °Ë»ö Æû
+		// È¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ë»ï¿½ ï¿½ï¿½
 		@RequestMapping(value="/member-searchForm")
 		public String membersearchForm() {
 			return "member-searchForm";
 		}
 
-		// È¸¿ø Á¤º¸ °Ë»ö Ãâ·Â
+		// È¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ë»ï¿½ ï¿½ï¿½ï¿½
 		@RequestMapping(value="/member-searchView", method = RequestMethod.POST)
 		public String membersearchView(HttpServletRequest request, Model mo) {
 			String item = request.getParameter("item");
@@ -119,7 +119,7 @@ public class Membercontroller {
 			return "redirect:member-out";
 		}
 		
-		// ¾ÆÀÌµð Áßº¹ °Ë»ç
+		// ï¿½ï¿½ï¿½Ìµï¿½ ï¿½ßºï¿½ ï¿½Ë»ï¿½
 			@ResponseBody
 			@RequestMapping(value="/idcheck")
 			public String idcheck(String userId) {
