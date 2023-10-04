@@ -5,8 +5,8 @@
 <mapper namespace="com.ezen.dog.qna.Qservice">
 
 <insert id="qnainsert">
-insert into qna(q_number,USERID,q_title,q_content,q_groups) 
-values (q_number_seq.nextval,#{param1},#{param2},#{param3},q_number_seq.currval)
+insert into qna(q_number,USERID,q_title,q_content,q_secret,q_groups) 
+values (q_number_seq.nextval,#{param1},#{param2},#{param3},#{param4},q_number_seq.currval)
 </insert>
 
 <select id="qnaout" resultType="com.ezen.dog.qna.QnaDTO">
@@ -15,7 +15,7 @@ order by q_groups desc,q_step asc
 </select>
 
 <select id="qnadetail" resultType="com.ezen.dog.qna.QnaDTO">
-select * from qna where userId=#{param1}
+select * from qna where q_number=#{param1}
 </select>
 
 <select id="qnareplyview" resultType="com.ezen.dog.qna.QnaDTO">

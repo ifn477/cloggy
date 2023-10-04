@@ -4,6 +4,14 @@ public class QnaDTO {
 	int q_number;
 	String userId,q_title,q_content,q_date;
 	int q_readcnt, q_groups,q_step,q_indent;
+	boolean q_secret;
+	
+	public boolean isQ_secret() {
+		return q_secret;
+	}
+	public void setQ_secret(boolean q_secret) {
+		this.q_secret = q_secret;
+	}
 	public QnaDTO() {
 		super();
 		// TODO Auto-generated constructor stub
