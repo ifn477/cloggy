@@ -26,6 +26,7 @@
 }
 </style>
 <script type="text/javascript">
+// 장바구니
 function addcart() {
     const productId = document.querySelector('input[name="product_id"]').value;
     const quantity = document.getElementById('result').innerText;
@@ -53,29 +54,38 @@ function addcart() {
     });
 }
 
+// 총 금액 계산 후 출력
 
-function count(operation, productId, price) {
-    const quantityElement = document.querySelector('#result'); // quantity element
-    const totalPriceElement = document.querySelector(`#totalPrice_${productId}`); // total price element
+	document.addEventListener('DOMContentLoaded', function () {
+    const minusbtn = document.getElementById('minusbtn');
+    const plusbtn = document.getElementById('plusbtn');
+    const resultElement = document.querySelector('#result');
+    const priceElement = document.querySelector('#price');
 
-    let quantity = parseInt(quantityElement.textContent);
-    if (operation === "plus") {
-        quantity++;
-    } else if (operation === "minus" && quantity > 1) {
-        quantity--;
+    minusbtn.addEventListener('click', function () {
+        const currentQuantity = parseInt(resultElement.innerText);
+        if (currentQuantity > 1) {
+            resultElement.innerText = (currentQuantity - 1).toString();
+            updateTotalPrice();
+        }
+    });
+
+    plusbtn.addEventListener('click', function () {
+        const currentQuantity = parseInt(resultElement.innerText);
+        resultElement.innerText = (currentQuantity + 1).toString();
+        updateTotalPrice();
+    });
+
+    // Function to update the total price
+    function updateTotalPrice() {
+        const currentQuantity = parseInt(resultElement.innerText);
+        const price = parseFloat(priceElement.innerText.replace(/[^\d.-]/g, ''));
+        const totalPrice = currentQuantity * price;
+
+        // Display the total price with formatting
+        document.querySelector('#totalPrice').innerText = totalPrice.toLocaleString('ko-KR') + '원';
     }
-
-    // Calculate the total price and update the element
-    const totalPrice = quantity * price;
-    totalPriceElement.textContent = new Intl.NumberFormat('ko-KR', {
-        style: 'currency',
-        currency: 'KRW'
-    }).format(totalPrice);
-
-    // Update the quantity element
-    quantityElement.textContent = quantity;
-}
-
+});
 
 
 
@@ -108,19 +118,17 @@ function count(operation, productId, price) {
 					</td>
 				</tr>
 
-				<!-- 				수량 선택 -->
+				<!--수량 선택 -->
 				<tr>
 					<td>
 						<div class="button-container">
-							<input type="button" onclick='count("minus", "${pdetail.product_id}", ${pdetail.p_price})' value='-' />
-							<div id="result" name="quantity">1</div>
-							<input type="button" onclick='count("plus", "${pdetail.product_id}", ${pdetail.p_price})' value='+' />
-
+						
+						
 						</div>
 					</td>
 				</tr>
 				<tr>
-					<td>Total Price: <span id="totalPrice_${pdetail.product_id}">0</span></td>
+					<td>Total Price: <span id="totalPrice">0</span></td>
 				</tr>
 				<tr>
 					<td colspan="2"><input type="button" value="장바구니 추가"
