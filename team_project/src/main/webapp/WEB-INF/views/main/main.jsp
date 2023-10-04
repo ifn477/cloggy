@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-    	<!-- 검색 -->
+    	<!-- 검색2 -->
 		<form action="search-all">
 			<table border="1" width="300px" align="center">
 				<tr>
