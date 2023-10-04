@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,6 +19,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
+
 
 @Controller
 public class Membercontroller {
@@ -48,7 +51,7 @@ public class Membercontroller {
 		return "redirect:main";
 	}
 	
-	    // È¸¿ø Á¤º¸ Ãâ·Â
+	    // È¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 		@RequestMapping(value = "/member-out")
 		public String memberout(HttpServletRequest request, Model mo) {
 			Mservice ms =sqlSession.getMapper(Mservice.class);
@@ -57,7 +60,6 @@ public class Membercontroller {
 			return "member-out";
 		}
 		
-		// È¸¿ø Á¤º¸ ¼öÁ¤ Æû
 		@RequestMapping(value = "/member-modifyForm")
 		public String membermodifyForm(HttpServletRequest request, Model mo) {
 			String userId = request.getParameter("userId");
@@ -68,7 +70,6 @@ public class Membercontroller {
 			return "member-modifyForm";
 		}
 		
-		// È¸¿ø Á¤º¸ ¼öÁ¤ ÀúÀå
 		@RequestMapping(value = "/member-modifyView")
 		public String membermodifyView(HttpServletRequest request, Model mo) {
 			String userId = request.getParameter("userId");
@@ -85,7 +86,6 @@ public class Membercontroller {
 			return "redirect:member-out";
 		}
 		
-		// È¸¿ø Á¤º¸ »èÁ¦
 		@RequestMapping(value ="/member-delete")
 		public String memberdelete(HttpServletRequest request) {
 			String userId = request.getParameter("userId");
@@ -94,13 +94,11 @@ public class Membercontroller {
 			return "redirect:member-out";
 		}
 		
-		// È¸¿ø Á¤º¸ °Ë»ö Æû
 		@RequestMapping(value="/member-searchForm")
 		public String membersearchForm() {
 			return "member-searchForm";
 		}
 
-		// È¸¿ø Á¤º¸ °Ë»ö Ãâ·Â
 		@RequestMapping(value="/member-searchView", method = RequestMethod.POST)
 		public String membersearchView(HttpServletRequest request, Model mo) {
 			String item = request.getParameter("item");
@@ -120,7 +118,6 @@ public class Membercontroller {
 			return "redirect:member-out";
 		}
 		
-		// ¾ÆÀÌµð Áßº¹ °Ë»ç
 		@ResponseBody
 		@RequestMapping(value="/idcheck")
 		public String idcheck(String userId) {
@@ -135,7 +132,6 @@ public class Membercontroller {
 			return bb;
 		}
 			
-		// ³»Á¤º¸ Á¶È¸
 		@RequestMapping(value = "/member-info")
 		public String memberinfo(HttpServletRequest request, Model mo) {
 			String userId = request.getParameter("userId");
@@ -145,7 +141,6 @@ public class Membercontroller {
 		return "member-info";
 		}	
 		
-		// È¸¿ø Å»Åð
 		@RequestMapping(value = "/member-deleteSelf")
 		public String memberdeleteSelf(HttpServletRequest request) {
 				String userId = request.getParameter("userId");
@@ -160,13 +155,11 @@ public class Membercontroller {
 
 		}
 		
-		// ÁÖ¼Ò ÆË¾÷ api
 		@RequestMapping(value = "/jusoPopup")
 		public String jusoPopup() {
 			return "jusoPopup";
 		}
 
-		// ÀÌ¸ÞÀÏ ¹ß¼Û
 		@RequestMapping(value = "/mail-send")
 		public String Mailsend(HttpServletRequest request) throws IOException {
 			String email = request.getParameter("email");
@@ -174,7 +167,6 @@ public class Membercontroller {
 			return "redirect:member-input";
 		}
 		
-		// ÀÎÁõ¸ÞÀÏ È®ÀÎ
 		@ResponseBody
 		@RequestMapping(value = "/verifyKey", produces = "application/json; charset=utf8")
 		public boolean verifyKey(HttpServletRequest request) throws IOException {
@@ -183,5 +175,19 @@ public class Membercontroller {
 			boolean codeCheck = MMailSend.verifyKey(email, userInputKey);
 			return codeCheck;
 		}
+			
+			@RequestMapping(value = "/kakaoMember", method = RequestMethod.GET)
+			public String kakaoLogin(@RequestParam(value = "code", required = false) String code,HttpServletRequest request) throws Throwable {
+				KakaoLoginService service = new KakaoLoginService();
+				
+				String access_Token = service.getAccessToken(code);
+				HashMap<String, Object> userInfo = service.getUserInfo(access_Token);
+				String nickname = (String)userInfo.get("nickname");
+				String email = (String)userInfo.get("email");
+				Mservice ms = sqlSession.getMapper(Mservice.class);
+				ms.kakaomember(nickname, email);
+				
+				return "redirect:main";
+			}
 }
 		

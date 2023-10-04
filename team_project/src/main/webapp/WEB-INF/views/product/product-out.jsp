@@ -4,37 +4,49 @@
 <!DOCTYPE html>
 <html>
 <head>
+<style type="text/css">
+.content{
+	max-width: 1300px;
+	margin: 0 auto;
+	margin-top: 50px;
+}
+.container_box{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 50px 20px;
+    padding-left:10px;
+    padding-right:10px;
+}
+.product_item{
+	min-height: 200px;
+    flex-basis: 150px;
+    flex-grow:0;
+}
+</style>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
-<table align="center" style="margin-top: 70px;">
-  <c:forEach items="${list}" var="pout" varStatus="loop">
-    <c:if test="${loop.index % 4 == 0}">
-      <tr> <!-- 4개의 테이블을 나란히 출력한 후 다음 행으로 넘어감 -->
-    </c:if>
-    <td>
-      <table style="margin-right: 30px; margin-bottom: 50px;">
-        <tr>
-          <td>
+<section class="content">
+<div class="container_box">
+  <c:forEach items="${list}" var="pout">
+	<div class="product_item">
+      	<div class="product_thumbnail">
           <a href="product-detail?product_id=${pout.product_id }">
-          <img alt="상품썸네일" src="/dog/image/${pout.p_thumbnail}" width="250px;" height="300px;"></td>
+          <img alt="상품썸네일" src="/dog/image/${pout.p_thumbnail}" width="300px;" height="350px;">
           </a>
-        </tr>
-        <tr>
-          <td>
-          <a href="product-detail?product_id=${pout.product_id }" style="font-size: 20px; text-decoration: none;">${pout.p_name}</a>
-          </td>
-        </tr>
-        <tr>
-          <td>${pout.p_price}</td>
-        </tr>
-      </table>
-    </td>
-    <c:if test="${loop.index % 4 == 3 or loop.last}">
-      </tr> <!-- 한 행에 4개의 테이블 출력 후 닫음 -->
-    </c:if>
+      	</div>
+      	<div class="product_name">
+          <a href="product-detail?product_id=${pout.product_id }" style="font-size: 20px; text-decoration: none;">
+          ${pout.p_name}
+          </a>
+        </div>
+      	<div class="product_price">
+          ${pout.p_price}
+        </div>
+       </div>
   </c:forEach>
-</table>
+</div>
+</section>
 </body>
 </html>

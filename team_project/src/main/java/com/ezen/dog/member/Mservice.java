@@ -14,5 +14,5 @@ public interface Mservice {
 	public int idcheck(String userId);
 	public ArrayList<MemberDTO> memberinfo(String userId);
 	public void memberdeleteSelf(String userId);
-	
+	public void kakaomember(String nicknaem, String email);
 }

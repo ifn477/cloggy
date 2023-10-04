@@ -3,12 +3,13 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <script type="text/javascript" src="/dog/js/check.js"></script>
 <meta charset="UTF-8">
 <script type="text/javascript" src="./js/member.js"></script>
 </head>
 
 <body>
-<form action="member-save" method="post" id="form" name="form">
+<form action="member-save" method="post" name="memberincheck">
 <table border="1" align="center">
 <tr>
 <th>아이디</th>
@@ -40,13 +41,15 @@
 </tr>
 <tr>
 <td colspan="3">
-<input type="submit" value="제출">
+<input type="button" value="확인" onclick="memcheck()">
 <input type="reset" value="취소">
 </td>
 </tr>
 </table>
 </form>
 <br>
-
+     <a href="https://kauth.kakao.com/oauth/authorize?client_id=4b174c23998fabfa7c3c09869f3e67a7&redirect_uri=http://localhost:8333/dog/kakaoMember&response_type=code">
+        <img alt="카카오 로그인" src="/dog/image/kakao_login_medium_narrow.png" style="margin-bottom: 5px;">
+   	 </a>
 </body>
 </html>
