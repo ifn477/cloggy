@@ -15,6 +15,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.ezen.dog.review.ReviewDTO;
+import com.ezen.dog.review.Rservice;
+
 @Controller
 public class ProductController {
 
@@ -49,23 +52,49 @@ public class ProductController {
 		return "redirect:product-input";
 	}
 
-	//상품리스트
-	@RequestMapping(value = "/product-out")
-	public String productout(Model mo) {
+	//상품리스트 대분류 출력
+	@RequestMapping(value = "/product-out-total")
+	public String productouttotal(HttpServletRequest request, Model mo) {
+		int a = Integer.parseInt(request.getParameter("category1_id"));
+		
+
 		PService ps = sqlSession.getMapper(PService.class);
-		list = ps.productout();
+		ArrayList<ProductDTO> list = ps.productouttotal(a);
+		
+	
 		mo.addAttribute("list", list);
+		
 		return "product-out";
 	}
 	
+	//상품리스트 중분류 출력
+	@RequestMapping(value = "/product-out")
+	public String productout(HttpServletRequest request, Model mo) {
+		int a = Integer.parseInt(request.getParameter("category1_id"));
+		int b = Integer.parseInt(request.getParameter("category2_id"));
+
+		PService ps = sqlSession.getMapper(PService.class);
+		ArrayList<ProductDTO> list = ps.productout(a, b);
+		mo.addAttribute("list", list);
+		
+		return "product-out";
+	}
+
+	
 	//상품 상세페이지
 	@RequestMapping(value = "/product-detail")
-	public String productdetail(HttpServletRequest request, Model mo) {
+	public String productdetail(HttpServletRequest request, ProductDTO pdto, Model mo) {
 		int product_id = Integer.parseInt(request.getParameter("product_id"));
+		
 		PService ps = sqlSession.getMapper(PService.class);
 		list = ps.productdetail(product_id);
 		ps.productcount(product_id);
 		mo.addAttribute("list", list);
+		
+		Rservice rs = sqlSession.getMapper(Rservice.class);
+		ReviewDTO rdto = rs.reviewlist(product_id);
+		mo.addAttribute("rdto", rdto);
+		
 		return "product-detail";
 	}
 	
