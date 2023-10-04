@@ -23,7 +23,7 @@ public class ProductController {
 
 	@Autowired
 	SqlSession sqlSession;
-	String image_path = "C:\\6산대특\\spring\\project\\src\\main\\webapp\\image";
+	String image_path = "C:\\Users\\amj32\\git\\team_project\\team_project\\src\\main\\webapp\\image";
 	ArrayList<ProductDTO>list = new ArrayList<ProductDTO>();
 	
 	//상품입력
