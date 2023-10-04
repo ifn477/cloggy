@@ -51,7 +51,6 @@ public class Membercontroller {
 		return "redirect:main";
 	}
 	
-	    // ȸ�� ���� ���
 		@RequestMapping(value = "/member-out")
 		public String memberout(HttpServletRequest request, Model mo) {
 			Mservice ms =sqlSession.getMapper(Mservice.class);
@@ -69,7 +68,7 @@ public class Membercontroller {
 			mo.addAttribute("list",list);
 			return "member-modifyForm";
 		}
-		
+
 		@RequestMapping(value = "/member-modifyView")
 		public String membermodifyView(HttpServletRequest request, Model mo) {
 			String userId = request.getParameter("userId");
@@ -85,7 +84,7 @@ public class Membercontroller {
 			ms.membermodifyView(userId, password, userName, age, gender, email, phone, address);
 			return "redirect:member-out";
 		}
-		
+
 		@RequestMapping(value ="/member-delete")
 		public String memberdelete(HttpServletRequest request) {
 			String userId = request.getParameter("userId");
@@ -94,10 +93,12 @@ public class Membercontroller {
 			return "redirect:member-out";
 		}
 		
+
 		@RequestMapping(value="/member-searchForm")
 		public String membersearchForm() {
 			return "member-searchForm";
 		}
+
 
 		@RequestMapping(value="/member-searchView", method = RequestMethod.POST)
 		public String membersearchView(HttpServletRequest request, Model mo) {
@@ -117,7 +118,7 @@ public class Membercontroller {
 			}
 			return "redirect:member-out";
 		}
-		
+
 		@ResponseBody
 		@RequestMapping(value="/idcheck")
 		public String idcheck(String userId) {

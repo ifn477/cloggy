@@ -21,6 +21,7 @@
     
         <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">회원<span class="caret"></span></a>
         <ul class="dropdown-menu">
+          <li><a href="member-input">회원입력</a></li>
           <li><a href="#">카테1-2</a></li>
           <li><a href="#">카테1-3</a></li>
         </ul>
@@ -103,6 +104,14 @@
 					<li><a href="product-out?category1_id=3&category2_id=64"> 외장칩 </a></li>
 				</ul></li>
 
+			<li class="dropdown"><a class="dropdown-toggle"
+				data-toggle="dropdown" href="#">결제<span class="caret"></span></a>
+				<ul class="dropdown-menu">
+					<li><a href="order"> 결제 </a></li>
+					<li><a href="naverpay"> 네이버페이간편결제 </a></li>
+				
+				</ul></li>	
+				
 			<li class="dropdown"><a class="dropdown-toggle"
 				data-toggle="dropdown" href="#">회사정보<span class="caret"></span></a>
 				<ul class="dropdown-menu">
