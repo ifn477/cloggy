@@ -1,18 +1,23 @@
 package com.ezen.dog;
 
-import java.text.DateFormat;
-import java.util.Date;
-import java.util.Locale;
+import java.util.ArrayList;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.ibatis.session.SqlSession;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.ezen.dog.product.ProductDTO;
+
 @Controller
 public class HomeController {
+	
+	@Autowired
+	SqlSession sqlSession;
 	
 	@RequestMapping(value = "/")
 	public String main() {
@@ -29,4 +34,15 @@ public class HomeController {
 		return "info";
 	}
 	
+	
+	@RequestMapping(value="/search-all", method = RequestMethod.POST )
+	public String searchall(HttpServletRequest request, Model mo) {
+		String p_name = request.getParameter("p_name");
+		
+		Service ss = sqlSession.getMapper(Service.class);
+		ArrayList<ProductDTO> list = ss.searchAll(p_name);
+		mo.addAttribute("list", list);
+		
+		return "redirect:product-out";
+	}
 }

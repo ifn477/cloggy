@@ -117,14 +117,23 @@
 <c:choose>
 	<c:when test="${loginstate==true}">
 		    <ul class="nav navbar-nav navbar-right">
-      			<li><a href="#"><span class="glyphicon glyphicon-user"></span>${member.name}님 반갑습니다!</a></li>
+      			<li><a href="#"><span class="glyphicon glyphicon-user"></span>${member.userId}님 반갑습니다!</a></li>
+      			<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">회원 정보<span class="caret"></span></a>
+					<ul class="dropdown-menu">
+						<li><a href="member-out">출력/ 수정/ 삭제</a></li>
+						<li><a href="member-searchForm">검색</a></li>
+						<li class="divider">
+						<li><a href="member-searchForm">내정보</a></li>
+						<li><a href="member-searchForm">회원 탈퇴</a></li>
+					</ul>
+				</li>
       			<li><a href="logout"><span class="glyphicon glyphicon-log-in"></span>Logout</a></li>
    			</ul>
 	</c:when>
 	<c:otherwise>
 		    <ul class="nav navbar-nav navbar-right">
-      			<li><a href="memberinput"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-      			<li><a href="loginform"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+      			<li><a href="member-input"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+      			<li><a href="login-input"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
    			</ul>
 	</c:otherwise>
 </c:choose>

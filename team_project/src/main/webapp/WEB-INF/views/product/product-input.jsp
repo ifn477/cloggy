@@ -2,6 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<script type="text/javascript" src="/dog/js/check.js"></script>
 <script>
 function readImageURL(input, imageID) {
   if (input.files && input.files[0]) {
@@ -31,7 +32,7 @@ function readThumbnailURL(input, thumbnailID) {
 <title>Insert title here</title>
 </head>
 <body>
-<form action="product-save" method="post" enctype="multipart/form-data">
+<form action="product-save" method="post" enctype="multipart/form-data" name="productform">
 <table align="center" border="1">
 <caption>신상품등록</caption>
 <tr> <th>카테고리</th> 
@@ -59,7 +60,7 @@ function readThumbnailURL(input, thumbnailID) {
 		</td> 
 </tr>
 <tr> <th>재고수량</th> <td><input type="text" name="p_stock"></td> </tr>
-<tr> <td colspan="2"><input type="submit" value="등록"></td> </tr>
+<tr> <td colspan="2"><input type="button" value="등록" onclick="productcheck()"></td> </tr>
 </table>
 </form>
 </body>

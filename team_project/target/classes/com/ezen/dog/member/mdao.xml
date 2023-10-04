@@ -5,8 +5,43 @@
 <mapper namespace="com.ezen.dog.member.Mservice">
 
 <insert id="insertm">
-insert into member values (#{param1},#{param2},#{param3},#{param4},#{param5},#{param6},#{param7},#{param8})
+insert into member (userId,password,userName, age,gender,email,phone,address)  values (#{param1},#{param2},#{param3},#{param4},#{param5},#{param6},#{param7},#{param8})
 </insert>
 
+<select id="memberout" resultType="com.ezen.dog.member.MemberDTO">
+select * from member
+</select>
 
+<select id="membermodifyForm" resultType="com.ezen.dog.member.MemberDTO">
+select * from member where userId=#{param1}
+</select>
+
+<update id="membermodifyView" parameterType="com.ezen.dog.member.MemberDTO">
+update member set password=#{param2},userName=#{param3},age=#{param4},
+gender=#{param5},email=#{param6},phone=#{param7},address=#{param8} where userId=#{param1}
+</update>
+
+<update id="memberdelete" parameterType="com.ezen.dog.member.MemberDTO">
+delete from member where userId=#{param1}
+</update>
+
+<select id="membersearchViewId" resultType="com.ezen.dog.member.MemberDTO">
+select * from member where userId like '%' || #{param1} || '%'
+</select>
+
+<select id="membersearchViewName" resultType="com.ezen.dog.member.MemberDTO">
+select * from member where userName like '%' || #{param1} || '%'
+</select>
+
+<select id="membersearchViewEmail" resultType="com.ezen.dog.member.MemberDTO">
+select * from member where email like '%' || #{param1} || '%'
+</select>
+
+<select id="idcheck" resultType="int">
+select count(*) from member where userId=#{param1}
+</select>
+
+<insert id="kakaomember">
+insert into member (userid,password,userName,email) values (dbms_random.string('A',5),TRUNC(DBMS_RANDOM.value(1, 10000)),#{param1},#{param2})
+</insert>
 </mapper>
