@@ -26,31 +26,6 @@
 }
 </style>
 <script type="text/javascript">
-	function count(type) {
-		// 결과를 표시할 element
-		const resultElement = document.getElementById('result');
-
-		// 현재 화면에 표시된 값
-		let number = parseInt(resultElement.innerText);
-
-		// 더하기/빼기
-		if (type === 'plus') {
-			number = number + 1;
-		} else if (type === 'minus') {
-			// Check if the number is greater than or equal to the minimum value
-			if (number > 1) {
-				number = number - 1;
-			} else {
-				// Set a minimum value (e.g., 0)
-				number = 1;
-			}
-		}
-
-		// 결과 출력
-		resultElement.innerText = number;
-	}
-</script>
-<script type="text/javascript">
 function addcart() {
     const productId = document.querySelector('input[name="product_id"]').value;
     const quantity = document.getElementById('result').innerText;
@@ -78,6 +53,32 @@ function addcart() {
     });
 }
 
+
+function count(operation, productId, price) {
+    const quantityElement = document.querySelector('#result'); // quantity element
+    const totalPriceElement = document.querySelector(`#totalPrice_${productId}`); // total price element
+
+    let quantity = parseInt(quantityElement.textContent);
+    if (operation === "plus") {
+        quantity++;
+    } else if (operation === "minus" && quantity > 1) {
+        quantity--;
+    }
+
+    // Calculate the total price and update the element
+    const totalPrice = quantity * price;
+    totalPriceElement.textContent = new Intl.NumberFormat('ko-KR', {
+        style: 'currency',
+        currency: 'KRW'
+    }).format(totalPrice);
+
+    // Update the quantity element
+    quantityElement.textContent = quantity;
+}
+
+
+
+
 </script>
 
 <meta charset="UTF-8">
@@ -100,22 +101,26 @@ function addcart() {
 					<td align="center" style="font-size: 40px; padding-left: 10px;">${pdetail.p_name }</td>
 				</tr>
 				<tr>
-					<td align="right" style="font-size: 30px; padding-left: 10px;">
-						<fmt:formatNumber pattern="#,##0원">${pdetail.p_price}</fmt:formatNumber>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<div class="button-container">
-							<input type="button" onclick='count("minus")' value='-' />
-							<div id="result" name="quantity">1</div>
-							<input type="button" onclick='count("plus")' value='+' />
+					<td id=align= "right" style="font-size: 30px; padding-left: 10px;">
+						<div id="price">
+							<fmt:formatNumber pattern="#,##0원">${pdetail.p_price}</fmt:formatNumber>
 						</div>
 					</td>
 				</tr>
 
+				<!-- 				수량 선택 -->
 				<tr>
-					<td>Total Price: <span id="totalPrice">0</span></td>
+					<td>
+						<div class="button-container">
+							<input type="button" onclick='count("minus", "${pdetail.product_id}", ${pdetail.p_price})' value='-' />
+							<div id="result" name="quantity">1</div>
+							<input type="button" onclick='count("plus", "${pdetail.product_id}", ${pdetail.p_price})' value='+' />
+
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td>Total Price: <span id="totalPrice_${pdetail.product_id}">0</span></td>
 				</tr>
 				<tr>
 					<td colspan="2"><input type="button" value="장바구니 추가"
