@@ -1,15 +1,20 @@
 package com.ezen.dog.member;
 
+import java.io.IOException;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -39,15 +44,13 @@ public class Membercontroller {
 		String gender = request.getParameter("gender");
 		String email = request.getParameter("email");
 		String phone = request.getParameter("phone");
-		String address = request.getParameter("address");
+		String address = request.getParameter("roadFullAddr");
 		Mservice ms = sqlSession.getMapper(Mservice.class);
-		ms.insertm(userId,password,userName,age,gender,email,phone,address);
-		
+		ms.membersave(userId,password,userName,age,gender,email,phone,address);
 		
 		return "redirect:main";
 	}
 	
-	// 회원 정보 출력
 		@RequestMapping(value = "/member-out")
 		public String memberout(HttpServletRequest request, Model mo) {
 			Mservice ms =sqlSession.getMapper(Mservice.class);
@@ -56,7 +59,6 @@ public class Membercontroller {
 			return "member-out";
 		}
 		
-		// 회원 정보 수정 폼
 		@RequestMapping(value = "/member-modifyForm")
 		public String membermodifyForm(HttpServletRequest request, Model mo) {
 			String userId = request.getParameter("userId");
@@ -66,8 +68,7 @@ public class Membercontroller {
 			mo.addAttribute("list",list);
 			return "member-modifyForm";
 		}
-		
-		// 회원 정보 수정 저장
+
 		@RequestMapping(value = "/member-modifyView")
 		public String membermodifyView(HttpServletRequest request, Model mo) {
 			String userId = request.getParameter("userId");
@@ -77,14 +78,13 @@ public class Membercontroller {
 			String gender = request.getParameter("gender");
 			String email = request.getParameter("email");
 			String phone = request.getParameter("phone");
-			String address = request.getParameter("address");
+			String address = request.getParameter("roadFullAddr");
 			
 			Mservice ms = sqlSession.getMapper(Mservice.class);
 			ms.membermodifyView(userId, password, userName, age, gender, email, phone, address);
 			return "redirect:member-out";
 		}
-		
-		// 회원 정보 삭제
+
 		@RequestMapping(value ="/member-delete")
 		public String memberdelete(HttpServletRequest request) {
 			String userId = request.getParameter("userId");
@@ -93,13 +93,13 @@ public class Membercontroller {
 			return "redirect:member-out";
 		}
 		
-		// 회원 정보 검색 폼
+
 		@RequestMapping(value="/member-searchForm")
 		public String membersearchForm() {
 			return "member-searchForm";
 		}
 
-		// 회원 정보 검색 출력
+
 		@RequestMapping(value="/member-searchView", method = RequestMethod.POST)
 		public String membersearchView(HttpServletRequest request, Model mo) {
 			String item = request.getParameter("item");
@@ -118,31 +118,70 @@ public class Membercontroller {
 			}
 			return "redirect:member-out";
 		}
-		
-		// 아이디 중복 검사
-			@ResponseBody
-			@RequestMapping(value="/idcheck")
-			public String idcheck(String userId) {
-				Mservice ms = sqlSession.getMapper(Mservice.class);
-				int count = ms.idcheck(userId);
-				String bb=null;
-				if(count==0) {
-					bb="ok";
-				}else {
-					bb="no";
-				}
-				return bb;
+
+		@ResponseBody
+		@RequestMapping(value="/idcheck")
+		public String idcheck(String userId) {
+			Mservice ms = sqlSession.getMapper(Mservice.class);
+			int count = ms.idcheck(userId);
+			String bb=null;
+			if(count==0) {
+				bb="ok";
+			}else {
+				bb="no";
 			}
+			return bb;
+		}
 			
+		@RequestMapping(value = "/member-info")
+		public String memberinfo(HttpServletRequest request, Model mo) {
+			String userId = request.getParameter("userId");
+			Mservice ms = sqlSession.getMapper(Mservice.class);
+			ArrayList<MemberDTO> list = ms.memberinfo(userId);
+			mo.addAttribute("list",list);
+		return "member-info";
+		}	
+		
+		@RequestMapping(value = "/member-deleteSelf")
+		public String memberdeleteSelf(HttpServletRequest request) {
+				String userId = request.getParameter("userId");
+				Mservice ms = sqlSession.getMapper(Mservice.class);
+				ms.memberdeleteSelf(userId);
+
+
+				HttpSession hs = request.getSession();
+				hs.removeAttribute("member");
+				hs.setAttribute("loginstate", false);
+				return "redirect:/";
+
+		}
+		
+		@RequestMapping(value = "/jusoPopup")
+		public String jusoPopup() {
+			return "jusoPopup";
+		}
+
+		@RequestMapping(value = "/mail-send")
+		public String Mailsend(HttpServletRequest request) throws IOException {
+			String email = request.getParameter("email");
+			MMailSend.sendMail(email);
+			return "redirect:member-input";
+		}
+		
+		@ResponseBody
+		@RequestMapping(value = "/verifyKey", produces = "application/json; charset=utf8")
+		public boolean verifyKey(HttpServletRequest request) throws IOException {
+			String email = request.getParameter("email");
+			String userInputKey = request.getParameter("userInputKey");
+			boolean codeCheck = MMailSend.verifyKey(email, userInputKey);
+			return codeCheck;
+		}
 			
-			//ReqeustParam으로 code값 받아오기
 			@RequestMapping(value = "/kakaoMember", method = RequestMethod.GET)
 			public String kakaoLogin(@RequestParam(value = "code", required = false) String code,HttpServletRequest request) throws Throwable {
 				KakaoLoginService service = new KakaoLoginService();
 				
-				//code로 Token값 받아오기
 				String access_Token = service.getAccessToken(code);
-				//Token값으로 사용자 정보 가져오기
 				HashMap<String, Object> userInfo = service.getUserInfo(access_Token);
 				String nickname = (String)userInfo.get("nickname");
 				String email = (String)userInfo.get("email");
@@ -152,3 +191,4 @@ public class Membercontroller {
 				return "redirect:main";
 			}
 }
+		

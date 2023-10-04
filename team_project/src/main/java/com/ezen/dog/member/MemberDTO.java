@@ -6,7 +6,7 @@ public class MemberDTO {
 	int auth_id;
 	String password,userName;
 	int age;
-	String gender,email,phone,address,enroll_date,last_update;
+	String gender,email,phone,address,enroll_date,last_update,userInputKey;
 	
 
 	public MemberDTO() {
@@ -100,6 +100,16 @@ public class MemberDTO {
 
 	public void setLast_update(String last_update) {
 		this.last_update = last_update;
+	}
+
+
+	public String getUserInputKey() {
+		return userInputKey;
+	}
+
+
+	public void setUserInputKey(String userInputKey) {
+		this.userInputKey = userInputKey;
 	}
 	
 }
