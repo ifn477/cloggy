@@ -6,6 +6,9 @@ import com.ezen.dog.member.MemberDTO;
 
 public interface Lservice {
 	public MemberDTO login(String userId,String password);
+	public MemberDTO idsearchView(String userName, String email);
+	public MemberDTO pwsearchView(String userId, String email);
 	public MemberDTO kakaologin(String nickname,String email);
 	public MemberDTO naverlogin(String name,String email);
+	
 }

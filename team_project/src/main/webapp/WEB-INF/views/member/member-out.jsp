@@ -9,11 +9,11 @@
 </head>
 <body>
 
-<table border="1" align="center" width="800px">
+<table border="1" align="center" width="900px">
 <tr>
 <th>아이디</th><th>패스워드</th><th>이름</th><th>나이</th>
 <th>성별</th><th>이메일</th><th>전화번호</th><th>주소</th>
-<th>가입일</th><th>비고</th>
+<th>가입일</th><th>마지막 수정일</th><th>비고</th>
 </tr>
 <c:forEach items="${list}" var="dto">
 <tr>
@@ -26,6 +26,7 @@
 <td>${dto.phone}</td>
 <td>${dto.address}</td>
 <td>${dto.enroll_date}</td>
+<td>${dto.last_update}</td>
 <td>
 <a href="member-modifyForm?userId=${dto.userId}">수정</a>&nbsp;
 <a href="member-delete?userId=${dto.userId}">삭제</a>

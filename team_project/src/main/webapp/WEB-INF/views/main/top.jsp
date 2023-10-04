@@ -131,8 +131,7 @@
 						<li><a href="member-out">출력/ 수정/ 삭제</a></li>
 						<li><a href="member-searchForm">검색</a></li>
 						<li class="divider">
-						<li><a href="member-searchForm">내정보</a></li>
-						<li><a href="member-searchForm">회원 탈퇴</a></li>
+						<li><a href="member-info?userId=${member.userId}">내정보</a></li>
 					</ul>
 				</li>
       			<li><a href="logout"><span class="glyphicon glyphicon-log-in"></span>Logout</a></li>
