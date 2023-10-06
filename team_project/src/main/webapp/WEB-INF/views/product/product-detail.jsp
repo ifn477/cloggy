@@ -121,10 +121,7 @@ function addcart() {
 				<!--수량 선택 -->
 				<tr>
 					<td>
-						<div class="button-container">
-						
-						
-						</div>
+						<div class="button-container"></div>
 					</td>
 				</tr>
 				<tr>
@@ -167,11 +164,16 @@ function addcart() {
 						width="700px;">
 					</td>
 				</tr>
-				<tr>
-					<td colspan="2" style="text-align: right;"><input
-						type="button" value="수정"
-						onclick="location.href='product-modifyForm?product_id=${pdetail.product_id}'">
-					</td>
+
+				<c:choose>
+					<c:when test="${loginstate==true && member.auth_id==0}">
+						<tr>
+							<td colspan="2" style="text-align: right;"><input
+								type="button" value="수정"
+								onclick="location.href='product-modifyForm?product_id=${pdetail.product_id}'">
+							</td>
+					</c:when>
+				</c:choose>
 			</table>
 		</c:forEach>
 	</form>
