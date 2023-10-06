@@ -103,7 +103,6 @@
 
 		<!-- 타일즈 셋팅 종료 -->
 
-		<!-- JACKSON -->
 
 		<!-- Jackson Core 1.x -->
 		<dependency>
@@ -140,7 +139,6 @@
 </dependency>
 <!--  젝슨 셋팅 종료  -->		
 			
-
 		<!-- AspectJ -->
 		<dependency>
 			<groupId>org.aspectj</groupId>
@@ -230,12 +228,6 @@
     <artifactId>json-simple</artifactId>
     <version>1.1.1</version>
 </dependency>
-<!-- jackson-mapper -->
-<dependency>
-	<groupId>org.codehaus.jackson</groupId>
-	<artifactId>jackson-mapper-asl</artifactId>
-	<version>1.5.0</version>
-</dependency>
 
 		<!-- Test -->
 		<dependency>
@@ -268,8 +260,8 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>2.5.1</version>
 				<configuration>
-					<source>1.6</source>
-					<target>1.6</target>
+					<source>1.8</source>
+					<target>1.8</target>
 					<compilerArgument>-Xlint:all</compilerArgument>
 					<showWarnings>true</showWarnings>
 					<showDeprecation>true</showDeprecation>

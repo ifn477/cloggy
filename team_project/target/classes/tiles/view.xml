@@ -21,15 +21,11 @@
 		<put-attribute name="body" value="/WEB-INF/views/main/info.jsp"/>
 	</definition>
 	
-
-<!-- 상품 -->
-
 	<definition name="error" extends="baseLayout">
 		<put-attribute name="title" value="에러창"/>
 		<put-attribute name="body" value="/WEB-INF/views/main/error.jsp"/>
 	</definition>
 	
-
 	<definition name="product-input" extends="baseLayout">
 		<put-attribute name="title" value="상품입력"/>
 		<put-attribute name="body" value="/WEB-INF/views/product/product-input.jsp"/>
@@ -51,7 +47,11 @@
 	</definition>
 	
 
-
+	<definition name="info" extends="baseLayout">
+		<put-attribute name="title" value="회사정보"/>
+		<put-attribute name="body" value="/WEB-INF/views/main/info.jsp"/>
+	</definition>
+	
 	
 <!-- 	문의 -->
 	<definition name="qna-input" extends="baseLayout">
@@ -85,12 +85,14 @@
 	</definition>
 	
 
+	
+<!-- 회원 -->
+
 	<definition name="member-input" extends="baseLayout">
 		<put-attribute name="title" value="회원입력"/>
 		<put-attribute name="body" value="/WEB-INF/views/member/member-input.jsp"/>
 	</definition>
 	
-
 		<definition name="login-input" extends="baseLayout">
 		<put-attribute name="title" value="로그인폼"/>
 		<put-attribute name="body" value="/WEB-INF/views/login/login-input.jsp"/>
