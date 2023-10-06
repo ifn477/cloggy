@@ -18,15 +18,22 @@
 <tr><th>작성자</th><td>${qna.userId }</td></tr>
 <tr><th>내용</th><td>
   <textarea rows="10" cols="60" name="q_content">${qna.q_content}</textarea></td></tr>
-	<tr>
-		<td colspan="2" style="text-align: center;">
-			<input type="submit" value="답글달기">
-		<button type="button" onclick="location.href='qna-out'">취소</button>
+<tr>
+	<c:choose>
+		<c:when test="${loginstate==true && member.auth_id == 9}">
+			<td colspan="2" style="text-align: center;"><input type="submit" value="답글달기"></td>
+		</c:when>
+		<c:otherwise></c:otherwise>
+	</c:choose>
+</tr>
+<tr>
+<td colspan="2">	
+	<button type="button" onclick="location.href='qna-out'">취소</button>
 	<button type="button" onclick="location.href='qna-modifyForm?q_number=${qna.q_number}'">수정</button>
 	
 	<button type="button" onclick="location.href='qna-delete?q_number=${qna.q_number}'">삭제</button>
-		</td>
-	</tr>
+</td>
+</tr>
 </table>
 </c:forEach>
 </form>
