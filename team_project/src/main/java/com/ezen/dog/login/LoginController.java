@@ -7,7 +7,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Locale;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.jdbc.SQL;
@@ -21,6 +23,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.util.WebUtils;
 
 import com.ezen.dog.member.MMailSend;
 import com.ezen.dog.member.MemberDTO;	
@@ -39,12 +42,23 @@ public class LoginController {
 	
 	// 로그인
 	@RequestMapping(value = "/login",method = RequestMethod.POST)
-	public String login(HttpServletRequest request) {
+	public String login(HttpServletRequest request,HttpSession session,
+			HttpServletResponse response) {
 		String userId = request.getParameter("userId");
 		String password = request.getParameter("password");
 		Lservice ms = sqlSession.getMapper(Lservice.class);
 		MemberDTO mdto =ms.login(userId,password);
 		HttpSession hs = request.getSession();
+		
+//		회원 로그인 시 비회원 장바구니 -> 회원 장바구니 
+		Cookie cookie = WebUtils.getCookie(request, "cartCookie");
+		
+		if(cookie!=null) {
+			String ckValue = cookie.getValue();
+			System.out.println("비회원 장바구니 삭제");
+//		쿠키에 담긴 정보에 회원 ID 입력.
+			ms.cartUpdate(ckValue, userId);
+		}
 		
 		if(mdto!=null){
 		hs.setAttribute("member",mdto);
@@ -104,6 +118,9 @@ public class LoginController {
 		hs.setMaxInactiveInterval(60*30);
 		}
 		return "redirect:main";
+		
+		
+		
 	}
 
 	// 로그아웃

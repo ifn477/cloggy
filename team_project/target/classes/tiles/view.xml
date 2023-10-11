@@ -152,13 +152,6 @@
 		<put-attribute name="title" value="메인화면"/>
 		<put-attribute name="body" value="/WEB-INF/views/juso/jusoPopup.jsp"/>
 	</definition>
-	
-<!-- 내 동물 입력하기	 -->
-
-	<definition name="mybaby-input" extends="baseLayout">
-		<put-attribute name="title" value="우리아이등록"/>
-		<put-attribute name="body" value="/WEB-INF/views/member/mybaby-input.jsp"/>
-	</definition>
 
 	
 <!-- 	리뷰 -->

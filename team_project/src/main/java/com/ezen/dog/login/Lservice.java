@@ -10,5 +10,5 @@ public interface Lservice {
 	public MemberDTO pwsearchView(String userId, String email);
 	public MemberDTO kakaologin(String nickname,String email);
 	public MemberDTO naverlogin(String name,String email);
-	
+	public void cartUpdate(String cart_ckid, String userId);
 }

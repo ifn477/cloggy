@@ -288,7 +288,6 @@
 							<li><a href="member-searchForm">검색</a></li>
 							<li class="divider">
 							<li><a href="member-searchForm">내정보</a></li>
-								<li><a href="mybaby-input">우리아이등록</a></li>
 							<li><a href="member-searchForm">회원 탈퇴</a></li>
 						</ul></li>
 					<li><a href="logout"><span
@@ -307,7 +306,6 @@
 
 							<!-- 						마이페이지&회원탈퇴로 수정 -->
 							<li><a href="member-searchForm">내정보</a></li>
-							<li><a href="mybaby-input">우리아이등록</a></li>
 							<li><a href="member-searchForm">회원 탈퇴</a></li>
 						</ul></li>
 					<li><a href="logout"><span
@@ -318,7 +316,7 @@
 				<ul class="nav navbar-nav navbar-right">
 					<li><a href="cart-out"><span
 							class="glyphicon glyphicon-user"></span> 장바구니</a></li> 
-					<li><a href="member-input"><span
+					<li><a href="memberinput"><span
 							class="glyphicon glyphicon-user"></span> Sign Up</a></li>
 					<li><a href="login-input"><span
 							class="glyphicon glyphicon-log-in"></span> Login</a></li>

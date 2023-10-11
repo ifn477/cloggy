@@ -21,4 +21,8 @@ select * from member where username=#{param1} and email=#{param2}
 <select id="naverlogin" resultType="com.ezen.dog.member.MemberDTO"> 
 select * from member where username=#{param1} and email=#{param2} 
 </select>
+<!-- 로그인 시 비회원장바구니 -> 회원장바구니 -->
+<update id="cartUpdate">
+UPDATE CART SET serId = #{serId} WHERE CART_CKID = #{cart_ckid}
+</update>
 </mapper>
