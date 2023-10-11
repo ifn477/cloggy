@@ -4,10 +4,12 @@
 
 <mapper namespace="com.ezen.dog.cart.Cservice">
 <insert id="addcart">
-	insert into cart values(cart_no, userId, product_id, cart_quantity, cart_date )
-	values (cart_seq.nextval, #{userId}, #{product_id}, #{cart_quantity}, sysdate )
+	insert into cart (cart_id, userId, product_id, CART_QUANTITY, cart_date)
+	values (cart_seq.nextval, #{param1}, #{param2},#{param3}, sysdate)
 </insert>
 <select id="cartout" resultType="com.ezen.dog.cart.CartDTO">
 	select * from cart where userId=#{param1}
 </select>
+
+
 </mapper>

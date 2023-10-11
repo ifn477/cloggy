@@ -36,6 +36,11 @@ public class HomeController {
 		return "info";
 	}
 	
+	@RequestMapping(value = "/mybaby-input")
+	public String main4() {
+		return "mybaby-input";
+	}
+	
 	
 	@RequestMapping(value="/search-all", method = RequestMethod.POST )
 	public String searchall(HttpServletRequest request, Model mo) {
