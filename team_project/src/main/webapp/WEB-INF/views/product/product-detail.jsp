@@ -179,6 +179,7 @@ function addcart() {
 	</form>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<!-- 	<script src="/dog/js/product-detail.js"></script> -->
 	<script type="text/javascript">
@@ -186,6 +187,8 @@ function addcart() {
 				.ready(
 						function() {
 							var quantity = 1; // 초기 수량은 1으로 설정
+=======
+>>>>>>> parent of 934500c (cart completed)
 =======
 >>>>>>> parent of 934500c (cart completed)
 

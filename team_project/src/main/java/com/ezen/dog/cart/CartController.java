@@ -27,57 +27,23 @@ public class CartController {
 	@Autowired
 	SqlSession sqlSession;
 
-<<<<<<< HEAD
+
+	
+	//카트 추가 : 비동기(view로 전환 없이 같은 창에서)
 	@ResponseBody
-	@RequestMapping(value = "/addtocart", method = RequestMethod.POST)
-	public int cartin(@RequestParam("product_id") int product_id, @RequestParam("quantity") int quantity,
-	        HttpSession session, HttpServletRequest request, HttpServletResponse response, CartDTO cdto) {
-
-		// 회원정보 가져오기
-		MemberDTO mdto = (MemberDTO) session.getAttribute("member");
-
-		Cookie cookie = WebUtils.getCookie(request, "cartCookie");
-		Cservice cs = sqlSession.getMapper(Cservice.class);
-		cdto.setProduct_id(product_id);
+	@RequestMapping(value = "/addcart", method = RequestMethod.POST)
+	public void addcart(HttpSession session, HttpServletRequest request, HttpServletResponse response, CartDTO cdto){
+		int quantity = Integer.parseInt(request.getParameter("quantity"));
+		
+		MemberDTO mdto = (MemberDTO)session.getAttribute("member");
+		cdto.setUserId(mdto.getUserId());
 		cdto.setCart_quantity(quantity);
 		
-		// 비회원 & 장바구니 첫 클릭 시 쿠키생성
-		if (cookie == null && mdto == null) {
-			String ckid = RandomStringUtils.random(6, true, true);
-			Cookie cartCookie = new Cookie("cartCookie", ckid);
-			cartCookie.setPath("/");
-			cartCookie.setMaxAge(60 * 60 * 24 * 1);
-			response.addCookie(cartCookie);
-			cdto.setCart_ckid(ckid);
-			cs.cartin_nocookie(cdto);
-
-			// 비회원 장바구니 쿠키생성 후 상품추가
-		} else if (cookie != null && mdto == null) {
-			String ckValue = cookie.getValue();
-			cdto.setCart_ckid(ckValue);
-			cs.cartin_yescookie(cdto);
-			// 장바구니 중복제한
-			if (cs.cartCheck(cdto) != 0) {
-				return 2;
-			}
-
-			// 쿠키 시간 재설정해주기
-			cookie.setPath("/");
-			cookie.setMaxAge(60 * 60 * 24 * 1);
-			response.addCookie(cookie);
-			
-			// 로그인 상태 : 회우너 장바구니 상품 추가
-		} else if (mdto != null) {
-			cdto.setUserId(mdto.getUserId());
-			if (cs.cartCheck(cdto) != 0) {
-				return 2;
-			}
-			cs.cartin_login(cdto);
-		}
-		return 1;
+		Cservice cv = sqlSession.getMapper(Cservice.class);
+		cv.addcart(cdto);
+		
 	}
-
-=======
+	
 	
 //	//카트 추가 : 비동기(view로 전환 없이 같은 창에서)
 //	@ResponseBody
@@ -149,7 +115,7 @@ public class CartController {
 
 	
 	//장바구니 출력1 : userId로 cart id 조회(조인 사용 못하니 임시방편) -> cartid에 있는 제품id로 제품 상세내역 조회(구현 전ㅜ)
->>>>>>> parent of 934500c (cart completed)
+
 	@RequestMapping(value = "/cart-out")
 	public String productout(HttpSession session,HttpServletRequest request, Model mo) {
 		MemberDTO mdto = (MemberDTO) session.getAttribute("member");
