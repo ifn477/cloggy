@@ -38,4 +38,8 @@ update product set category_id=#{param1}, p_name=#{param3}, p_price=#{param4}, p
 <delete id="productdelete">
 delete from product where product_id=#{param2}
 </delete>
+<!-- 장바구니 출력 -->
+<select id="cartout" resultType="com.ezen.dog.cart.CartDTO">
+		select * from cart where userId=#{param1}
+	</select>
 </mapper>

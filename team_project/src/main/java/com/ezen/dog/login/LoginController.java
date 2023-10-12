@@ -34,11 +34,22 @@ public class LoginController {
 	@Autowired
 	SqlSession sqlSession;
 	
-	// 로그인 폼
 	@RequestMapping(value = "/login-input")
-	public String logininput() {
-		return "login-input";
+	public String logininput(HttpServletRequest request, Model model) {
+	    Cookie[] cookies = request.getCookies();
+	    if (cookies != null) {
+	        for (Cookie cookie : cookies) {
+	            if (cookie.getName().equals("rememberedUserId")) {
+	                String rememberedUserId = cookie.getValue();
+	                // Set the remembered user ID in the model to pre-fill the input field
+	                model.addAttribute("rememberedUserId", rememberedUserId);
+	                break;
+	            }
+	        }
+	    }
+	    return "login-input";
 	}
+
 	
 	// 로그인
 	@RequestMapping(value = "/login",method = RequestMethod.POST)
@@ -46,19 +57,19 @@ public class LoginController {
 			HttpServletResponse response) {
 		String userId = request.getParameter("userId");
 		String password = request.getParameter("password");
+		
+
+		
 		Lservice ms = sqlSession.getMapper(Lservice.class);
 		MemberDTO mdto =ms.login(userId,password);
 		HttpSession hs = request.getSession();
 		
-//		회원 로그인 시 비회원 장바구니 -> 회원 장바구니 
-		Cookie cookie = WebUtils.getCookie(request, "cartCookie");
 		
-		if(cookie!=null) {
-			String ckValue = cookie.getValue();
-			System.out.println("비회원 장바구니 삭제");
-//		쿠키에 담긴 정보에 회원 ID 입력.
-			ms.cartUpdate(ckValue, userId);
-		}
+		
+		
+
+		System.out.println("3단계-로그인단계");
+		
 		
 		if(mdto!=null){
 		hs.setAttribute("member",mdto);

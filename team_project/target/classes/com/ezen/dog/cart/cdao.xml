@@ -3,44 +3,8 @@
     "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.ezen.dog.cart.Cservice">
-	<insert id="addcart">
-		insert into cart (cart_id, userId, product_id,
-		CART_QUANTITY, cart_cklimit)
-		values (cart_seq.nextval, #{param1},
-		#{param2},#{param3}, sysdate)
-	</insert>
-	<insert id="cartin_nocookie">
-		insert into cart (cart_id, product_id, CART_QUANTITY,
-		cart_date, cart_cklimit)
-		values (cart_seq.nextval, #{product_id},
-		#{CART_QUANTITY},sysdate,
-		#{cart_ckid})
-	</insert>
-	<insert id="cartin_login">
-		insert into cart (cart_id, product_id, CART_QUANTITY,
-		cart_cklimit, userId)
-		values (cart_seq.nextval, #{product_id},
-		#{CART_QUANTITY}, sysdate,
-		#{userId})
-	</insert>
-	<select id="cartout" resultType="com.ezen.dog.cart.CartDTO">
-		select * from cart where
-		userId=#{param1}
-	</select>
-	<select id="cartCheck" resultType="int">
-		SELECT COUNT(*) FROM CART WHERE CART_ckid = #{cart_ckid}
-		and product_id
-		= #{product_id}
-		<!-- AND CART_OPTION_NO = #{cart_option_no} -->
-	</select>
-
-	<insert id="addcart">
-		insert into cart values(cart_no, userId, product_id, cart_quantity,
-		cart_date )
-		values (cart_seq.nextval, #{userId}, #{product_id}, #{cart_quantity},
-		sysdate )
-	</insert>
-	<select id="cartout" resultType="com.ezen.dog.cart.CartDTO">
-		select * from cart where userId=#{param1}
-	</select>
+<insert id="addcart">
+	insert into cart (cart_id, userId, product_id, CART_QUANTITY, cart_date)
+	values (cart_seq.nextval, #{param1}, #{param2},#{param3}, sysdate)
+</insert>
 </mapper>

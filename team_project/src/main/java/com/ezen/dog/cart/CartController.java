@@ -2,23 +2,24 @@ package com.ezen.dog.cart;
 
 import java.util.ArrayList;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.util.WebUtils;
 
 import com.ezen.dog.member.MemberDTO;
+import com.ezen.dog.member.Mservice;
+import com.ezen.dog.product.PService;
+import com.ezen.dog.product.ProductDTO;
 
 
 @Controller
@@ -27,106 +28,47 @@ public class CartController {
 	@Autowired
 	SqlSession sqlSession;
 
-
-	
-	//Ä«Æ® Ãß°¡ : ºñµ¿±â(view·Î ÀüÈ¯ ¾øÀÌ °°Àº Ã¢¿¡¼­)
-	@ResponseBody
-	@RequestMapping(value = "/addcart", method = RequestMethod.POST)
-	public void addcart(HttpSession session, HttpServletRequest request, HttpServletResponse response, CartDTO cdto){
-		int quantity = Integer.parseInt(request.getParameter("quantity"));
-		
-		MemberDTO mdto = (MemberDTO)session.getAttribute("member");
-		cdto.setUserId(mdto.getUserId());
-		cdto.setCart_quantity(quantity);
-		
-		Cservice cv = sqlSession.getMapper(Cservice.class);
-		cv.addcart(cdto);
-		
-	}
-	
-	
-//	//Ä«Æ® Ãß°¡ : ºñµ¿±â(view·Î ÀüÈ¯ ¾øÀÌ °°Àº Ã¢¿¡¼­)
-//	@ResponseBody
-//	@RequestMapping(value = "/addcart", method = RequestMethod.POST)
-//	public void addcart(HttpSession session, HttpServletRequest request, HttpServletResponse response, CartDTO cdto){
-//		int quantity = Integer.parseInt(request.getParameter("quantity"));
-//		
-//		MemberDTO mdto = (MemberDTO)session.getAttribute("member");
-//		cdto.setUserId(mdto.getUserId());
-//		cdto.setCart_quantity(quantity);
-//		
-//		Cservice cv = sqlSession.getMapper(Cservice.class);
-//		cv.addcart(cdto);
-//		
-//	}
-//	
-//	@ResponseBody
-//	@RequestMapping(value = "/addcart", method = RequestMethod.POST)
-//	public void addcart(HttpSession session, @RequestBody Map<String, Object> requestData) {
-//	    int quantity = Integer.parseInt(requestData.get("quantity").toString());
-//	    int productId = Integer.parseInt(requestData.get("product_id").toString());
-//
-//	    MemberDTO mdto = (MemberDTO) session.getAttribute("member");
-//	    CartDTO cdto = new CartDTO();
-//	    cdto.setUserId(mdto.getUserId());
-//	    cdto.setProduct_id(productId);
-//	    cdto.setCart_quantity(quantity);
-//
-//	    Cservice cv = sqlSession.getMapper(Cservice.class);
-//	    cv.addcart(cdto);
-//	}
-
-	
-	@ResponseBody
-	@RequestMapping(value = "/addcart", method = RequestMethod.POST)
-	public String addcart(HttpSession session, @RequestParam("product_id") int productId, @RequestParam("quantity") int quantity) {
-	    try {
+	   @ResponseBody
+	    @RequestMapping(value = "/addtocart", method = RequestMethod.POST)
+	    public String cartin(@RequestParam("product_id") int product_id, @RequestParam("quantity") int quantity, HttpSession session) {
+	        // íšŒì›ì •ë³´ ê°€ì ¸ì˜¤ê¸°
 	        MemberDTO mdto = (MemberDTO) session.getAttribute("member");
+	        String userId = null;
 
-	        if (mdto == null) {
-	            // Handle the case where the user is not logged in
-	            return "User not logged in";
+	        // ë¡œê·¸ì¸ ìƒíƒœ
+	        Cservice cs = sqlSession.getMapper(Cservice.class);
+	        if (mdto != null) {
+	            userId = mdto.getUserId();
+	            cs.addcart(userId, product_id, quantity);
+	            return "yes";
+	        } else {
+	            return "no";
 	        }
-
-	        CartDTO cdto = new CartDTO();
-	        cdto.setUserId(mdto.getUserId());
-	        cdto.setProduct_id(productId);
-	        cdto.setCart_quantity(quantity);
-
-	        Cservice cv = sqlSession.getMapper(Cservice.class);
-
-	        // Log values for debugging
-	        System.out.println("Debug: mdto.getUserId() = " + mdto.getUserId());
-	        System.out.println("Debug: productId = " + productId);
-	        System.out.println("Debug: quantity = " + quantity);
-
-	        // Attempt to add the item to the cart
-	        cv.addcart(cdto);
-
-	        // Optionally, you can return a success message
-	        return "Item added to cart successfully";
-	    } catch (Exception e) {
-	        // Log the exception and stack trace
-	        e.printStackTrace();
-	        return "Error adding item to cart: " + e.getMessage();
 	    }
-	}
 
-
-	
-	//Àå¹Ù±¸´Ï Ãâ·Â1 : userId·Î cart id Á¶È¸(Á¶ÀÎ »ç¿ë ¸øÇÏ´Ï ÀÓ½Ã¹æÆí) -> cartid¿¡ ÀÖ´Â Á¦Ç°id·Î Á¦Ç° »ó¼¼³»¿ª Á¶È¸(±¸Çö Àü¤Ì)
 
 	@RequestMapping(value = "/cart-out")
-	public String productout(HttpSession session,HttpServletRequest request, Model mo) {
+	public String productout(HttpSession session,HttpServletRequest request, CartDTO cdto, Model mo) {
+		
+		//Sessionì— ì €ì¥ë˜ì–´ìˆëŠ” ì‚¬ìš©ì ID ê°€ì ¸ì˜¤ê¸°
 		MemberDTO mdto = (MemberDTO) session.getAttribute("member");
-		
-		mo.addAttribute("mdto", mdto);
-		
 		String userId = mdto.getUserId();
 		
-		Cservice cs = sqlSession.getMapper(Cservice.class);
-		ArrayList<CartDTO> list = cs.cartout(userId);
-		mo.addAttribute("list", list);
+		//ê³ ê°DBì— ì ‘ê·¼í•´ì„œ userIdë¡œ ê³ ê° ì´ë¦„, ì£¼ì†Œ, ì „í™”ë²ˆí˜¸ ë“± ì •ë³´ ê°€ì ¸ì˜¤ê¸°
+		Mservice ms = sqlSession.getMapper(Mservice.class);
+		ArrayList<MemberDTO> mlist = ms.memberInfoForCart(userId);
+		mo.addAttribute("mlist", mlist);
+		
+		
+		//ì œí’ˆDBì— ì ‘ê·¼í•´ì„œ product_idë¡œ ìƒí’ˆ ì •ë³´ ê°€ì ¸ì˜¤ê¸°
+		PService ps = sqlSession.getMapper(PService.class);
+		ArrayList<ProductDTO> plist = ps.cartout(userId);
+		mo.addAttribute("plist", plist);
+		
+		//joiní•´ì„œ ì¡°íšŒí•´ë³´ê¸°...
+		
+		
+		
 		
 		return "cart-out";
 	}

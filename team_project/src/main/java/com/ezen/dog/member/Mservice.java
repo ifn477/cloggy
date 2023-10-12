@@ -11,6 +11,7 @@ public interface Mservice {
 	public ArrayList<MemberDTO> membersearchViewId(String value);
 	public ArrayList<MemberDTO> membersearchViewName(String userId);
 	public ArrayList<MemberDTO> membersearchViewEmail(String userId);
+	public ArrayList<MemberDTO> memberInfoForCart(String userId);
 	public int idcheck(String userId);
 	public ArrayList<MemberDTO> memberinfo(String userId);
 	public void memberdeleteSelf(String userId);

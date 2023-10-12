@@ -33,18 +33,27 @@ text-align: center;
 		<table>
 		  <caption>CART   장바구니에 담긴 상품은 30일 동안 보관됩니다.</caption>
 			<tr>
+			
 				<th><input type="checkbox" name="chk-all" id="chk-all"></th>
 				<th>이미지</th>
-				<th class="row-description">상품정보</th>
+				<th class="row-description">상품명</th>
 				<th>수량</th>
 				<th>상품구매금액</th>
 				<th>적립금</th>
 				<th>배송비</th>
 				<th>선택</th>
 			</tr>
+			<c:forEach items="${clist}" var="cart">
 			<tr>
-				<th>
+				<td>${cart.p_thumbnail}</td>
+				<td>${cart.p_name}</td>
+				<td>${cart. }</td>
+				<td>${cart. }</td>
+				<td>${cart. }</td>
+				<td>${cart. }</td>
+				<td>${cart. }</td>
 			</tr>
+			</c:forEach>
 		</table>
 
 

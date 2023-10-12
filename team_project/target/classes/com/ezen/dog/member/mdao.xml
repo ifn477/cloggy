@@ -37,6 +37,11 @@ select userId,password,userName,age,gender,email,phone,address,enroll_date from 
 select userId,password,userName,age,gender,email,phone,address,enroll_date from member where email like '%' || #{param1} || '%'
 </select>
 
+<!-- 장바구니 출력용 -->
+<select id="memberInfoForCart" resultType="com.ezen.dog.member.MemberDTO">
+select userId,userName,email,phone,address from member where userId=#{param1}
+</select>
+
 <select id="idcheck" resultType="int">
 select count(*) from member where userId=#{param1}
 </select>
