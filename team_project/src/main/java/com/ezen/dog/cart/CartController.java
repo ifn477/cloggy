@@ -29,8 +29,8 @@ public class CartController {
 	SqlSession sqlSession;
 
 	   @ResponseBody
-	    @RequestMapping(value = "/addtocart", method = RequestMethod.POST)
-	    public String cartin(@RequestParam("product_id") int product_id, @RequestParam("quantity") int quantity, HttpSession session) {
+	   @RequestMapping(value = "/addtocart", method = RequestMethod.POST)
+	    public String addToCart(@RequestParam("product_id") int product_id, @RequestParam("quantity") int quantity, HttpSession session) {
 	        // 회원정보 가져오기
 	        MemberDTO mdto = (MemberDTO) session.getAttribute("member");
 	        String userId = null;
@@ -40,13 +40,15 @@ public class CartController {
 	        if (mdto != null) {
 	            userId = mdto.getUserId();
 	            cs.addcart(userId, product_id, quantity);
-	            return "yes";
+	            return "success";
 	        } else {
-	            return "no";
+	        	 return "not_logged_in";
 	        }
 	    }
 
 
+//	  작업중
+	   
 	@RequestMapping(value = "/cart-out")
 	public String productout(HttpSession session,HttpServletRequest request, CartDTO cdto, Model mo) {
 		

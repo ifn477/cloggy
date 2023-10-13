@@ -161,25 +161,26 @@
 					console.log("quantity: " + quantity);
 
 
+					// Ajax를 사용하여 서버로 데이터 전송
+				      $.ajax({
+				        type: "POST", // 또는 "GET"에 따라 적절하게 변경
+				        url: "/dog/addtocart", // 컨트롤러의 URL을 여기에 지정
+				        data: {
+				          product_id: product_id,
+				          quantity: quantity
+				        },
+				        success: function(response) {
+				            if (response === "success") {
+				                alert("장바구니에 상품이 추가되었습니다.");
+				            } else if (response === "not_logged_in") {
+				            	alert("사용자가 로그인하지 않았습니다.");
+				                // 다른 처리를 수행할 수 있음
+				            } else {
+				            	alert("알 수 없는 응답: " + response);
+				            }
+				        },
 
-					// 서버로 JSON 데이터 전송
-					$.ajax({
-						type : "POST", 
-						url : "/dog/addtocart", // 컨트롤러의 URL에 대한 경로를 지정
-						success : function(response) {
-							// 성공적으로 처리된 경우 실행되는 코드
-							
-							if (response == 1) {
-							alert("장바구니에 상품이 저장되었습니다");
-							// 여기에서 추가 작업을 수행할 수 있습니다.
-							}else if (response ==2){
-							alert("이미 추가 된 상품입니다.");
-							}
-						},
-						 error: function(xhr, status, error) {
-					        console.error("Ajax 요청 오류: " + error);
-					    }
-					});
+				      });
 				});
 			});
 	</script>
