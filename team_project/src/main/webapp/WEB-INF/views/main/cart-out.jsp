@@ -191,7 +191,7 @@ th {
 				function updateShipping() {
 				    var totalprice = parseFloat($(".totalprice")
 				        .text().replace(/[^0-9.-]+/g, ""));
-				    var shipping = totalprice < 30000 ? 2500 : 0;
+				    var shipping = totalprice == 0 ? 0 : totalprice < 30000 ? 2500 : 0;
 				    var formattedShipping = formatNumberWithCommas(shipping);
 				    $(".shipping").text(formattedShipping); // Update the shipping element
 
