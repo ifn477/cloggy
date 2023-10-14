@@ -158,7 +158,28 @@ th {
 							}
 
 							quantityElement.text(quantity);
-
+							
+							//DB로 변경된 quantity 값 보내서 수정하기
+							
+					        var product_id = $(this).closest("tr").find("input[name='product_id']").val();
+							
+							$.ajax({
+							    type: "POST",
+							    url: "/dog/changeqty",
+							    data: {
+							          product_id: product_id,
+							          quantity: quantity
+							        },
+							    success: function(response) {
+							        if (response === "success") {
+							            alert("수량이 변경되었습니다.");
+							        } else {
+							            alert("알 수 없는 응답: " + response);
+							        }
+							    },
+							});							
+							
+							
 							// Recalculate subtotal, total price, and shipping
 							updateSubtotal(index);
 							updateTotalPrice();

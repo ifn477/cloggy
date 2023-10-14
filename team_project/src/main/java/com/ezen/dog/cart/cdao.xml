@@ -23,4 +23,7 @@
 	<update id="increasequantity">
 		update cart set cart_quantity = cart_quantity + #{param3} where userId=#{param1} and product_id=#{param2}
 	</update>
+	<update id="changeqty">
+		update cart set cart_quantity = #{param3} where userId=#{param1} and product_id=#{param2}
+	</update>
 </mapper>

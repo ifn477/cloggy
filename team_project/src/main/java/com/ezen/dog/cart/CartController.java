@@ -1,7 +1,6 @@
 package com.ezen.dog.cart;
 
 import java.util.ArrayList;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -10,7 +9,6 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -98,4 +96,16 @@ public class CartController {
 	    return "success";
 	}
 
+	
+	@ResponseBody
+	@RequestMapping(value = "/changeqty", method = RequestMethod.POST)
+	public String changeqty(@RequestParam("product_id") int product_id, @RequestParam("quantity") int quantity, HttpSession session) {
+	       // 회원정보 가져오기
+	       MemberDTO mdto = (MemberDTO) session.getAttribute("member");
+	       String userId = mdto.getUserId();
+	     
+	       Cservice cs = sqlSession.getMapper(Cservice.class);
+	       cs.changeqty(userId, product_id, quantity);
+	     return "success"; // 상품 수량 증가 성공
+	}
 }
