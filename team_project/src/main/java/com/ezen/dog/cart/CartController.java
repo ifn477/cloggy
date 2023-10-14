@@ -25,23 +25,37 @@ public class CartController {
 	@Autowired
 	SqlSession sqlSession;
 
+	   
+	   
 	   @ResponseBody
 	   @RequestMapping(value = "/addtocart", method = RequestMethod.POST)
-	    public String addToCart(@RequestParam("product_id") int product_id, @RequestParam("quantity") int quantity, HttpSession session) {
-	        // 회원정보 가져오기
-	        MemberDTO mdto = (MemberDTO) session.getAttribute("member");
-	        String userId = null;
+	   public String addToCart(@RequestParam("product_id") int product_id, @RequestParam("quantity") int quantity, HttpSession session) {
+	       // 회원정보 가져오기
+	       MemberDTO mdto = (MemberDTO) session.getAttribute("member");
+	       String userId = null;
 
-	        // 로그인 상태
-	        Cservice cs = sqlSession.getMapper(Cservice.class);
-	        if (mdto != null) {
-	            userId = mdto.getUserId();
-	            cs.addcart(userId, product_id, quantity);
-	            return "success";
-	        } else {
-	        	 return "not_logged_in";
-	        }
-	    }
+	       // 로그인 상태
+	       Cservice cs = sqlSession.getMapper(Cservice.class);
+	       if (mdto != null) { // 로그인 상태
+	           userId = mdto.getUserId();
+
+	           // 카트에 이미 저장된 상품인지 체크하는 메서드!
+	           int hasitem = cs.checkcart(userId, product_id);
+	           System.out.println("장바구니 수량 :" + hasitem);
+	           
+	           if (hasitem > 0) { // 장바구니에 있는 상품일 경우 수량 증가 method 호출
+	               cs.increasequantity(userId, product_id, quantity);
+	               return "success"; // 상품 수량 증가 성공
+	           } else { // 없는 상품일 경우 신규 추가
+	               cs.addcart(userId, product_id, quantity);
+	               return "success"; // 상품 추가 성공
+	           }
+
+	       } else { // 비로그인 상태
+	           return "no"; // 로그인되지 않은 상태
+	       }
+	   }
+
 	
 	   
 	@RequestMapping(value = "/cart-out")

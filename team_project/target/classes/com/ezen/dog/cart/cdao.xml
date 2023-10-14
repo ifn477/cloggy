@@ -17,5 +17,10 @@
 	<delete id="cartdelete">
 		delete from cart where userId=#{param1} and product_id=#{param2}
 	</delete>
-	
+	<select id="checkcart" resultType="Integer">
+	    select count(*) from cart where userId=#{param1} and product_id=#{param2}
+	</select>
+	<update id="increasequantity">
+		update cart set cart_quantity = cart_quantity + #{param3} where userId=#{param1} and product_id=#{param2}
+	</update>
 </mapper>

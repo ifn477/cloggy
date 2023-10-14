@@ -172,7 +172,7 @@
 				        success: function(response) {
 				            if (response === "success") {
 				                alert("장바구니에 상품이 추가되었습니다.");
-				            } else if (response === "not_logged_in") {
+				            } else if (response === "no") {
 				            	alert("사용자가 로그인하지 않았습니다.");
 				                // 다른 처리를 수행할 수 있음
 				            } else {
