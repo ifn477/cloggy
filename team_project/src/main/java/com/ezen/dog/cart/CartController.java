@@ -1,25 +1,22 @@
 package com.ezen.dog.cart;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ezen.dog.member.MemberDTO;
-import com.ezen.dog.member.Mservice;
-import com.ezen.dog.product.PService;
-import com.ezen.dog.product.ProductDTO;
 
 
 @Controller
@@ -45,9 +42,7 @@ public class CartController {
 	        	 return "not_logged_in";
 	        }
 	    }
-
-
-//	  작업중
+	
 	   
 	@RequestMapping(value = "/cart-out")
 	public String productout(HttpSession session,HttpServletRequest request, CartDTO cdto, Model mo) {
@@ -55,23 +50,38 @@ public class CartController {
 		//Session에 저장되어있는 사용자 ID 가져오기
 		MemberDTO mdto = (MemberDTO) session.getAttribute("member");
 		String userId = mdto.getUserId();
-		
-		//고객DB에 접근해서 userId로 고객 이름, 주소, 전화번호 등 정보 가져오기
-		Mservice ms = sqlSession.getMapper(Mservice.class);
-		ArrayList<MemberDTO> mlist = ms.memberInfoForCart(userId);
-		mo.addAttribute("mlist", mlist);
+
 		
 		
 		//제품DB에 접근해서 product_id로 상품 정보 가져오기
-		PService ps = sqlSession.getMapper(PService.class);
-		ArrayList<ProductDTO> plist = ps.cartout(userId);
-		mo.addAttribute("plist", plist);
-		
-		//join해서 조회해보기...
-		
-		
-		
+		Cservice cs = sqlSession.getMapper(Cservice.class);
+		ArrayList<CartProductDTO> list = cs.cartout(userId);
+		mo.addAttribute("list", list);
 		
 		return "cart-out";
 	}
+	
+
+	
+	@ResponseBody
+	@RequestMapping(value = "/deletefromcart", method = RequestMethod.POST)
+	public String deletefromcart(@RequestParam("productIds") String[] productIds, HttpSession session) {
+	    
+	    if (productIds == null || productIds.length == 0) {
+	        // Handle the case where productIds is missing or empty
+	        return "error";
+	    }
+
+	    // 나머지 코드는 그대로 유지
+	    MemberDTO mdto = (MemberDTO) session.getAttribute("member");
+	    String userId = mdto.getUserId();
+
+	    for (int i = 0; i < productIds.length; i++) {
+	        Cservice cs = sqlSession.getMapper(Cservice.class);
+	        cs.cartdelete(userId, productIds[i]);
+	    }
+
+	    return "success";
+	}
+
 }

@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -73,6 +74,9 @@
     <title>Sample Payment</title>
 </head>
 <body>
+
+
+
 <a onclick="kakakoPay()">
 <img alt="카카오페이" src="/dog/image/payment_icon_yellow_medium.png" height="48px">
 </a>

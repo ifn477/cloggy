@@ -3,8 +3,19 @@
     "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.ezen.dog.cart.Cservice">
-<insert id="addcart">
-	insert into cart (cart_id, userId, product_id, CART_QUANTITY, cart_date)
-	values (cart_seq.nextval, #{param1}, #{param2},#{param3}, sysdate)
-</insert>
+	<insert id="addcart">
+		insert into cart (cart_id, userId, product_id,
+		CART_QUANTITY, cart_date)
+		values (cart_seq.nextval, #{param1},
+		#{param2},#{param3}, sysdate)
+	</insert>
+	<select id="cartout" resultType="com.ezen.dog.cart.CartProductDTO">
+	    select c.userId, c.product_id, c.cart_quantity, p.p_name, p.p_thumbnail, p.p_price
+	    from cart c
+	    INNER JOIN product p ON c.product_id = p.product_id and c.userId=#{param1}
+	</select>
+	<delete id="cartdelete">
+		delete from cart where userId=#{param1} and product_id=#{param2}
+	</delete>
+	
 </mapper>
