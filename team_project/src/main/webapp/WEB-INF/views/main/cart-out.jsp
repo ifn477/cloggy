@@ -26,18 +26,18 @@ th {
 <title>Insert title here</title>
 </head>
 <body>
-	<!-- 진행상태바 -->
-	<ul class="order-status">
-		<li>장바구니</li>
-		<li>주문/결제</li>
-		<li>완료</li>
-	</ul>
+<!-- 	<!-- 진행상태바 -->
+<!-- 	<ul class="order-status"> -->
+<!-- 		<li>장바구니</li> -->
+<!-- 		<li>주문/결제</li> -->
+<!-- 		<li>완료</li> -->
+<!-- 	</ul> -->
 	<form action="order" method="post">
 		<table align="center">
 			<caption>CART 장바구니에 담긴 상품은 30일 동안 보관됩니다.</caption>
 
 			<tr>
-				<td colspan="7"><button type="button" id="deletethis">선택
+				<td colspan="7"><button type="button" id="deletethis" >선택
 						삭제</button>
 			</tr>
 			<tr>
@@ -55,7 +55,8 @@ th {
 					<td><img src="/dog/image/${cart.p_thumbnail}" width="100px"></td>
 					<td>${cart.p_name}<input type="hidden" name="product_id"
 						value="${cart.product_id}"></td>
-					<td>${cart.p_price}<span id="price-${loop.index}"
+					<td><fmt:formatNumber pattern="#,##0원">${cart.p_price}</fmt:formatNumber>
+					<span id="price-${loop.index}"
 						style="display: none;">${cart.p_price}</span>
 					</td>
 					<td>
@@ -118,22 +119,49 @@ th {
 				 
 				
 				// 3. 선택삭제
-				 $("#deletethis").click(function() {
-					    var selectedProducts = [];
-					    // 체크된 상품의 product_id를 수집
-					    $("input[name='check-one']:checked").each(function() {
-					        var product_id = $(this).closest("tr").find("input[name='product_id']").val();
-					        selectedProducts.push(product_id);
-					    });
+// 				 $("#deletethis").click(function() {
+// 					    var selectedProducts = [];
+// 					    // 체크된 상품의 product_id를 수집
+// 					    $("input[name='check-one']:checked").each(function() {
+// 					        var product_id = $(this).closest("tr").find("input[name='product_id']").val();
+// 					        selectedProducts.push(product_id);
+// 					    });
 						
-						 console.log("Selected product_ids: " + selectedProducts);
+// 						 console.log("Selected product_ids: " + selectedProducts);
 
-					    // AJAX 요청으로 선택된 상품을 컨트롤러로 전송
+// 					    // AJAX 요청으로 선택된 상품을 컨트롤러로 전송
 					    
-						$.ajax({
+// 						$.ajax({
+// 						    type: "POST",
+// 						    url: "/dog/deletefromcart",
+// 						    data: { productIds: selectedProducts },
+// 						    success: function(response) {
+// 						        if (response === "success") {
+// 						            alert("상품이 삭제되었습니다.");
+// 						        } else {
+// 						            alert("알 수 없는 응답: " + response);
+// 						        }
+// 						    },
+// 						});
+// 				});
+				
+				  $("#deletethis").click(function() {
+					  
+				        // 상품 id를 저장할 배열을 초기화.
+				        var productIds = [];
+				
+				        // 선택된 제품의 product_id를 수집해서 배열에 저장
+				        $("input[name='check-one']:checked").each(function() {
+				        	productIds.push($(this).closest("tr").find("input[name='product_id']").val());
+				        });
+				        
+				        console.log("product_id : " + productIds);
+				        
+				        //ajax로 전송
+				        $.ajax({
 						    type: "POST",
 						    url: "/dog/deletefromcart",
-						    data: { productIds: selectedProducts },
+						    data: { productIds: productIds },
 						    success: function(response) {
 						        if (response === "success") {
 						            alert("상품이 삭제되었습니다.");
@@ -142,21 +170,29 @@ th {
 						        }
 						    },
 						});
-				});
+
+				        
+				    });
 					    
+				  
+				  
 				// 4. 수량 증감
 				$(".increase, .decrease").click(
 					function() {
 							var index = $(this).data("id");
+							//증감버튼이 여러 개 있기 때문에 해당 행의 index값을 받아와야 원하는 행에 적용됨
 							var quantityElement = $("#quantity-"+ index);
+							//수량값을 숫자로 변환
 							var quantity = parseInt(quantityElement.text(), 10);
 
+							// 증가/감소 여부를 판단해 수량 변경
 							if ($(this).hasClass("increase")) {
 								quantity++;
 							} else if (quantity > 1) {
 								quantity--;
 							}
 
+							//화면에 표시되는 값 변경
 							quantityElement.text(quantity);
 							
 							//DB로 변경된 quantity 값 보내서 수정하기

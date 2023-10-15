@@ -17,13 +17,13 @@
 	$(document).ready(function () {
 	$('#loginBtn').click(function() {
 		var id = $('#inputId').val();
-		var remember_us = $('#remember_us').is(':checked');
+// 		var remember_us = $('#remember_us').is(':checked');
 			$.ajax({
 			type : 'post',
 			url : '${pageContext.request.contextPath}/',
 			data : {
 				user_id : id,
-				remember_userId : remember_us
+// 				remember_userId : remember_us
 				},
 				success : function(data) {
 					console.log(data);
@@ -67,7 +67,7 @@
 					<td><input type="password" name="password"></td>
 				</tr>
 				<tr>
-					<td colspan="2"><input type="checkbox" class="custom-control-nput" id="customCheck" name="customCheck" valeu="true" ${checked} />아이디 기억하기</td>
+					<td colspan="2"><input type="checkbox" class="custom-control-nput" id="customCheck" name="customCheck" ${checked} />아이디 기억하기</td>
 				</tr>
 				<tr>
 					<td colspan="2"><input type="button" value="확인"

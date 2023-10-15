@@ -59,31 +59,25 @@ public class CartController {
 	@RequestMapping(value = "/cart-out")
 	public String productout(HttpSession session,HttpServletRequest request, CartDTO cdto, Model mo) {
 		
-		//Session에 저장되어있는 사용자 ID 가져오기
 		MemberDTO mdto = (MemberDTO) session.getAttribute("member");
-		String userId = mdto.getUserId();
-
-		
-		
-		//제품DB에 접근해서 product_id로 상품 정보 가져오기
-		Cservice cs = sqlSession.getMapper(Cservice.class);
-		ArrayList<CartProductDTO> list = cs.cartout(userId);
-		mo.addAttribute("list", list);
-		
-		return "cart-out";
+		if(mdto!= null) {
+			//Session에 저장되어있는 사용자 ID 가져오기
+			String userId = mdto.getUserId();
+	
+			
+			//제품DB에 접근해서 product_id로 상품 정보 가져오기
+			Cservice cs = sqlSession.getMapper(Cservice.class);
+			ArrayList<CartProductDTO> list = cs.cartout(userId);
+			mo.addAttribute("list", list);
+			
+			return "cart-out";	
+		}
+		return "cart-out";	
 	}
-	
 
 	
-	@ResponseBody
-	@RequestMapping(value = "/deletefromcart", method = RequestMethod.POST)
+	@RequestMapping(value = "/deletefromcart")
 	public String deletefromcart(@RequestParam("productIds") String[] productIds, HttpSession session) {
-	    
-	    if (productIds == null || productIds.length == 0) {
-	        // Handle the case where productIds is missing or empty
-	        return "error";
-	    }
-
 	    // 나머지 코드는 그대로 유지
 	    MemberDTO mdto = (MemberDTO) session.getAttribute("member");
 	    String userId = mdto.getUserId();
