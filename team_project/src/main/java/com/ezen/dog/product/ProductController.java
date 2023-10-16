@@ -87,7 +87,7 @@ public class ProductController {
 		int product_id = Integer.parseInt(request.getParameter("product_id"));
 		
 		PService ps = sqlSession.getMapper(PService.class);
-		list = ps.productdetail(product_id);
+		list = ps.productdetailWithOpt(product_id);
 		ps.productcount(product_id);
 		mo.addAttribute("list", list);
 		

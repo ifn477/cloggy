@@ -46,31 +46,31 @@
 		});
 	});
 
-	// 크롭 팝업 열기
-// 	function openCropModal() {
-// 		$('#cropModal').modal('show'); // 모달 팝업 열기
-// 		var image = document.getElementById('target_img');
-// 		var cropper = new Cropper(image, {
-// 			aspectRatio : 1, // 크롭 비율 (1:1)
-// 			viewMode : 1, // 크롭 박스 안에 이미지가 꽉 차도록 설정
-// 		});
-// 	}
+	크롭 팝업 열기
+	function openCropModal() {
+		$('#cropModal').modal('show'); // 모달 팝업 열기
+		var image = document.getElementById('target_img');
+		var cropper = new Cropper(image, {
+			aspectRatio : 1, // 크롭 비율 (1:1)
+			viewMode : 1, // 크롭 박스 안에 이미지가 꽉 차도록 설정
+		});
+	}
 
-	// 크롭 완료 후 이미지 업로드
-// 	function uploadCroppedImage() {
-// 		var croppedData = cropper.getCroppedCanvas().toDataURL();
+	크롭 완료 후 이미지 업로드
+	function uploadCroppedImage() {
+		var croppedData = cropper.getCroppedCanvas().toDataURL();
 
-// 		// 업로드 코드 추가
-// 	}
+		// 업로드 코드 추가
+	}
 
-	// 모달이 닫힐 때 크롭 데이터 초기화
-// 	$('#cropModal').on('hidden.bs.modal', function() {
-// 		var image = document.getElementById('target_img');
-// 		var cropper = new Cropper(image, {
-// 			aspectRatio : 1,
-// 			viewMode : 1,
-// 		});
-// 	});
+	모달이 닫힐 때 크롭 데이터 초기화
+	$('#cropModal').on('hidden.bs.modal', function() {
+		var image = document.getElementById('target_img');
+		var cropper = new Cropper(image, {
+			aspectRatio : 1,
+			viewMode : 1,
+		});
+	});
 </script>
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.css">
@@ -84,31 +84,31 @@
 					type="file" id="file" name="baby_photo" style="display: none;"
 					accept=".jpg, .png"> <input type="hidden" name="target_url">
 			</div>
-<!-- 			<!-- 크롭 팝업 모달 --> -->
-<!-- 			<div class="modal fade" id="cropModal" tabindex="-1" role="dialog" -->
-<!-- 				aria-labelledby="cropModalLabel" aria-hidden="true"> -->
-<!-- 				<div class="modal-dialog" role="document"> -->
-<!-- 					<div class="modal-content"> -->
-<!-- 						<div class="modal-header"> -->
-<!-- 							<h5 class="modal-title" id="cropModalLabel">크롭 이미지</h5> -->
-<!-- 							<button type="button" class="close" data-dismiss="modal" -->
-<!-- 								aria-label="Close"> -->
-<!-- 								<span aria-hidden="true">&times;</span> -->
-<!-- 							</button> -->
-<!-- 						</div> -->
-<!-- 						<div class="modal-body"> -->
-<!-- 							<img src="" id="target_img" style="max-width: 100%;"> -->
-<!-- 						</div> -->
-<!-- 						<div class="modal-footer"> -->
-<!-- 							<button type="button" class="btn btn-secondary" -->
-<!-- 								data-dismiss="modal">닫기</button> -->
-<!-- 							<button type="button" class="btn btn-primary" -->
-<!-- 								onclick="uploadCroppedImage()">크롭 완료</button> -->
-<!-- 						</div> -->
-<!-- 					</div> -->
-<!-- 				</div> -->
-<!-- 			</div> -->
-<!-- 			<!-- 크롭 팝업 모달 끝 --> -->
+			<!-- 크롭 팝업 모달 -->
+			<div class="modal fade" id="cropModal" tabindex="-1" role="dialog"
+				aria-labelledby="cropModalLabel" aria-hidden="true">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="cropModalLabel">크롭 이미지</h5>
+							<button type="button" class="close" data-dismiss="modal"
+								aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body">
+							<img src="" id="target_img" style="max-width: 100%;">
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary"
+								data-dismiss="modal">닫기</button>
+							<button type="button" class="btn btn-primary"
+								onclick="uploadCroppedImage()">크롭 완료</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- 크롭 팝업 모달 끝 -->
 			<div class="baby_name">
 				이름을 입력해주세요 <input type="text" name="baby_name">
 			</div>
@@ -201,71 +201,71 @@
 					<option value="휘핏">휘핏</option>
 				</select>
 			</div>
-			<div class="baby_birth">
+			<div class="baby_birth" name="baby_birth">
 				생일을 입력해주세요 <select>
-					<option value="">-- 년 --</option>
-					<option value="2023년">2023년</option>
-					<option value="2022년">2022년</option>
-					<option value="2021년">2021년</option>
-					<option value="2020년">2020년</option>
-					<option value="2019년">2019년</option>
-					<option value="2018년">2018년</option>
-					<option value="2017년">2017년</option>
-					<option value="2016년">2016년</option>
-					<option value="2015년">2015년</option>
-					<option value="2014년">2014년</option>
-					<option value="2013년">2013년</option>
-					<option value="2012년">2012년</option>
-					<option value="2011년">2011년</option>
-					<option value="2010년">2010년</option>
+					<option name="baby_birth_year" value="">-- 년 --</option>
+					<option name="baby_birth_year" value="2023" >2023년</option>
+					<option name="baby_birth_year" value="2022" >2022년</option>
+					<option name="baby_birth_year" value="2021" >2021년</option>
+					<option name="baby_birth_year" value="2020" >2020년</option>
+					<option name="baby_birth_year" value="2019" >2019년</option>
+					<option name="baby_birth_year" value="2018" >2018년</option>
+					<option name="baby_birth_year" value="2017" >2017년</option>
+					<option name="baby_birth_year" value="2016" >2016년</option>
+					<option name="baby_birth_year" value="2015" >2015년</option>
+					<option name="baby_birth_year" value="2014" >2014년</option>
+					<option name="baby_birth_year" value="2013" >2013년</option>
+					<option name="baby_birth_year" value="2012" >2012년</option>
+					<option name="baby_birth_year" value="2011" >2011년</option>
+					<option name="baby_birth_year" value="2010" >2010년</option>
 				</select> <select>
-					<option value="">-- 월 --</option>
-					<option value="12월">12월</option>
-					<option value="11월">11월</option>
-					<option value="10월">10월</option>
-					<option value="9월">9월</option>
-					<option value="8월">8월</option>
-					<option value="7월">7월</option>
-					<option value="6월">6월</option>
-					<option value="5월">5월</option>
-					<option value="4월">4월</option>
-					<option value="3월">3월</option>
-					<option value="2월">2월</option>
-					<option value="1월">1월</option>
+					<option name="baby_birth_month" value="">-- 월 --</option>
+					<option name="baby_birth_month" value="12">12월</option>
+					<option name="baby_birth_month" value="11">11월</option>
+					<option name="baby_birth_month" value="10">10월</option>
+					<option name="baby_birth_month" value="9">9월</option>
+					<option name="baby_birth_month" value="8">8월</option>
+					<option name="baby_birth_month" value="7">7월</option>
+					<option name="baby_birth_month" value="6">6월</option>
+					<option name="baby_birth_month" value="5">5월</option>
+					<option name="baby_birth_month" value="4">4월</option>
+					<option name="baby_birth_month" value="3">3월</option>
+					<option name="baby_birth_month" value="2">2월</option>
+					<option name="baby_birth_month" value="1">1월</option>
 				</select> <select name="birth_day">
 					<option value="">-- 일 --</option>
 					<!-- 1일부터 31일까지 옵션 추가 -->
-					<option value="31일">31일</option>
-					<option value="30일">30일</option>
-					<option value="29일">29일</option>
-					<option value="28일">28일</option>
-					<option value="27일">27일</option>
-					<option value="26일">26일</option>
-					<option value="25일">25일</option>
-					<option value="24일">24일</option>
-					<option value="23일">23일</option>
-					<option value="22일">22일</option>
-					<option value="21일">21일</option>
-					<option value="20일">20일</option>
-					<option value="19일">19일</option>
-					<option value="18일">18일</option>
-					<option value="17일">17일</option>
-					<option value="16일">16일</option>
-					<option value="15일">15일</option>
-					<option value="14일">14일</option>
-					<option value="13일">13일</option>
-					<option value="12일">12일</option>
-					<option value="11일">11일</option>
-					<option value="10일">10일</option>
-					<option value="9일">9일</option>
-					<option value="8일">8일</option>
-					<option value="7일">7일</option>
-					<option value="6일">6일</option>
-					<option value="5일">5일</option>
-					<option value="4일">4일</option>
-					<option value="3일">3일</option>
-					<option value="2일">2일</option>
-					<option value="1일">1일</option>
+					<option name = "baby_birth_day" value="31">31일</option>
+					<option name = "baby_birth_day" value="30">30일</option>
+					<option name = "baby_birth_day" value="29">29일</option>
+					<option name = "baby_birth_day" value="28">28일</option>
+					<option name = "baby_birth_day" value="27">27일</option>
+					<option name = "baby_birth_day" value="26">26일</option>
+					<option name = "baby_birth_day" value="25">25일</option>
+					<option name = "baby_birth_day" value="24">24일</option>
+					<option name = "baby_birth_day" value="23">23일</option>
+					<option name = "baby_birth_day" value="22">22일</option>
+					<option name = "baby_birth_day" value="21">21일</option>
+					<option name = "baby_birth_day" value="20">20일</option>
+					<option name = "baby_birth_day" value="19">19일</option>
+					<option name = "baby_birth_day" value="18">18일</option>
+					<option name = "baby_birth_day" value="17">17일</option>
+					<option name = "baby_birth_day" value="16">16일</option>
+					<option name = "baby_birth_day" value="15">15일</option>
+					<option name = "baby_birth_day" value="14">14일</option>
+					<option name = "baby_birth_day" value="13">13일</option>
+					<option name = "baby_birth_day" value="12">12일</option>
+					<option name = "baby_birth_day" value="11">11일</option>
+					<option name = "baby_birth_day" value="10">10일</option>
+					<option name = "baby_birth_day" value="9">9일</option>
+					<option name = "baby_birth_day" value="8">8일</option>
+					<option name = "baby_birth_day" value="7">7일</option>
+					<option name = "baby_birth_day" value="6">6일</option>
+					<option name = "baby_birth_day" value="5">5일</option>
+					<option name = "baby_birth_day" value="4">4일</option>
+					<option name = "baby_birth_day" value="3">3일</option>
+					<option name = "baby_birth_day" value="2">2일</option>
+					<option name = "baby_birth_day" value="1">1일</option>
 					<!-- 1일부터 31일까지의 일을 추가 -->
 				</select>
 			</div>
