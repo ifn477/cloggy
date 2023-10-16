@@ -3,6 +3,7 @@ package com.ezen.dog;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +23,9 @@ public class HomeController {
 	SqlSession sqlSession;
 	
 	@RequestMapping(value = "/")
-	public String main() {
+	public String main1(HttpServletRequest request) {
+		HttpSession hs = request.getSession();
+		hs.setAttribute("loginstate", false);
 		return "main";
 	}
 	
@@ -36,6 +39,7 @@ public class HomeController {
 		return "info";
 	}
 	
+
 	
 	@RequestMapping(value="/search-all", method = RequestMethod.POST )
 	public String searchall(HttpServletRequest request, Model mo) {
@@ -48,5 +52,6 @@ public class HomeController {
 		return "redirect:product-out";
 	}
 	
+
 
 }

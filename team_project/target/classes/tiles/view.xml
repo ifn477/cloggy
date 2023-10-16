@@ -29,6 +29,11 @@
 		<put-attribute name="body" value="/WEB-INF/views/main/error.jsp"/>
 	</definition>
 	
+	<definition name="product-searchView" extends="baseLayout">
+		<put-attribute name="title" value="전체검색결과"/>
+		<put-attribute name="body" value="/WEB-INF/views/product/product-searchView.jsp"/>
+	</definition>
+	
 
 	<definition name="product-input" extends="baseLayout">
 		<put-attribute name="title" value="상품입력"/>
@@ -36,10 +41,26 @@
 	</definition>
 	
 	<definition name="product-out" extends="baseLayout">
-		<put-attribute name="title" value="상품리스트"/>
+		<put-attribute name="title" value="관리자상품리스트"/>
 		<put-attribute name="body" value="/WEB-INF/views/product/product-out.jsp"/>
 	</definition>
 	
+	<definition name="product-user-out" extends="baseLayout">
+		<put-attribute name="title" value="사용자상품리스트"/>
+		<put-attribute name="body" value="/WEB-INF/views/product/product-user-out.jsp"/>
+	</definition>
+	
+	<definition name="product-like-out" extends="baseLayout">
+		<put-attribute name="title" value="사용자상품리스트"/>
+		<put-attribute name="body" value="/WEB-INF/views/product/product-like-out.jsp"/>
+	</definition>
+	
+	
+	<definition name="product-recent-out" extends="baseLayout">
+		<put-attribute name="title" value="사용자상품리스트"/>
+		<put-attribute name="body" value="/WEB-INF/views/product/product-recent-out.jsp"/>
+	</definition>
+
 	<definition name="product-detail" extends="baseLayout">
 		<put-attribute name="title" value="상품페이지"/>
 		<put-attribute name="body" value="/WEB-INF/views/product/product-detail.jsp"/>
@@ -97,17 +118,17 @@
 	</definition>
 	
 	<definition name="id-searchForm" extends="baseLayout">
-		<put-attribute name="title" value="메인화면"/>
+		<put-attribute name="title" value="아이디찾기폼"/>
 		<put-attribute name="body" value="/WEB-INF/views/login/id-searchForm.jsp"/>
 	</definition>
 
 	<definition name="id-searchView" extends="baseLayout">
-		<put-attribute name="title" value="메인화면"/>
+		<put-attribute name="title" value="아이디찾기뷰"/>
 		<put-attribute name="body" value="/WEB-INF/views/login/id-searchView.jsp"/>
 	</definition>	
 
 	<definition name="pw-searchForm" extends="baseLayout">
-		<put-attribute name="title" value="메인화면"/>
+		<put-attribute name="title" value="비밀번호찾기폼"/>
 		<put-attribute name="body" value="/WEB-INF/views/login/pw-searchForm.jsp"/>
 	</definition>
 
@@ -131,6 +152,16 @@
 		<put-attribute name="body" value="/WEB-INF/views/member/member-searchForm.jsp"/>
 	</definition>	
 
+	<definition name="member-terms1" extends="baseLayout">
+		<put-attribute name="title" value="회원가입약관1"/>
+		<put-attribute name="body" value="/WEB-INF/views/member/member-terms1.jsp"/>
+	</definition>	
+
+	<definition name="member-terms2" extends="baseLayout">
+		<put-attribute name="title" value="회원가입약관2"/>
+		<put-attribute name="body" value="/WEB-INF/views/member/member-terms2.jsp"/>
+	</definition>	
+
 	<definition name="order" extends="baseLayout">
 		<put-attribute name="title" value="결제"/>
 		<put-attribute name="body" value="/WEB-INF/views/pay/order.jsp"/>
@@ -142,12 +173,17 @@
 	</definition>	
 	
 	<definition name="member-info" extends="baseLayout">
-		<put-attribute name="title" value="메인화면"/>
+		<put-attribute name="title" value="회원개인정보"/>
 		<put-attribute name="body" value="/WEB-INF/views/member/member-info.jsp"/>
 	</definition>
 	
+	<definition name="member-modifySelfForm" extends="baseLayout">
+		<put-attribute name="title" value="회원개인정보수정"/>
+		<put-attribute name="body" value="/WEB-INF/views/member/member-modifySelfForm.jsp"/>
+	</definition>
+	
 	<definition name="jusoPopup" extends="baseLayout">
-		<put-attribute name="title" value="메인화면"/>
+		<put-attribute name="title" value="도로명주소팝업"/>
 		<put-attribute name="body" value="/WEB-INF/views/juso/jusoPopup.jsp"/>
 	</definition>
 
