@@ -145,34 +145,41 @@ th {
 // 						});
 // 				});
 				
-				  $("#deletethis").click(function() {
-					  
-				        // 상품 id를 저장할 배열을 초기화.
-				        var productIds = [];
-				
-				        // 선택된 제품의 product_id를 수집해서 배열에 저장
-				        $("input[name='check-one']:checked").each(function() {
-				        	productIds.push($(this).closest("tr").find("input[name='product_id']").val());
-				        });
-				        
-				        console.log("product_id : " + productIds);
-				        
-				        //ajax로 전송
-				        $.ajax({
-						    type: "POST",
-						    url: "/dog/deletefromcart",
-						    data: { productIds: productIds },
-						    success: function(response) {
-						        if (response === "success") {
-						            alert("상품이 삭제되었습니다.");
-						        } else {
-						            alert("알 수 없는 응답: " + response);
-						        }
-						    },
-						});
+// '선택 삭제' 버튼 클릭 이벤트를 처리합니다.
+$("#deletethis").click(function() {
+    const checkedBoxes = $('.chk:checked');
+    let productIds = [];
+
+    // 선택된 제품의 product_id를 수집해서 배열에 저장
+    $("input[name='check-one']:checked").each(function() {
+        const productId = $(this).closest("tr").find("input[name='product_id']").val();
+        productIds.push(productId);
+    });
+
+    if (productIds.length === 0) {
+        alert('선택한 상품이 없습니다.');
+        return;
+    } else {
+        alert('선택한 상품이 삭제되었습니다.');
+    }
+
+    $.ajax({
+        type: "POST",
+        url: "/dog/deletefromcart",
+        data: { productIds: productIds.join(",") },
+        success: function(response) {
+            // 서버에서의 응답을 처리할 수 있음
+            // 예를 들어, 페이지 리로드 또는 필요한 작업 수행
+            location.reload(); // 페이지 리로드 예시
+        },
+        error: function(xhr, status, error) {
+            alert("오류 발생: " + error);
+        }
+    });
+});
 
 				        
-				    });
+				    
 					    
 				  
 				  

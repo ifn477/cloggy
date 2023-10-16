@@ -1,25 +1,23 @@
 package com.ezen.dog.member;
 
+import java.io.File;
 import java.io.IOException;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 
 @Controller
@@ -28,10 +26,18 @@ public class Membercontroller {
 	@Autowired
 	SqlSession sqlSession;
 	
+	static String imgPath = "C:\\Users\\dywlr\\git\\team_project\\team_project\\src\\main\\webapp\\image";
+	
 	@RequestMapping(value = "/member-input")
 	public String memberinput()
 	{
 		return "member-input";
+	}
+	
+	@RequestMapping(value = "/mybaby-input")
+	public String mybaby()
+	{
+		return "mybaby-input";
 	}
 
 	@RequestMapping(value = "/member-save",method = RequestMethod.POST)
@@ -47,6 +53,33 @@ public class Membercontroller {
 		String address = request.getParameter("roadFullAddr");
 		Mservice ms = sqlSession.getMapper(Mservice.class);
 		ms.membersave(userId,password,userName,age,gender,email,phone,address);
+		
+		return "redirect:main";
+	}
+	
+	
+	@RequestMapping(value = "/mybaby-save",method = RequestMethod.POST)
+	public String mybabysave(MultipartHttpServletRequest request, HttpSession session) throws IllegalStateException, IOException
+	{
+		
+		MemberDTO mdto = (MemberDTO) session.getAttribute("member");
+		String userId = mdto.getUserId();
+		String baby_name = request.getParameter("baby_name");
+		String baby_type =request.getParameter("baby_type");
+		String baby_birth = request.getParameter("baby_birth");
+		String babygender = request.getParameter("babygender");
+		String bodytype = request.getParameter("bodytype");
+		
+		
+		String baby_photo = request.getParameter("baby_photo");
+		MultipartFile mf = request.getFile("baby_photo");
+		String fname = mf.getOriginalFilename();
+		mf.transferTo(new File(imgPath+"\\"+fname));
+		
+		Mservice ms = sqlSession.getMapper(Mservice.class);
+		ms.babysave(baby_name,baby_birth,  baby_type, fname, babygender, bodytype,  userId);
+		
+		
 		
 		return "redirect:main";
 	}

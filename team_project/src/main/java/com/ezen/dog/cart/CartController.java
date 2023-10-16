@@ -77,19 +77,25 @@ public class CartController {
 
 	
 	@RequestMapping(value = "/deletefromcart")
-	public String deletefromcart(@RequestParam("productIds") String[] productIds, HttpSession session) {
+	public String deletefromcart(HttpServletRequest request	, HttpSession session) {
 	    // 나머지 코드는 그대로 유지
 	    MemberDTO mdto = (MemberDTO) session.getAttribute("member");
 	    String userId = mdto.getUserId();
-
-	    for (int i = 0; i < productIds.length; i++) {
-	        Cservice cs = sqlSession.getMapper(Cservice.class);
-	        cs.cartdelete(userId, productIds[i]);
+	    
+	    String productIds = request.getParameter("productIds");
+	    System.out.println("!!!!제품번호!!!!"+ productIds);//확인용
+		String[] ProductIdss = productIds.split(",");
+		
+		Cservice cs = sqlSession.getMapper(Cservice.class);
+		
+	    for (int i = 0; i < ProductIdss.length; i++) {
+	    	int product_id = Integer.parseInt(ProductIdss[i]);
+	    	cs.cartdelete(userId, product_id);
 	    }
 
-	    return "success";
+	    return "redirect:/cart-out";
 	}
-
+	
 	
 	@ResponseBody
 	@RequestMapping(value = "/changeqty", method = RequestMethod.POST)

@@ -306,6 +306,7 @@
 
 							<!-- 						마이페이지&회원탈퇴로 수정 -->
 							<li><a href="member-searchForm">내정보</a></li>
+							<li><a href="mybaby-input">우리 아이 등록</a></li>
 							<li><a href="member-searchForm">회원 탈퇴</a></li>
 						</ul></li>
 					<li><a href="logout"><span

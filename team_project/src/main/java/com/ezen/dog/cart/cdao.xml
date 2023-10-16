@@ -14,9 +14,6 @@
 	    from cart c
 	    INNER JOIN product p ON c.product_id = p.product_id and c.userId=#{param1}
 	</select>
-	<delete id="cartdelete">
-		delete from cart where userId=#{param1} and product_id=#{param2}
-	</delete>
 	<select id="checkcart" resultType="Integer">
 	    select count(*) from cart where userId=#{param1} and product_id=#{param2}
 	</select>
@@ -26,4 +23,8 @@
 	<update id="changeqty">
 		update cart set cart_quantity = #{param3} where userId=#{param1} and product_id=#{param2}
 	</update>
+<!-- 	선택삭제 -->
+	<delete id="cartdelete">
+		delete from cart where userId=#{param1} and product_id=#{param2}
+	</delete>
 </mapper>

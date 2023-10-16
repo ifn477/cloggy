@@ -7,6 +7,9 @@
 <insert id="membersave">
 insert into member values(#{param1},0,#{param2},#{param3},#{param4},#{param5},#{param6},#{param7},#{param8},sysdate,sysdate)
 </insert>
+<insert id="babysave">
+insert into mybaby values(#{param1},#{param2},#{param3},#{param4},#{param5},#{param6},#{param7})
+</insert>
 
 <select id="memberout" resultType="com.ezen.dog.member.MemberDTO">
 select userId,password,userName,age,gender,email,phone,address,enroll_date,last_update from member
