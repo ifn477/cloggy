@@ -6,11 +6,15 @@
 <!-- 상품입력 -->
 <insert id="productinput">
 insert into product
-(product_id,category_id,p_name,p_price,p_info,p_image,p_thumbnail,p_stock,p_enroll,p_sell,p_hits)
+(product_id,category1_id,p_name,p_price,p_info,p_image,p_thumbnail,p_stock,p_enroll,p_sell,p_hits)
  values(product_id_seq.nextval,#{param1},#{param2},#{param3},#{param4},#{param5},#{param6},#{param7},sysdate,0,0)
 </insert>
 <!-- 상품리스트 -->
 <select id="productout" resultType="com.ezen.dog.product.ProductDTO">
+select * from product
+</select>
+<!-- 상품 사용자 리스트 -->
+<select id="productuserout" resultType="com.ezen.dog.product.ProductDTO">
 select * from product
 </select>
 <!-- 상품상세페이지 -->
@@ -34,4 +38,36 @@ update product set category_id=#{param1}, p_name=#{param3}, p_price=#{param4}, p
 <delete id="productdelete">
 delete from product where product_id=#{param2}
 </delete>
+
+<select id="searchAll" resultType="com.ezen.dog.product.ProductDTO">
+SELECT product_id, category1_id, p_name, p_price, p_info, p_image, p_thumbnail, p_stock, p_enroll, p_sell, p_hits
+FROM product
+WHERE p_name LIKE '%' || #{param1} || '%'
+</select>
+
+<select id="search1" resultType="com.ezen.dog.product.ProductDTO">
+SELECT product_id, category1_id, p_name, p_price, p_info, p_image, p_thumbnail, p_stock, p_enroll, p_sell, p_hits
+FROM product
+WHERE p_name LIKE '%' || #{param1} || '%' and category1_id=1001
+</select>
+
+<select id="search2" resultType="com.ezen.dog.product.ProductDTO">
+SELECT product_id, category1_id, p_name, p_price, p_info, p_image, p_thumbnail, p_stock, p_enroll, p_sell, p_hits
+FROM product
+WHERE p_name LIKE '%' || #{param1} || '%' and category1_id=1002
+</select>
+
+<select id="search3" resultType="com.ezen.dog.product.ProductDTO">
+SELECT product_id, category1_id, p_name, p_price, p_info, p_image, p_thumbnail, p_stock, p_enroll, p_sell, p_hits
+FROM product
+WHERE p_name LIKE '%' || #{param1} || '%' and category1_id=1003
+</select>
+
+<select id="recentProducts" resultType="com.ezen.dog.product.ProductDTO">
+SELECT * FROM PRODUCT WHERE product_Id IN
+<foreach collection="array" item="productId" open="(" separator="," close=")">
+#{productId}
+</foreach>
+</select>
+
 </mapper>

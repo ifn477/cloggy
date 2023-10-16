@@ -98,5 +98,5 @@ public class ProductDTO {
 	public void setP_hits(int p_hits) {
 		this.p_hits = p_hits;
 	}
-	
+
 }

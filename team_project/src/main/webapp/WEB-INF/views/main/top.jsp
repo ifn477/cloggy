@@ -6,6 +6,13 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style>
+  .search-all {
+    display: flex;
+    align-items: center;
+    top: 12px;
+  }
+</style>
 </head>
 
 <header style="text-align: center; background-color:#FFB8E0; ">
@@ -18,6 +25,13 @@
       <a class="navbar-brand" href="main" id="maintext">MAIN</a>
     </div>
     <ul class="nav navbar-nav">
+    
+		<li class="search-all">
+  			<form action="search-all" method="post">
+    		<input type="text" name="p_name">
+    		<input type="submit" value="검색">
+  			</form>
+		</li>
     
         <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">회원<span class="caret"></span></a>
         <ul class="dropdown-menu">
@@ -34,6 +48,12 @@
           <li><a href="#">카테1-3</a></li>
         </ul>
       </li>
+      
+      <li class="dropdown"><a class="dropdown-toggle"
+				data-toggle="dropdown" href="#">ALL<span class="caret"></span></a>
+				<ul class="dropdown-menu">
+					<li><a href="prduct-user-out?userId=${member.userId}">사용자 전체보기</a></li>
+				</ul></li>     
       
       <li class="dropdown"><a class="dropdown-toggle"
 				data-toggle="dropdown" href="#">사료<span class="caret"></span></a>
@@ -120,7 +140,6 @@
         			 <li><a href="qna-out">Q&A게시판</a></li>
        				 <li><a href="#">카테2-3</a></li>
 				</ul></li>	
-      
      </ul>
 <c:choose>
 	<c:when test="${loginstate==true}">
@@ -132,6 +151,8 @@
 						<li><a href="member-searchForm">검색</a></li>
 						<li class="divider">
 						<li><a href="member-info?userId=${member.userId}">내정보</a></li>
+						<li><a href="like-out">찜목록</a></li>
+						<li><a href="recent-products?userId=${member.userId}">최근 본 상품</a></li>
 					</ul>
 				</li>
       			<li><a href="logout"><span class="glyphicon glyphicon-log-in"></span>Logout</a></li>

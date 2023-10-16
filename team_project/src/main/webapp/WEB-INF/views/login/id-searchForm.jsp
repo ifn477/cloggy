@@ -4,11 +4,6 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<script type="text/javascript">
-<c:if test="${loginFailed==true}">
-      alert('회원정보가 일치하지 않습니다.');
-</c:if>
-</script>
 </head>
 <body>
 회원가입 시 등록한 이름과 이메일을 입력하세요.<br>
@@ -24,6 +19,10 @@
 </tr>
 </table>
 </form>
-
+<script type="text/javascript">
+<c:if test="${loginFailed==true}">
+      alert('회원정보가 일치하지 않습니다.');
+</c:if>
+</script>
 </body>
 </html>

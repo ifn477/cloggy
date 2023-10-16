@@ -117,9 +117,7 @@
 <artifactId>jackson-databind</artifactId>
 <version>2.13.2.2</version>
 </dependency>
-<!--  젝슨 셋팅 종료  -->		
-			
-				
+<!--  젝슨 셋팅 종료  -->				
 		<!-- AspectJ -->
 		<dependency>
 			<groupId>org.aspectj</groupId>
@@ -244,8 +242,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>2.5.1</version>
                 <configuration>
-                    <source>1.6</source>
-                    <target>1.6</target>
+                    <source>1.8</source>
+                    <target>1.8</target>
                     <compilerArgument>-Xlint:all</compilerArgument>
                     <showWarnings>true</showWarnings>
                     <showDeprecation>true</showDeprecation>

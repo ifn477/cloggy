@@ -40,13 +40,11 @@ public class Membercontroller {
 		String userId = request.getParameter("userId");
 		String password =request.getParameter("password");
 		String userName = request.getParameter("userName");
-		int age =Integer.parseInt(request.getParameter("age"));
-		String gender = request.getParameter("gender");
 		String email = request.getParameter("email");
 		String phone = request.getParameter("phone");
 		String address = request.getParameter("roadFullAddr");
 		Mservice ms = sqlSession.getMapper(Mservice.class);
-		ms.membersave(userId,password,userName,age,gender,email,phone,address);
+		ms.membersave(userId,password,userName,email,phone,address);
 		
 		return "redirect:main";
 	}
@@ -70,18 +68,16 @@ public class Membercontroller {
 		}
 
 		@RequestMapping(value = "/member-modifyView")
-		public String membermodifyView(HttpServletRequest request, Model mo) {
+		public String membermodifyView(HttpServletRequest request) {
 			String userId = request.getParameter("userId");
 			String password = request.getParameter("password");
 			String userName = request.getParameter("userName");
-			int age = Integer.parseInt(request.getParameter("age"));
-			String gender = request.getParameter("gender");
 			String email = request.getParameter("email");
 			String phone = request.getParameter("phone");
 			String address = request.getParameter("roadFullAddr");
 			
 			Mservice ms = sqlSession.getMapper(Mservice.class);
-			ms.membermodifyView(userId, password, userName, age, gender, email, phone, address);
+			ms.membermodifyView(userId, password, userName, email, phone, address);
 			return "redirect:member-out";
 		}
 
@@ -177,18 +173,54 @@ public class Membercontroller {
 			return codeCheck;
 		}
 			
-			@RequestMapping(value = "/kakaoMember", method = RequestMethod.GET)
-			public String kakaoLogin(@RequestParam(value = "code", required = false) String code,HttpServletRequest request) throws Throwable {
-				KakaoLoginService service = new KakaoLoginService();
+		@RequestMapping(value = "/kakaoMember", method = RequestMethod.GET)
+		public String kakaoLogin(@RequestParam(value = "code", required = false) String code,HttpServletRequest request) throws Throwable {
+			KakaoLoginService service = new KakaoLoginService();
 				
-				String access_Token = service.getAccessToken(code);
-				HashMap<String, Object> userInfo = service.getUserInfo(access_Token);
-				String nickname = (String)userInfo.get("nickname");
-				String email = (String)userInfo.get("email");
-				Mservice ms = sqlSession.getMapper(Mservice.class);
-				ms.kakaomember(nickname, email);
+			String access_Token = service.getAccessToken(code);
+			HashMap<String, Object> userInfo = service.getUserInfo(access_Token);
+			String nickname = (String)userInfo.get("nickname");
+			String email = (String)userInfo.get("email");
+			Mservice ms = sqlSession.getMapper(Mservice.class);
+			ms.kakaomember(nickname, email);
 				
-				return "redirect:main";
-			}
+			return "redirect:main";
+		}
+			
+		@RequestMapping(value = "/member-modifySelfForm")
+		public String membermodifySelfForm(HttpServletRequest request, Model mo) {
+			String userId = request.getParameter("userId");
+			Mservice ms = sqlSession.getMapper(Mservice.class);
+			ArrayList<MemberDTO> list = ms.membermodifyForm(userId);
+			mo.addAttribute("list",list);
+			return "member-modifySelfForm";
+		}
+
+		@RequestMapping(value = "/member-modifySelfView")
+		public String membermodifySelfView(HttpServletRequest request, Model mo) {
+			String userId = request.getParameter("userId");
+			String password = request.getParameter("password");
+			String userName = request.getParameter("userName");
+			String email = request.getParameter("email");
+			String phone = request.getParameter("phone");
+			String address = request.getParameter("roadFullAddr");
+			
+			Mservice ms = sqlSession.getMapper(Mservice.class);
+			ms.membermodifySelfView(userId, password, userName, email, phone, address);
+			ArrayList<MemberDTO> list = ms.memberinfoout(userId);
+			mo.addAttribute("list",list);
+			return "member-info";
+		}
+		
+		@RequestMapping(value = "/member-terms1")
+		public String memberterms1() {
+			return "member-terms1";
+		}
+		
+		@RequestMapping(value = "/member-terms2")
+		public String memberterms2() {
+			return "member-terms2";
+		}
+		
 }
 		

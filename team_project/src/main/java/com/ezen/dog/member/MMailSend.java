@@ -39,7 +39,7 @@ public class MMailSend {
 	        Session session = Session.getDefaultInstance(p, auth);
 	        MimeMessage msg = new MimeMessage(session);
 	        
-	        // µğ¹ö±ë
+	        // ï¿½ï¿½ï¿½ï¿½ï¿½
 	        Session ss = Session.getDefaultInstance(p, auth);
 	        ss.setDebug(true);
 	         
@@ -50,10 +50,10 @@ public class MMailSend {
 	            msg.setFrom(from);
 	            InternetAddress to = new InternetAddress(email);
 	            msg.setRecipient(Message.RecipientType.TO, to);
-	            msg.setSubject("[cloggy] º»ÀÎ ÀÎÁõ ¸ŞÀÏ", "UTF-8");
+	            msg.setSubject("[cloggy] ë³¸ì¸ ì¸ì¦ ë©”ì¼", "UTF-8");
 	            
 	            String authKey = createKey();
-	            String emailBody = " cloggy º»ÀÎ ÀÎÁõ ¸ŞÀÏÀÔ´Ï´Ù. \nÀÎÁõ ÄÚµå: " + authKey;
+	            String emailBody = " cloggy ë³¸ì¸ ì¸ì¦ ë©”ì¼ì…ë‹ˆë‹¤. ì¸ì¦ ì½”ë“œ : " + authKey;
 
 	            msg.setText(emailBody, "UTF-8");
 	            msg.setHeader("content-Type", "text/html");
@@ -88,7 +88,7 @@ public class MMailSend {
 	    
 	}
 
-	// ·£´ı ÀÎÁõ ÄÚµå
+	// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Úµï¿½
 	public static String createKey() {
 		StringBuffer key = new StringBuffer();
 		Random rnd = new Random();
@@ -109,7 +109,7 @@ public class MMailSend {
 		return key.toString();
 	}
 	
-    //  ÀÎÁß ÄÚµå °ËÁõ
+    //  ï¿½ï¿½ï¿½ï¿½ ï¿½Úµï¿½ ï¿½ï¿½ï¿½ï¿½
     public static boolean verifyKey(String email, String userInputKey) {
         String storedKey = authKeyMap.get(email);
         return storedKey != null && storedKey.equals(userInputKey);

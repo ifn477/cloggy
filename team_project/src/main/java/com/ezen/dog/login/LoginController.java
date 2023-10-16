@@ -31,13 +31,13 @@ public class LoginController {
 	@Autowired
 	SqlSession sqlSession;
 	
-	// ·Î±×ÀÎ Æû
+	// ï¿½Î±ï¿½ï¿½ï¿½ ï¿½ï¿½
 	@RequestMapping(value = "/login-input")
 	public String logininput() {
 		return "login-input";
 	}
 	
-	// ·Î±×ÀÎ
+	// ï¿½Î±ï¿½ï¿½ï¿½
 	@RequestMapping(value = "/login",method = RequestMethod.POST)
 	public String login(HttpServletRequest request) {
 		String userId = request.getParameter("userId");
@@ -49,7 +49,7 @@ public class LoginController {
 		if(mdto!=null){
 		hs.setAttribute("member",mdto);
 		hs.setAttribute("loginstate",true);
-		hs.setMaxInactiveInterval(60*30);
+		hs.setMaxInactiveInterval(60*60);
 		return "redirect:main";
 		}
 		else{
@@ -58,19 +58,19 @@ public class LoginController {
 		return "login-input";
 		}
 	}
-	//ReqeustParamÀ¸·Î code°ª ¹Þ¾Æ¿À±â
+	//ReqeustParamï¿½ï¿½ï¿½ï¿½ codeï¿½ï¿½ ï¿½Þ¾Æ¿ï¿½ï¿½ï¿½
 	@RequestMapping(value = "/kakaoLogin", method = RequestMethod.GET)
 	public String kakaoLogin(@RequestParam(value = "code", required = false) String code,HttpServletRequest request) throws Throwable {
 		KakaoLoginService service = new KakaoLoginService();
 		
-		//code·Î Token°ª ¹Þ¾Æ¿À±â
+		//codeï¿½ï¿½ Tokenï¿½ï¿½ ï¿½Þ¾Æ¿ï¿½ï¿½ï¿½
 		String access_Token = service.getAccessToken(code);
-		//Token°ªÀ¸·Î »ç¿ëÀÚ Á¤º¸ °¡Á®¿À±â
+		//Tokenï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		HashMap<String, Object> userInfo = service.getUserInfo(access_Token);
 		String nickname = (String)userInfo.get("nickname");
 		String email = (String)userInfo.get("email");
 		
-		//»ç¿ëÀÚ Á¤º¸ Áß ÀÌ¸§°ú, ÀÌ¸ÞÀÏÀ» »ç¿ëÇÏ¿© È¸¿ø¿©ºÎ È®ÀÎ ÈÄ ·Î±×ÀÎ 
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ì¸ï¿½ï¿½ï¿½, ï¿½Ì¸ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ï¿ï¿½ È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ È®ï¿½ï¿½ ï¿½ï¿½ ï¿½Î±ï¿½ï¿½ï¿½ 
 		Lservice ls = sqlSession.getMapper(Lservice.class);
 		MemberDTO mdto = ls.kakaologin(nickname,email);
 		if(mdto!=null){
@@ -94,7 +94,7 @@ public class LoginController {
 		String name = (String)userInfo.get("name");
 		String email = (String)userInfo.get("email");
 		
-		//»ç¿ëÀÚ Á¤º¸ Áß ÀÌ¸§°ú, ÀÌ¸ÞÀÏÀ» »ç¿ëÇÏ¿© È¸¿ø¿©ºÎ È®ÀÎ ÈÄ ·Î±×ÀÎ 
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ì¸ï¿½ï¿½ï¿½, ï¿½Ì¸ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ï¿ï¿½ È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ È®ï¿½ï¿½ ï¿½ï¿½ ï¿½Î±ï¿½ï¿½ï¿½ 
 		Lservice ls = sqlSession.getMapper(Lservice.class);
 		MemberDTO mdto = ls.naverlogin(name,email);
 		if(mdto!=null){
@@ -106,7 +106,7 @@ public class LoginController {
 		return "redirect:main";
 	}
 
-	// ·Î±×¾Æ¿ô
+	// ï¿½Î±×¾Æ¿ï¿½
 	@RequestMapping(value = "/logout")
 	public String logout(HttpServletRequest request) {
 		HttpSession hs =request.getSession();
@@ -115,13 +115,13 @@ public class LoginController {
 		return "redirect:/";
 	}
 	
-	// ¾ÆÀÌµð Ã£±â Æû
+	// ï¿½ï¿½ï¿½Ìµï¿½ Ã£ï¿½ï¿½ ï¿½ï¿½
 	@RequestMapping(value = "/id-searchForm")
 	public String idsearch() {
 		return "id-searchForm";
 	}
 	
-	// ¾ÆÀÌµð Ã£±â ºä
+	// ï¿½ï¿½ï¿½Ìµï¿½ Ã£ï¿½ï¿½ ï¿½ï¿½
 	@RequestMapping(value="id-searchView")
 	public String idsearchView(HttpServletRequest request, Model mo) {
 		String userName = request.getParameter("userName");
@@ -140,13 +140,13 @@ public class LoginController {
 		}
 	}
 	
-	// ºñ¹Ð¹øÈ£ Ã£±â Æû
+	// ï¿½ï¿½Ð¹ï¿½È£ Ã£ï¿½ï¿½ ï¿½ï¿½
 	@RequestMapping(value = "/pw-searchForm")
 	public String pwsearch() {
 		return "pw-searchForm";
 	}
 	
-	// ºñ¹Ð¹øÈ£ Ã£±â ºä
+	// ï¿½ï¿½Ð¹ï¿½È£ Ã£ï¿½ï¿½ ï¿½ï¿½
 	@RequestMapping(value = "/pw-searchView")
 	public String pwsearchView(HttpServletRequest request, Model mo) {
 		String userId = request.getParameter("userId");
