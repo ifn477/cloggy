@@ -87,9 +87,12 @@ public class ProductController {
 		int product_id = Integer.parseInt(request.getParameter("product_id"));
 		
 		PService ps = sqlSession.getMapper(PService.class);
-		list = ps.productdetailWithOpt(product_id);
+		list = ps.productdetail(product_id);
 		ps.productcount(product_id);
+		
 		mo.addAttribute("list", list);
+		
+		
 		
 		Rservice rs = sqlSession.getMapper(Rservice.class);
 		ReviewDTO rdto = rs.reviewlist(product_id);

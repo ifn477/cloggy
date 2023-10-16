@@ -17,16 +17,15 @@ insert into product
 <select id="productout" resultType="com.ezen.dog.product.ProductDTO">
 	select * from product where category1_id=#{param1} and category2_id=#{param2}
 </select>
-<!-- 상품상세페이지 -->
-<!-- <select id="productdetail" resultType="com.ezen.dog.product.ProductDTO"> -->
-<!-- select * from product where product_id=#{param1} -->
-<!-- </select> -->
-<select id="productdetailWithOpt" resultType="com.ezen.dog.product.ProductOptDTO">
-SELECT p.product_id, p.p_name, p.p_price, p.p_image, p.p_thumbnail,  o.opt_id, o.opt_name, SUM(o.opt_stock) AS stock
-FROM product p
-JOIN p_option o ON p.product_id = o.product_id
-GROUP BY p.product_id, p.p_name, p.p_price, p.p_image, p.p_thumbnail,  o.opt_id, o.opt_name
+<select id="productdetail" resultType="com.ezen.dog.product.ProductDTO">
+select * from product where product_id=#{param1}
 </select>
+
+<!-- <select id="productdetailWithOpt" resultType="com.ezen.dog.product.ProductOptDTO"> -->
+<!-- SELECT p.product_id, p.p_name, p.p_price, p.p_image, p.p_thumbnail, o.opt_id, o.opt_name, o.opt_stock -->
+<!-- FROM product p -->
+<!-- JOIN p_option o ON p.product_id = o.product_id where p.product_id = #{param1} -->
+<!-- </select> -->
 
 <!-- 상품조회수 -->
 <update id="productcount">

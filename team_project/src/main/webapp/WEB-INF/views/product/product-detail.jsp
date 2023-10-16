@@ -51,13 +51,13 @@
 			</tr>
 
 			<!--	옵션 선택 -->
-			<tr>
-				<td>
-				<select>
-					<option value="${pdetail.opt_name}">${pdetail.opt_name}</option>
-				</select>
-				</td>
-			</tr>
+<!-- 			<tr> -->
+<!-- 				<td> -->
+<!-- 				<select> -->
+<%-- 					<option value="${pdetail.opt_name}">${pdetail.opt_name}</option> --%>
+<!-- 				</select> -->
+<!-- 				</td> -->
+<!-- 			</tr> -->
 
 
 			<!--     수량 선택  		-->
