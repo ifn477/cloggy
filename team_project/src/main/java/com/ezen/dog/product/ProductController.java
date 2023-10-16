@@ -24,6 +24,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sun.tools.javac.util.List;
 
+
 @Controller
 public class ProductController {
 
@@ -58,14 +59,31 @@ public class ProductController {
 		return "redirect:product-input";
 	}
 
-	//��ǰ����Ʈ
-	@RequestMapping(value = "/product-out")
-	public String productout(Model mo) {
+
+	//��ǰ����Ʈ ��з� ���
+	@RequestMapping(value = "/product-out-total")
+	public String productouttotal(HttpServletRequest request, Model mo) {
+		int a = Integer.parseInt(request.getParameter("category1_id"));
 		PService ps = sqlSession.getMapper(PService.class);
-		list = ps.productout();
+		ArrayList<ProductDTO> list = ps.productouttotal(a);
 		mo.addAttribute("list", list);
 		return "product-out";
 	}
+	
+
+	//��ǰ����Ʈ �ߺз� ���
+	@RequestMapping(value = "/product-out")
+	public String productout(HttpServletRequest request, Model mo) {
+		int a = Integer.parseInt(request.getParameter("category1_id"));
+		int b = Integer.parseInt(request.getParameter("category2_id"));
+
+		PService ps = sqlSession.getMapper(PService.class);
+		ArrayList<ProductDTO> list = ps.productout(a, b);
+		mo.addAttribute("list", list);
+		
+		return "product-out";
+	}
+
 	
 	//��ǰ ��������
 	@RequestMapping(value = "/product-detail")
