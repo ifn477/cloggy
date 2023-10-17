@@ -25,7 +25,7 @@ public class Paycontroller {
 	public String order(HttpServletRequest request, HttpSession session) {
 		MemberDTO mdto = (MemberDTO) session.getAttribute("member");
 		Cservice cs = sqlSession.getMapper(Cservice.class);
-		String productIds = request.getParameter("productIds");
+		String productIds = request.getParameter("productIdsToOrder");
 		System.out.println("!!!!제품번호!!!!" + productIds);
 		String[] ProductIdss = productIds.split(",");
 		
@@ -36,7 +36,7 @@ public class Paycontroller {
 			cs.cartdelete(userId, product_id);
 		}
 				
-		return "redirect:/cart-out";
+		return "order";
 	}
 	
 	

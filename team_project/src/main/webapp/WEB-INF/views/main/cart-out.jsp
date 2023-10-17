@@ -26,13 +26,6 @@ th {
 <title>Insert title here</title>
 </head>
 <body>
-<!-- 	<!-- 진행상태바 -->
-<!-- 	<ul class="order-status"> -->
-<!-- 		<li>장바구니</li> -->
-<!-- 		<li>주문/결제</li> -->
-<!-- 		<li>완료</li> -->
-<!-- 	</ul> -->
-<!-- 	<form action="order" method="post"> -->
 		<table align="center">
 			<caption>CART 장바구니에 담긴 상품은 30일 동안 보관됩니다.</caption>
 
@@ -94,8 +87,7 @@ th {
 		<div>
 			<button type="button" id="order">결제하기</button>
 		</div>
-<!-- 	</form> -->
-	<!-- 	<script src="/dog/js/cart-out.js"></script> -->
+		
 	<script type="text/javascript">
 	$(document).ready(function() {
 				
@@ -118,101 +110,80 @@ th {
 				 });
 				 
 				
-				// 3. 선택삭제
-// 				 $("#deletethis").click(function() {
-// 					    var selectedProducts = [];
-// 					    // 체크된 상품의 product_id를 수집
-// 					    $("input[name='check-one']:checked").each(function() {
-// 					        var product_id = $(this).closest("tr").find("input[name='product_id']").val();
-// 					        selectedProducts.push(product_id);
-// 					    });
-						
-// 						 console.log("Selected product_ids: " + selectedProducts);
-
-// 					    // AJAX 요청으로 선택된 상품을 컨트롤러로 전송
-					    
-// 						$.ajax({
-// 						    type: "POST",
-// 						    url: "/dog/deletefromcart",
-// 						    data: { productIds: selectedProducts },
-// 						    success: function(response) {
-// 						        if (response === "success") {
-// 						            alert("상품이 삭제되었습니다.");
-// 						        } else {
-// 						            alert("알 수 없는 응답: " + response);
-// 						        }
-// 						    },
-// 						});
-// 				});
+	
+				// '선택 삭제' 버튼 클릭 이벤트를 처리합니다.
+				$("#deletethis").click(function() {
+				    const checkedBoxes = $('.chk:checked');
+				    let productIdsToDelete = [];
 				
-// '선택 삭제' 버튼 클릭 이벤트를 처리합니다.
-$("#deletethis").click(function() {
-    const checkedBoxes = $('.chk:checked');
-    let productIds = [];
-
-    // 선택된 제품의 product_id를 수집해서 배열에 저장
-    $("input[name='check-one']:checked").each(function() {
-        const productId = $(this).closest("tr").find("input[name='product_id']").val();
-        productIds.push(productId);
-    });
-
-    if (productIds.length === 0) {
-        alert('선택한 상품이 없습니다.');
-        return;
-    } else {
-        alert('선택한 상품이 삭제되었습니다.');
-    }
-
-    $.ajax({
-        type: "POST",
-        url: "/dog/deletefromcart",
-        data: { productIds: productIds.join(",") },
-        success: function(response) {
-            // 서버에서의 응답을 처리할 수 있음
-            // 예를 들어, 페이지 리로드 또는 필요한 작업 수행
-            location.reload(); // 페이지 리로드 예시
-        },
-        error: function(xhr, status, error) {
-            alert("오류 발생: " + error);
-        }
-    });
-});
-
-//'결제' 버튼 클릭 이벤트를 처리합니다.
-$("#order").click(function() {
-    const checkedBoxes = $('.chk:checked');
-    let productIds = [];
-
-    // 선택된 제품의 product_id를 수집해서 배열에 저장
-    $("input[name='check-one']:checked").each(function() {
-        const productId = $(this).closest("tr").find("input[name='product_id']").val();
-        productIds.push(productId);
-    });
-
-    if (productIds.length === 0) {
-        alert('선택한 상품이 없습니다.');
-        return;
-    } 
-
-    $.ajax({
-        type: "POST",
-        url: "/dog/order",
-        data: { productIds: productIds.join(",") },
-    	 // 성공한 경우의 콜백 함수
-        success: function(response) {
-            // 서버에서의 응답을 처리한 후, URL로 이동
-            // 예를 들어, 성공 메시지를 표시하고, 페이지를 이동
-            alert('주문이 성공적으로 처리되었습니다.');
-            window.location.href = '/dog/order'; // 이동할 URL을 지정
-        },
-        error: function(xhr, status, error) {
-            alert("오류 발생: " + error);
-        }
-    });
-});
-			        
-		  
-				  
+				    // 선택된 제품의 product_id를 수집해서 배열에 저장
+				    $("input[name='check-one']:checked").each(function() {
+				        const productId = $(this).closest("tr").find("input[name='product_id']").val();
+				        productIdsToDelete.push(productId);
+				    });
+				
+				    if (productIdsToDelete.length === 0) {
+				        alert('선택한 상품이 없습니다.');
+				        return;
+				    } else {
+				        alert('선택한 상품이 삭제되었습니다.');
+				    }
+				
+				    $.ajax({
+				        type: "POST",
+				        url: "/dog/deletefromcart",
+				        data: { productIds: productIdsToDelete.join(",") },
+				        success: function(response) {
+				            // 서버에서의 응답을 처리할 수 있음
+				            // 예를 들어, 페이지 리로드 또는 필요한 작업 수행
+				            location.reload(); // 페이지 리로드 예시
+				        },
+				        error: function(xhr, status, error) {
+				            alert("오류 발생: " + error);
+				        }
+				    });
+				});
+				
+				
+				
+				$("#order").click(function() {
+				    const checkedBoxesToOrder = $('.chk:checked');
+				    let productIdsToOrder = [];
+				
+				    // 선택된 제품의 product_id를 수집해서 배열에 저장
+				    $("input[name='check-one']:checked").each(function() {
+				        const productIdtoOrder = $(this).closest("tr").find("input[name='product_id']").val();
+				        productIdsToOrder.push(productIdtoOrder);
+				    });
+				
+				    if (productIdsToOrder.length === 0) {
+				        alert('선택한 상품이 없습니다.');
+				        return;
+				    }
+				
+				    $.ajax({
+				        type: "POST",
+				        url: "/dog/order",
+				        data: { productIdsToOrder: productIdsToOrder.join(",") },
+				        async: false, // 요청을 동기적으로 처리하도록 설정
+				
+// 				        success: function(response) {
+// 				            // 이 부분은 실행되지 않습니다.
+// 				        },
+				
+// 				        error: function(xhr, status, error) {
+// 				            alert("오류 발생: " + error);
+// 				        }
+				    });
+				
+				    // 요청이 완료되면 이 부분으로 이동하게 됩니다.
+				    alert('주문이 성공적으로 처리되었습니다.');
+				    window.location.href = '/dog/order'; // 이동할 URL을 지정
+				});
+				
+							        
+						  
+								  
 				// 4. 수량 증감
 				$(".increase, .decrease").click(
 					function() {
