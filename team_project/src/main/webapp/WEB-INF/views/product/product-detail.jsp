@@ -148,6 +148,8 @@
 								var formattedTotalPrice = formatNumberWithCommas(totalPrice);
 								$("#totalPrice").text(formattedTotalPrice);
 							}
+							
+							
 
 							// + 버튼을 클릭할 때 수량을 증가시키는 이벤트 핸들러
 							$("#increase").click(function() {

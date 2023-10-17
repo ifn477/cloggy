@@ -9,22 +9,45 @@
 		values (cart_seq.nextval, #{param1},
 		#{param2},#{param3}, sysdate)
 	</insert>
+	<insert id="addcartwithcookie">
+		insert into cart (cart_id, cart_ckid, product_id,
+		CART_QUANTITY, cart_cklimit)
+		values (cart_seq.nextval, #{param1},
+		#{param2},#{param3}, sysdate)
+	</insert>
 	<select id="cartout" resultType="com.ezen.dog.cart.CartProductDTO">
 	    select c.userId, c.product_id, c.cart_quantity, p.p_name, p.p_thumbnail, p.p_price
 	    from cart c
 	    INNER JOIN product p ON c.product_id = p.product_id and c.userId=#{param1}
 	</select>
+	<select id="cartoutwithcookie" resultType="com.ezen.dog.cart.CartProductDTO">
+	    select c.cart_ckid, c.product_id, c.cart_quantity, p.p_name, p.p_thumbnail, p.p_price
+	    from cart c
+	    INNER JOIN product p ON c.product_id = p.product_id and c.cart_ckid=#{param1}
+	</select>
 	<select id="checkcart" resultType="Integer">
 	    select count(*) from cart where userId=#{param1} and product_id=#{param2}
+	</select>
+	<select id="checkcartwithcookie" resultType="Integer">
+	    select count(*) from cart where cart_ckid=#{param1} and product_id=#{param2}
 	</select>
 	<update id="increasequantity">
 		update cart set cart_quantity = cart_quantity + #{param3} where userId=#{param1} and product_id=#{param2}
 	</update>
+	<update id="increasequantitywithcookie">
+		update cart set cart_quantity = cart_quantity + #{param3} where cart_ckid=#{param1} and product_id=#{param2}
+	</update>
 	<update id="changeqty">
 		update cart set cart_quantity = #{param3} where userId=#{param1} and product_id=#{param2}
+	</update>
+	<update id="changeqtyforcookie">
+		update cart set cart_quantity = #{param3} where cart_ckid=#{param1} and product_id=#{param2}
 	</update>
 <!-- 	선택삭제 -->
 	<delete id="cartdelete">
 		delete from cart where userId=#{param1} and product_id=#{param2}
+	</delete>
+	<delete id="cartdeletewithcookie">
+		delete from cart where cart_ckid=#{param1} and product_id=#{param2}
 	</delete>
 </mapper>

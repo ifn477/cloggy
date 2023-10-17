@@ -19,4 +19,6 @@ public interface Mservice {
 	public void babysave(String baby_name, String baby_birth, String baby_type, String fname, String babygender,
 			String bodytype, String userId);
 	
+	//스케줄링
+	public void updateMembershipByPurchaseAmount();
 }

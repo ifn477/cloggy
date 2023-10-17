@@ -32,7 +32,7 @@ th {
 <!-- 		<li>주문/결제</li> -->
 <!-- 		<li>완료</li> -->
 <!-- 	</ul> -->
-	<form action="order" method="post">
+<!-- 	<form action="order" method="post"> -->
 		<table align="center">
 			<caption>CART 장바구니에 담긴 상품은 30일 동안 보관됩니다.</caption>
 
@@ -92,9 +92,9 @@ th {
 			</tr>
 		</table>
 		<div>
-			<input type="submit" value="결제하기">
+			<button type="button" id="order">결제하기</button>
 		</div>
-	</form>
+<!-- 	</form> -->
 	<!-- 	<script src="/dog/js/cart-out.js"></script> -->
 	<script type="text/javascript">
 	$(document).ready(function() {
@@ -178,10 +178,40 @@ $("#deletethis").click(function() {
     });
 });
 
-				        
-				    
-					    
-				  
+//'결제' 버튼 클릭 이벤트를 처리합니다.
+$("#order").click(function() {
+    const checkedBoxes = $('.chk:checked');
+    let productIds = [];
+
+    // 선택된 제품의 product_id를 수집해서 배열에 저장
+    $("input[name='check-one']:checked").each(function() {
+        const productId = $(this).closest("tr").find("input[name='product_id']").val();
+        productIds.push(productId);
+    });
+
+    if (productIds.length === 0) {
+        alert('선택한 상품이 없습니다.');
+        return;
+    } 
+
+    $.ajax({
+        type: "POST",
+        url: "/dog/order",
+        data: { productIds: productIds.join(",") },
+    	 // 성공한 경우의 콜백 함수
+        success: function(response) {
+            // 서버에서의 응답을 처리한 후, URL로 이동
+            // 예를 들어, 성공 메시지를 표시하고, 페이지를 이동
+            alert('주문이 성공적으로 처리되었습니다.');
+            window.location.href = '/dog/order'; // 이동할 URL을 지정
+        },
+        error: function(xhr, status, error) {
+            alert("오류 발생: " + error);
+        }
+    });
+});
+			        
+		  
 				  
 				// 4. 수량 증감
 				$(".increase, .decrease").click(
