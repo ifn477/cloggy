@@ -48,5 +48,11 @@ public class HomeController {
 		return "redirect:product-out";
 	}
 	
+    @RequestMapping("/popup")
+    public String popup(Model model) {
+        // 팝업에 전달할 데이터를 모델에 추가
+        model.addAttribute("message", "팝업 창 내용입니다.");
+        return "popup";
+    }
 
 }

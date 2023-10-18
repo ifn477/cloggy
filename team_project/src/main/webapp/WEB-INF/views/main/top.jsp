@@ -34,7 +34,6 @@
 						<ul class="dropdown-menu">
 							<li><a href="product-input">상품입력</a></li>
 							<li><a href="product-out">상품출력</a></li>
-							<li><a href="#">카테1-3</a></li>
 						</ul></li>
 
 					<li class="dropdown"><a class="dropdown-toggle"
@@ -153,6 +152,15 @@
 							<li><a href="qna-out">Q&A게시판</a></li>
 							<li><a href="#">카테2-3</a></li>
 						</ul></li>
+					<li class="dropdown"><a class="dropdown-toggle"
+						data-toggle="dropdown" href="#">쿠폰관리<span class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li><a href="coupon-input">쿠폰입력</a></li>
+							<li><a href="coupon-out">쿠폰현황</a></li>
+							<li><a href="coupon-downloadform">쿠폰받기</a></li>
+							<li><a href="coupon-list?userId=${member.userId }">쿠폰적용</a></li>
+						</ul></li>
+						
 				</c:when>
 				<c:otherwise>
 					<li class="dropdown"><a class="dropdown-toggle"
@@ -266,7 +274,7 @@
 					<li class="dropdown"><a class="dropdown-toggle"
 						data-toggle="dropdown" href="#">회사정보<span class="caret"></span></a>
 						<ul class="dropdown-menu">
-							<li><a href="info"> 회사정보 </a></li>
+							<li><a href="info">회사정보</a></li>
 							<li><a href="qna-input">Q&A입력</a></li>
 							<li><a href="qna-out">Q&A게시판</a></li>
 							<li><a href="#">카테2-3</a></li>
@@ -316,7 +324,7 @@
 				<ul class="nav navbar-nav navbar-right">
 					<li><a href="cart-out"><span
 							class="glyphicon glyphicon-user"></span> 장바구니</a></li> 
-					<li><a href="memberinput"><span
+					<li><a href="member-input"><span
 							class="glyphicon glyphicon-user"></span> Sign Up</a></li>
 					<li><a href="login-input"><span
 							class="glyphicon glyphicon-log-in"></span> Login</a></li>

@@ -3,6 +3,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <script>
+            window.open("/dog/popup", "팝업 창", "width=400,height=400");
+    </script>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>

@@ -14,6 +14,4 @@ select * from review
 <select id="reviewlist" resultType="com.ezen.dog.review.ReviewDTO">
 select * from review where product_id=#{param1} and rank=1
 </select>
-
-
 </mapper>

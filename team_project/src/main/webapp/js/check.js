@@ -1,28 +1,5 @@
 
- /*회원가입 요휴성 검사*/
- 
- $(function(){
-	$("#button1").click(function(){
-		var userId = $("#userId").val();
-		$.ajax({
-			type:"post",
-			async:true,
-			url:"idcheck",
-			data:{"userId":userId},
-			success:function(result){
-				if(result=="ok"){
-					alert("사용 가능한 ID입니다");
-				}
-				else{
-					alert("이미 있는 ID입니다");
-				}
-			},	
-			error:function(){
-				alert("에러")
-			}
-		});
-	});
-});
+ /*회원가입 유효성 검사*/
  
  function memcheck() 
 {
@@ -121,6 +98,14 @@
 function productcheck() 
 {
 	var f = document.productform;
+
+	    //--카테고리 선택필수
+	    var c_category1_id = f.category1_id.value;
+	
+	    if (c_category1_id == "") {
+	        alert('카테고리를 선택해주세요.');
+	        return false;
+	    }
 	
 		//--상품명 인증
 		var cp_name = f.p_name.value;
@@ -162,6 +147,7 @@ function productcheck()
 			f.p_stock.select();
 			return false;
 			}
+    		
 	f.submit();
 }
 

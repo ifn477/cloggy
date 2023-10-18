@@ -55,7 +55,8 @@ $(function(){
     $("#button3").click(function(){
         var confirmation = confirm('인증 번호를 이메일로 전송합니다.');
         if (confirmation) {
-            var email = $("#email").val();
+		var email = $("#email").val();
+		console.log(email);
             $.ajax({
                 url: "mail-send",
                 method: "POST",

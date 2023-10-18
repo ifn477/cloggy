@@ -26,7 +26,7 @@ public class ReviewController {
 	SqlSession sqlSession;
 	ArrayList<ReviewDTO>list = new ArrayList<ReviewDTO>();
 	
-	String imgPath = "C:\\Users\\dywlr\\git\\team_project\\team_project\\src\\main\\webapp\\review-img";
+	String imgPath = "C:\\Users\\이한솔\\git\\team_project3\\team_project\\src\\main\\webapp\\review-img";
 	
 	
 	//리뷰 작성폼 불러오기
@@ -64,7 +64,7 @@ public class ReviewController {
 		mo.addAttribute("pdto", pdto);
 		
 		Rservice qs = sqlSession.getMapper(Rservice.class);
-		ArrayList<ReviewDTO> list= qs.reviewout();
+		ArrayList<ReviewDTO> list= qs.reviewout(product_id);
 		mo.addAttribute("list", list);
 		
 		return "review-out";
