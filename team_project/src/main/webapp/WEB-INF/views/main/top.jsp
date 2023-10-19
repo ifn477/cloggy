@@ -6,6 +6,13 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style>
+  .search-all {
+    display: flex;
+    align-items: center;
+    top: 12px;
+  }
+</style>
 </head>
 
 <header style="text-align: center; background-color: #FFB8E0;">
@@ -13,6 +20,7 @@
 </header>
 
 <nav class="navbar navbar-inverse">
+
 	<div class="container-fluid">
 		<div class="navbar-header">
 			<a class="navbar-brand" href="main" id="maintext">MAIN</a>
@@ -88,6 +96,7 @@
 							<li><a href="product-out?category1_id=2&category2_id=35">
 									처방식 </a></li>
 						</ul></li>
+
 
 
 
@@ -325,6 +334,7 @@
 			</c:otherwise>
 		</c:choose>
 	</div>
+
 </nav>
 
 </html>

@@ -1,12 +1,14 @@
+<%@page import="com.ezen.dog.likecheck.LikeDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
-<head>
+<head>	
+
 <style type="text/css">
 .content{
-	max-width: 1300px;
+	max-width: 1300px;	
 	margin: 0 auto;
 	margin-top: 50px;
 }
@@ -17,10 +19,21 @@
     padding-left:10px;
     padding-right:10px;
 }
-.product_item{
-	min-height: 200px;
+.product_item {
+    min-height: 200px;
     flex-basis: 150px;
-    flex-grow:0;
+    flex-grow: 0;
+    position: relative;
+}
+.product_thumbnail {
+    position: relative;
+}
+
+.like-check{
+    position: absolute;
+    bottom: 65px;
+    left: 15px;
+    background-position: -180px -10px;
 }
 </style>
 <meta charset="UTF-8">
