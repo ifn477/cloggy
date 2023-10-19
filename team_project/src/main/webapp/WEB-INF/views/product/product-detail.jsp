@@ -50,14 +50,17 @@
 				</td>
 			</tr>
 
-			<!--	옵션 선택 -->
-<!-- 			<tr> -->
-<!-- 				<td> -->
-<!-- 				<select> -->
-<%-- 					<option value="${pdetail.opt_name}">${pdetail.opt_name}</option> --%>
-<!-- 				</select> -->
-<!-- 				</td> -->
-<!-- 			</tr> -->
+			<!-- 옵션 선택 -->
+			<td><select class="haha" id="haha" name="haha">
+					<option data-opt_price=0 data-opt_id=0>옵션을 선택해주세요</option>
+					<c:forEach items="${optlist}" var="opt">
+						<!-- 데이터를 data-* 속성에 저장합니다. -->
+						<option data-opt_name="${opt.opt_name}"
+							data-opt_price="${opt.opt_price}"
+							data-opt_id="${opt.opt_id}">${opt.opt_name} &emsp;
+							(+${opt.opt_price})</option>
+					</c:forEach>
+			</select></td>
 
 
 			<!--     수량 선택  		-->
@@ -130,20 +133,37 @@
 				.ready(
 						function() {
 							var quantity = 1; // 초기 수량은 1으로 설정
+							let priceValue = parseFloat($("#price").text().replace(/[^0-9.-]+/g, ""));
 
+							// 옵션 선택 시 이벤트 핸들러
+							$("#haha").change(function() {
+							  var selectedOption = $(this).find("option:selected");
+							  var optName = selectedOption.data("opt_name");
+							  var optPrice = selectedOption.data("opt_price");
+							
+							  // 제품 가격 -> optPrice + 기존 가격으로 업데이트
+							  var updatedPrice = priceValue + optPrice;
+							  $("#price").text(formatNumberWithCommas(updatedPrice)); // 업데이트된 가격을 화면에 출력
+							  updateTotalPrice(); // total_price 업데이트 함수 호출
+							});
+							
+							
 							function formatNumberWithCommas(number) {
 								return number.toString().replace(
 										/\B(?=(\d{3})+(?!\d))/g, ",")
 										+ '원';
 							}
-
+							
+							
+							
 							// total_price 업데이트 함수
 							function updateTotalPrice() {
 								var quantityValue = parseInt($("#quantity")
 										.text(), 10);
 								var priceValue = parseFloat($("#price").text()
 										.replace(/[^0-9.-]+/g, ""));
-
+								
+								
 								var totalPrice = quantityValue * priceValue;
 								var formattedTotalPrice = formatNumberWithCommas(totalPrice);
 								$("#totalPrice").text(formattedTotalPrice);
@@ -169,8 +189,15 @@
 
 							$("#addToCart").click(function() {
 								var product_id = $("#product_id").val();
+								var selectedOption = $("#haha option:selected").val();
+
+								 var selectedOption = $("#haha").find("option:selected");
+							     var optId = selectedOption.data("opt_id");
+
+							      // 추출된 데이터 사용
 								console.log("product id: " + product_id);
 								console.log("quantity: " + quantity);
+								console.log("선택한 옵션의 번호: " + optId);
 
 								// Ajax를 사용하여 서버로 데이터 전송
 								$.ajax({
@@ -178,7 +205,8 @@
 									url : "/dog/addtocart", // 컨트롤러의 URL을 여기에 지정
 									data : {
 										product_id : product_id,
-										quantity : quantity
+										quantity : quantity,
+										optId: optId
 									},
 									success : function(response) {
 										if (response === "success") {

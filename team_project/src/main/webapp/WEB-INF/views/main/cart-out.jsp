@@ -26,12 +26,20 @@ th {
 <title>Insert title here</title>
 </head>
 <body>
+<!-- 	<!-- 진행상태바 -->
+<!-- 	<ul class="order-status"> -->
+<!-- 		<li>장바구니</li> -->
+<!-- 		<li>주문/결제</li> -->
+<!-- 		<li>완료</li> -->
+<!-- 	</ul> -->
+	
 		<table align="center">
 			<caption>CART 장바구니에 담긴 상품은 30일 동안 보관됩니다.</caption>
 
 			<tr>
 				<td colspan="7"><button type="button" id="deletethis" >선택
-						삭제</button>
+						삭제</button><button type="button" id="deleteAll" onclick="location.href='delete-all'">전체
+						삭제</button></td>
 			</tr>
 			<tr>
 				<th><input type="checkbox" name="chk-all" id="chk-all"></th>
@@ -44,27 +52,34 @@ th {
 			<c:set var="totalprice" value="0" />
 			<c:forEach items="${list}" var="cart" varStatus="loop">
 				<tr>
-					<td><input type="checkbox" name="check-one"></td>
-					<td><img src="/dog/image/${cart.p_thumbnail}" width="100px"></td>
-					<td>${cart.p_name}<input type="hidden" name="product_id"
-						value="${cart.product_id}"></td>
-					<td><fmt:formatNumber pattern="#,##0원">${cart.p_price}</fmt:formatNumber>
+					<td rowspan="2"><input type="checkbox" name="check-one" class="check-one"></td>
+					<td rowspan="2"><img src="/dog/image/${cart.p_thumbnail}" width="100px"></td>
+					<td><div><h3>${cart.p_name}</h3></div>
+					<input type="hidden" name="product_id" value="${cart.product_id}">
+					<input type="hidden" name="opt_id" value="${cart.opt_id}">
+						
+						</td>
+					<td rowspan="2"><fmt:formatNumber pattern="#,##0원">${cart.p_price+cart.opt_price}</fmt:formatNumber>
 					<span id="price-${loop.index}"
-						style="display: none;">${cart.p_price}</span>
+						style="display: none;">${cart.p_price+cart.opt_price}</span>
 					</td>
-					<td>
+					<td rowspan="2">
 						<div class="button-container">
 							<button type="button" class="decrease" data-id="${loop.index}">-</button>
 							<span id="quantity-${loop.index}">${cart.cart_quantity}</span>개
 							<button type="button" class="increase" data-id="${loop.index}">+</button>
 						</div>
 					</td>
-					<td><span id="subtotal-${loop.index}"> <fmt:formatNumber
+					<td rowspan="2"><span id="subtotal-${loop.index}"> <fmt:formatNumber
 								pattern="#,##0원">
-            ${cart.cart_quantity * cart.p_price}
+           				 ${cart.cart_quantity * (cart.p_price+cart.opt_price)}
         </fmt:formatNumber>
 					</span></td>
-
+				</tr>
+				<tr>
+					<td><div>${cart.opt_name}</div>
+					
+					</td>
 				</tr>
 			</c:forEach>
 
@@ -85,15 +100,17 @@ th {
 			</tr>
 		</table>
 		<div>
-			<button type="button" id="order">결제하기</button>
+			 <button type="button" id="order-button">주문하기</button>
 		</div>
-		
+	</form>
+	<!-- 	<script src="/dog/js/cart-out.js"></script> -->
 	<script type="text/javascript">
 	$(document).ready(function() {
 				
 				// 초기 로딩 시 전체박스, 개별체크박스 선택
 				$("input[name='chk-all']").prop('checked', true);
 				$("input[name='check-one']").prop('checked', $("input[name='chk-all']").prop('checked'));
+				
 				
 				
 				///이벤트들///
@@ -108,21 +125,42 @@ th {
 				 $("input[name='check-one']").change(function() {
 				      updateTotalPrice();
 				 });
-				 
 				
-	
-				// '선택 삭제' 버튼 클릭 이벤트를 처리합니다.
+
+				// 3. check-one 버튼이 모두 체크되면 chk-all도 체크, 하나라도 해제되면 chk-all도 해제
+				$(".check-one").click(function() {
+			     var allChecked = true;
+				    $(".check-one").each(function() {
+				        if (!$(this).prop("checked")) {
+				            allChecked = false;
+				            $("input[name='chk-all']").prop('checked', false);
+				            return false; // Exit the each loop early if a checkbox is not checked
+				        }
+				    });
+			
+				    $("input[name='chk-all']").prop('checked', allChecked);
+				    updateTotalPrice();
+				});
+
+			        
+				// '선택 삭제' 버튼 클릭 이벤트
 				$("#deletethis").click(function() {
 				    const checkedBoxes = $('.chk:checked');
-				    let productIdsToDelete = [];
-				
+				    let productIds = [];
+				    let optIds = [];
+				    
+				    
 				    // 선택된 제품의 product_id를 수집해서 배열에 저장
 				    $("input[name='check-one']:checked").each(function() {
 				        const productId = $(this).closest("tr").find("input[name='product_id']").val();
-				        productIdsToDelete.push(productId);
+				        productIds.push(productId);
+				        const optId = $(this).closest("tr").find("input[name='opt_id']").val();
+				        optIds.push(optId);
+				        
 				    });
 				
-				    if (productIdsToDelete.length === 0) {
+				    
+				    if (productIds.length === 0) {
 				        alert('선택한 상품이 없습니다.');
 				        return;
 				    } else {
@@ -132,58 +170,21 @@ th {
 				    $.ajax({
 				        type: "POST",
 				        url: "/dog/deletefromcart",
-				        data: { productIds: productIdsToDelete.join(",") },
+				        data: { productIds: productIds.join(","), 
+				        		optIds: optIds.join(",") 
+				        	},
 				        success: function(response) {
-				            // 서버에서의 응답을 처리할 수 있음
-				            // 예를 들어, 페이지 리로드 또는 필요한 작업 수행
-				            location.reload(); // 페이지 리로드 예시
+				            location.reload(); 
 				        },
 				        error: function(xhr, status, error) {
 				            alert("오류 발생: " + error);
 				        }
 				    });
 				});
-				
-				
-				
-				$("#order").click(function() {
-				    const checkedBoxesToOrder = $('.chk:checked');
-				    let productIdsToOrder = [];
-				
-				    // 선택된 제품의 product_id를 수집해서 배열에 저장
-				    $("input[name='check-one']:checked").each(function() {
-				        const productIdtoOrder = $(this).closest("tr").find("input[name='product_id']").val();
-				        productIdsToOrder.push(productIdtoOrder);
-				    });
-				
-				    if (productIdsToOrder.length === 0) {
-				        alert('선택한 상품이 없습니다.');
-				        return;
-				    }
-				
-				    $.ajax({
-				        type: "POST",
-				        url: "/dog/order",
-				        data: { productIdsToOrder: productIdsToOrder.join(",") },
-				        async: false, // 요청을 동기적으로 처리하도록 설정
-				
-// 				        success: function(response) {
-// 				            // 이 부분은 실행되지 않습니다.
-// 				        },
-				
-// 				        error: function(xhr, status, error) {
-// 				            alert("오류 발생: " + error);
-// 				        }
-				    });
-				
-				    // 요청이 완료되면 이 부분으로 이동하게 됩니다.
-				    alert('주문이 성공적으로 처리되었습니다.');
-				    window.location.href = '/dog/order'; // 이동할 URL을 지정
-				});
-				
-							        
-						  
-								  
+
+				        
+
+				  
 				// 4. 수량 증감
 				$(".increase, .decrease").click(
 					function() {
@@ -278,6 +279,45 @@ th {
 				updateShipping();
 			
 	});
+	
+	//주문하기버튼
+	$("#order-button").click(function() {
+		 const checkedBoxes = $('.chk:checked');
+		    let productIds = [];
+
+		    // 선택된 제품의 product_id를 수집해서 배열에 저장
+		    $("input[name='check-one']:checked").each(function() {
+		        const productId = $(this).closest("tr").find("input[name='product_id']").val();
+		        productIds.push(productId);
+		    });
+		    
+		    console.log("제품아이디 : "+productIds);
+
+		    if (productIds.length === 0) {
+		        console.log('선택한 상품이 없습니다.');
+		        return;
+		    } else {
+		    	console.log('주문하러~고고');
+		    }
+
+		    $.ajax({
+		        type: "POST",
+		        url: "/dog/order",
+		        async: false,
+		        data: { productIds: productIds.join(",") },
+		        success: function(response) {
+		            $('body').html(response);
+		            $('head').html(response);
+		        },
+		        error: function(xhr, status, error) {
+		            alert("오류 발생: " + error);
+		        }
+		    });
+
+
+
+		});
+	
 		</script>
 </body>
 </html>

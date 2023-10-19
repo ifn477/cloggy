@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ezen.dog.member.MemberDTO;
+import com.ezen.dog.product.OptionDTO;
 
 @Controller
 public class CartController {
@@ -28,7 +29,7 @@ public class CartController {
 	@ResponseBody
 	@RequestMapping(value = "/addtocart", method = RequestMethod.POST)
 	public String addToCart(@RequestParam("product_id") int product_id, @RequestParam("quantity") int quantity,
-			HttpServletRequest request, HttpServletResponse response, HttpSession session) {
+			@RequestParam("optId") int optId, HttpServletRequest request, HttpServletResponse response, HttpSession session) {
 		
 		// 회원정보 가져오기
 		MemberDTO mdto = (MemberDTO) session.getAttribute("member");
@@ -40,14 +41,14 @@ public class CartController {
 			userId = mdto.getUserId();
 
 			// 카트에 이미 저장된 상품인지 체크하는 메서드!
-			int hasitem = cs.checkcart(userId, product_id);
+			int hasitem = cs.checkcart(userId, product_id, optId);
 			System.out.println("장바구니 수량 :" + hasitem);
 
 			if (hasitem > 0) { // 장바구니에 있는 상품일 경우 수량 증가 method 호출
-				cs.increasequantity(userId, product_id, quantity);
+				cs.increasequantity(userId, product_id, quantity, optId);
 				return "success"; // 상품 수량 증가 성공
 			} else { // 없는 상품일 경우 신규 추가
-				cs.addcart(userId, product_id, quantity);
+				cs.addcart(userId, product_id, quantity, optId);
 				return "success"; // 상품 추가 성공
 			}
 
@@ -69,14 +70,14 @@ public class CartController {
 			//ckid가 이미 있는 경우~
 			if(foundCkid){
 				// 카트에 이미 저장된 상품인지 체크하는 메서드!
-				int hasitem = cs.checkcartwithcookie(ckid, product_id);
+				int hasitem = cs.checkcartwithcookie(ckid, product_id, optId);
 				System.out.println("장바구니 수량 :" + hasitem);
 					
 				if (hasitem > 0) { // 장바구니에 있는 상품일 경우 수량 증가 method 호출
-					cs.increasequantitywithcookie(ckid, product_id, quantity);
+					cs.increasequantitywithcookie(ckid, product_id, quantity, optId);
 					return "success"; // 상품 수량 증가 성공
 				} else { // 없는 상품일 경우 신규 추가
-					cs.addcartwithcookie(ckid, product_id, quantity);
+					cs.addcartwithcookie(ckid, product_id, quantity, optId);
 					return "success"; // 상품 추가 성공
 				}
 			   }//ckid 없을 때(비로그인 상태 최초 저장) : 쿠키 신규 생성
@@ -91,7 +92,7 @@ public class CartController {
 			    // 서버 -> 클라이언트(브라우저)로 쿠키 전송, 저장
 			    response.addCookie(cookie);
 			    // ckid 값을 사용하여 DB에 저장
-			    cs.addcartwithcookie(ckid, product_id, quantity);
+			    cs.addcartwithcookie(ckid, product_id, quantity, optId);
 			    System.out.println("쿠키 값:" + ckid);			    
 
 			    return "success";
@@ -107,8 +108,8 @@ public class CartController {
 	}
 
 	@RequestMapping(value = "/cart-out")
-	public String productout(HttpSession session, HttpServletRequest request, CartDTO cdto, Model mo) {
-
+	public String productout(HttpSession session, HttpServletRequest request, Model mo) {
+		
 		MemberDTO mdto = (MemberDTO) session.getAttribute("member");
 		Cservice cs = sqlSession.getMapper(Cservice.class);
 		if (mdto != null) {
@@ -117,7 +118,9 @@ public class CartController {
 
 			// 제품DB에 접근해서 product_id로 상품 정보 가져오기
 			ArrayList<CartProductDTO> list = cs.cartout(userId);
+
 			mo.addAttribute("list", list);
+			
 
 			return "cart-out";
 		} else {// 로그인 값이 없는 경우 (쿠키로 저장한 경우)
@@ -142,15 +145,18 @@ public class CartController {
 		MemberDTO mdto = (MemberDTO) session.getAttribute("member");
 		Cservice cs = sqlSession.getMapper(Cservice.class);
 		String productIds = request.getParameter("productIds");
+		String optIds = request.getParameter("optIds");
 		System.out.println("!!!!제품번호!!!!" + productIds);// 확인용
 		String[] ProductIdss = productIds.split(",");
+		String[] optIdss = optIds.split(",");
 
 		if (mdto != null) { // 로그인 상태일 경우
 			String userId = mdto.getUserId();
 
 			for (int i = 0; i < ProductIdss.length; i++) {
 				int product_id = Integer.parseInt(ProductIdss[i]);
-				cs.cartdelete(userId, product_id);
+				int opt_id = Integer.parseInt(optIdss[i]);
+				cs.cartdelete(userId, product_id, opt_id);
 			}
 			return "redirect:/cart-out";
 		} else {
@@ -164,13 +170,38 @@ public class CartController {
 			}
 			for (int i = 0; i < ProductIdss.length; i++) {
 				int product_id = Integer.parseInt(ProductIdss[i]);
-				cs.cartdeletewithcookie(ckvalue, product_id);
+				int opt_id = Integer.parseInt(optIdss[i]);
+				cs.cartdeletewithcookie(ckvalue, product_id, opt_id);
 			}
 			return "redirect:/cart-out";
 		}
 
 	}
 
+	@RequestMapping(value = "/delete-all")
+	public String deleteall(HttpServletRequest request, HttpSession session) {
+		MemberDTO mdto = (MemberDTO) session.getAttribute("member");
+		Cservice cs = sqlSession.getMapper(Cservice.class);
+		
+		if (mdto != null) { 
+			String userId =	mdto.getUserId();
+			cs.deleteall(userId);
+		
+		}else {
+		Cookie[] cookies = request.getCookies();
+		String ckvalue = null;
+			for (Cookie cookie : cookies) {
+				if (cookie.getName().equals("ckid")) {
+					ckvalue = cookie.getValue();
+					break; // 이미 쿠키를 찾았으므로 루프 종료
+				}
+			}
+		cs.deleteall(ckvalue);
+		}
+		
+		return "redirect:/cart-out";
+	}
+		
 	@ResponseBody
 	@RequestMapping(value = "/changeqty", method = RequestMethod.POST)
 	public String changeqty(@RequestParam("product_id") int product_id, @RequestParam("quantity") int quantity,

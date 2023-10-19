@@ -5,31 +5,39 @@
 <mapper namespace="com.ezen.dog.cart.Cservice">
 	<insert id="addcart">
 		insert into cart (cart_id, userId, product_id,
-		CART_QUANTITY, cart_date)
+		CART_QUANTITY, cart_date, opt_id)
 		values (cart_seq.nextval, #{param1},
-		#{param2},#{param3}, sysdate)
+		#{param2},#{param3}, sysdate,#{param4})
 	</insert>
 	<insert id="addcartwithcookie">
 		insert into cart (cart_id, cart_ckid, product_id,
-		CART_QUANTITY, cart_cklimit)
+		CART_QUANTITY, cart_cklimit, opt_id)
 		values (cart_seq.nextval, #{param1},
-		#{param2},#{param3}, sysdate)
+		#{param2},#{param3}, sysdate,#{param4})
 	</insert>
 	<select id="cartout" resultType="com.ezen.dog.cart.CartProductDTO">
-	    select c.userId, c.product_id, c.cart_quantity, p.p_name, p.p_thumbnail, p.p_price
-	    from cart c
-	    INNER JOIN product p ON c.product_id = p.product_id and c.userId=#{param1}
+	    SELECT c.userId, c.product_id, c.opt_id, c.cart_quantity, 
+        p.p_name, p.p_thumbnail, p.p_price, 
+        o.opt_name, o.opt_price
+		FROM cart c
+		INNER JOIN product p ON c.product_id = p.product_id 
+		LEFT JOIN p_option o ON c.opt_id = o.opt_id
+		WHERE c.userId = #{param1}
 	</select>
 	<select id="cartoutwithcookie" resultType="com.ezen.dog.cart.CartProductDTO">
-	    select c.cart_ckid, c.product_id, c.cart_quantity, p.p_name, p.p_thumbnail, p.p_price
-	    from cart c
-	    INNER JOIN product p ON c.product_id = p.product_id and c.cart_ckid=#{param1}
+	    SELECT c.cart_ckid, c.product_id, c.opt_id, c.cart_quantity, 
+        p.p_name, p.p_thumbnail, p.p_price, 
+        o.opt_name, o.opt_price
+		FROM cart c
+		INNER JOIN product p ON c.product_id = p.product_id 
+		LEFT JOIN p_option o ON c.opt_id = o.opt_id
+		WHERE c.cart_ckid=#{param1}
 	</select>
 	<select id="checkcart" resultType="Integer">
-	    select count(*) from cart where userId=#{param1} and product_id=#{param2}
+	    select count(*) from cart where userId=#{param1} and product_id=#{param2} and opt_id = #{param3}
 	</select>
 	<select id="checkcartwithcookie" resultType="Integer">
-	    select count(*) from cart where cart_ckid=#{param1} and product_id=#{param2}
+	    select count(*) from cart where cart_ckid=#{param1} and product_id=#{param2} and opt_id = #{param3}
 	</select>
 	<update id="increasequantity">
 		update cart set cart_quantity = cart_quantity + #{param3} where userId=#{param1} and product_id=#{param2}
@@ -45,9 +53,16 @@
 	</update>
 <!-- 	선택삭제 -->
 	<delete id="cartdelete">
-		delete from cart where userId=#{param1} and product_id=#{param2}
+		delete from cart where userId=#{param1} and product_id=#{param2} and opt_id=#{param3}
 	</delete>
 	<delete id="cartdeletewithcookie">
-		delete from cart where cart_ckid=#{param1} and product_id=#{param2}
+		delete from cart where cart_ckid=#{param1} and product_id=#{param2} and opt_id=#{param3}
+	</delete>
+<!-- 전체삭제 -->
+	<delete id="deleteall">
+		delete from cart where userId=#{param1}
+	</delete>
+	<delete id="deleteallwithcookie">
+		delete from cart where cart_ckid=#{param1}
 	</delete>
 </mapper>
