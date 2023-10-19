@@ -38,20 +38,5 @@ public class HomeController {
 	public String main3() {
 		return "info";
 	}
-	
-
-	
-	@RequestMapping(value="/search-all", method = RequestMethod.POST )
-	public String searchall(HttpServletRequest request, Model mo) {
-		String p_name = request.getParameter("p_name");
-		
-		Service ss = sqlSession.getMapper(Service.class);
-		ArrayList<ProductDTO> list = ss.searchAll(p_name);
-		mo.addAttribute("list", list);
-		
-		return "redirect:product-out";
-	}
-	
-
 
 }
