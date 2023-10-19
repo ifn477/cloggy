@@ -38,5 +38,10 @@ public class HomeController {
 	public String main3() {
 		return "info";
 	}
+	
+	@RequestMapping(value = "/now")
+	public String main4() {
+		return "now";
+	}
 
 }
