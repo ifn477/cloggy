@@ -1,5 +1,5 @@
 
- /*회원가입 요휴성 검사*/
+ /*회원가입 요휴성 검사
  
  $(function(){
 	$("#button1").click(function(){
@@ -23,11 +23,11 @@
 		});
 	});
 });
- 
+*/
  function memcheck() 
 {
 	var f = document.memberincheck;
-	
+	var checkTerms1 = document.getElementById('checkterms1').checked;
 		//--아이디 인증
 		var cid = f.userId.value;
 		var vid = /^[a-zA-Z0-9]+$/;
@@ -75,15 +75,6 @@
 				return false;
 			}
 		
-		var cgender = f.gender.value;
-		var vgender = /^[\d]{3}-[\d]{4}-[\d]{4}$/;
-		if(cgender=="")
-			{
-				alert("성별을 선택해주세요");
-				f.gender.select();
-				return false;
-			}
-		
 		var cemail = f.email.value;
 		var vemail = /^[A-Za-z0-9]*@[a-z]*\.[a-z]{2,3}$/;
 		if(cemail=="")
@@ -113,6 +104,11 @@
 				f.phone.select();
 				return false;
 			}
+	    if (!checkTerms1) {
+        alert('서비스 약관 동의가 필요합니다.');
+				return false;
+    }
+			
 	f.submit();
 }
 
@@ -188,3 +184,4 @@ function productcheck()
 			}
 	f.submit();
 }
+

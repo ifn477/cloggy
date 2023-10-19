@@ -92,5 +92,6 @@
 			<img alt="네이버 로그인" src="/dog/image/btnG_완성형.png" height="48px">
 		</a>
 	</div>
+
 </body>
 </html>

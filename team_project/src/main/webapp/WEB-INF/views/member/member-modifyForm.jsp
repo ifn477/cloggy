@@ -16,11 +16,6 @@
 <tr><th>아이디</th><td colspan="3"><input type="text" name="userId" value="${dto.userId}" readonly="readonly"></td></tr>
 <tr><th>비밀번호</th><td colspan="3"><input type="text" name="password" value="${dto.password}"></td></tr>
 <tr><th>이름</th><td colspan="3"><input type="text" name="userName" value="${dto.userName}"></td></tr>
-<tr><th>나이</th><td colspan="3"><input type="text" name="age" value="${dto.age}"></td></tr>
-<tr><th>성별</th><td colspan="3">
-<input type="radio" name="gender" value="남">남 &nbsp;
-<input type="radio" name="gender" value="여">여
-</td></tr>
 <tr><th colspan="3">이메일</th><td colspan="2"><input type="text" name="email" value="${dto.email}"></td></tr>
 <tr><th colspan="3">핸드폰 번호</th><td colspan="2"><input type="text" name="phone" value="${dto.phone}"></td></tr>
 <tr><th colspan="3">주소</th><td colspan="2"><input type="text" name="roadFullAddr" value="${dto.address}"></td></tr>
