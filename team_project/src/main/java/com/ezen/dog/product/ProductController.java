@@ -24,7 +24,8 @@ public class ProductController {
 	@Autowired
 	SqlSession sqlSession;
 	String image_path = "C:\\Users\\amj32\\git\\team_project\\team_project\\src\\main\\webapp\\image";
-	ArrayList<ProductDTO>list = new ArrayList<ProductDTO>();
+	ArrayList<ProductDTO> list = new ArrayList<ProductDTO>();
+	ArrayList<OptionDTO> optlist = new ArrayList<OptionDTO>();
 	
 	//상품입력
 	@RequestMapping(value = "/product-input")
@@ -88,8 +89,16 @@ public class ProductController {
 		
 		PService ps = sqlSession.getMapper(PService.class);
 		list = ps.productdetail(product_id);
+		optlist = ps.optdetail(product_id);
+		
 		ps.productcount(product_id);
+		
+		
+		
 		mo.addAttribute("list", list);
+		mo.addAttribute("optlist", optlist);
+		
+		
 		
 		Rservice rs = sqlSession.getMapper(Rservice.class);
 		ReviewDTO rdto = rs.reviewlist(product_id);

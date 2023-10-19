@@ -103,7 +103,6 @@
 
 		<!-- 타일즈 셋팅 종료 -->
 
-		<!-- JACKSON -->
 
 		<!-- Jackson Core 1.x -->
 		<dependency>
@@ -121,25 +120,24 @@
 
 
 
-<!-- 타일즈 셋팅 종료 -->			
-		
-<!--  제이슨 셋팅  -->
-<!--  https://mvnrepository.com/artifact/com.google.code.gson/gson  -->
-<dependency>
-<groupId>com.google.code.gson</groupId>
-<artifactId>gson</artifactId>
-<version>2.8.2</version>
-</dependency>
-<!--  제이슨 셋팅 종료  -->
-<!--  젝슨 셋팅  -->
-<!--  https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind  -->
-<dependency>
-<groupId>com.fasterxml.jackson.core</groupId>
-<artifactId>jackson-databind</artifactId>
-<version>2.13.2.2</version>
-</dependency>
-<!--  젝슨 셋팅 종료  -->		
-			
+		<!-- 타일즈 셋팅 종료 -->
+
+		<!-- 제이슨 셋팅 -->
+		<!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
+		<dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+			<version>2.8.2</version>
+		</dependency>
+		<!-- 제이슨 셋팅 종료 -->
+		<!-- 젝슨 셋팅 -->
+		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.13.2.2</version>
+		</dependency>
+		<!-- 젝슨 셋팅 종료 -->
 
 		<!-- AspectJ -->
 		<dependency>
@@ -218,24 +216,18 @@
 		</dependency>
 
 
-<!-- 이메일 전송 -->
-<dependency>
-	<groupId>com.sun.mail</groupId>
-	<artifactId>javax.mail</artifactId>
-	<version>1.6.1</version>
-</dependency>
-<!-- json -->
-<dependency>
-    <groupId>com.googlecode.json-simple</groupId>
-    <artifactId>json-simple</artifactId>
-    <version>1.1.1</version>
-</dependency>
-<!-- jackson-mapper -->
-<dependency>
-	<groupId>org.codehaus.jackson</groupId>
-	<artifactId>jackson-mapper-asl</artifactId>
-	<version>1.5.0</version>
-</dependency>
+		<!-- 이메일 전송 -->
+		<dependency>
+			<groupId>com.sun.mail</groupId>
+			<artifactId>javax.mail</artifactId>
+			<version>1.6.1</version>
+		</dependency>
+		<!-- json -->
+		<dependency>
+			<groupId>com.googlecode.json-simple</groupId>
+			<artifactId>json-simple</artifactId>
+			<version>1.1.1</version>
+		</dependency>
 
 		<!-- Test -->
 		<dependency>
@@ -244,6 +236,16 @@
 			<version>4.7</version>
 			<scope>test</scope>
 		</dependency>
+
+
+		<!-- Random문자열 생성 -->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>3.12.0</version>
+		</dependency>
+
+
 	</dependencies>
 
 
@@ -268,8 +270,8 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>2.5.1</version>
 				<configuration>
-					<source>1.6</source>
-					<target>1.6</target>
+					<source>1.8</source>
+					<target>1.8</target>
 					<compilerArgument>-Xlint:all</compilerArgument>
 					<showWarnings>true</showWarnings>
 					<showDeprecation>true</showDeprecation>

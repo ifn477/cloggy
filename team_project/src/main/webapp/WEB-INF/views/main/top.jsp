@@ -20,7 +20,7 @@
 		<ul class="nav navbar-nav">
 
 			<c:choose>
-				<c:when test="${loginstate == true && member.auth_id == 1}">
+				<c:when test="${loginstate == true && member.auth_id == 0}">
 					<li class="dropdown"><a class="dropdown-toggle"
 						data-toggle="dropdown" href="#">회원<span class="caret"></span></a>
 						<ul class="dropdown-menu">
@@ -275,7 +275,7 @@
 			</c:choose>
 		</ul>
 		<c:choose>
-			<c:when test="${loginstate == true && member.auth_id == 1}">
+			<c:when test="${loginstate == true && member.auth_id == 0}">
 				<ul class="nav navbar-nav navbar-right">
 					<li><a href="#"><span class="glyphicon glyphicon-user"></span>${member.userId}님
 							반갑습니다!</a></li>
@@ -294,7 +294,7 @@
 							class="glyphicon glyphicon-log-in"></span>Logout</a></li>
 				</ul>
 			</c:when>
-			<c:when test="${loginstate == true && member.auth_id == 0}">
+			<c:when test="${loginstate == true && member.auth_id == 1}">
 				<ul class="nav navbar-nav navbar-right">
 					<li><a href="#"><span class="glyphicon glyphicon-user"></span>${member.userId}님
 							반갑습니다!</a></li>
@@ -306,6 +306,7 @@
 
 							<!-- 						마이페이지&회원탈퇴로 수정 -->
 							<li><a href="member-searchForm">내정보</a></li>
+							<li><a href="mybaby-input">우리 아이 등록</a></li>
 							<li><a href="member-searchForm">회원 탈퇴</a></li>
 						</ul></li>
 					<li><a href="logout"><span

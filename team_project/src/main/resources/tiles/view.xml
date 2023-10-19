@@ -92,6 +92,11 @@
 		<put-attribute name="title" value="회원입력"/>
 		<put-attribute name="body" value="/WEB-INF/views/member/member-input.jsp"/>
 	</definition>
+
+	<definition name="mybaby-input" extends="baseLayout">
+		<put-attribute name="title" value="우리아이입력"/>
+		<put-attribute name="body" value="/WEB-INF/views/member/mybaby-input.jsp"/>
+	</definition>
 	
 		<definition name="login-input" extends="baseLayout">
 		<put-attribute name="title" value="로그인폼"/>

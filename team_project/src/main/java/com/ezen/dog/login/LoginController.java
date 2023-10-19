@@ -7,7 +7,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Locale;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.jdbc.SQL;
@@ -21,6 +23,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.util.WebUtils;
 
 import com.ezen.dog.member.MMailSend;
 import com.ezen.dog.member.MemberDTO;	
@@ -31,20 +34,42 @@ public class LoginController {
 	@Autowired
 	SqlSession sqlSession;
 	
-	// 로그인 폼
 	@RequestMapping(value = "/login-input")
-	public String logininput() {
-		return "login-input";
+	public String logininput(HttpServletRequest request, Model model) {
+	    Cookie[] cookies = request.getCookies();
+	    if (cookies != null) {
+	        for (Cookie cookie : cookies) {
+	            if (cookie.getName().equals("rememberedUserId")) {
+	                String rememberedUserId = cookie.getValue();
+	                // Set the remembered user ID in the model to pre-fill the input field
+	                model.addAttribute("rememberedUserId", rememberedUserId);
+	                break;
+	            }
+	        }
+	    }
+	    return "login-input";
 	}
+
 	
 	// 로그인
 	@RequestMapping(value = "/login",method = RequestMethod.POST)
-	public String login(HttpServletRequest request) {
+	public String login(HttpServletRequest request,HttpSession session,
+			HttpServletResponse response) {
 		String userId = request.getParameter("userId");
 		String password = request.getParameter("password");
+		
+
+		
 		Lservice ms = sqlSession.getMapper(Lservice.class);
 		MemberDTO mdto =ms.login(userId,password);
 		HttpSession hs = request.getSession();
+		
+		
+		
+		
+
+		System.out.println("3단계-로그인단계");
+		
 		
 		if(mdto!=null){
 		hs.setAttribute("member",mdto);
@@ -104,6 +129,9 @@ public class LoginController {
 		hs.setMaxInactiveInterval(60*30);
 		}
 		return "redirect:main";
+		
+		
+		
 	}
 
 	// 로그아웃

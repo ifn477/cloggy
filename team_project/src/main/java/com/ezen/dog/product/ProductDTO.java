@@ -8,6 +8,7 @@ public class ProductDTO {
 	int p_stock;
 	String p_enroll;
 	int p_sell, p_hits;
+	int opt_id;
 	
 	public ProductDTO() {	super();	}
 

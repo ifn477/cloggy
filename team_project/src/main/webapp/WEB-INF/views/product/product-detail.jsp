@@ -25,158 +25,203 @@
 	/* Optionally, set the height to fill the entire viewport */
 }
 </style>
-<script type="text/javascript">
-// 장바구니
-function addcart() {
-    const productId = document.querySelector('input[name="product_id"]').value;
-    const quantity = document.getElementById('result').innerText;
-
-    // Create a JSON object with the data to send
-    const data = {
-        product_id: productId,
-        quantity: quantity
-    };
-
-    // Send the data to the server using AJAX
-   fetch('/addcart', {
-    method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-    })
-    .then(response => {
-        // Handle the response as needed (e.g., show a success message)
-        alert('상품이 장바구니에 추가되었습니다.');
-    })
-    .catch(error => {
-    	alert('Error', error);
-    });
-}
-
-// 총 금액 계산 후 출력
-
-	document.addEventListener('DOMContentLoaded', function () {
-    const minusbtn = document.getElementById('minusbtn');
-    const plusbtn = document.getElementById('plusbtn');
-    const resultElement = document.querySelector('#result');
-    const priceElement = document.querySelector('#price');
-
-    minusbtn.addEventListener('click', function () {
-        const currentQuantity = parseInt(resultElement.innerText);
-        if (currentQuantity > 1) {
-            resultElement.innerText = (currentQuantity - 1).toString();
-            updateTotalPrice();
-        }
-    });
-
-    plusbtn.addEventListener('click', function () {
-        const currentQuantity = parseInt(resultElement.innerText);
-        resultElement.innerText = (currentQuantity + 1).toString();
-        updateTotalPrice();
-    });
-
-    // Function to update the total price
-    function updateTotalPrice() {
-        const currentQuantity = parseInt(resultElement.innerText);
-        const price = parseFloat(priceElement.innerText.replace(/[^\d.-]/g, ''));
-        const totalPrice = currentQuantity * price;
-
-        // Display the total price with formatting
-        document.querySelector('#totalPrice').innerText = totalPrice.toLocaleString('ko-KR') + '원';
-    }
-});
-
-
-
-</script>
-
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
+	<c:forEach items="${list}" var="pdetail">
+		<table align="center" width="1000px" style="margin-top: 130px;">
+			<tr>
+				<td><input type="hidden" id="product_id"
+					value="${pdetail.product_id}"></td>
+			</tr>
+			<tr>
+				<td><img alt="상품썸네일" src="/dog/image/${pdetail.p_thumbnail}"
+					width="350px;" height="400px;"></td>
+			</tr>
+			<tr>
+				<td align="center" style="font-size: 40px; padding-left: 10px;">${pdetail.p_name}</td>
+			</tr>
+			<tr>
+				<td id=align= "right" style="font-size: 30px; padding-left: 10px;">
+					<div id="price">
+						<fmt:formatNumber pattern="#,##0원">${pdetail.p_price}</fmt:formatNumber>
+					</div>
+				</td>
+			</tr>
 
-	<form action="addcart" method="post">
-		<c:forEach items="${list}" var="pdetail">
-			<table align="center" width="1000px" style="margin-top: 130px;">
-				<tr>
-					<td><input type="hidden" name="product_id"
-						value="${pdetail.product_id}"></td>
-				</tr>
-				<tr>
-					<td><img alt="상품썸네일" src="/dog/image/${pdetail.p_thumbnail }"
-						width="350px;" height="400px;"></td>
-				</tr>
-				<tr>
-					<td align="center" style="font-size: 40px; padding-left: 10px;">${pdetail.p_name }</td>
-				</tr>
-				<tr>
-					<td id=align= "right" style="font-size: 30px; padding-left: 10px;">
-						<div id="price">
-							<fmt:formatNumber pattern="#,##0원">${pdetail.p_price}</fmt:formatNumber>
-						</div>
-					</td>
-				</tr>
+			<!-- 옵션 선택 -->
+			<td><select class="haha" id="haha" name="haha">
+					<option data-opt_price=0 data-opt_id=0>옵션을 선택해주세요</option>
+					<c:forEach items="${optlist}" var="opt">
+						<!-- 데이터를 data-* 속성에 저장합니다. -->
+						<option data-opt_name="${opt.opt_name}"
+							data-opt_price="${opt.opt_price}"
+							data-opt_id="${opt.opt_id}">${opt.opt_name} &emsp;
+							(+${opt.opt_price})</option>
+					</c:forEach>
+			</select></td>
 
-				<!--수량 선택 -->
-				<tr>
-					<td>
-						<div class="button-container">
-						
-						
-						</div>
-					</td>
-				</tr>
-				<tr>
-					<td>Total Price: <span id="totalPrice">0</span></td>
-				</tr>
-				<tr>
-					<td colspan="2"><input type="button" value="장바구니 추가"
-						onclick="addcart()"></td>
-				</tr>
-			</table>
 
-			<!--             리뷰 -->
-			<div class="review-container">
-				<div class="review">
-					<table width="500px">
-						<tr>
-							<td colspan="2"><a
-								href="review-out?product_id=${pdetail.product_id}" align="right">리뷰
-									전체보기</a></td>
-						</tr>
+			<!--     수량 선택  		-->
+			<tr>
+				<td>
+					<div class="button-container">
+						<button id="decrease">-</button>
+						<span id="quantity">1</span>
+						<button id="increase">+</button>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td>Total Price: <span id="totalPrice"><fmt:formatNumber
+							pattern="#,##0원">${pdetail.p_price}</fmt:formatNumber></span></td>
+			</tr>
 
-						<tr>
-							<td rowspan="2" width="120px"><img
-								src="/dog/review-img/${rdto.r_photo}" width="100px"
-								height="100px"></td>
-							<td height="30px">${rdto.userId}</td>
-						</tr>
-						<tr>
-							<td>${rdto.r_content}</td>
-						</tr>
-					</table>
-				</div>
+			<tr>
+				<td colspan="2"><button id="addToCart">장바구니 추가</button></td>
+			</tr>
+		</table>
+
+		<!-- 리뷰 -->
+		<div class="review-container">
+			<div class="review">
+				<table width="500px">
+					<tr>
+						<td colspan="2"><a
+							href="review-out?product_id=${pdetail.product_id}" align="right">리뷰
+								전체보기</a></td>
+					</tr>
+
+					<tr>
+						<td rowspan="2" width="120px"><img
+							src="/dog/review-img/${rdto.r_photo}" width="100px"
+							height="100px"></td>
+						<td height="30px">${rdto.userId}</td>
+					</tr>
+					<tr>
+						<td>${rdto.r_content}</td>
+					</tr>
+				</table>
 			</div>
+		</div>
 
-			<!-- 		다시 내용	 -->
-			<table>
-				<tr>
-					<td colspan="2" style="padding-top: 150px;">${pdetail.p_info }<br>
-						<img alt="상세페이지" src="/dog/image/${pdetail.p_image}"
-						width="700px;">
-					</td>
-				</tr>
-				<tr>
-					<td colspan="2" style="text-align: right;"><input
-						type="button" value="수정"
-						onclick="location.href='product-modifyForm?product_id=${pdetail.product_id}'">
-					</td>
-			</table>
-		</c:forEach>
-	</form>
+		<!-- 		다시 내용	 -->
+		<table>
+			<tr>
+				<td colspan="2" style="padding-top: 150px;">${pdetail.p_info }<br>
+					<img alt="상세페이지" src="/dog/image/${pdetail.p_image}" width="700px;">
+				</td>
+			</tr>
 
+			<c:choose>
+				<c:when test="${loginstate==true && member.auth_id==0}">
+					<tr>
+						<td colspan="2" style="text-align: right;"><input
+							type="button" value="수정"
+							onclick="location.href='product-modifyForm?product_id=${pdetail.product_id}'">
+						</td>
+				</c:when>
+			</c:choose>
+		</table>
+	</c:forEach>
 
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<!-- 	<script src="/dog/js/product-detail.js"></script> -->
+	<script type="text/javascript">
+		$(document)
+				.ready(
+						function() {
+							var quantity = 1; // 초기 수량은 1으로 설정
+							let priceValue = parseFloat($("#price").text().replace(/[^0-9.-]+/g, ""));
 
+							// 옵션 선택 시 이벤트 핸들러
+							$("#haha").change(function() {
+							  var selectedOption = $(this).find("option:selected");
+							  var optName = selectedOption.data("opt_name");
+							  var optPrice = selectedOption.data("opt_price");
+							
+							  // 제품 가격 -> optPrice + 기존 가격으로 업데이트
+							  var updatedPrice = priceValue + optPrice;
+							  $("#price").text(formatNumberWithCommas(updatedPrice)); // 업데이트된 가격을 화면에 출력
+							  updateTotalPrice(); // total_price 업데이트 함수 호출
+							});
+							
+							
+							function formatNumberWithCommas(number) {
+								return number.toString().replace(
+										/\B(?=(\d{3})+(?!\d))/g, ",")
+										+ '원';
+							}
+							
+							
+							
+							// total_price 업데이트 함수
+							function updateTotalPrice() {
+								var quantityValue = parseInt($("#quantity")
+										.text(), 10);
+								var priceValue = parseFloat($("#price").text()
+										.replace(/[^0-9.-]+/g, ""));
+								
+								
+								var totalPrice = quantityValue * priceValue;
+								var formattedTotalPrice = formatNumberWithCommas(totalPrice);
+								$("#totalPrice").text(formattedTotalPrice);
+							}
+							
+							
+
+							// + 버튼을 클릭할 때 수량을 증가시키는 이벤트 핸들러
+							$("#increase").click(function() {
+								quantity++;
+								$("#quantity").text(quantity);
+								updateTotalPrice();
+							});
+
+							// - 버튼을 클릭할 때 수량을 감소시키는 이벤트 핸들러
+							$("#decrease").click(function() {
+								if (quantity > 1) {
+									quantity--;
+									$("#quantity").text(quantity);
+									updateTotalPrice();
+								}
+							});
+
+							$("#addToCart").click(function() {
+								var product_id = $("#product_id").val();
+								var selectedOption = $("#haha option:selected").val();
+
+								 var selectedOption = $("#haha").find("option:selected");
+							     var optId = selectedOption.data("opt_id");
+
+							      // 추출된 데이터 사용
+								console.log("product id: " + product_id);
+								console.log("quantity: " + quantity);
+								console.log("선택한 옵션의 번호: " + optId);
+
+								// Ajax를 사용하여 서버로 데이터 전송
+								$.ajax({
+									type : "POST", // 또는 "GET"에 따라 적절하게 변경
+									url : "/dog/addtocart", // 컨트롤러의 URL을 여기에 지정
+									data : {
+										product_id : product_id,
+										quantity : quantity,
+										optId: optId
+									},
+									success : function(response) {
+										if (response === "success") {
+											alert("장바구니에 상품이 추가되었습니다.");
+										} else if (response === "no") {
+											alert("사용자가 로그인하지 않았습니다.");
+											// 다른 처리를 수행할 수 있음
+										} else {
+											alert("알 수 없는 응답: " + response);
+										}
+									},
+
+								});
+							});
+						});
+	</script>
 </body>
 </html>

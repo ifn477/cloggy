@@ -11,8 +11,14 @@ public interface Mservice {
 	public ArrayList<MemberDTO> membersearchViewId(String value);
 	public ArrayList<MemberDTO> membersearchViewName(String userId);
 	public ArrayList<MemberDTO> membersearchViewEmail(String userId);
+	public ArrayList<MemberDTO> memberInfoForCart(String userId);
 	public int idcheck(String userId);
 	public ArrayList<MemberDTO> memberinfo(String userId);
 	public void memberdeleteSelf(String userId);
 	public void kakaomember(String nicknaem, String email);
+	public void babysave(String baby_name, String baby_birth, String baby_type, String fname, String babygender,
+			String bodytype, String userId);
+	
+	//스케줄링
+	public void updateMembershipByPurchaseAmount();
 }
