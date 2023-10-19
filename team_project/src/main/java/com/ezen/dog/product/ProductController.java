@@ -24,18 +24,14 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sun.tools.javac.util.List;
 
-
 @Controller
 public class ProductController {
 
 	@Autowired
 	SqlSession sqlSession;
-
-	String image_path = "C:\\Users\\amj32\\git\\team_project\\team_project\\src\\main\\webapp\\image";
-	ArrayList<ProductDTO> list = new ArrayList<ProductDTO>();
-	ArrayList<OptionDTO> optlist = new ArrayList<OptionDTO>();
-
-
+	String image_path = "C:\\Users\\meata\\git\\team_project_1006_space2\\team_project\\src\\main\\webapp\\image";
+	ArrayList<ProductDTO>list = new ArrayList<ProductDTO>();
+	
 	//��ǰ�Է�
 	@RequestMapping(value = "/product-input")
 	public String productinput() {
@@ -62,31 +58,14 @@ public class ProductController {
 		return "redirect:product-input";
 	}
 
-
-	//��ǰ����Ʈ ��з� ���
-	@RequestMapping(value = "/product-out-total")
-	public String productouttotal(HttpServletRequest request, Model mo) {
-		int a = Integer.parseInt(request.getParameter("category1_id"));
-		PService ps = sqlSession.getMapper(PService.class);
-		ArrayList<ProductDTO> list = ps.productouttotal(a);
-		mo.addAttribute("list", list);
-		return "product-out";
-	}
-	
-
-	//��ǰ����Ʈ �ߺз� ���
+	//��ǰ����Ʈ
 	@RequestMapping(value = "/product-out")
-	public String productout(HttpServletRequest request, Model mo) {
-		int a = Integer.parseInt(request.getParameter("category1_id"));
-		int b = Integer.parseInt(request.getParameter("category2_id"));
-
+	public String productout(Model mo) {
 		PService ps = sqlSession.getMapper(PService.class);
-		ArrayList<ProductDTO> list = ps.productout(a, b);
+		list = ps.productout();
 		mo.addAttribute("list", list);
-		
 		return "product-out";
 	}
-
 	
 	//��ǰ ��������
 	@RequestMapping(value = "/product-detail")
@@ -95,16 +74,8 @@ public class ProductController {
 		String userId = request.getParameter("userId");
 		PService ps = sqlSession.getMapper(PService.class);
 		list = ps.productdetail(product_id);
-		optlist = ps.optdetail(product_id);
-		
 		ps.productcount(product_id);
-		
-		
-		
 		mo.addAttribute("list", list);
-		mo.addAttribute("optlist", optlist);
-		
-		
 		
 		//찜하기
 		Likeservice ls = sqlSession.getMapper(Likeservice.class);

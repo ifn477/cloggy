@@ -43,9 +43,9 @@ public class LMailSend {
 	            msg.setFrom(from);
 	            InternetAddress to = new InternetAddress(email);
 	            msg.setRecipient(Message.RecipientType.TO, to);
-	            msg.setSubject("[cloggy] ë¹„ë°€ ë²ˆí˜¸ ì°¾ê¸°", "UTF-8");
+	            msg.setSubject("[cloggy] ºñ¹Ğ ¹øÈ£ Ã£±â", "UTF-8");
 	            
-	            String emailBody = "íšŒì›ë‹˜ì˜ ë¹„ë°€ ë²ˆí˜¸ëŠ” " + password +"ì…ë‹ˆë‹¤.";
+	            String emailBody = "È¸¿ø´ÔÀÇ ºñ¹Ğ ¹øÈ£´Â " + password +"ÀÔ´Ï´Ù.";
 
 	            msg.setText(emailBody, "UTF-8");
 	            msg.setHeader("content-Type", "text/html");

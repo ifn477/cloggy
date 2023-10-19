@@ -7,7 +7,7 @@ public class MemberDTO {
 	String password,userName;
 	int age;
 	String gender,email,phone,address,enroll_date,last_update,userInputKey;
-	private boolean customCheck;
+	
 
 	public MemberDTO() {
 		super();
@@ -111,21 +111,5 @@ public class MemberDTO {
 	public void setUserInputKey(String userInputKey) {
 		this.userInputKey = userInputKey;
 	}
-
-
-	public boolean isCustomCheck() {
-		return customCheck;
-	}
-
-
-	public void setCustomCheck(boolean customCheck) {
-		this.customCheck = customCheck;
-	}
-
-
-	
-	
-	
-	
 	
 }

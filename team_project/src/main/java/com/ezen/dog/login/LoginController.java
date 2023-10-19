@@ -7,9 +7,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Locale;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.jdbc.SQL;
@@ -23,10 +21,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.util.WebUtils;
 
 import com.ezen.dog.member.MMailSend;
 import com.ezen.dog.member.MemberDTO;	
+
 
 @Controller
 public class LoginController {
@@ -34,42 +32,20 @@ public class LoginController {
 	@Autowired
 	SqlSession sqlSession;
 	
+	//  α      
 	@RequestMapping(value = "/login-input")
-	public String logininput(HttpServletRequest request, Model model) {
-	    Cookie[] cookies = request.getCookies();
-	    if (cookies != null) {
-	        for (Cookie cookie : cookies) {
-	            if (cookie.getName().equals("rememberedUserId")) {
-	                String rememberedUserId = cookie.getValue();
-	                // Set the remembered user ID in the model to pre-fill the input field
-	                model.addAttribute("rememberedUserId", rememberedUserId);
-	                break;
-	            }
-	        }
-	    }
-	    return "login-input";
+	public String logininput() {
+		return "login-input";
 	}
-
 	
-	// �α���
+	//  α   
 	@RequestMapping(value = "/login",method = RequestMethod.POST)
-	public String login(HttpServletRequest request,HttpSession session,
-			HttpServletResponse response) {
+	public String login(HttpServletRequest request) {
 		String userId = request.getParameter("userId");
 		String password = request.getParameter("password");
-		
-
-		
 		Lservice ms = sqlSession.getMapper(Lservice.class);
 		MemberDTO mdto =ms.login(userId,password);
 		HttpSession hs = request.getSession();
-		
-		
-		
-		
-
-		System.out.println("3�ܰ�-�α��δܰ�");
-		
 		
 		if(mdto!=null){
 		hs.setAttribute("member",mdto);
@@ -83,19 +59,19 @@ public class LoginController {
 		return "login-input";
 		}
 	}
-	//ReqeustParam���� code�� �޾ƿ���
+	//ReqeustParam     code    ޾ƿ   
 	@RequestMapping(value = "/kakaoLogin", method = RequestMethod.GET)
 	public String kakaoLogin(@RequestParam(value = "code", required = false) String code,HttpServletRequest request) throws Throwable {
 		KakaoLoginService service = new KakaoLoginService();
 		
-		//code�� Token�� �޾ƿ���
+		//code   Token    ޾ƿ   
 		String access_Token = service.getAccessToken(code);
-		//Token������ ����� ���� ��������
+		//Token                          
 		HashMap<String, Object> userInfo = service.getUserInfo(access_Token);
 		String nickname = (String)userInfo.get("nickname");
 		String email = (String)userInfo.get("email");
 		
-		//����� ���� �� �̸���, �̸����� ����Ͽ� ȸ������ Ȯ�� �� �α��� 
+		//               ̸   ,  ̸          Ͽ  ȸ       Ȯ       α    
 		Lservice ls = sqlSession.getMapper(Lservice.class);
 		MemberDTO mdto = ls.kakaologin(nickname,email);
 		if(mdto!=null){
@@ -119,7 +95,7 @@ public class LoginController {
 		String name = (String)userInfo.get("name");
 		String email = (String)userInfo.get("email");
 		
-		//����� ���� �� �̸���, �̸����� ����Ͽ� ȸ������ Ȯ�� �� �α��� 
+		//               ̸   ,  ̸          Ͽ  ȸ       Ȯ       α    
 		Lservice ls = sqlSession.getMapper(Lservice.class);
 		MemberDTO mdto = ls.naverlogin(name,email);
 		if(mdto!=null){
@@ -129,12 +105,9 @@ public class LoginController {
 		hs.setMaxInactiveInterval(60*30);
 		}
 		return "redirect:main";
-		
-		
-		
 	}
 
-	// �α׾ƿ�
+	//  α׾ƿ 
 	@RequestMapping(value = "/logout")
 	public String logout(HttpServletRequest request) {
 		HttpSession hs =request.getSession();
@@ -143,13 +116,13 @@ public class LoginController {
 		return "redirect:/";
 	}
 	
-	// ���̵� ã�� ��
+	//    ̵  ã     
 	@RequestMapping(value = "/id-searchForm")
 	public String idsearch() {
 		return "id-searchForm";
 	}
 	
-	// ���̵� ã�� ��
+	//    ̵  ã     
 	@RequestMapping(value="id-searchView")
 	public String idsearchView(HttpServletRequest request, Model mo) {
 		String userName = request.getParameter("userName");
@@ -168,13 +141,13 @@ public class LoginController {
 		}
 	}
 	
-	// ��й�ȣ ã�� ��
+	//   й ȣ ã     
 	@RequestMapping(value = "/pw-searchForm")
 	public String pwsearch() {
 		return "pw-searchForm";
 	}
 	
-	// ��й�ȣ ã�� ��
+	//   й ȣ ã     
 	@RequestMapping(value = "/pw-searchView")
 	public String pwsearchView(HttpServletRequest request, Model mo) {
 		String userId = request.getParameter("userId");
