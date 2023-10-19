@@ -3,41 +3,69 @@
 <!DOCTYPE html>
 <html>
 <head>
-<script>
-function readImageURL(input, imageID) {
-  if (input.files && input.files[0]) {
-    var reader = new FileReader();
-    reader.onload = function(e) {
-      document.getElementById(imageID).src = e.target.result;
-    };
-    reader.readAsDataURL(input.files[0]);
-  } else {
-    document.getElementById(imageID).src = "";
-  }
-}
+<style type="text/css">
 
-function readThumbnailURL(input, thumbnailID) {
-  if (input.files && input.files[0]) {
-    var reader = new FileReader();
-    reader.onload = function(e) {
-      document.getElementById(thumbnailID).src = e.target.result;
-    };
-    reader.readAsDataURL(input.files[0]);
-  } else {
-    document.getElementById(thumbnailID).src = "";
-  }
+.btn {
+    border-radius: 0;
+    width: 200px;
+	border: 0;
 }
-
-</script>
+#recommendbnt{
+	width: 200px;
+}
+table {
+	font-family: 'Noto Sans KR', sans-serif;
+	width: 60rem;
+	text-align: center;
+	margin-top: 5rem;
+	margin-bottom: 13rem;
+	border-top: 1px solid #f6eddf;
+    border-collapse: collapse;
+}
+th{
+	width: 15%;
+	font-weight: 400;
+	background-color: #f6eddf;
+}
+th,td {
+    border-bottom: 1px solid #f6eddf;
+    padding: 10px;
+	font-size: 13px;
+	color: #463528; 
+}
+td{
+	text-align: left;
+}
+input {
+	padding-left: 10px;
+	width: 500px;
+	height: 40px;
+	border-style: none;
+    outline: none;
+}
+textarea {
+	padding-left: 10px;
+	width: 800px;
+	max-height:200px;
+	min-height:200px;
+	border-style: none;
+}
+caption {
+	font-size: 17px;
+	margin-bottom: 15px;
+	margin-left: 3px;
+	font-weight: 500;
+}
+</style>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
 <form action="product-save" method="post" enctype="multipart/form-data" name="productform">
-<table align="center" border="1">
-<caption>신상품등록</caption>
+<table align="center">
+<caption align="top">신상품 입력</caption>
 <tr> <th>카테고리</th> 
-	<td>
+	<td style="text-align: center;">
 		<select name="category1_id" id="category1">
 		    <option value="">카테고리 선택</option>
 			<option value="1">사료		
@@ -66,11 +94,39 @@ function readThumbnailURL(input, thumbnailID) {
 		</td> 
 </tr>
 <tr> <th>재고수량</th> <td><input type="text" name="p_stock"></td> </tr>
-<tr> <td colspan="2"><input type="button" value="추천상품 넣기" onclick="recommendpopup()"></a></td> </tr>
-<tr> <td colspan="2"><input type="button" value="등록" onclick="productcheck()"></td> </tr>
+<tr> <th>추천상품</th> <td><input type="button" value="상품리스트" onclick="recommendpopup()" id="recommendbnt"></a></td> </tr>
+<!-- <tr> <td colspan="2"><input type="button" value="등록" onclick="productcheck()"></td> </tr> -->
+<tr> <td colspan="2" style="text-align: center; border-bottom: none;">
+<button class="btn btn-primary py-2" type="submit" style="background-color: #e28b3a; margin-top: 30px;" onclick="productcheck()">등록</button></td> </tr>
 </table>
 </form>
+
 <script type="text/javascript">
+
+//이미지 미리보여주기
+function readImageURL(input, imageID) {
+  if (input.files && input.files[0]) {
+    var reader = new FileReader();
+    reader.onload = function(e) {
+      document.getElementById(imageID).src = e.target.result;
+    };
+    reader.readAsDataURL(input.files[0]);
+  } else {
+    document.getElementById(imageID).src = "";
+  }
+}
+
+function readThumbnailURL(input, thumbnailID) {
+  if (input.files && input.files[0]) {
+    var reader = new FileReader();
+    reader.onload = function(e) {
+      document.getElementById(thumbnailID).src = e.target.result;
+    };
+    reader.readAsDataURL(input.files[0]);
+  } else {
+    document.getElementById(thumbnailID).src = "";
+  }
+}
 
 //추천상품
 function recommendpopup() {
@@ -150,8 +206,6 @@ category1Select.addEventListener('change', function() {
             category2Select.appendChild(optionElement);
         });
     }
-    
-    // 다른 category1_id 값에 대한 필터링 로직 추가
 });
 
 </script>

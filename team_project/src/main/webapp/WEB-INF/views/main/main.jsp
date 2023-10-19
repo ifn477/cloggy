@@ -7,6 +7,7 @@
 <script>
         window.open("/dog/popup", "팝업 창", "width=400,height=400");
 </script>
+
 <style type="text/css">
 /* 대메인 */
 .carousel-item {

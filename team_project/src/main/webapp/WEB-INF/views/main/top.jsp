@@ -99,7 +99,7 @@ color: white;
 <!-- 맨위안내 -->
   <div class="swiper-container" id="topswiper">
     <div class="swiper-wrapper" id="topwrapper">
-      <div class="swiper-slide" id="topslide"><a href="#">♥로그인 후 클로기의 다양한 혜택을 만나보세요♥</a></div>
+      <div class="swiper-slide" id="topslide"><a href="login-input">♥로그인 후 클로기의 다양한 혜택을 만나보세요♥</a></div>
       <div class="swiper-slide" id="topslide">지금 클로기는 전품목 무료배송 이벤트 중!</div>
       <div class="swiper-slide" id="topslide">♥건강에도 좋고 맛있는 덴탈껌 10% SALE♥ ~2024.02.15 23:59PM</div>
     </div>
@@ -133,11 +133,19 @@ color: white;
     <div class="collapse navbar-collapse" id="navbarScroll">
       <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
           <li class="nav-item">
-          <a class="nav-link" href="#" role="button" aria-expanded="false">main</a>
+          <a class="nav-link" href="main" role="button" aria-expanded="false">main</a>
           </li>
           <li class="nav-item">
           <a class="nav-link" href="#" role="button" aria-expanded="false">best♥</a>
           </li>
+<!-- 관리자모드로 옮기기  -->
+          		<li class="nav-item dropdown" onmouseenter="openDropdown(this)" onmouseleave="closeDropdown(this)">
+		    <a class="nav-link" href="#" role="button" aria-expanded="false">상품관리</a>
+		    <ul class="dropdown-menu">
+		        <li><a class="dropdown-item" href="product-input">상품입력</a></li>
+		        <li><a class="dropdown-item" href="product-out">상품리스트</a></li>
+		    </ul>
+		</li>
 <!--  제품카테시작   -->
 		<li class="nav-item dropdown" onmouseenter="openDropdown(this)" onmouseleave="closeDropdown(this)">
 		    <a class="nav-link" href="#" role="button" aria-expanded="false">사료</a>
