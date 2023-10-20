@@ -1,28 +1,19 @@
 package com.ezen.dog.login;
 
-import java.io.IOException;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Locale;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.apache.ibatis.jdbc.SQL;
 import org.apache.ibatis.session.SqlSession;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.quartz.LocalDataSourceJobStore;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.ezen.dog.member.MMailSend;
 import com.ezen.dog.member.MemberDTO;	
 
 
@@ -34,7 +25,20 @@ public class LoginController {
 	
 	//  α      
 	@RequestMapping(value = "/login-input")
-	public String logininput() {
+	public String logininput(HttpServletRequest request, Model mo) {
+		
+	    Cookie[] cookies = request.getCookies();
+	    if (cookies != null) {
+	        for (Cookie cookie : cookies) {
+	            if (cookie.getName().equals("rememberedUserId")) {
+	                String rememberedUserId = cookie.getValue();
+	                // Set the remembered user ID in the model to pre-fill the input field
+	                mo.addAttribute("rememberedUserId", rememberedUserId);
+	                break;
+	            }
+	        }
+	    }
+		
 		return "login-input";
 	}
 	
@@ -43,8 +47,8 @@ public class LoginController {
 	public String login(HttpServletRequest request) {
 		String userId = request.getParameter("userId");
 		String password = request.getParameter("password");
-		Lservice ms = sqlSession.getMapper(Lservice.class);
-		MemberDTO mdto =ms.login(userId,password);
+		Lservice ls = sqlSession.getMapper(Lservice.class);
+		MemberDTO mdto =ls.login(userId,password);
 		HttpSession hs = request.getSession();
 		
 		if(mdto!=null){

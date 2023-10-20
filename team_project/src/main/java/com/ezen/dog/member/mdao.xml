@@ -9,7 +9,7 @@ insert into member values(#{param1},0,#{param2},#{param3},#{param4},#{param5},#{
 </insert>
 
 <select id="memberout" resultType="com.ezen.dog.member.MemberDTO">
-select userId,password,userName,email,phone,address,enroll_date,last_update from member
+select userId , auth_id, password,userName,email,phone,address,enroll_date,last_update from member
 </select>
 
 <select id="membermodifyForm" resultType="com.ezen.dog.member.MemberDTO">
@@ -66,4 +66,21 @@ email=#{param4},phone=#{param5},address=#{param6},last_update=sysdate where user
 select userId,password,userName,email,phone,address,enroll_date,last_update from member where userId=#{param1}
 </select>
 
+<insert id="babysave">
+insert into mybaby values(#{param1},#{param2},#{param3},#{param4},#{param5},#{param6},#{param7})
+</insert>
+
+
+<update id="updateMembershipByPurchaseAmount" parameterType="map">
+    UPDATE member
+    SET membership_id = 
+    CASE 
+        WHEN purchase_amount >= 700000 THEN 'CEO댕댕'
+        WHEN purchase_amount >= 500000 THEN '부장댕댕'
+        WHEN purchase_amount >= 300000 THEN '과장댕댕'
+        WHEN purchase_amount >= 200000 THEN '대리댕댕'
+        WHEN purchase_amount >= 100000 THEN '신입댕댕'
+        ELSE '신입댕댕'
+    END
+</update>
 </mapper>

@@ -143,6 +143,11 @@
 		<put-attribute name="title" value="회원입력"/>
 		<put-attribute name="body" value="/WEB-INF/views/member/memberinput.jsp"/>
 	</definition>
+	
+	<definition name="mybaby-input" extends="baseLayout">
+		<put-attribute name="title" value="회원입력"/>
+		<put-attribute name="body" value="/WEB-INF/views/member/mybaby-input.jsp"/>
+	</definition>
 
 	<definition name="member-out" extends="baseLayout">
 		<put-attribute name="title" value="회원목록"/>
