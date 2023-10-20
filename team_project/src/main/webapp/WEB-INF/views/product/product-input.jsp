@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
@@ -80,6 +81,7 @@ caption {
 <tr> <th>상품번호</th> <td><input type="text" name="product_id" value="${input_product_id }" readonly></td> </tr>
 <tr> <th>상품명</th> <td><input type="text" name="p_name"></td> </tr>
 <tr> <th>상품가격</th> <td><input type="text" name="p_price"></td> </tr>
+<tr> <th>할인율</th> <td><input type="text" name="p_discount"></td> </tr>
 <tr> <th>상품설명</th> <td><textarea rows="5px" cols="50%" name="p_info"></textarea></td> </tr>
 <tr> <th>상품이미지</th> 
 		<td align="center">
@@ -95,7 +97,6 @@ caption {
 </tr>
 <tr> <th>재고수량</th> <td><input type="text" name="p_stock"></td> </tr>
 <tr> <th>추천상품</th> <td><input type="button" value="상품리스트" onclick="recommendpopup()" id="recommendbnt"></a></td> </tr>
-<!-- <tr> <td colspan="2"><input type="button" value="등록" onclick="productcheck()"></td> </tr> -->
 <tr> <td colspan="2" style="text-align: center; border-bottom: none;">
 <button class="btn btn-primary py-2" type="submit" style="background-color: #e28b3a; margin-top: 30px;" onclick="productcheck()">등록</button></td> </tr>
 </table>

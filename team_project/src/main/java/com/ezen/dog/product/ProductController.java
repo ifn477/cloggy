@@ -33,7 +33,7 @@ public class ProductController {
 	String image_path = "C:\\Users\\이한솔\\git\\team_project3\\team_project\\src\\main\\webapp\\image";
 	ArrayList<ProductDTO>list = new ArrayList<ProductDTO>();
 	
-	//��ǰ�Է�
+	//상품입력
 	@RequestMapping(value = "/product-input")
 	public String productinput(Model mo) {
 		PService ps = sqlSession.getMapper(PService.class);
@@ -43,35 +43,13 @@ public class ProductController {
 		return "product-input";
 	}
 	
-	//��ǰ��õ����Ʈ
-	@RequestMapping(value = "/product-recommendlist")
-	public String productrecommendlist(HttpServletRequest request, Model mo) {
-		String product_id = request.getParameter("product_id");
-		PService ps = sqlSession.getMapper(PService.class);
-		list = ps.productrecommendlist();
-		mo.addAttribute("list", list);
-		mo.addAttribute("product_id", product_id);
-		return "product-recommendlist";
-	}
-	
-	@RequestMapping(value = "/product-recommend", method = RequestMethod.POST)
-	public ModelAndView productrecommend(HttpServletRequest request) {
-		int product_id = Integer.parseInt(request.getParameter("product_id"));
-		String[] recommend_product_id = request.getParameterValues("recommend_select_product");
-		PService ps = sqlSession.getMapper(PService.class);
-		for(int i=0; i<recommend_product_id.length ; i++) {
-			ps.productrecommend(product_id,recommend_product_id[i]);
-		}
-	    ModelAndView modelAndView = new ModelAndView("closePopup");
-	    return modelAndView;
-	}
-	
-	//��ǰ DB����
+	//상품 DB저장
 	@RequestMapping(value = "/product-save", method = RequestMethod.POST)
 	public String product2(MultipartHttpServletRequest multi) throws IllegalStateException, IOException{
 		int product_id = Integer.parseInt(multi.getParameter("product_id"));
 		int category1_id = Integer.parseInt(multi.getParameter("category1_id"));
 		int category2_id = Integer.parseInt(multi.getParameter("category2_id"));
+		int p_discount = Integer.parseInt(multi.getParameter("p_discount"));
 		String p_name = multi.getParameter("p_name");
 		int p_price = Integer.parseInt(multi.getParameter("p_price"));
 		String p_info = multi.getParameter("p_info");
@@ -84,12 +62,12 @@ public class ProductController {
 		int p_stock = Integer.parseInt(multi.getParameter("p_stock"));
 		double p_point = p_price * 0.01;
 		PService ps = sqlSession.getMapper(PService.class);
-		ps.productinput(product_id,category1_id,category2_id,p_name,p_price,p_info,p_image,p_thumbnail,p_stock,p_point);
+		ps.productinput(product_id,category1_id,category2_id,p_name,p_price,p_info,p_image,p_thumbnail,p_stock,p_point,p_discount);
 		
 		return "redirect:product-input";
 	}
 
-	//��ǰ����Ʈ
+	//占쏙옙품占쏙옙占쏙옙트
 	@RequestMapping(value = "/product-out")
 	public String productout(Model mo) {
 		PService ps = sqlSession.getMapper(PService.class);
@@ -98,7 +76,7 @@ public class ProductController {
 		return "product-out";
 	}
 	
-	//��ǰ ��������
+	//상품상세페이지
 	@RequestMapping(value = "/product-detail")
 	public String productdetail(HttpServletRequest request, Model mo) {
 		int product_id = Integer.parseInt(request.getParameter("product_id"));
@@ -129,6 +107,7 @@ public class ProductController {
 		return "product-detail";
 	}
 	
+
 	//상품 수정내용 입력창
 	@RequestMapping(value = "/product-modifyForm")
 	public String productmodifyForm(HttpServletRequest request, Model mo) {
@@ -162,6 +141,7 @@ public class ProductController {
 		return "redirect:product-out";
 	}
 	
+
 	//상품삭제
 	@RequestMapping(value = "/product-delete")
 	public String productdelete(HttpServletRequest request) {
@@ -171,7 +151,6 @@ public class ProductController {
 		
 		return "redirect:product-out";
 	}
-
 
 	// 상품 전체검색
 	@RequestMapping(value="/search-all", method = RequestMethod.POST )
@@ -243,4 +222,28 @@ public class ProductController {
 		return "product-user-out";
 	}
 	
+	
+	//상품추천리스트
+	@RequestMapping(value = "/product-recommendlist")
+	public String productrecommendlist(HttpServletRequest request, Model mo) {
+		String product_id = request.getParameter("product_id");
+		PService ps = sqlSession.getMapper(PService.class);
+		list = ps.productrecommendlist();
+		mo.addAttribute("list", list);
+		mo.addAttribute("product_id", product_id);
+		return "product-recommendlist";
+	}
+	
+	@RequestMapping(value = "/product-recommend", method = RequestMethod.POST)
+	public ModelAndView productrecommend(HttpServletRequest request) {
+		int product_id = Integer.parseInt(request.getParameter("product_id"));
+		String[] recommend_product_id = request.getParameterValues("recommend_select_product");
+		PService ps = sqlSession.getMapper(PService.class);
+		for(int i=0; i<recommend_product_id.length ; i++) {
+			ps.productrecommend(product_id,recommend_product_id[i]);
+		}
+	    ModelAndView modelAndView = new ModelAndView("closePopup");
+	    return modelAndView;
+	}
+
 }

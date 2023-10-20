@@ -20,4 +20,9 @@
 		<put-attribute name="body" value="/WEB-INF/views/product/product-recommendlist.jsp"/>
 	</definition>
 
+	<definition name="closePopup" extends="popupbaseLayout">
+		<put-attribute name="title" value="팝업창닫기"/>
+		<put-attribute name="body" value="/WEB-INF/views/product/closePopup.jsp"/>
+	</definition>
+
 </tiles-definitions>

@@ -254,6 +254,5 @@
 	<definition name="coupon-modifyform" extends="baseLayout">
 		<put-attribute name="title" value="쿠폰수정폼"/>
 		<put-attribute name="body" value="/WEB-INF/views/coupon/coupon-modifyform.jsp"/>
-	</definition>	
-
+	</definition>		
 </tiles-definitions>

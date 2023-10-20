@@ -145,7 +145,7 @@
    </div>
    <div class="carousel-inner">
 	 <div class="carousel-item active d-flex justify-content-center align-items-center">
-	   <img src="/dog/resources/mainimage/클로기%20대메인1.jpg" class="d-block" style="max-width: 100%; cursor: pointer;" onclick="location.href='#'">
+	   <img src="/dog/resources/mainimage/클로기%20대메인1.jpg" class="d-block" style="width: 100%; cursor: pointer;" onclick="location.href='#'">
 	 </div>
      <div class="carousel-item">
        <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
@@ -198,7 +198,7 @@
       <li class="swiper-slide product-item">
         <div class="product_thumbnail">
           <a href="#">
-            <img alt="썸네일 자리" src="/lhstest/resources/noimage.jpg" style="">
+            <img alt="썸네일 자리" src="/dog/resources/mainimage/noimage.jpg">
           </a>
         </div>
         <div class="product_name" id="product_name">
