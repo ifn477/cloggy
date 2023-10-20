@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.ezen.dog.likecheck.LikeDTO;
 import com.ezen.dog.likecheck.Likeservice;
@@ -32,16 +33,45 @@ public class ProductController {
 	String image_path = "C:\\Users\\meata\\git\\team_project_1006_space2\\team_project\\src\\main\\webapp\\image";
 	ArrayList<ProductDTO>list = new ArrayList<ProductDTO>();
 	
-	//��ǰ�Է�
+	//상품입력
 	@RequestMapping(value = "/product-input")
-	public String productinput() {
+	public String productinput(Model mo) {
+		PService ps = sqlSession.getMapper(PService.class);
+		int now_product_id = ps.productidpreview();
+		int input_product_id = now_product_id+1;
+		mo.addAttribute("input_product_id", input_product_id);
 		return "product-input";
 	}
 	
-	//��ǰ DB����
+	//상품추천리스트
+	@RequestMapping(value = "/product-recommendlist")
+	public String productrecommendlist(HttpServletRequest request, Model mo) {
+		String product_id = request.getParameter("product_id");
+		PService ps = sqlSession.getMapper(PService.class);
+		list = ps.productrecommendlist();
+		mo.addAttribute("list", list);
+		mo.addAttribute("product_id", product_id);
+		return "product-recommendlist";
+	}
+	
+	@RequestMapping(value = "/product-recommend", method = RequestMethod.POST)
+	public ModelAndView productrecommend(HttpServletRequest request) {
+		int product_id = Integer.parseInt(request.getParameter("product_id"));
+		String[] recommend_product_id = request.getParameterValues("recommend_select_product");
+		PService ps = sqlSession.getMapper(PService.class);
+		for(int i=0; i<recommend_product_id.length ; i++) {
+			ps.productrecommend(product_id,recommend_product_id[i]);
+		}
+	    ModelAndView modelAndView = new ModelAndView("closePopup");
+	    return modelAndView;
+	}
+	
+	//상품 DB저장
 	@RequestMapping(value = "/product-save", method = RequestMethod.POST)
-	public String product2(MultipartHttpServletRequest multi) throws IllegalStateException, IOException {
-		int category_id = Integer.parseInt(multi.getParameter("category_id"));
+	public String product2(MultipartHttpServletRequest multi) throws IllegalStateException, IOException{
+		int product_id = Integer.parseInt(multi.getParameter("product_id"));
+		int category1_id = Integer.parseInt(multi.getParameter("category1_id"));
+		int category2_id = Integer.parseInt(multi.getParameter("category2_id"));
 		String p_name = multi.getParameter("p_name");
 		int p_price = Integer.parseInt(multi.getParameter("p_price"));
 		String p_info = multi.getParameter("p_info");
@@ -52,13 +82,14 @@ public class ProductController {
 		String p_thumbnail = mf_thumnail.getOriginalFilename(); 
 		mf_thumnail.transferTo(new File(image_path+"\\"+p_thumbnail));
 		int p_stock = Integer.parseInt(multi.getParameter("p_stock"));
+		double p_point = p_price * 0.01;
 		PService ps = sqlSession.getMapper(PService.class);
-		ps.productinput(category_id,p_name,p_price,p_info,p_image,p_thumbnail,p_stock);
+		ps.productinput(product_id,category1_id,category2_id,p_name,p_price,p_info,p_image,p_thumbnail,p_stock,p_point);
 		
 		return "redirect:product-input";
 	}
 
-	//��ǰ����Ʈ
+	//占쏙옙품占쏙옙占쏙옙트
 	@RequestMapping(value = "/product-out")
 	public String productout(Model mo) {
 		PService ps = sqlSession.getMapper(PService.class);
@@ -67,7 +98,7 @@ public class ProductController {
 		return "product-out";
 	}
 	
-	//��ǰ ��������
+	//占쏙옙품 占쏙옙占쏙옙占쏙옙占쏙옙
 	@RequestMapping(value = "/product-detail")
 	public String productdetail(HttpServletRequest request, Model mo) {
 		int product_id = Integer.parseInt(request.getParameter("product_id"));
@@ -77,7 +108,7 @@ public class ProductController {
 		ps.productcount(product_id);
 		mo.addAttribute("list", list);
 		
-		//찜하기
+		//李쒗븯湲�
 		Likeservice ls = sqlSession.getMapper(Likeservice.class);
 	    ArrayList<LikeDTO> likelist = null;
 		likelist = ls.likecheck(userId);
@@ -86,7 +117,7 @@ public class ProductController {
 		return "product-detail";
 	}
 	
-	//��ǰ �������� �Է�â
+	//占쏙옙품 占쏙옙占쏙옙占쏙옙占쏙옙 占쌉뤄옙창
 	@RequestMapping(value = "/product-modifyForm")
 	public String productmodifyForm(HttpServletRequest request, Model mo) {
 		int product_id = Integer.parseInt(request.getParameter("product_id"));
@@ -96,7 +127,7 @@ public class ProductController {
 		return "product-modifyForm";
 	}
 
-	//��ǰ ��������
+	//占쏙옙품 占쏙옙占쏙옙占쏙옙占쏙옙
 	@RequestMapping(value = "/product-modifyView", method = RequestMethod.POST)
 	public String productmodifyView(MultipartHttpServletRequest multi) throws IllegalStateException, IOException {
 		int category_id = Integer.parseInt(multi.getParameter("category_id"));
@@ -119,7 +150,7 @@ public class ProductController {
 		return "redirect:product-out";
 	}
 	
-	//��ǰ����
+	//占쏙옙품占쏙옙占쏙옙
 	@RequestMapping(value = "/product-delete")
 	public String productdelete(HttpServletRequest request) {
 		int product_id = Integer.parseInt(request.getParameter("product_id"));
@@ -129,7 +160,7 @@ public class ProductController {
 		return "redirect:product-out";
 	}
 
-	// 상품 전체검색
+	// �긽�뭹 �쟾泥닿��깋
 	@RequestMapping(value="/search-all", method = RequestMethod.POST )
 	public String searchall(HttpServletRequest request, Model mo) {
 		String p_name = request.getParameter("p_name");
@@ -191,7 +222,7 @@ public class ProductController {
 		list = ss.productuserout();
 		mo.addAttribute("list", list);
 	    
-		//찜하기
+		//李쒗븯湲�
 		Likeservice ls = sqlSession.getMapper(Likeservice.class);
 	    ArrayList<LikeDTO> likelist = null;
 		likelist = ls.likecheck(userId);	
