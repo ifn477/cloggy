@@ -65,18 +65,11 @@ function jusoCallBack(roadFullAddr){
 /* 메일 전송 */
 $(function(){
     $("#button3").click(function(){
-    var nullCheck= $("#email").val().trim();
-    
-    if (!nullCheck) {
-        alert("이메일을 입력하세요.");
-        return;
 
-    }
-    
-    var confirmation = confirm('인증 번호를 이메일로 전송합니다.');
-    if (confirmation) {
-            var email = $("#email").val();
-
+        var confirmation = confirm('인증 번호를 이메일로 전송합니다.');
+        if (confirmation) {
+		var email = $("#email").val();
+		console.log(email);
             $.ajax({
                 url: "mail-send",
                 method: "POST",

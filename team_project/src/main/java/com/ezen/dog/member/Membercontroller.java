@@ -78,7 +78,13 @@ public class Membercontroller {
 		String userId = request.getParameter("userId");
 		String password =request.getParameter("password");
 		String userName = request.getParameter("userName");
-		String email = request.getParameter("email");
+
+		int age =Integer.parseInt(request.getParameter("age"));
+		String gender = request.getParameter("gender");
+		String user_emailid = request.getParameter("user_emailid");
+		String email_address = request.getParameter("email_address");
+		String email = user_emailid+"@"+email_address;
+
 		String phone = request.getParameter("phone");
 		String address = request.getParameter("roadFullAddr");
 		Mservice ms = sqlSession.getMapper(Mservice.class);
@@ -111,7 +117,7 @@ public class Membercontroller {
 			String password = request.getParameter("password");
 			String userName = request.getParameter("userName");
 			String email = request.getParameter("email");
-			String phone = request.getParameter("phone");
+			String phone = request.getParameter("phone1")+"-"+request.getParameter("phone2")+"-"+request.getParameter("phone3");
 			String address = request.getParameter("roadFullAddr");
 			
 			Mservice ms = sqlSession.getMapper(Mservice.class);

@@ -15,7 +15,7 @@
 		<put-attribute name="body" value="/WEB-INF/views/main/main.jsp"/>
 	</definition>
 	
-
+<!-- 회사정보 -->
 	<definition name="info" extends="baseLayout">
 		<put-attribute name="title" value="회사정보"/>
 		<put-attribute name="body" value="/WEB-INF/views/main/info.jsp"/>
@@ -66,13 +66,6 @@
 		<put-attribute name="title" value="상품수정"/>
 		<put-attribute name="body" value="/WEB-INF/views/product/product-modifyForm.jsp"/>
 	</definition>
-	
-
-	<definition name="info" extends="baseLayout">
-		<put-attribute name="title" value="회사정보"/>
-		<put-attribute name="body" value="/WEB-INF/views/main/info.jsp"/>
-	</definition>
-	
 	
 <!-- 	문의 -->
 	<definition name="qna-input" extends="baseLayout">
@@ -218,5 +211,30 @@
 		<put-attribute name="body" value="/WEB-INF/views/main/cart-out.jsp"/>
 	</definition>	
 
-	
+<!-- 쿠폰 -->
+	<definition name="coupon-input" extends="baseLayout">
+		<put-attribute name="title" value="쿠폰입력"/>
+		<put-attribute name="body" value="/WEB-INF/views/coupon/coupon-input.jsp"/>
+	</definition>	
+
+	<definition name="coupon-out" extends="baseLayout">
+		<put-attribute name="title" value="쿠폰조회"/>
+		<put-attribute name="body" value="/WEB-INF/views/coupon/coupon-out.jsp"/>
+	</definition>	
+
+	<definition name="coupon-downloadform" extends="baseLayout">
+		<put-attribute name="title" value="쿠폰다운로드"/>
+		<put-attribute name="body" value="/WEB-INF/views/coupon/coupon-downloadform.jsp"/>
+	</definition>	
+
+	<definition name="coupon-list" extends="baseLayout">
+		<put-attribute name="title" value="쿠폰리스트"/>
+		<put-attribute name="body" value="/WEB-INF/views/coupon/coupon-list.jsp"/>
+	</definition>	
+
+	<definition name="coupon-modifyform" extends="baseLayout">
+		<put-attribute name="title" value="쿠폰수정폼"/>
+		<put-attribute name="body" value="/WEB-INF/views/coupon/coupon-modifyform.jsp"/>
+	</definition>	
+
 </tiles-definitions>

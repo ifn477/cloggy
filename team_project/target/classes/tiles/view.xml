@@ -15,7 +15,7 @@
 		<put-attribute name="body" value="/WEB-INF/views/main/main.jsp"/>
 	</definition>
 	
-
+<!-- 회사정보 -->
 	<definition name="info" extends="baseLayout">
 		<put-attribute name="title" value="회사정보"/>
 		<put-attribute name="body" value="/WEB-INF/views/main/info.jsp"/>
@@ -26,15 +26,24 @@
 		<put-attribute name="body" value="/WEB-INF/views/main/error.jsp"/>
 	</definition>
 	
+
 	<definition name="product-searchView" extends="baseLayout">
 		<put-attribute name="title" value="전체검색결과"/>
 		<put-attribute name="body" value="/WEB-INF/views/product/product-searchView.jsp"/>
 	</definition>
 	
+
+<!-- 상품관련 -->
+
 	<definition name="product-input" extends="baseLayout">
 		<put-attribute name="title" value="상품입력"/>
 		<put-attribute name="body" value="/WEB-INF/views/product/product-input.jsp"/>
 	</definition>
+		
+<!-- 	<definition name="product-recommendlist" extends="baseLayout"> -->
+<!-- 		<put-attribute name="title" value="추천상품걸기용 상품리스트"/> -->
+<!-- 		<put-attribute name="body" value="/WEB-INF/views/product/product-recommendlist.jsp"/> -->
+<!-- 	</definition> -->
 	
 	<definition name="product-out" extends="baseLayout">
 		<put-attribute name="title" value="관리자상품리스트"/>
@@ -67,6 +76,7 @@
 		<put-attribute name="body" value="/WEB-INF/views/product/product-modifyForm.jsp"/>
 	</definition>
 	
+
 
 	<definition name="info" extends="baseLayout">
 		<put-attribute name="title" value="회사정보"/>
@@ -114,10 +124,12 @@
 		<put-attribute name="body" value="/WEB-INF/views/member/member-input.jsp"/>
 	</definition>
 
+
 	<definition name="mybaby-input" extends="baseLayout">
 		<put-attribute name="title" value="우리아이입력"/>
 		<put-attribute name="body" value="/WEB-INF/views/member/mybaby-input.jsp"/>
 	</definition>
+
 	
 		<definition name="login-input" extends="baseLayout">
 		<put-attribute name="title" value="로그인폼"/>
@@ -218,5 +230,30 @@
 		<put-attribute name="body" value="/WEB-INF/views/main/cart-out.jsp"/>
 	</definition>	
 
-	
+<!-- 쿠폰 -->
+	<definition name="coupon-input" extends="baseLayout">
+		<put-attribute name="title" value="쿠폰입력"/>
+		<put-attribute name="body" value="/WEB-INF/views/coupon/coupon-input.jsp"/>
+	</definition>	
+
+	<definition name="coupon-out" extends="baseLayout">
+		<put-attribute name="title" value="쿠폰조회"/>
+		<put-attribute name="body" value="/WEB-INF/views/coupon/coupon-out.jsp"/>
+	</definition>	
+
+	<definition name="coupon-downloadform" extends="baseLayout">
+		<put-attribute name="title" value="쿠폰다운로드"/>
+		<put-attribute name="body" value="/WEB-INF/views/coupon/coupon-downloadform.jsp"/>
+	</definition>	
+
+	<definition name="coupon-list" extends="baseLayout">
+		<put-attribute name="title" value="쿠폰리스트"/>
+		<put-attribute name="body" value="/WEB-INF/views/coupon/coupon-list.jsp"/>
+	</definition>	
+
+	<definition name="coupon-modifyform" extends="baseLayout">
+		<put-attribute name="title" value="쿠폰수정폼"/>
+		<put-attribute name="body" value="/WEB-INF/views/coupon/coupon-modifyform.jsp"/>
+	</definition>	
+
 </tiles-definitions>
