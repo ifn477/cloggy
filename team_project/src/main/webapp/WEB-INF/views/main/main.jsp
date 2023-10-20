@@ -4,9 +4,30 @@
 <!DOCTYPE html>
 <html>
 <head>
-<script>
-        window.open("/dog/popup", "팝업 창", "width=400,height=400");
-</script>
+<script type="text/javascript">
+	function getCookie( name ){
+			var nameOfCookie = name + "=";
+			var x = 0;
+			while ( x <= document.cookie.length )
+			{
+					var y = (x+nameOfCookie.length);
+					if ( document.cookie.substring( x, y ) == nameOfCookie ) {
+							if ( (endOfCookie=document.cookie.indexOf( ";", y )) == -1 )
+									endOfCookie = document.cookie.length;
+							return unescape( document.cookie.substring( y, endOfCookie ) );
+					}
+					x = document.cookie.indexOf( " ", x ) + 1;
+					if ( x == 0 )
+							break;
+			}
+			return "";
+	}
+
+	if ( getCookie( "Notice" ) !="done") {
+			noticeWindow  =  window.open('popup.html','notice','left=0, top=0, width=400,height=400');
+			noticeWindow.opener = self;
+	}
+</script> 
 
 <style type="text/css">
 /* 대메인 */
@@ -124,19 +145,19 @@
    </div>
    <div class="carousel-inner">
 	 <div class="carousel-item active d-flex justify-content-center align-items-center">
-	   <img src="/lhstest/resources/클로기%20대메인1.jpg" class="d-block" style="max-width: 100%; cursor: pointer;" onclick="location.href='#'">
+	   <img src="/dog/resources/mainimage/클로기%20대메인1.jpg" class="d-block" style="max-width: 100%; cursor: pointer;" onclick="location.href='#'">
 	 </div>
      <div class="carousel-item">
        <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
        <a href="#">
-       <image width="100%" height="100%" xlink:href="/lhstest/resources/D87641A7-E747-4167-98C6-E0AADF887A1C.jpeg" preserveAspectRatio="xMidYMid slice" />
+       <image width="100%" height="100%" xlink:href="/dog/resources/mainimage/클로기%20대메인2.jpg" preserveAspectRatio="xMidYMid slice" />
        </a>
        </svg>
      </div>
      <div class="carousel-item">
        <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
        <a href="#">
-       <image width="100%" height="100%" xlink:href="/lhstest/resources/집가고싶어_PC.jpg" preserveAspectRatio="xMidYMid slice" />
+       <image width="100%" height="100%" xlink:href="/dog/resources/mainimage/cloggymain.jpg" preserveAspectRatio="xMidYMid slice" />
        </a>
        </svg>
      </div>
@@ -177,7 +198,7 @@
       <li class="swiper-slide product-item">
         <div class="product_thumbnail">
           <a href="#">
-            <img alt="썸네일 자리" src="/lhstest/resources/noimage.jpg">
+            <img alt="썸네일 자리" src="/lhstest/resources/noimage.jpg" style="">
           </a>
         </div>
         <div class="product_name" id="product_name">

@@ -8,7 +8,6 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
-
 <style type="text/css">
 /* 폰트 */
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;500&display=swap');
@@ -20,7 +19,7 @@
  src: url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.eot?#iefix') format('embedded-opentype'), url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.woff') format('woff'), url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.ttf') format('truetype');
 }
 .nanumbarungothic * {
- font-family: 'NanumBarunGothic', sans-serif;
+ font-family: 'NanumBarunGothic', sans-serif;1?????????????????????????????????????///////////////////////////
 }
 /* 맨위 안내 라인   */
 #topswiper {
@@ -108,10 +107,10 @@ color: white;
   <script type="text/javascript">
     // Swiper를 초기화합니다.
     var mySwiper = new Swiper('.swiper-container', {
-      direction: 'vertical', // 수직 슬라이딩 설정
-      slidesPerView: 1, // 한 번에 보일 슬라이드 개수 (1개로 설정)
-      spaceBetween: 0, // 슬라이드 사이의 간격 (0으로 설정)
-      loop: true, // 무한 루프 활성화
+      direction: 'vertical', 
+      slidesPerView: 1, 
+      spaceBetween: 0,
+      loop: true, 
       autoplay: {
         delay: 3000, // 슬라이드 간의 시간 간격 (3초로 설정)
         disableOnInteraction: false, // 사용자 상호작용 후에도 자동 재생을 계속 활성화
@@ -124,7 +123,7 @@ color: white;
   <div class="container-fluid">
 	<!-- 로고 -->
       <a href="main" class="navbar-brand">
-      <img alt="로고" src="/lhstest/resources/cloggy임시.jpg" class="logoimg">
+      <img alt="로고" src="/dog/resources/mainimage/cloggy임시.jpg" class="logoimg">
     </a>
   
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
