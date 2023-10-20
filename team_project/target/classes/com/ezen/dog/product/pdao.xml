@@ -3,11 +3,15 @@
     "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.ezen.dog.product.PService">
+<!-- 입력하는 상품번호 가져오기 위함 -->
+<select id="productidpreview" resultType="int">
+select max(product_id) from product
+</select>
 <!-- 상품입력 -->
 <insert id="productinput">
 insert into product
-(product_id,category1_id,p_name,p_price,p_info,p_image,p_thumbnail,p_stock,p_enroll,p_sell,p_hits)
- values(product_id_seq.nextval,#{param1},#{param2},#{param3},#{param4},#{param5},#{param6},#{param7},sysdate,0,0)
+(product_id,CATEGORY1_ID,CATEGORY2_ID,p_name,p_price,p_info,p_image,p_thumbnail,p_stock,p_enroll,p_sell,p_hits,p_point,p_discount)
+ values(#{param1},#{param2},#{param3},#{param4},#{param5},#{param6},#{param7},#{param8},#{param9},sysdate,0,0,#{param10},#{param11})
 </insert>
 <!-- 상품리스트 -->
 <select id="productout" resultType="com.ezen.dog.product.ProductDTO">
@@ -68,6 +72,23 @@ SELECT * FROM PRODUCT WHERE product_Id IN
 <foreach collection="array" item="productId" open="(" separator="," close=")">
 #{productId}
 </foreach>
+</select>
+
+<!-- 추천상품리스트 -->
+<select id="productrecommendlist" resultType="com.ezen.dog.product.ProductDTO">
+select * from product
+</select>
+<!-- 추천상품입력 -->
+<insert id="productrecommend">
+insert into RECOMMENDPRODUCT (product_id,recommend_product_id)
+values (#{param1},#{param2})
+</insert>
+<!-- 상세페이지 안 추천상품 출력 -->
+<select id="productrecommendout" resultType="com.ezen.dog.product.ProductDTO">
+select p.p_name, p.p_price, p.p_thumbnail, p.product_id
+from product p, recommendproduct rp
+where p.product_id = rp.recommend_product_id
+and rp.product_id = #{param1}
 </select>
 
 </mapper>

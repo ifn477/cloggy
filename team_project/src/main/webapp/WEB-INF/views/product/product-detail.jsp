@@ -85,6 +85,7 @@ function getProduct_IDFromURL(url) {
   }
   return null;
 }
+
 /*찜하기*/
 $(document).ready(function () {
     $('.container_box').on('click', '.likeAddButton, .likeDeleteButton', function () {
@@ -162,6 +163,7 @@ $(document).ready(function () {
         </c:otherwise>
     </c:choose>
 <!-- 찜하기 -->
+
 </td>
 </tr> 
 <tr>
@@ -194,6 +196,51 @@ $(document).ready(function () {
 		<img alt="상세페이지" src="/dog/image/${pdetail.p_image}" width="700px;">
 		</td>
 </tr> 
+<tr>
+<!-- url 공유하기 -->
+<span class="button gray medium"><a href="#" onclick="clip(); return false;">URL주소복사</a></span>
+
+<script type="text/javascript">
+function clip(){
+
+	var url = '';
+	var textarea = document.createElement("textarea");
+	document.body.appendChild(textarea);
+	url = window.document.location.href;
+	textarea.value = url;
+	textarea.select();
+	document.execCommand("copy");
+	document.body.removeChild(textarea);
+	alert("URL이 복사되었습니다.")
+}
+</script>
+
+<!-- 카카오톡 공유하기 -->
+<a href="javascript:shareKakao();" id="btnKakao"><img src="/dog/image/icon-kakao.png"></a>
+<script type="text/javascript">
+function shareKakao() {
+	  console.log('shareKakao 함수가 호출되었습니다.');
+	var thisUrl = document.URL;
+	  // 사용할 앱의 JavaScript 키 설정
+	  Kakao.init('3eebd9335d1049afaa57ca1a1e68a170');
+	  // 카카오링크 버튼 생성
+	  Kakao.Link.createDefaultButton({
+	    container: '#btnKakao', // 카카오공유버튼ID
+	    objectType: 'feed',
+	    content: {
+	      title: "클로기", // 보여질 제목
+	      description: "클로기 상세페이지", // 보여질 설명
+	      imageUrl: thisUrl, // 콘텐츠 URL
+	      link: {
+	         webUrl: thisUrl
+	      }
+	    }
+	  });
+	}
+</script>
+<!-- 카카오톡 공유하기 종료-->
+</tr>
+
 <tr> 
 		<td colspan="2" style="text-align: right;"> 
 			<input type="button" value="수정" onclick="location.href='product-modifyForm?product_id=${pdetail.product_id}'">
@@ -297,5 +344,16 @@ $(document).ready(function () {
 							});
 						});
 	</script>
+	
+	
+	<!--- 상품추천리스트 --->
+<c:forEach items="${recommend_list}" var="recommend_product">
+    <span style="display: inline-block; margin-right: 20px;">
+    	<a href="product-detail?product_id=${recommend_product.product_id }">
+        <img src="/dog/image/${recommend_product.p_thumbnail}" height="200px;">
+        <div>${recommend_product.p_name}</div>
+        <div>${recommend_product.p_price}</div>
+    </span>
+</c:forEach>
 </body>
 </html>

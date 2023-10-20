@@ -8,15 +8,9 @@
 <title><t:insertAttribute name="title"/></title>
 </head>
 <body>
-	<div id="container">
-		<div id="top">
-			<t:insertAttribute name="top"/>
-		</div>
+	<div id="popupcontainer">
 		<div id="body">
 			<t:insertAttribute name="body"/>
-		</div>
-		<div id="footer">
-			<t:insertAttribute name="footer"/>
 		</div>
 	</div>
 </body>

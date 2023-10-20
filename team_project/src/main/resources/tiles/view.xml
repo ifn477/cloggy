@@ -218,5 +218,29 @@
 		<put-attribute name="body" value="/WEB-INF/views/main/cart-out.jsp"/>
 	</definition>	
 
-	
+<!-- 쿠폰 -->
+	<definition name="coupon-input" extends="baseLayout">
+		<put-attribute name="title" value="쿠폰입력"/>
+		<put-attribute name="body" value="/WEB-INF/views/coupon/coupon-input.jsp"/>
+	</definition>	
+
+	<definition name="coupon-out" extends="baseLayout">
+		<put-attribute name="title" value="쿠폰조회"/>
+		<put-attribute name="body" value="/WEB-INF/views/coupon/coupon-out.jsp"/>
+	</definition>	
+
+	<definition name="coupon-downloadform" extends="baseLayout">
+		<put-attribute name="title" value="쿠폰다운로드"/>
+		<put-attribute name="body" value="/WEB-INF/views/coupon/coupon-downloadform.jsp"/>
+	</definition>	
+
+	<definition name="coupon-list" extends="baseLayout">
+		<put-attribute name="title" value="쿠폰리스트"/>
+		<put-attribute name="body" value="/WEB-INF/views/coupon/coupon-list.jsp"/>
+	</definition>	
+
+	<definition name="coupon-modifyform" extends="baseLayout">
+		<put-attribute name="title" value="쿠폰수정폼"/>
+		<put-attribute name="body" value="/WEB-INF/views/coupon/coupon-modifyform.jsp"/>
+	</definition>		
 </tiles-definitions>
