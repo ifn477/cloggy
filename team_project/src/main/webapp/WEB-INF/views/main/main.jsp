@@ -24,7 +24,7 @@
 	}
 
 	if ( getCookie( "Notice" ) !="done") {
-			noticeWindow  =  window.open('popup.html','notice','left=0, top=0, width=400,height=400');
+			noticeWindow  =  window.open('/dog/popup','notice','left=0, top=0, width=400,height=400');
 			noticeWindow.opener = self;
 	}
 </script> 
@@ -198,7 +198,7 @@
       <li class="swiper-slide product-item">
         <div class="product_thumbnail">
           <a href="#">
-            <img alt="썸네일 자리" src="/lhstest/resources/noimage.jpg" style="">
+            <img alt="썸네일 자리" src="/dog/resources/mainimage/noimage.jpg" style="">
           </a>
         </div>
         <div class="product_name" id="product_name">

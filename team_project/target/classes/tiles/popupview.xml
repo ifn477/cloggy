@@ -14,6 +14,12 @@
 		<put-attribute name="body" value="/WEB-INF/views/main/popup.jsp"/>
 	</definition>	
 
+<!-- 팝업창 닫기 -->
+	<definition name="closePopup" extends="popupbaseLayout">
+		<put-attribute name="title" value="팝업창"/>
+		<put-attribute name="body" value="/WEB-INF/views/main/closePopup.jsp"/>
+	</definition>	
+
 <!-- 추천상품 팝업 -->
 	<definition name="product-recommendlist" extends="popupbaseLayout">
 		<put-attribute name="title" value="추천상품걸기용 상품리스트"/>

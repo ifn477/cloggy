@@ -38,4 +38,10 @@ public class HomeController {
 		return "info";
 	}
 	
+    @RequestMapping("/popup")
+    public String popup(Model model) {
+        model.addAttribute("message", "ÆË¾÷Ã¢");
+        return "popup";
+    }
+	
 }

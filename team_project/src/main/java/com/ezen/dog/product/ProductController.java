@@ -30,7 +30,7 @@ public class ProductController {
 
 	@Autowired
 	SqlSession sqlSession;
-	String image_path = "C:\\Users\\meata\\git\\team_project_1006_space2\\team_project\\src\\main\\webapp\\image";
+	String image_path = "C:\\Users\\이한솔\\git\\team_project_comcomcom\\team_project\\src\\main\\webapp\\image";
 	ArrayList<ProductDTO>list = new ArrayList<ProductDTO>();
 	
 	//상품입력
@@ -117,7 +117,7 @@ public class ProductController {
 		return "product-detail";
 	}
 	
-	//占쏙옙품 占쏙옙占쏙옙占쏙옙占쏙옙 占쌉뤄옙창
+
 	@RequestMapping(value = "/product-modifyForm")
 	public String productmodifyForm(HttpServletRequest request, Model mo) {
 		int product_id = Integer.parseInt(request.getParameter("product_id"));

@@ -19,8 +19,8 @@
  src: url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.eot?#iefix') format('embedded-opentype'), url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.woff') format('woff'), url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.ttf') format('truetype');
 }
 .nanumbarungothic * {
- font-family: 'NanumBarunGothic', sans-serif;1?????????????????????????????????????///////////////////////////
-}
+ font-family: 'NanumBarunGothic', sans-serif;
+ }
 /* 맨위 안내 라인   */
 #topswiper {
   width: 100%;
