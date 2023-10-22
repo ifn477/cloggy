@@ -8,7 +8,7 @@ select product_id from likecheck where userId=#{param1}
 </select>
 
 <insert id="likeadd">
-insert into likecheck values(#{param1},#{param2})
+insert into likecheck (PRODUCT_ID,USERID) values(#{param1},#{param2})
 </insert>
 
 <delete id="likedelete">

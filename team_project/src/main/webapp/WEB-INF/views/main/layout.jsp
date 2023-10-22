@@ -4,6 +4,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+<style type="text/css">
+</style>
 <meta charset="UTF-8">
 <title><t:insertAttribute name="title"/></title>
 </head>

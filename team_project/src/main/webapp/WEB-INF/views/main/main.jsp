@@ -4,31 +4,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-<script type="text/javascript">
-	function getCookie( name ){
-			var nameOfCookie = name + "=";
-			var x = 0;
-			while ( x <= document.cookie.length )
-			{
-					var y = (x+nameOfCookie.length);
-					if ( document.cookie.substring( x, y ) == nameOfCookie ) {
-							if ( (endOfCookie=document.cookie.indexOf( ";", y )) == -1 )
-									endOfCookie = document.cookie.length;
-							return unescape( document.cookie.substring( y, endOfCookie ) );
-					}
-					x = document.cookie.indexOf( " ", x ) + 1;
-					if ( x == 0 )
-							break;
-			}
-			return "";
-	}
-
-	if ( getCookie( "Notice" ) !="done") {
-			noticeWindow  =  window.open('/dog/popup','notice','left=0, top=0, width=400,height=400');
-			noticeWindow.opener = self;
-	}
-</script> 
-
 <style type="text/css">
 /* 대메인 */
 .carousel-item {
@@ -70,6 +45,7 @@
 	overflow: hidden;
 }
 .best-product::-webkit-scrollbar {
+	top: 50px;
 	height: 5px;
 	background-color: #d9d4cd;
     border-radius: 10px; /* 스크롤바 모서리 둥글게 설정 */
@@ -79,7 +55,7 @@
   border-radius: 10px; /* 스크롤바 모서리 둥글게 설정 */
 }
 .best-product ul{
-  width: 360px;
+  width: 380px;
   padding: 0;
   margin: 0;
 }
@@ -102,6 +78,25 @@
     font-size: 30px;
     font-weight: 500;
     color: #463528;
+}
+.best_product_thumbnail{
+	position: relative;
+    width: 380px;
+    height: 450px;
+    background-color: white;
+}
+.best_product_thumbnail_image{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 380px;
+    max-height: 450px;
+    overflow: hidden;
+}
+.best_product_thumbnail_image img {
+    width: 120%;
+    height: 120%;
+ 	text-align: center; 
 }
 #product_name{
 	font-size: 20px;
@@ -184,7 +179,6 @@
 	</p>
 </div>
 
-
 <!-- 인기상품 슬라이드 -->
 <div class="best-product-area">
 <div class="best-product-title">
@@ -194,45 +188,30 @@
 <div class="best-product">
 <div class="swiper-container" id="best-product-slide">
   <ul class="swiper-wrapper">
-    <c:forEach var="i" begin="0" end="10" step="1">
+    <c:forEach items="${bestlist}" var="best">
       <li class="swiper-slide product-item">
-        <div class="product_thumbnail">
-          <a href="#">
-            <img alt="썸네일 자리" src="/dog/resources/mainimage/noimage.jpg" style="">
+        <div class="best_product_thumbnail">
+          <a href="product-detail?product_id=${bestproduct.product_id}&userId=${member.userId}">
+          	<div class="best_product_thumbnail_image">
+            	<img alt="썸네일 자리" src="/dog/image/${best.p_thumbnail}">
+          	</div>
           </a>
         </div>
         <div class="product_name" id="product_name">
-          <a href="#" style="text-decoration: none; color: black;">
-            상품이름 ${i}
+          <a href="product-detail?product_id=${best.product_id}&userId=${member.userId}" style="text-decoration: none; color: black;">
+			${best.p_name}
           </a>
         </div>
         <div class="product_price" style="color: black;">
-          10,000원
+          ${best.p_price}
         </div>
       </li>
     </c:forEach>
   </ul>
 </div>
-<div class="swiper-scrollbar" style="position: relative; top: 40px; width: 40%; text-align: center; margin: 0 auto;"></div>
+<div class="swiper-scrollbar" style="position: relative; top: 100px; width: 40%; text-align: center; margin: 0 auto;"></div>
 </div>
 </div>
-
-<script>
-var mySwiper = new Swiper('#best-product-slide', {
-  slidesPerView: 'auto',
-  spaceBetween: 10,
-  scrollbar: {
-    el: '.swiper-scrollbar',
-    hide: false,
-  },
-  autoplay: {
-    delay: 3000, // 3초마다 자동으로 슬라이드 넘김
-    disableOnInteraction: false, // 사용자 상호 작용 후에도 계속 자동 슬라이딩 유지
-  },
-});
-</script>
-
-
 <!-- 신상품 -->
 <div class="new-product">
 <div class="new-product-title">
@@ -240,5 +219,6 @@ var mySwiper = new Swiper('#best-product-slide', {
 	<h2>NEW ITEM</h2>
 </div>
 </div>
+<script type="text/javascript" src="./js/main.js"></script>
 </body>
 </html>

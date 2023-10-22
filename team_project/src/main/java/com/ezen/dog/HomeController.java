@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.ezen.dog.product.PService;
 import com.ezen.dog.product.ProductDTO;
 
 
@@ -20,16 +21,25 @@ public class HomeController {
 	
 	@Autowired
 	SqlSession sqlSession;
+	ArrayList<ProductDTO> list = new ArrayList<ProductDTO>();
 	
 	@RequestMapping(value = "/")
-	public String main1(HttpServletRequest request) {
+	public String main1(HttpServletRequest request, Model mo) {
 		HttpSession hs = request.getSession();
 		hs.setAttribute("loginstate", false);
+		PService ps = sqlSession.getMapper(PService.class);
+		list = ps.productout();
+		mo.addAttribute("bestlist", list);
+		
 		return "main";
 	}
 	
 	@RequestMapping(value = "/main")
-	public String main2() {
+	public String main2(Model mo) {
+		PService ps = sqlSession.getMapper(PService.class);
+		list = ps.productout();
+		mo.addAttribute("bestlist", list);
+
 		return "main";
 	}
 	

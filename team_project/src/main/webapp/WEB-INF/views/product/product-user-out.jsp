@@ -7,50 +7,258 @@
 <html>
 <head>		
 <style type="text/css">
+*{
+	 font-family: 'NanumBarunGothic';
+}
 .content{
 	max-width: 1300px;	
 	margin: 0 auto;
 	margin-top: 50px;
+	margin-bottom: 10rem;
+	text-align: center;
 }
 .container_box{
     display: flex;
     flex-wrap: wrap;
-    gap: 50px 20px;
-    padding-left:10px;
-    padding-right:10px;
+    justify-content: inherit;
+  	padding-left: 50px; 
 }
 .product_item {
     min-height: 200px;
     flex-basis: 150px;
     flex-grow: 0;
     position: relative;
-}
-.product_thumbnail {
-    position: relative;
+    margin-bottom: 50px;
+    padding-left: 5px;
+    padding-right: 5px;
 }
 
-.like-check{
+/* 썸네일 */
+.product_thumbnail {
+    position: relative;
+    width: 300px;
+    height: 350px;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.image-container {
+    max-width: 300px;
+    max-height: 350px;
+    overflow: hidden;
+    text-align: center;
+}
+.image-container img {
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 100%;
+}
+
+/* 찜하기 */
+.like-check {
     position: absolute;
-    bottom: 65px;
-    left: 15px;
-    background-position: -180px -10px;
+    right: 1rem;
+    top: 18.5rem; /* 원하는 위치에 따라 top 값을 조절하세요. */
+    z-index: 1; /* 다른 내용 위에 나타나도록 z-index 값을 설정합니다. */
+    height: 20px;
 }
-.likeDeleteButton{
+
+.likeDeleteButton, .likeAddButton {
     background: none;
     border: none;
     padding: 0;
     margin: 0;
     cursor: pointer;
+    opacity: 0.8;
 }
-.likeAddButton{
-    background: none;
-    border: none;
-    padding: 0;
-    margin: 0;
-    cursor: pointer;
+
+/* 인기상품 */
+.best-product-area{
+	height: 50rem;
+	background-color: #fbf7f0;
+}
+.best-product{
+	width: 70%; 
+	height: 37rem;
+	text-align: center; 
+	margin: 0 auto;
+	overflow: hidden;
+}
+.best-product::-webkit-scrollbar {
+	background-color: #d9d4cd;
+    border-radius: 10px; /* 스크롤바 모서리 둥글게 설정 */
+    width: 10px;
+}
+.best-product::-webkit-scrollbar-thumb {
+  background: #c5b49b;
+  border-radius: 10px;
+}
+.best-product ul{
+  width: 355px;
+  padding: 0;
+  margin: 0;
+}
+.product-item {
+  display: inline-block; /* 리스트 항목을 옆으로 나란히 배치 */
+  margin-right: 1px; /* 항목 간 간격 설정 */
+}
+.best-product-title {
+	padding-top: 5rem;
+	text-align: center;
+	margin-bottom: 3rem;
+}
+.best-product-title1 {
+    font-size: 13px;
+    font-weight: 400;
+    margin-bottom: 5px;
+    color: #d88402;
+}
+.best-product-title2 {
+    font-size: 27px;
+    font-weight: 500;
+    color: #463528;
+}
+.best_product_thumbnail{
+	position: relative;
+    width: 350px;
+    height: 400px;
+    background-color: white;
+}
+.best_product_thumbnail_image{
+    max-width: 350px;
+    max-height: 400px;
+    overflow: hidden;
+}
+.best_product_thumbnail_image img {
+	padding-top: 2rem;
+	padding-right: 4rem;
+    width: auto;
+    height: auto;
+    width: 120%;
+    height: 120%;
+	text-align: center;
+}
+#product_name{
+	font-size: 20px;
+    font-weight: 500;
+    margin-top: 20px;
+    margin-bottom: 5px;
+}
+.best_product_price{
+	color: black;
 }
 </style>
 <meta charset="UTF-8">
+</head>
+<body>
+
+
+<!-- 베스트 슬라이드 -->
+<div class="best-product-area">
+<div class="best-product-title">
+  <p class="best-product-title1">지금 가장 사랑받는</p>
+  <h2 class="best-product-title2">BEST ITEM</h2>
+</div>
+<div class="best-product">
+<div class="swiper-container" id="best-product-slide">
+  <ul class="swiper-wrapper">
+	<c:forEach items="${list}" var="bestproduct" begin="0" end="6">
+      <li class="swiper-slide product-item">
+        <div class="best_product_thumbnail">
+         <a href="product-detail?product_id=${bestproduct.product_id}&userId=${member.userId}">
+	        <div class="best_product_thumbnail_image">
+	         	<img alt="상품썸네일" src="/dog/image/${bestproduct.p_thumbnail}" >
+    		</div>
+         </a>
+        </div>
+        <div class="product_name" id="product_name">
+          <a href="product-detail?product_id=${bestproduct.product_id}&userId=${member.userId}" style="text-decoration: none; color: black;">
+			${bestproduct.p_name}
+          </a>
+        </div>
+        <div class="best_product_price">
+			${bestproduct.p_price}
+        </div>
+      </li>
+    </c:forEach>
+  </ul>
+</div>
+<div class="swiper-scrollbar" style="position: relative; top: 40px; width: 20%; text-align: center; margin: 0 auto;"></div>
+</div>
+</div>
+
+<script>
+var mySwiper = new Swiper('#best-product-slide', {
+  slidesPerView: 'auto',
+  spaceBetween: 10,
+  scrollbar: {
+    el: '.swiper-scrollbar',
+    hide: false,
+  },
+  autoplay: {
+    delay: 3000, // 3초마다 자동으로 슬라이드 넘김
+    disableOnInteraction: false, // 사용자 상호 작용 후에도 계속 자동 슬라이딩 유지
+  },
+});
+</script>
+
+
+<section class="content">
+<div class="container_box">
+<c:forEach items="${list}" var="pout">
+<div class="product_item">
+	<!-- 썸네일 -->
+     	<div class="product_thumbnail">
+         <a href="product-detail?product_id=${pout.product_id}&userId=${member.userId}">
+         	<div class="image-container">
+         		<img alt="상품썸네일" src="/dog/image/${pout.p_thumbnail}" width="300px;" height="350px;">
+         	</div>
+         </a>
+     	</div>
+       
+	<!-- 찜하기 -->
+	<div class="like-check">
+	    <c:choose>
+	        <c:when test="${empty likelist}">
+	                    <button class="likeAddButton" data-productid="${pout.product_id}" data-userid="${member.userId}">
+	                        <img alt="찜하기" src="/dog/image/Footprint_s.png" width="40px" height="40px">
+	                    </button>
+	        </c:when>
+	        <c:otherwise>
+	            <c:choose>
+	           		<c:when test="${fn:contains(likelist, pout.product_id)}">
+	                    <button class="likeDeleteButton" data-productid="${pout.product_id}" data-userid="${member.userId}">
+	                        <img alt="찜해제" src="/dog/image/Footprint_full_pink_s.png" width="40px" height="40px">
+	                    </button>
+	                </c:when>
+	                <c:otherwise>
+	                    <button class="likeAddButton" data-productid="${pout.product_id}" data-userid="${member.userId}">
+	                        <img alt="찜하기" src="/dog/image/Footprint_s.png" width="40px" height="40px">
+	                    </button>
+	                </c:otherwise>
+	            </c:choose>
+	        </c:otherwise>
+	    </c:choose>
+	</div>
+	
+	<!-- 상품명 -->
+     	<div class="product_name">
+         <a href="product-detail?product_id=${pout.product_id }" style="font-size: 20px; text-decoration: none; color: black;">
+         ${pout.p_name}
+         </a>
+       </div>
+       
+	<!-- 가격 -->
+	<div class="product_price" style="padding-top: 15px;">
+        ${pout.p_price}
+	</div>
+</div>
+</c:forEach>
+</div>
+</section>
+
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function () {
@@ -86,54 +294,5 @@ $(document).ready(function () {
     });
 });
 </script>
-</head>
-<body>
-<section class="content">
-<div class="container_box">
-  <c:forEach items="${list}" var="pout">
-	<div class="product_item">
-      	<div class="product_thumbnail">
-          <a href="product-detail?product_id=${pout.product_id}&userId=${member.userId}">
-          <img alt="상품썸네일" src="/dog/image/${pout.p_thumbnail}" width="300px;" height="350px;">
-          </a>
-      	</div>
-      	<div class="product_name">
-          <a href="product-detail?product_id=${pout.product_id}" style="font-size: 20px; text-decoration: none;">
-          ${pout.p_name}
-          </a>
-                
-<!-- 찜하기 -->
-<div class="like-check">
-    <c:choose>
-        <c:when test="${empty likelist}">
-                    <button class="likeAddButton" data-productid="${pout.product_id}" data-userid="${member.userId}">
-                        <img alt="찜하기" src="/dog/image/Footprint_s.png" width="50px" height="50px">
-                    </button>
-        </c:when>
-        <c:otherwise>
-            <c:choose>
-           		<c:when test="${fn:contains(likelist, pout.product_id)}">
-                    <button class="likeDeleteButton" data-productid="${pout.product_id}" data-userid="${member.userId}">
-                        <img alt="찜해제" src="/dog/image/Footprint_full_pink_s.png" width="50px" height="50px">
-                    </button>
-                </c:when>
-                <c:otherwise>
-                    <button class="likeAddButton" data-productid="${pout.product_id}" data-userid="${member.userId}">
-                        <img alt="찜하기" src="/dog/image/Footprint_s.png" width="50px" height="50px">
-                    </button>
-                </c:otherwise>
-            </c:choose>
-        </c:otherwise>
-    </c:choose>
-</div>
-</div>
-<!-- 찜하기 -->
-      	<div class="product_price">
-          ${pout.p_price}
-        </div>
-       </div>
-  </c:forEach>
-</div>
-</section>
 </body>
 </html>

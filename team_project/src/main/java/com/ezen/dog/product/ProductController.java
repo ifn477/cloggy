@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
 import org.apache.tomcat.util.http.parser.Cookie;
@@ -21,6 +22,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.ezen.dog.likecheck.LikeDTO;
 import com.ezen.dog.likecheck.Likeservice;
 import com.ezen.dog.login.Lservice;
+import com.ezen.dog.member.MemberDTO;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sun.tools.javac.util.List;
@@ -30,15 +32,22 @@ public class ProductController {
 
 	@Autowired
 	SqlSession sqlSession;
-	String image_path = "C:\\Users\\이한솔\\git\\team_project_comcomcom\\team_project\\src\\main\\webapp\\image";
+	String image_path = "C:\\Users\\이한솔\\git\\team_project_hansol\\team_project\\src\\main\\webapp\\image";
 	ArrayList<ProductDTO>list = new ArrayList<ProductDTO>();
 	
 	//상품입력
 	@RequestMapping(value = "/product-input")
 	public String productinput(Model mo) {
 		PService ps = sqlSession.getMapper(PService.class);
-		int now_product_id = ps.productidpreview();
-		int input_product_id = now_product_id+1;
+		int p_id = ps.firstproductinput();
+		int input_product_id = 1;
+		if(p_id == 0){
+			input_product_id =1;
+		}
+		else {
+			int now_product_id = ps.productidpreview();
+			input_product_id = now_product_id+1;
+		}
 		mo.addAttribute("input_product_id", input_product_id);
 		return "product-input";
 	}
@@ -89,7 +98,7 @@ public class ProductController {
 		return "redirect:product-input";
 	}
 
-	//占쏙옙품占쏙옙占쏙옙트
+	//전체상품출력
 	@RequestMapping(value = "/product-out")
 	public String productout(Model mo) {
 		PService ps = sqlSession.getMapper(PService.class);
@@ -98,9 +107,60 @@ public class ProductController {
 		return "product-out";
 	}
 	
-	//占쏙옙품 占쏙옙占쏙옙占쏙옙占쏙옙
+	//상품리스트 대분류 출력
+	@RequestMapping(value = "/product-out-total")
+	public String productouttotal(HttpServletRequest request, Model mo) {
+		int a = Integer.parseInt(request.getParameter("category1_id"));
+		
+	    // 세션에서 id 값 가져오기
+	    HttpSession hs = request.getSession();
+	    MemberDTO member = (MemberDTO) hs.getAttribute("member");
+	    String userId = "";
+	    if (member != null) {
+	        userId = member.getUserId();
+	    } 
+		
+		PService ps = sqlSession.getMapper(PService.class);
+		ArrayList<ProductDTO> list = ps.productouttotal(a);
+		
+		mo.addAttribute("list", list);
+		
+		Likeservice ls = sqlSession.getMapper(Likeservice.class);
+	    ArrayList<LikeDTO> likelist = null;
+		likelist = ls.likecheck(userId);	
+		mo.addAttribute("likelist",likelist);
+		return "product-user-out";
+	}
+	
+	//상품리스트 중분류 출력
+	@RequestMapping(value = "/product-out-cate")
+	public String productout(HttpServletRequest request, Model mo) {
+		int a = Integer.parseInt(request.getParameter("category1_id"));
+		int b = Integer.parseInt(request.getParameter("category2_id"));
+
+	    // 세션에서 id 값 가져오기
+	    HttpSession hs = request.getSession();
+	    MemberDTO member = (MemberDTO) hs.getAttribute("member");
+	    String userId = "";
+	    if (member != null) {
+	        userId = member.getUserId();
+	    } 
+		
+		PService ps = sqlSession.getMapper(PService.class);
+		ArrayList<ProductDTO> list = ps.productoutcate(a, b);
+		mo.addAttribute("list", list);
+		
+		Likeservice ls = sqlSession.getMapper(Likeservice.class);
+	    ArrayList<LikeDTO> likelist = null;
+		likelist = ls.likecheck(userId);	
+		mo.addAttribute("likelist",likelist);
+		return "product-user-out";
+	}
+	
+	//상세페이지
 	@RequestMapping(value = "/product-detail")
 	public String productdetail(HttpServletRequest request, Model mo) {
+		
 		int product_id = Integer.parseInt(request.getParameter("product_id"));
 		String userId = request.getParameter("userId");
 		PService ps = sqlSession.getMapper(PService.class);
@@ -108,12 +168,12 @@ public class ProductController {
 		ps.productcount(product_id);
 		mo.addAttribute("list", list);
 		
-		//李쒗븯湲�
+		//찜하기
 		Likeservice ls = sqlSession.getMapper(Likeservice.class);
 	    ArrayList<LikeDTO> likelist = null;
 		likelist = ls.likecheck(userId);
 		mo.addAttribute("likelist",likelist);
-		
+
 		return "product-detail";
 	}
 	
@@ -130,7 +190,8 @@ public class ProductController {
 	//占쏙옙품 占쏙옙占쏙옙占쏙옙占쏙옙
 	@RequestMapping(value = "/product-modifyView", method = RequestMethod.POST)
 	public String productmodifyView(MultipartHttpServletRequest multi) throws IllegalStateException, IOException {
-		int category_id = Integer.parseInt(multi.getParameter("category_id"));
+		int category1_id = Integer.parseInt(multi.getParameter("category1_id"));
+		int category2_id = Integer.parseInt(multi.getParameter("category2_id"));
 		int product_id = Integer.parseInt(multi.getParameter("product_id"));
 		String p_name = multi.getParameter("p_name");
 		int p_price = Integer.parseInt(multi.getParameter("p_price"));
@@ -145,7 +206,7 @@ public class ProductController {
 		String p_enroll = multi.getParameter("p_enroll");
 
 		PService ps = sqlSession.getMapper(PService.class);
-		ps.productmodifyView(category_id,product_id, p_name,p_price,p_info,p_image,p_thumbnail,p_stock, p_enroll);
+		ps.productmodifyView(category1_id,product_id, p_name,p_price,p_info,p_image,p_thumbnail,p_stock, p_enroll,category2_id);
 		
 		return "redirect:product-out";
 	}
@@ -217,12 +278,11 @@ public class ProductController {
 		
 		String userId = request.getParameter("userId");
 		
-
 		PService ss = sqlSession.getMapper(PService.class);	
 		list = ss.productuserout();
 		mo.addAttribute("list", list);
 	    
-		//李쒗븯湲�
+		//찜하기
 		Likeservice ls = sqlSession.getMapper(Likeservice.class);
 	    ArrayList<LikeDTO> likelist = null;
 		likelist = ls.likecheck(userId);	

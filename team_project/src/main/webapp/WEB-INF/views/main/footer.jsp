@@ -67,27 +67,5 @@
   </footer>
 </div>
 </div>
-
-<script type="text/javascript">
-function openDropdown(element) {
-    // 드롭다운 트리거와 드롭다운 메뉴 요소 가져오기
-    const dropdownTrigger = element.querySelector('.nav-link');
-    const dropdownMenu = element.querySelector('.dropdown-menu');
-
-    // 드롭다운 메뉴를 열고 스타일을 조정
-    dropdownMenu.style.display = 'block';
-    dropdownMenu.style.position = 'absolute';
-    dropdownMenu.style.willChange = 'transform';
-    dropdownMenu.style.top = (dropdownTrigger.offsetTop + dropdownTrigger.offsetHeight) + 'px';
-}
-
-// 드롭다운 메뉴를 닫을 때
-function closeDropdown(element) {
-    const dropdownMenu = element.querySelector('.dropdown-menu');
-    dropdownMenu.style.display = 'none';
-}
-
-</script>
-
 </body>
 </html>
