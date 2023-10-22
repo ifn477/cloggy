@@ -14,9 +14,9 @@
 .container_box{
 	width: 1200px;
 	text-align: center;
-	margin: 0 auto;
-	margin-top: 10rem;
-	margin-bottom: 20rem;
+ 	margin: 0 auto; 
+	margin-bottom: 10rem;
+	margin-left: 300px;
 }
 /* 썸네일 */
 .product-image {
@@ -79,8 +79,13 @@
 .product-url img{
 	height: 35px;
 }
-.product-info{
-    float: inline-end;
+.product-maininfo{
+    text-align: center;
+    margin: 0 auto;
+    width: 1000px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 </style>
 <meta charset="UTF-8">
@@ -88,19 +93,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-
-
-
-<!--- 상품추천리스트 --->
-<c:forEach items="${recommend_list}" var="recommend_product">
-    <span style="display: inline-block; margin-right: 20px;">
-    	<a href="product-detail?product_id=${recommend_product.product_id }">
-        <img src="/dog/image/${recommend_product.p_thumbnail}" height="200px;">
-        <div>${recommend_product.p_name}</div>
-        <div>${recommend_product.p_price}</div>
-    </span>
-</c:forEach>
-
 <div class="container_box">
     <c:forEach items="${list}" var="pdetail">
         <div class="product-details">
@@ -139,15 +131,11 @@
 	            </c:choose>
 				</div>
 	
-	
 	            <div class="product-price">
 	                <span id="price">판매가&emsp;<fmt:formatNumber pattern="#,##0원">${pdetail.p_price}</fmt:formatNumber></span>
 	            </div>
 				
 				<!-- 옵션, 수량 -->
-				
-				
-				
 	            <div class="options-container">
 					<select class="form-select" class="haha" id="haha" name="haha">
 	                    <option data-opt_price="0" data-opt_id="0">옵션을 선택해주세요</option>
@@ -184,22 +172,38 @@
 				<!-- 장바구니 버튼 -->
 				<button class="btn btn-primary py-2" id="addToCart" style="background-color: #e28b3a;">add to cart</button>
 				</div>
-		        
-		        <div class="product-maininfo">
-			        <div class="product-info">
-				        ${pdetail.p_info}
-			        </div>
-			    	<div class="product-infoimage">
-				        <img alt="상세페이지" src="/dog/image/${pdetail.p_image}" style="margin-top: 50px;">
-			    	</div>
-		        </div>
+	    	</div>
+    </c:forEach>
+</div>
 
-			<!-- 수정삭제 버튼 -->
-	        <div style="text-align: center; margin-top: 70px;">
-	            <button class="btn btn-primary py-2" id="modibnt" style="background-color: #e28b3a;" 
-	            onclick="location.href='product-modifyForm?product_id=${pdetail.product_id}'">수정</button>
-	        </div>
-	    </div>
+<!--- 상품추천리스트 --->
+<div class="recommendlist">
+<c:forEach items="${recommend_list}" var="recommend_product">
+    <span style="display: inline-block; margin-right: 20px;">
+    	<a href="product-detail?product_id=${recommend_product.product_id }">
+        <img src="/dog/image/${recommend_product.p_thumbnail}" height="200px;">
+        <div>${recommend_product.p_name}</div></a>
+        <div>${recommend_product.p_price}</div>
+    </span>
+</c:forEach>
+</div>
+
+
+<!-- 상품상세정보 -->
+<div class="product-maininfo">
+    <c:forEach items="${list}" var="pdetail">
+ 		<div class="product-info" style="width: 1000px;">
+  			${pdetail.p_info}
+   		</div>
+		<div class="product-infoimage">
+		    <img alt="상세페이지" src="/dog/image/${pdetail.p_image}" style="margin-top: 50px;">
+		</div>
+
+<!-- 수정삭제 버튼 -->
+<div style="text-align: center; margin-top:30px; margin-bottom:70px;">
+    <button class="btn btn-primary py-2" id="modibnt" style="background-color: #e28b3a;" 
+    onclick="location.href='product-modifyForm?product_id=${pdetail.product_id}'">수정</button>
+</div>
     </c:forEach>
 </div>
 

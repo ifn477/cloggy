@@ -58,4 +58,7 @@ select * from coupon where c_code=#{param1}
 update coupon set c_name=#{param2},c_stock=#{param3},c_discount=#{param4},
 c_startdate=#{param5},c_enddate=#{param6} where c_code=#{param1}
 </update>
+<!-- <update id="couponout"> -->
+<!-- update coupondownload set c_stock = c_stock-1 where c_code=#{param1} and userid=#{param2} -->
+<!-- </update> -->
 </mapper>

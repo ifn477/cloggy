@@ -101,9 +101,11 @@ public class ProductController {
 	//전체상품출력
 	@RequestMapping(value = "/product-out")
 	public String productout(Model mo) {
+		
 		PService ps = sqlSession.getMapper(PService.class);
 		list = ps.productout();
 		mo.addAttribute("list", list);
+		
 		return "product-out";
 	}
 	
@@ -167,6 +169,10 @@ public class ProductController {
 		list = ps.productdetail(product_id);
 		ps.productcount(product_id);
 		mo.addAttribute("list", list);
+		
+		//추천상품출력
+		ArrayList<ProductDTO> recommend_list = ps.productrecommendout(product_id);
+		mo.addAttribute("recommend_list", recommend_list);
 		
 		//찜하기
 		Likeservice ls = sqlSession.getMapper(Likeservice.class);
@@ -266,9 +272,7 @@ public class ProductController {
 	        mo.addAttribute("rplist", rplist);
 	    }
 	    else {
-	    	
 	    }
-	    
 		return "product-recent-out";
 	}
 	

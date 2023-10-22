@@ -95,6 +95,9 @@ public class CouponController {
 		CouponService couponservice = sqlSession.getMapper(CouponService.class);
 		int c_discount = couponservice.coupondiscount(selectcoupon);
 		System.out.println("##할인율##:"+c_discount);
+		int price = 10000;
+		int discount_price = (int)(price -(price * c_discount/100.0));
+		System.out.println("##할인된 가격##"+discount_price);
 		return null;
 	}
 	

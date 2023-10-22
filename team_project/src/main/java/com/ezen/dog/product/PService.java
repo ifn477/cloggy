@@ -13,6 +13,7 @@ public interface PService {
 	public ArrayList<ProductDTO> productoutcate(int a, int b);
 	public ArrayList<ProductDTO> productuserout();
 	public ArrayList<ProductDTO> productdetail(int product_id);
+	public ArrayList<ProductDTO> productrecommendout(int product_id);
 	public void productcount(int product_id);
 	public ArrayList<ProductDTO> productmodifyForm(int product_id);
 	public void productmodifyView(int category1_id,int product_id, String p_name,int p_price,String p_info,String p_image,String p_thumbnail,int p_stock,String p_enroll,int category2_id);

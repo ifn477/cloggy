@@ -14,5 +14,5 @@ public interface CouponService {
 	public void coupondelete(int c_code);
 	public ArrayList<CouponDTO> couponmodifyform(int c_code);
 	public void couponmodify(int c_code, String c_name,int c_stock,int c_discount,String c_startdate,String c_enddate);
-	
+	public void couponout(int c_code,String userId);
 }

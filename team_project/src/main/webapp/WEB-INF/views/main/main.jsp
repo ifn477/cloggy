@@ -126,6 +126,37 @@
     font-weight: 500;
     color: #463528;
 }
+.new-product-list{
+	max-width: 70%;	
+	margin: 0 auto;
+	margin-top: 50px;
+	margin-bottom: 10rem;
+}
+.new-product_thumbnail {
+    position: relative;
+    width: 300px;
+    height: 350px;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.new-image-container {
+    max-width: 300px;
+    max-height: 350px;
+    overflow: hidden;
+    text-align: center;
+}
+.new-image-container img {
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 100%;
+}
+.product_price{
+	font-size: 20px;
+}
+
 </style>
 <meta charset="UTF-8">
 <title>Insert title here</title>
@@ -212,11 +243,35 @@
 <div class="swiper-scrollbar" style="position: relative; top: 100px; width: 40%; text-align: center; margin: 0 auto;"></div>
 </div>
 </div>
+
 <!-- 신상품 -->
 <div class="new-product">
 <div class="new-product-title">
 	<p>따끈따끈한 신상품</p>
 	<h2>NEW ITEM</h2>
+</div>
+<div class="new-product-list" style="width: 1300px; margin: 0 auto;">
+  <div class="new-product-listin" style="display: flex; flex-wrap: wrap; justify-content: space-between;">
+    <c:forEach var="i" begin="0" end="10" step="1">
+      <div class="new-product-item" style="width: 200px; margin: 10px; text-align: center;">
+        <div class="new_product_thumbnail">
+          <a href="#">
+            <div class="new-image-container">
+              <img alt="썸네일 자리" src="/dog/image/11.jpg">
+            </div>
+          </a>
+        </div>
+        <div class="new-product_name" id="new-product_name">
+          <a href="#">
+            이름[i]
+          </a>
+        </div>
+        <div class="new-product_price" style="color: black;">
+          가격
+        </div>
+      </div>
+    </c:forEach>
+  </div>
 </div>
 </div>
 <script type="text/javascript" src="./js/main.js"></script>

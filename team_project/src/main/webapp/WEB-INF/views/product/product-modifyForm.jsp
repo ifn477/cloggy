@@ -68,6 +68,7 @@ caption {
 <caption align="top">상품수정</caption>
 <tr> <th>카테고리</th> 
 	<td style="text-align: center;">
+		<input type="hidden" id="product_id" value="${pmodi.product_id }">
 		<select name="category1_id" id="category1">
 		    <option value="">카테고리 선택</option>
 			<option value="1">사료		
@@ -136,7 +137,7 @@ function readThumbnailURL(input, thumbnailID) {
 
 //추천상품
 function recommendpopup() {
-	var productID = "${input_product_id}"; // product_id 가져옴
+	var productID = document.getElementById("product_id").value;; // product_id 가져옴
 	var url = "/dog/product-recommendlist?product_id=" + productID;
 	window.open(url, "추천상품팝업창", "width=700,height=1000");
 }

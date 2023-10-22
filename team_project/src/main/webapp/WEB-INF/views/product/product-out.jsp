@@ -71,14 +71,14 @@
   <c:forEach items="${list}" var="pout">
 	<div class="product_item">
       	<div class="product_thumbnail">
-          <a href="product-detail?product_id=${pout.product_id }">
+          <a href="product-detail?product_id=${pout.product_id}&userId=${member.userId}">
            <div class="image-container">
           <img alt="상품썸네일" src="/dog/image/${pout.p_thumbnail}" width="300px;" height="350px;">
            </div>
           </a>
       	</div>
       	<div class="product_name">
-          <a href="product-detail?product_id=${pout.product_id }" style="font-size: 20px; text-decoration: none; color: black;">
+          <a href="product-detail?product_id=${pout.product_id}&userId=${member.userId}" style="font-size: 20px; text-decoration: none; color: black;">
           ${pout.p_name}
           </a>
         </div>
