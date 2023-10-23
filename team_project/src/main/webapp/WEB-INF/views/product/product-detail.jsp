@@ -7,41 +7,59 @@
 <html>
 <head>
 <style type="text/css">
-/* 전체적인 */
-*{
-    font-family: 'NanumBarunGothic';
-}
 .container_box{
-	width: 1200px;
-	text-align: center;
- 	margin: 0 auto; 
+	display: flex;
+	flex-direction: column;
+	flex-flow: column wrap;
+    align-items: center; /* 가로 중앙 정렬을 위해 추가 */
+	margin-top: 5rem;
+	margin-bottom: 5rem;
+}
+.product-detail{
+	width: 1000px;
+}
+.detail-top{
+	display: flex;
+	flex-wrap: nowrap;
+	height: 28rem;
 	margin-bottom: 10rem;
-	margin-left: 300px;
 }
 /* 썸네일 */
-.product-image {
-    float: left; 
-	margin-bottom: 100px;    
+.thumbnail-area{
+	flex-grow: 0;
+	height: 28rem;	
 }
-/* 썸네일 옆 정보 */
-.product-side{
-	text-align: left;
-	height: 600px;
-	float: right;
-	margin-bottom: 100px;
+.thumbnail {
+  position: relative;
+  width: 400px; /* 원하는 가로 크기로 설정 */
+  height: 450px; /* 원하는 세로 크기로 설정 */
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
 }
-/* 상품명 */
+.thumbnail img {
+  max-width: 130%; 
+  max-height: 130%;
+  object-fit: cover;
+}
+.order-area{
+	flex-grow: 1;
+	height: 28rem;
+}
+
+/* 상품정보 */
 .product-title{
-	font-size: 30px;
-	padding-top: 50px;
+	font-size: 27px;
 }
 .product-price{
 	font-size: 20px;
-	padding-bottom: 50px;
+	padding-bottom: 20px;
 	padding-top: 150px;
 }
 .options-container{
-	padding-bottom: 30px;
+	padding-bottom: 20px;
 }
 .likeDeleteButton, .likeAddButton {
     background: none;
@@ -55,13 +73,10 @@
 	padding-right: 5px;
 }
 .cart-container{
-	padding-bottom: 30px;
+	padding-bottom: 20px;
 }
 .form-select{
 	width: 600px;
-}
-.share{
-	margin-top: 30px;
 }
 #addToCart {
 	margin-top: 20px;
@@ -70,22 +85,63 @@
     height: 50px;
 	border: 0;
 }
+
+/* 추천상품 */
+.detail-recommend{
+	height: 23rem;
+	margin-bottom: 30px;
+}
+.recommend-title{
+	font-weight: 400;
+	font-size: 20px;
+	text-align: center;
+	margin-top: 50px;
+	margin-bottom: 30px;
+	color: #463528;
+}
+.recommend-item{
+	display: flex;
+	width: 250px;
+	text-align: center;
+}
+.recommend-thumbnail{
+	position: relative;
+	width: 200px; /* 원하는 가로 크기로 설정 */
+	height: 230px; /* 원하는 세로 크기로 설정 */
+	background-color: white;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	overflow: hidden;
+}
+.thumbnail img {
+	max-width: 130%; 
+	max-height: 130%;
+	object-fit: cover;
+}
+.recommend-item a{
+	text-decoration: none;
+	color: black;
+}
+/* 상품상세 */
+.detail-info{
+	margin-bottom: 30px;
+}
+.info-item{
+	text-align: center;
+}
+.product-info{
+	width: 700px;
+	text-align: center;
+	margin: 0 auto;
+}
+
+/* 수정버튼 */
 #modibnt{
     border-radius: 0;
     width: 300px;
     height: 50px;
 	border: 0;
-}
-.product-url img{
-	height: 35px;
-}
-.product-maininfo{
-    text-align: center;
-    margin: 0 auto;
-    width: 1000px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
 }
 </style>
 <meta charset="UTF-8">
@@ -93,18 +149,22 @@
 <title>Insert title here</title>
 </head>
 <body>
+<c:forEach items="${list}" var="pdetail">
 <div class="container_box">
-    <c:forEach items="${list}" var="pdetail">
-        <div class="product-details">
-            <input type="hidden" id="product_id" value="${pdetail.product_id}">
-            <div class="product-image">
-                <img alt="상품썸네일" src="/dog/image/${pdetail.p_thumbnail}" width="600px;">
-            </div>            
-            
-            <div class="product-side">
+	<div class="product-detail">
+		<!-- 상단 -->
+		<div class="detail-top">
 
-				<!-- 상품명 -->
-	            <div class="product-title">${pdetail.p_name}</div>
+			<!-- 썸네일(상단 왼쪽) -->
+			<div class="thumbnail-area">
+				<div class="thumbnail">
+					<img alt="상품썸네일" src="/dog/image/${pdetail.p_thumbnail}">
+				</div>
+			</div>
+			
+			<!-- 상단 오른쪽 -->
+			<div class="order-area">
+			<div class="product-title">${pdetail.p_name}</div>
 	
 	            <!-- 찜하기 -->
 				<div class="likecheck"style="display: inline-block; float: right;">
@@ -117,12 +177,14 @@
 	                <c:otherwise>
 	                    <c:choose>
 	                        <c:when test="${fn:contains(likelist, pdetail.product_id)}">
-	                            <button class="likeDeleteButton" data-productid="${pdetail.product_id}" data-userid="${member.userId}">
+	                            <button class="likeDeleteButton" 
+	                            data-productid="${pdetail.product_id}" data-userid="${member.userId}">
 	                                <img alt="찜해제" src="/dog/image/Footprint_full_pink_s.png" width="50px" height="50px">
 	                            </button>
 	                        </c:when>
 	                        <c:otherwise>
-	                            <button class="likeAddButton" data-productid="${pdetail.product_id}" data-userid="${member.userId}">
+	                            <button class="likeAddButton" 
+	                            data-productid="${pdetail.product_id}" data-userid="${member.userId}">
 	                                <img alt="찜하기" src="/dog/image/Footprint_s.png" width="50px" height="50px">
 	                            </button>
 	                        </c:otherwise>
@@ -154,7 +216,8 @@
 				        <button id="increase">+</button>
 				    </div>
 				    <div class="total-price" style="display: inline-block; float: right;">
-				        Total Price: <span id="totalPrice"><fmt:formatNumber pattern="#,##0원">${pdetail.p_price}</fmt:formatNumber></span>
+				        Total Price: <span id="totalPrice"><fmt:formatNumber pattern="#,##0원">
+				        ${pdetail.p_price}</fmt:formatNumber></span>
 				    </div>
 				</div>
 
@@ -164,7 +227,10 @@
 				        공유하기
 				    </div>
 				    <div class="product-url" style="display: inline-block; float: right;">
-				        <span class="button gray medium" style="margin-right: 5px;"><a href="#" onclick="clip(); return false;"><img src="/dog/image/url.png"></a></span>
+				        <span class="button gray medium" style="margin-right: 5px;">
+				        <a href="#" onclick="clip(); return false;" style="text-decoration: none;">
+				        <img src="/dog/image/url.png">
+				        </a></span>
 				        <a href="javascript:shareKakao();" id="btnKakao"><img src="/dog/image/icon-kakao.png"></a>
 				    </div>
 				</div>
@@ -173,9 +239,48 @@
 				<button class="btn btn-primary py-2" id="addToCart" style="background-color: #e28b3a;">add to cart</button>
 				</div>
 	    	</div>
- 
+		
+		<!-- 추천상품리스트 -->
+		<div class="detail-recommend">
+			<div class="recommend-title">
+				판매자 추천상품
+			</div>
+			<div class="recommend-item">
+				<c:forEach items="${recommend_list}" var="recommend_product">
+				    <span style="display: inline-block; margin-right: 10px;">
+				    	<a href="product-detail?product_id=${recommend_product.product_id }">
+				    	<div class="recommend-thumbnail">
+				        <img src="/dog/image/${recommend_product.p_thumbnail}" height="200px;">
+				    	</div>
+				        <div>${recommend_product.p_name}</div></a>
+				        <div><fmt:formatNumber pattern="#,###원" value="${recommend_product.p_price}"/></div>
+				    </span>
+				</c:forEach>
+			</div>
+		</div>
+		
+		<!-- 상세설명 -->
+		<div class="detail-info">
+			<div class="info-item">
+				<div class="product-infoimage">
+				    <img alt="상세페이지" src="/dog/image/${pdetail.p_image}" style="margin-top: 50px;">
+				</div>
+				<div class="product-info">
+					<div class="info">
+		  				${pdetail.p_info}
+		   			</div>
+		   		</div>
+			</div>
+		</div>
+		
+		<!-- 수정버튼 -->
+		<div style="text-align: center; margin-top:30px; margin-bottom:70px;">
+		    <button class="btn btn-primary py-2" id="modibnt" style="background-color: #e28b3a;" 
+		    onclick="location.href='product-modifyForm?product_id=${pdetail.product_id}'">수정</button>
+		</div>
+	</div>
 </div>
-<!-- 리뷰 -->
+
 		<div class="review-container">
 			<div class="review">
 				<table width="500px" align="center">
@@ -197,37 +302,8 @@
 				</table>
 			</div>
 		</div>
-   </c:forEach>
-<!--- 상품추천리스트 --->
-<div class="recommendlist">
-<c:forEach items="${recommend_list}" var="recommend_product">
-    <span style="display: inline-block; margin-right: 20px;">
-    	<a href="product-detail?product_id=${recommend_product.product_id }">
-        <img src="/dog/image/${recommend_product.p_thumbnail}" height="200px;">
-        <div>${recommend_product.p_name}</div></a>
-        <div>${recommend_product.p_price}</div>
-    </span>
 </c:forEach>
-</div>
 
-
-<!-- 상품상세정보 -->
-<div class="product-maininfo">
-    <c:forEach items="${list}" var="pdetail">
- 		<div class="product-info" style="width: 1000px;">
-  			${pdetail.p_info}
-   		</div>
-		<div class="product-infoimage">
-		    <img alt="상세페이지" src="/dog/image/${pdetail.p_image}" style="margin-top: 50px;">
-		</div>
-
-<!-- 수정삭제 버튼 -->
-<div style="text-align: center; margin-top:30px; margin-bottom:70px;">
-    <button class="btn btn-primary py-2" id="modibnt" style="background-color: #e28b3a;" 
-    onclick="location.href='product-modifyForm?product_id=${pdetail.product_id}'">수정</button>
-</div>
-    </c:forEach>
-</div>
 
 
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
