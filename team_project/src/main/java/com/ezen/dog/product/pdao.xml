@@ -46,6 +46,10 @@ select * from product
 <select id="productdetail" resultType="com.ezen.dog.product.ProductDTO">
 select * from product where product_id=#{param1}
 </select>
+<!-- 옵션 -->
+<select id="optdetail" resultType="com.ezen.dog.product.OptionDTO">
+	select * from p_option where product_id=#{param1}
+</select>
 <!-- 상세페이지 안 추천상품 출력 -->
 <select id="productrecommendout" resultType="com.ezen.dog.product.ProductDTO">
 select p.p_name, p.p_price, p.p_thumbnail, p.product_id

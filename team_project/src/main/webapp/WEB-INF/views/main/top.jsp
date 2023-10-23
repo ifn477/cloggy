@@ -213,8 +213,10 @@ color: white;
       	<i class="bi bi-person" style="font-size: 25px; color: #545454;"></i>
         </a>
         <ul class="dropdown-menu" id="dropdown-menu-left">
+          <li><a class="dropdown-item" href="cart-out">장바구니</a></li>
           <li><a class="dropdown-item" href="login-input">로그인</a></li>
           <li><a class="dropdown-item" href="member-input">회원가입</a></li>
+          <li><a class="dropdown-item" href="logout">로그아웃</a></li>
         </ul>
         </li>
     </div>

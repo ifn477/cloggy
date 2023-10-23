@@ -23,6 +23,8 @@ import com.ezen.dog.likecheck.LikeDTO;
 import com.ezen.dog.likecheck.Likeservice;
 import com.ezen.dog.login.Lservice;
 import com.ezen.dog.member.MemberDTO;
+import com.ezen.dog.review.ReviewDTO;
+import com.ezen.dog.review.Rservice;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sun.tools.javac.util.List;
@@ -34,6 +36,7 @@ public class ProductController {
 	SqlSession sqlSession;
 	String image_path = "C:\\Users\\이한솔\\git\\team_project_hansol\\team_project\\src\\main\\webapp\\image";
 	ArrayList<ProductDTO>list = new ArrayList<ProductDTO>();
+	ArrayList<OptionDTO> optlist = new ArrayList<OptionDTO>();
 	
 	//상품입력
 	@RequestMapping(value = "/product-input")
@@ -167,8 +170,18 @@ public class ProductController {
 		String userId = request.getParameter("userId");
 		PService ps = sqlSession.getMapper(PService.class);
 		list = ps.productdetail(product_id);
+		optlist = ps.optdetail(product_id);
 		ps.productcount(product_id);
+		
+		
 		mo.addAttribute("list", list);
+		mo.addAttribute("optlist", optlist);
+		
+		
+		Rservice rs = sqlSession.getMapper(Rservice.class);
+		ReviewDTO rdto = rs.reviewlist(product_id);
+		mo.addAttribute("rdto", rdto);
+		
 		
 		//추천상품출력
 		ArrayList<ProductDTO> recommend_list = ps.productrecommendout(product_id);
