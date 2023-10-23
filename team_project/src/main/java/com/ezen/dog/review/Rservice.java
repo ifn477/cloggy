@@ -5,6 +5,6 @@ import java.util.ArrayList;
 
 public interface Rservice {
 	public void reviewinsert(String userId,  String r_content, String fname );
-	public ArrayList<ReviewDTO> reviewout();
+	public ArrayList<ReviewDTO> reviewout(int product_id);
 	public ReviewDTO reviewlist(int product_id);
 }

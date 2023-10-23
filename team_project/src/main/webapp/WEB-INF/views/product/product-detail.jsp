@@ -173,21 +173,8 @@
 				<button class="btn btn-primary py-2" id="addToCart" style="background-color: #e28b3a;">add to cart</button>
 				</div>
 	    	</div>
-    </c:forEach>
+ 
 </div>
-
-<!--- 상품추천리스트 --->
-<div class="recommendlist">
-<c:forEach items="${recommend_list}" var="recommend_product">
-    <span style="display: inline-block; margin-right: 20px;">
-    	<a href="product-detail?product_id=${recommend_product.product_id }">
-        <img src="/dog/image/${recommend_product.p_thumbnail}" height="200px;">
-        <div>${recommend_product.p_name}</div></a>
-        <div>${recommend_product.p_price}</div>
-    </span>
-</c:forEach>
-</div>
-
 <!-- 리뷰 -->
 		<div class="review-container">
 			<div class="review">
@@ -210,6 +197,19 @@
 				</table>
 			</div>
 		</div>
+   </c:forEach>
+<!--- 상품추천리스트 --->
+<div class="recommendlist">
+<c:forEach items="${recommend_list}" var="recommend_product">
+    <span style="display: inline-block; margin-right: 20px;">
+    	<a href="product-detail?product_id=${recommend_product.product_id }">
+        <img src="/dog/image/${recommend_product.p_thumbnail}" height="200px;">
+        <div>${recommend_product.p_name}</div></a>
+        <div>${recommend_product.p_price}</div>
+    </span>
+</c:forEach>
+</div>
+
 
 <!-- 상품상세정보 -->
 <div class="product-maininfo">
