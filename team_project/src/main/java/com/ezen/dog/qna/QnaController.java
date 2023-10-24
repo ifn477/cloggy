@@ -26,13 +26,7 @@ public class QnaController {
 	
 	ArrayList<QnaDTO>list = new ArrayList<QnaDTO>();
 	
-	//qna�����Է�
 	@RequestMapping(value="/qna-input")
-	public String qnainput() {
-		return "qna-input";
-	}
-	
-	@RequestMapping(value="/qna-inputtest")
 	public String qnainputtest(HttpServletRequest request) {
 	    HttpSession hs = request.getSession();
 	    Object loginState = hs.getAttribute("loginstate");
@@ -45,7 +39,7 @@ public class QnaController {
 	}
 
 	
-	//qna����
+	//qna占쏙옙占쏙옙
 	@RequestMapping(value="/qna-save",method = RequestMethod.POST)
 	public String qnasave(HttpServletRequest request) {
 		String q_userId=request.getParameter("userId");
@@ -58,7 +52,7 @@ public class QnaController {
 		return "redirect:main";
 	}
 	
-	//qna ���
+	//qna 占쏙옙占�
 	@RequestMapping(value="/qna-out")
 	public String qnaout(Model mo) {
 		
@@ -69,7 +63,7 @@ public class QnaController {
 		return "qna-out";
 	}
 	
-	//qna�������
+	//qna占쏙옙占쏙옙占쏙옙占�
 	@RequestMapping(value = "/qna-detail")
 	public String qnadetil(HttpServletRequest request,Model mo) {
 		
@@ -82,7 +76,7 @@ public class QnaController {
 		return "qna-detail";
 	}
 	
-	//qna���
+	//qna占쏙옙占�
 	@RequestMapping(value = "/qna-reply",method = RequestMethod.POST)
 	public String qnareply(HttpServletRequest request,Model mo) {
 				
@@ -94,7 +88,7 @@ public class QnaController {
 		return "qna-replyview";
 	}
 	
-	//qna�������
+	//qna占쏙옙占쏙옙占쏙옙占�
 
 	@RequestMapping(value = "/qna-replysave",method = RequestMethod.POST)
 	public String qnareplysave(HttpServletRequest request) {
