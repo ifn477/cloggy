@@ -122,17 +122,31 @@
     font-weight: 500;
     color: #463528;
 }
-.content{
-	max-width: 1300px;	
-	margin: 0 auto;
-	margin-top: 50px;
-	margin-bottom: 10rem;
+.new-product-area{
 	text-align: center;
+	margin: 0 auto;
+    width: 1300px;	
 }
-.container_box{
+.new-product-items{
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: flex-start;
+    padding-left: 30px; 
+}
+.new-product-thumbnail{
+    background-color: aquamarine;
+    height: 20rem;
+    width: auto;
+    position: relative;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+}
+.new-product-thumbnail img {
+  max-width: 100%; 
+  max-height: 100%;
+  object-fit: cover;
+  margin-right: 30px;  
 }
 .product_item {
     min-height: 200px;
@@ -236,29 +250,27 @@
 	<p class="new-product-title1">따끈따끈한 신상품</p>
 	<h2 class="new-product-title2">NEW ITEM</h2>
 </div>
-<section class="content">
-<div class="container_box">
-<c:forEach items="${list}" var="pout">
+<section class="new-product-area">
+<div class="new-product-items">
+<c:forEach items="${newlist}" var="newitem">
 <div class="product_item">
 	<!-- 썸네일 -->
      	<div class="product_thumbnail">
-         <a href="product-detail?product_id=${pout.product_id}&userId=${member.userId}">
-         	<div class="image-container">
-         		<img alt="상품썸네일" src="/dog/image/${pout.p_thumbnail}" width="300px;" height="350px;">
-         	</div>
+         <a href="product-detail?product_id=${newitem.product_id}&userId=${member.userId}">
+         	<img alt="상품썸네일" src="/dog/image/${newitem.p_thumbnail}" width="300px;">
          </a>
      	</div>
 	
 	<!-- 상품명 -->
      	<div class="product_name">
-         <a href="product-detail?product_id=${pout.product_id }" style="font-size: 20px; text-decoration: none; color: black;">
-         ${pout.p_name}
+         <a href="product-detail?product_id=${newitem.product_id }" style="font-size:20px; text-decoration: none; color: black;">
+          <p class="product-name" style="width: 250px; text-align: center; margin: 0 auto;">${newitem.p_name}</p>
          </a>
        </div>
        
 	<!-- 가격 -->
 	<div class="product_price" style="padding-top: 15px;">
-        ${pout.p_price}
+        ${newitem.p_price}
 	</div>
 </div>
 </c:forEach>
