@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+   pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
@@ -47,7 +47,7 @@ color: white;
 }
 /* 로고 */
 .logoimg{
-	height: 3rem;
+   height: 3rem;
 }
 
 /* 네비바 */
@@ -71,8 +71,8 @@ color: white;
   color: #e48b00; /* 마우스 호버 시 변경할 색상으로 설정 */
 }
 .dropdown-menu {
-	border-style: none;
-	width: auto;
+   border-style: none;
+   width: auto;
 }
 #searchicon{
   cursor: pointer; /* 마우스 포인터를 손가락 모양으로 변경 */
@@ -81,13 +81,17 @@ color: white;
   cursor: pointer; 
 }
 #membericon{
-	padding-left: 15px; 
-	padding-right: 15px;
-	padding-bottom: 5px;
+   padding-left: 15px; 
+   padding-right: 15px;
+   padding-bottom: 5px;
 }
 #dropdown-menu-left {
     right: 0;
     left: auto;
+}
+a {
+    text-decoration: none;
+    color: inherit;
 }
 </style>
 <meta charset="UTF-8">
@@ -117,11 +121,26 @@ color: white;
       },
     });
   </script>
+<c:choose>
+<c:when test="${loginstate == true && member.auth_id == 0}">
+
+
+</c:when>
+<c:when test="${loginstate == true && member.auth_id == 1}">
+
+
+</c:when>
+<c:otherwise>
+
+
+
+</c:otherwise>
+</c:choose>
 
 <!-- 네비바 -->
 <nav class="navbar navbar-expand-lg bg-transparent" style="margin-top: 1.7rem; margin-bottom: 0.5rem;">
   <div class="container-fluid">
-	<!-- 로고 -->
+   <!-- 로고 -->
       <a href="main" class="navbar-brand">
       <img alt="로고" src="/dog/resources/mainimage/cloggy임시.jpg" class="logoimg">
     </a>
@@ -138,29 +157,37 @@ color: white;
           <a class="nav-link" href="#" role="button" aria-expanded="false">best♥</a>
           </li>
 <!-- 관리자모드로 옮기기  -->
-          		<li class="nav-item dropdown" onmouseenter="openDropdown(this)" onmouseleave="closeDropdown(this)">
-		    <a class="nav-link" href="#" role="button" aria-expanded="false">상품관리</a>
-		    <ul class="dropdown-menu">
-		        <li><a class="dropdown-item" href="product-input">상품입력</a></li>
-		        <li><a class="dropdown-item" href="product-out">상품리스트</a></li>
-		    </ul>
-		</li>
+
+<c:choose>
+         <c:when test="${loginstate == true && member.auth_id == 0}">
+                   <li class="nav-item dropdown" onmouseenter="openDropdown(this)" onmouseleave="closeDropdown(this)">
+          <a class="nav-link" href="#" role="button" aria-expanded="false">상품관리</a>
+          <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="product-input">상품입력</a></li>
+              <li><a class="dropdown-item" href="product-out">상품리스트</a></li>
+          </ul>
+      </li>
+   </c:when>
+   <c:otherwise>
+   </c:otherwise>
+</c:choose>
+
 <!--  제품카테시작   -->
-		<li class="nav-item dropdown" onmouseenter="openDropdown(this)" onmouseleave="closeDropdown(this)">
-		    <a class="nav-link" href="#" role="button" aria-expanded="false">사료</a>
-		    <ul class="dropdown-menu">
-		        <li><a class="dropdown-item" href="product-out-total?category1_id=1">전체보기</a></li>
-		        <li><a class="dropdown-item" href="product-out-cate?category1_id=1&category2_id=13">퍼피(1세미만)-건식사료</a></li>
-		        <li><a class="dropdown-item" href="product-out-cate?category1_id=1&category2_id=11">퍼피(1세미만)-습식사료</a></li>
-		        <li><a class="dropdown-item" href="product-out-cate?category1_id=1&category2_id=12">퍼피(1세미만)-자연식</a></li>
-		        <li><a class="dropdown-item" href="product-out-cate?category1_id=1&category2_id=16">어덜트(1-7세)-건식사료</a></li>
-		        <li><a class="dropdown-item" href="product-out-cate?category1_id=1&category2_id=14">어덜트(1-7세)-습식사료</a></li>
-		        <li><a class="dropdown-item" href="product-out-cate?category1_id=1&category2_id=15">어덜트(1-7세)-자연식</a></li>
-		        <li><a class="dropdown-item" href="product-out-cate?category1_id=1&category2_id=19">시니어(7세이상)-건식사료</a></li>
-		        <li><a class="dropdown-item" href="product-out-cate?category1_id=1&category2_id=17">시니어(7세이상)-습식사료</a></li>
-		        <li><a class="dropdown-item" href="product-out-cate?category1_id=1&category2_id=18">시니어(7세이상)-자연식</a></li>
-		    </ul>
-		</li>
+      <li class="nav-item dropdown" onmouseenter="openDropdown(this)" onmouseleave="closeDropdown(this)">
+          <a class="nav-link" href="#" role="button" aria-expanded="false">사료</a>
+          <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="product-out-total?category1_id=1">전체보기</a></li>
+              <li><a class="dropdown-item" href="product-out-cate?category1_id=1&category2_id=13">퍼피(1세미만)-건식사료</a></li>
+              <li><a class="dropdown-item" href="product-out-cate?category1_id=1&category2_id=11">퍼피(1세미만)-습식사료</a></li>
+              <li><a class="dropdown-item" href="product-out-cate?category1_id=1&category2_id=12">퍼피(1세미만)-자연식</a></li>
+              <li><a class="dropdown-item" href="product-out-cate?category1_id=1&category2_id=16">어덜트(1-7세)-건식사료</a></li>
+              <li><a class="dropdown-item" href="product-out-cate?category1_id=1&category2_id=14">어덜트(1-7세)-습식사료</a></li>
+              <li><a class="dropdown-item" href="product-out-cate?category1_id=1&category2_id=15">어덜트(1-7세)-자연식</a></li>
+              <li><a class="dropdown-item" href="product-out-cate?category1_id=1&category2_id=19">시니어(7세이상)-건식사료</a></li>
+              <li><a class="dropdown-item" href="product-out-cate?category1_id=1&category2_id=17">시니어(7세이상)-습식사료</a></li>
+              <li><a class="dropdown-item" href="product-out-cate?category1_id=1&category2_id=18">시니어(7세이상)-자연식</a></li>
+          </ul>
+      </li>
 
         <li class="nav-item dropdown"  onmouseenter="openDropdown(this)" onmouseleave="closeDropdown(this)">
           <a class="nav-link" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">간식</a>
@@ -194,6 +221,9 @@ color: white;
             <li><a class="dropdown-item" href="#">Q&A게시판</a></li>
           </ul>
         </li>
+        
+        <c:choose>
+         <c:when test="${loginstate == true && member.auth_id == 0}">
         <li class="nav-item dropdown"  onmouseenter="openDropdown(this)" onmouseleave="closeDropdown(this)">
           <a class="nav-link" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">쿠폰</a>
           <ul class="dropdown-menu">
@@ -203,22 +233,78 @@ color: white;
             <li><a class="dropdown-item" href="coupon-list?userId=${member.userId }">쿠폰사용</a></li>
           </ul>
         </li>
+   </c:when>
+   <c:otherwise>
+   </c:otherwise>
+</c:choose>
+        
+        
+
       </ul>
       <form class="d-flex" role="search">
         <input class="form-control me-2" type="search" placeholder="검색하기" aria-label="Search">
-      	<i class="bi bi-search" id="searchicon" onclick="location.href='#'"></i>
+         <i class="bi bi-search" id="searchicon" onclick="location.href='#'"></i>
       </form>
-        <li class="nav-item dropdown list-unstyled" onmouseenter="openDropdown(this)" onmouseleave="closeDropdown(this)">
+      
+      
+     <!-- 로그인 창, 관리자 : 0 -->
+      <c:choose>
+         <c:when test="${loginstate == true && member.auth_id == 0}">
+                  <ul class="nav navbar-nav navbar-right">
+                     <li><a href="#"><span class="glyphicon glyphicon-user"></span>&nbsp; ${member.userName}님 반갑습니다! &nbsp;</a></li>
+         <li class="nav-item dropdown list-unstyled" onmouseenter="openDropdown(this)" onmouseleave="closeDropdown(this)">
+        <a class="glyphicon glyphicon-log-in" href="search-all" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+        회원 관리 &nbsp;</a>
+        <ul class="dropdown-menu" id="dropdown-menu-left">
+          <li><a class="dropdown-item" href="member-out">회원 출력/ 수정/ 삭제</a></li>
+          <li><a class="dropdown-item" href="member-searchForm">회원 검색</a></li>
+        </ul>
+        </li>
+         <li class="nav-item dropdown list-unstyled" onmouseenter="openDropdown(this)" onmouseleave="closeDropdown(this)">
+        <a class="glyphicon glyphicon-log-in" href="search-all" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          마이페이지 &nbsp;</a>
+        <ul class="dropdown-menu" id="dropdown-menu-left">
+          <li><a class="dropdown-item" href="member-info?userId=${member.userId}">내정보</a></li>
+          <li><a class="dropdown-item" href="cart-out">장바구니</a></li>
+          <li><a class="dropdown-item" href="like-out">찜목록</a></li>
+          <li><a class="dropdown-item" href="recent-products?userId=${member.userId}">최근 본 상품</a></li>
+        </ul>
+        </li>                           
+        <li><a href="logout"><span class="glyphicon glyphicon-log-in"></span>Logout</a></li>
+      </ul>
+      </c:when>
+        <c:when test="${loginstate == true && member.auth_id == 1}">
+                  <ul class="nav navbar-nav navbar-right">
+                     <li><a href="#"><span class="glyphicon glyphicon-user"></span>&nbsp; ${member.userName}님 반갑습니다! &nbsp;</a></li>
+         <li class="nav-item dropdown list-unstyled" onmouseenter="openDropdown(this)" onmouseleave="closeDropdown(this)">
+        <a class="glyphicon glyphicon-log-in" href="search-all" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          마이페이지 &nbsp;</a>
+        <ul class="dropdown-menu" id="dropdown-menu-left">
+          <li><a class="dropdown-item" href="member-info?userId=${member.userId}">내정보</a></li>
+          <li><a class="dropdown-item" href="mybaby-input">우리 아이 등록</a></li>
+          <li><a class="dropdown-item" href="cart-out">장바구니</a></li>
+          <li><a class="dropdown-item" href="like-out">찜목록</a></li>
+          <li><a class="dropdown-item" href="recent-products?userId=${member.userId}">최근 본 상품</a></li>  
+        </ul>
+        </li>                           
+        <li><a href="logout"><span class="glyphicon glyphicon-log-in"></span>Logout</a></li>
+      </ul>   
+      </c:when>
+        <c:otherwise>
+         <li class="nav-item dropdown list-unstyled" onmouseenter="openDropdown(this)" onmouseleave="closeDropdown(this)">
         <a class="nav-link" href="search-all" role="button" data-bs-toggle="dropdown" aria-expanded="false" id="membericon">
-      	<i class="bi bi-person" style="font-size: 25px; color: #545454;"></i>
+         <i class="bi bi-person" style="font-size: 25px; color: #545454;"></i>
         </a>
         <ul class="dropdown-menu" id="dropdown-menu-left">
           <li><a class="dropdown-item" href="cart-out">장바구니</a></li>
           <li><a class="dropdown-item" href="login-input">로그인</a></li>
           <li><a class="dropdown-item" href="member-input">회원가입</a></li>
-          <li><a class="dropdown-item" href="logout">로그아웃</a></li>
         </ul>
         </li>
+        </c:otherwise>
+      </c:choose> 
+      <!-- 로그인 창 --> 
+        
     </div>
   </div>
 </nav>

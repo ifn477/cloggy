@@ -38,11 +38,13 @@
   align-items: center;
   justify-content: center;
   overflow: hidden;
+  margin-top: 20px;  
 }
 .thumbnail img {
   max-width: 130%; 
   max-height: 130%;
   object-fit: cover;
+  margin-right: 30px;  
 }
 .order-area{
 	flex-grow: 1;
@@ -241,24 +243,39 @@
 	    	</div>
 		
 		<!-- 추천상품리스트 -->
-		<div class="detail-recommend">
-			<div class="recommend-title">
-				판매자 추천상품
-			</div>
-			<div class="recommend-item">
-				<c:forEach items="${recommend_list}" var="recommend_product">
-				    <span style="display: inline-block; margin-right: 10px;">
-				    	<a href="product-detail?product_id=${recommend_product.product_id }">
-				    	<div class="recommend-thumbnail">
-				        <img src="/dog/image/${recommend_product.p_thumbnail}" height="200px;">
-				    	</div>
-				        <div>${recommend_product.p_name}</div></a>
-				        <div><fmt:formatNumber pattern="#,###원" value="${recommend_product.p_price}"/></div>
-				    </span>
-				</c:forEach>
-			</div>
-		</div>
-		
+		<div class="detail-recommend" id="recommendContainer">
+		    <c:choose>
+		        <c:when test="${not empty recommend_list}">
+		            <div class="recommend-title">
+		                판매자 추천상품
+		            </div>
+		            <div class="recommend-item">
+		                <c:forEach items="${recommend_list}" var="recommend_product">
+		                    <span style="display: inline-block; margin-right: 10px;">
+		                        <a href="product-detail?product_id=${recommend_product.product_id}">
+		                            <div class="recommend-thumbnail">
+		                                <img src="/dog/image/${recommend_product.p_thumbnail}" height="200px;">
+		                            </div>
+		                            <div>${recommend_product.p_name}</div>
+		                            <div><fmt:formatNumber pattern="#,###원" value="${recommend_product.p_price}"/></div>
+		                        </a>
+		                    </span>
+		                </c:forEach>
+		            </div>
+		        </c:when>
+		        <c:otherwise>
+        	        <script>
+			            // 추천 상품 목록이 없을 때 <div class="detail-recommend">의 높이를 조절
+			            var recommendContainer = document.getElementById("recommendContainer");
+			            if (recommendContainer) {
+			                recommendContainer.style.height = "5px";
+			            }
+			        </script>
+		        	<p class="no-recommend" style="color: white;">추천상품란</p>
+		        </c:otherwise>
+       	  </c:choose>
+       </div>
+	
 		<!-- 상세설명 -->
 		<div class="detail-info">
 			<div class="info-item">
@@ -280,31 +297,7 @@
 		</div>
 	</div>
 </div>
-
-		<div class="review-container">
-			<div class="review">
-				<table width="500px" align="center">
-					<tr>
-						<td colspan="2"><a
-							href="review-out?product_id=${pdetail.product_id}" align="right">리뷰
-								전체보기</a></td>
-					</tr>
-
-					<tr>
-						<td rowspan="2" width="120px"><img
-							src="/dog/review-img/${rdto.r_photo}" width="100px"
-							height="100px"></td>
-						<td height="30px">${rdto.userId}</td>
-					</tr>
-					<tr>
-						<td>${rdto.r_content}</td>
-					</tr>
-				</table>
-			</div>
-		</div>
 </c:forEach>
-
-
 
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -405,92 +398,92 @@ $(document).ready(function () {
 
 /*장바구니*/
 $(document).ready(
-	function() {
-		var quantity = 1; // 초기 수량은 1으로 설정
-		let priceValue = parseFloat($("#price").text().replace(/[^0-9.-]+/g, ""));
+function() {
+	var quantity = 1; // 초기 수량은 1으로 설정
+	let priceValue = parseFloat($("#price").text().replace(/[^0-9.-]+/g, ""));
 
-		// 옵션 선택 시 이벤트 핸들러
-		$("#haha").change(function() {
-		  var selectedOption = $(this).find("option:selected");
-		  var optName = selectedOption.data("opt_name");
-		  var optPrice = selectedOption.data("opt_price");
+	// 옵션 선택 시 이벤트 핸들러
+	$("#haha").change(function() {
+	  var selectedOption = $(this).find("option:selected");
+	  var optName = selectedOption.data("opt_name");
+	  var optPrice = selectedOption.data("opt_price");
+	
+	  // 제품 가격 -> optPrice + 기존 가격으로 업데이트
+	  var updatedPrice = priceValue + optPrice;
+	  $("#price").text(formatNumberWithCommas(updatedPrice)); // 업데이트된 가격을 화면에 출력
+	  updateTotalPrice(); // total_price 업데이트 함수 호출
+	});
+	
+	
+	function formatNumberWithCommas(number) {
+		return number.toString().replace(
+				/\B(?=(\d{3})+(?!\d))/g, ",")
+				+ '원';
+	}
+	
+	// total_price 업데이트 함수
+	function updateTotalPrice() {
+		var quantityValue = parseInt($("#quantity")
+				.text(), 10);
+		var priceValue = parseFloat($("#price").text()
+				.replace(/[^0-9.-]+/g, ""));
 		
-		  // 제품 가격 -> optPrice + 기존 가격으로 업데이트
-		  var updatedPrice = priceValue + optPrice;
-		  $("#price").text(formatNumberWithCommas(updatedPrice)); // 업데이트된 가격을 화면에 출력
-		  updateTotalPrice(); // total_price 업데이트 함수 호출
-		});
 		
-		
-		function formatNumberWithCommas(number) {
-			return number.toString().replace(
-					/\B(?=(\d{3})+(?!\d))/g, ",")
-					+ '원';
-		}
-		
-		// total_price 업데이트 함수
-		function updateTotalPrice() {
-			var quantityValue = parseInt($("#quantity")
-					.text(), 10);
-			var priceValue = parseFloat($("#price").text()
-					.replace(/[^0-9.-]+/g, ""));
-			
-			
-			var totalPrice = quantityValue * priceValue;
-			var formattedTotalPrice = formatNumberWithCommas(totalPrice);
-			$("#totalPrice").text(formattedTotalPrice);
-		}
+		var totalPrice = quantityValue * priceValue;
+		var formattedTotalPrice = formatNumberWithCommas(totalPrice);
+		$("#totalPrice").text(formattedTotalPrice);
+	}
 
-		// + 버튼을 클릭할 때 수량을 증가시키는 이벤트 핸들러
-		$("#increase").click(function() {
-			quantity++;
+	// + 버튼을 클릭할 때 수량을 증가시키는 이벤트 핸들러
+	$("#increase").click(function() {
+		quantity++;
+		$("#quantity").text(quantity);
+		updateTotalPrice();
+	});
+
+	// - 버튼을 클릭할 때 수량을 감소시키는 이벤트 핸들러
+	$("#decrease").click(function() {
+		if (quantity > 1) {
+			quantity--;
 			$("#quantity").text(quantity);
 			updateTotalPrice();
+		}
+	});
+
+	$("#addToCart").click(function() {
+		var product_id = $("#product_id").val();
+		var selectedOption = $("#haha option:selected").val();
+
+		 var selectedOption = $("#haha").find("option:selected");
+	     var optId = selectedOption.data("opt_id");
+
+	      // 추출된 데이터 사용
+		console.log("product id: " + product_id);
+		console.log("quantity: " + quantity);
+		console.log("선택한 옵션의 번호: " + optId);
+
+		// Ajax를 사용하여 서버로 데이터 전송
+		$.ajax({
+			type : "POST", // 또는 "GET"에 따라 적절하게 변경
+			url : "/dog/addtocart", // 컨트롤러의 URL을 여기에 지정
+			data : {
+				product_id : product_id,
+				quantity : quantity,
+				optId: optId
+			},
+			success : function(response) {
+				if (response === "success") {
+					alert("장바구니에 상품이 추가되었습니다.");
+				} else if (response === "no") {
+					alert("사용자가 로그인하지 않았습니다.");
+					// 다른 처리를 수행할 수 있음
+				} else {
+					alert("알 수 없는 응답: " + response);
+				}
+			},
+
 		});
-
-		// - 버튼을 클릭할 때 수량을 감소시키는 이벤트 핸들러
-		$("#decrease").click(function() {
-			if (quantity > 1) {
-				quantity--;
-				$("#quantity").text(quantity);
-				updateTotalPrice();
-			}
-		});
-
-		$("#addToCart").click(function() {
-			var product_id = $("#product_id").val();
-			var selectedOption = $("#haha option:selected").val();
-
-			 var selectedOption = $("#haha").find("option:selected");
-		     var optId = selectedOption.data("opt_id");
-
-		      // 추출된 데이터 사용
-			console.log("product id: " + product_id);
-			console.log("quantity: " + quantity);
-			console.log("선택한 옵션의 번호: " + optId);
-
-			// Ajax를 사용하여 서버로 데이터 전송
-			$.ajax({
-				type : "POST", // 또는 "GET"에 따라 적절하게 변경
-				url : "/dog/addtocart", // 컨트롤러의 URL을 여기에 지정
-				data : {
-					product_id : product_id,
-					quantity : quantity,
-					optId: optId
-				},
-				success : function(response) {
-					if (response === "success") {
-						alert("장바구니에 상품이 추가되었습니다.");
-					} else if (response === "no") {
-						alert("사용자가 로그인하지 않았습니다.");
-						// 다른 처리를 수행할 수 있음
-					} else {
-						alert("알 수 없는 응답: " + response);
-					}
-				},
-
-			});
-		});
+	});
 });	
 
 //카카오 공유하기

@@ -29,7 +29,9 @@ public class HomeController {
 		hs.setAttribute("loginstate", false);
 		PService ps = sqlSession.getMapper(PService.class);
 		list = ps.productout();
+		ArrayList<ProductDTO> list2 = ps.productout();
 		mo.addAttribute("bestlist", list);
+		mo.addAttribute("newlist", list2);
 		
 		return "main";
 	}
@@ -38,7 +40,9 @@ public class HomeController {
 	public String main2(Model mo) {
 		PService ps = sqlSession.getMapper(PService.class);
 		list = ps.productout();
+		ArrayList<ProductDTO> list2 = ps.productout();
 		mo.addAttribute("bestlist", list);
+		mo.addAttribute("newlist", list2);
 
 		return "main";
 	}
