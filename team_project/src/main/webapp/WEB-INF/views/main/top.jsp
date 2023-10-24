@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+   pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
@@ -47,7 +47,7 @@ color: white;
 }
 /* 로고 */
 .logoimg{
-	height: 3rem;
+   height: 3rem;
 }
 
 /* 네비바 */
@@ -71,8 +71,8 @@ color: white;
   color: #e48b00; /* 마우스 호버 시 변경할 색상으로 설정 */
 }
 .dropdown-menu {
-	border-style: none;
-	width: auto;
+   border-style: none;
+   width: auto;
 }
 #searchicon{
   cursor: pointer; /* 마우스 포인터를 손가락 모양으로 변경 */
@@ -81,9 +81,9 @@ color: white;
   cursor: pointer; 
 }
 #membericon{
-	padding-left: 15px; 
-	padding-right: 15px;
-	padding-bottom: 5px;
+   padding-left: 15px; 
+   padding-right: 15px;
+   padding-bottom: 5px;
 }
 #dropdown-menu-left {
     right: 0;
@@ -140,7 +140,7 @@ a {
 <!-- 네비바 -->
 <nav class="navbar navbar-expand-lg bg-transparent" style="margin-top: 1.7rem; margin-bottom: 0.5rem;">
   <div class="container-fluid">
-	<!-- 로고 -->
+   <!-- 로고 -->
       <a href="main" class="navbar-brand">
       <img alt="로고" src="/dog/resources/mainimage/cloggy임시.jpg" class="logoimg">
     </a>
@@ -170,24 +170,25 @@ a {
 	</c:when>
 	<c:otherwise>
 	</c:otherwise>
+
 </c:choose>
 
 <!--  제품카테시작   -->
-		<li class="nav-item dropdown" onmouseenter="openDropdown(this)" onmouseleave="closeDropdown(this)">
-		    <a class="nav-link" href="#" role="button" aria-expanded="false">사료</a>
-		    <ul class="dropdown-menu">
-		        <li><a class="dropdown-item" href="product-out-total?category1_id=1">전체보기</a></li>
-		        <li><a class="dropdown-item" href="product-out-cate?category1_id=1&category2_id=13">퍼피(1세미만)-건식사료</a></li>
-		        <li><a class="dropdown-item" href="product-out-cate?category1_id=1&category2_id=11">퍼피(1세미만)-습식사료</a></li>
-		        <li><a class="dropdown-item" href="product-out-cate?category1_id=1&category2_id=12">퍼피(1세미만)-자연식</a></li>
-		        <li><a class="dropdown-item" href="product-out-cate?category1_id=1&category2_id=16">어덜트(1-7세)-건식사료</a></li>
-		        <li><a class="dropdown-item" href="product-out-cate?category1_id=1&category2_id=14">어덜트(1-7세)-습식사료</a></li>
-		        <li><a class="dropdown-item" href="product-out-cate?category1_id=1&category2_id=15">어덜트(1-7세)-자연식</a></li>
-		        <li><a class="dropdown-item" href="product-out-cate?category1_id=1&category2_id=19">시니어(7세이상)-건식사료</a></li>
-		        <li><a class="dropdown-item" href="product-out-cate?category1_id=1&category2_id=17">시니어(7세이상)-습식사료</a></li>
-		        <li><a class="dropdown-item" href="product-out-cate?category1_id=1&category2_id=18">시니어(7세이상)-자연식</a></li>
-		    </ul>
-		</li>
+      <li class="nav-item dropdown" onmouseenter="openDropdown(this)" onmouseleave="closeDropdown(this)">
+          <a class="nav-link" href="#" role="button" aria-expanded="false">사료</a>
+          <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="product-out-total?category1_id=1">전체보기</a></li>
+              <li><a class="dropdown-item" href="product-out-cate?category1_id=1&category2_id=13">퍼피(1세미만)-건식사료</a></li>
+              <li><a class="dropdown-item" href="product-out-cate?category1_id=1&category2_id=11">퍼피(1세미만)-습식사료</a></li>
+              <li><a class="dropdown-item" href="product-out-cate?category1_id=1&category2_id=12">퍼피(1세미만)-자연식</a></li>
+              <li><a class="dropdown-item" href="product-out-cate?category1_id=1&category2_id=16">어덜트(1-7세)-건식사료</a></li>
+              <li><a class="dropdown-item" href="product-out-cate?category1_id=1&category2_id=14">어덜트(1-7세)-습식사료</a></li>
+              <li><a class="dropdown-item" href="product-out-cate?category1_id=1&category2_id=15">어덜트(1-7세)-자연식</a></li>
+              <li><a class="dropdown-item" href="product-out-cate?category1_id=1&category2_id=19">시니어(7세이상)-건식사료</a></li>
+              <li><a class="dropdown-item" href="product-out-cate?category1_id=1&category2_id=17">시니어(7세이상)-습식사료</a></li>
+              <li><a class="dropdown-item" href="product-out-cate?category1_id=1&category2_id=18">시니어(7세이상)-자연식</a></li>
+          </ul>
+      </li>
 
         <li class="nav-item dropdown"  onmouseenter="openDropdown(this)" onmouseleave="closeDropdown(this)">
           <a class="nav-link" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">간식</a>
@@ -241,9 +242,8 @@ a {
       </ul>
       <form class="d-flex" role="search">
         <input class="form-control me-2" type="search" placeholder="검색하기" aria-label="Search">
-      	<i class="bi bi-search" id="searchicon" onclick="location.href='#'"></i>
+         <i class="bi bi-search" id="searchicon" onclick="location.href='#'"></i>
       </form>
-      
       
 	  <!-- 로그인 창, 관리자 : 0 -->
       <c:choose>
@@ -291,13 +291,12 @@ a {
         <c:otherwise>
          <li class="nav-item dropdown list-unstyled" onmouseenter="openDropdown(this)" onmouseleave="closeDropdown(this)">
         <a class="nav-link" href="search-all" role="button" data-bs-toggle="dropdown" aria-expanded="false" id="membericon">
-      	<i class="bi bi-person" style="font-size: 25px; color: #545454;"></i>
+         <i class="bi bi-person" style="font-size: 25px; color: #545454;"></i>
         </a>
         <ul class="dropdown-menu" id="dropdown-menu-left">
           <li><a class="dropdown-item" href="cart-out">장바구니</a></li>
           <li><a class="dropdown-item" href="login-input">로그인</a></li>
           <li><a class="dropdown-item" href="member-input">회원가입</a></li>
-          <li><a class="dropdown-item" href="logout">로그아웃</a></li>
         </ul>
         </li>
         </c:otherwise>
