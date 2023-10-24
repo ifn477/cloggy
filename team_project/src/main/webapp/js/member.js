@@ -58,7 +58,7 @@ function goPopupself(){
 
 
 function jusoCallBack(roadFullAddr){
-		document.memberincheckself.roadFullAddr.value = roadFullAddr;
+		document.member-input.roadFullAddr.value = roadFullAddr;
 }
 
 
