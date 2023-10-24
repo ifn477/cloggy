@@ -4,11 +4,13 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" a href="/dog/css/widthtable.css">
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
-<table border="1" align="center">
+<table align="center">
+<caption>쿠폰다운로드</caption>
 <tr> <th>쿠폰명</th> <th>할인율(%)</th> <th>다운로드</th> </tr>
 <c:forEach items="${list }" var="coupondown">
 <tr> <td>${coupondown.c_name }</td> <td>${coupondown.c_discount }%</td> 
