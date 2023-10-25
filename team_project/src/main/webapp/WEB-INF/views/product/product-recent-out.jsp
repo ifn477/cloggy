@@ -67,7 +67,7 @@ p{
 
 <section class="content">
   <div class="container_box">
-          <p>최근 본 상품</p>
+          <p>최근 본 상품~~~</p>
     <c:if test="${not empty rplist}">
       <div style="font-size: 15px; font-weight: bold; text-align:left; margin-left: 317px;">
       </div>
