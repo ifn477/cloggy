@@ -7,6 +7,7 @@
 /* footer */
 .footercontainer{
    background-color: #fff6e9;
+   
 }
 .py-5{
    font-family: 'Noto Sans KR', sans-serif;

@@ -26,4 +26,10 @@
 		<put-attribute name="body" value="/WEB-INF/views/product/product-recommendlist.jsp"/>
 	</definition>
 
+<!-- 추천상품 팝업 -->
+	<definition name="review-input" extends="popupbaseLayout">
+		<put-attribute name="title" value="리뷰 작성"/>
+		<put-attribute name="body" value="/WEB-INF/views/review/review-input.jsp"/>
+	</definition>
+
 </tiles-definitions>

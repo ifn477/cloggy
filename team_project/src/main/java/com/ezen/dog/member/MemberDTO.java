@@ -7,7 +7,6 @@ public class MemberDTO {
 	String password,userName;
 	int age;
 	String gender,email,phone,address,enroll_date,last_update,userInputKey;
-	
 
 	public MemberDTO() {
 		super();
