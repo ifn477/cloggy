@@ -4,6 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" a href="/dog/css/widthtable.css">
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>

@@ -48,7 +48,7 @@ textarea {
 </tr>
 <tr>
 	<c:choose>
-		<c:when test="${loginstate==true && member.auth_id == 9}">
+		<c:when test="${loginstate==true && member.auth_id == 0}">
 			<td colspan="2" style="text-align: center;"><input type="submit" value="답글달기"></td>
 		</c:when>
 		<c:otherwise></c:otherwise>
