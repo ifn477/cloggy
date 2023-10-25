@@ -121,21 +121,6 @@ a {
       },
     });
   </script>
-<c:choose>
-<c:when test="${loginstate == true && member.auth_id == 0}">
-
-
-</c:when>
-<c:when test="${loginstate == true && member.auth_id == 1}">
-
-
-</c:when>
-<c:otherwise>
-
-
-
-</c:otherwise>
-</c:choose>
 
 <!-- 네비바 -->
 <nav class="navbar navbar-expand-lg bg-transparent" style="margin-top: 1.7rem; margin-bottom: 0.5rem;">
@@ -239,13 +224,16 @@ a {
    </c:otherwise>
 </c:choose>
       </ul>
-      <form class="d-flex" role="search">
-        <input class="form-control me-2" type="search" placeholder="검색하기" aria-label="Search">
-         <i class="bi bi-search" id="searchicon" onclick="location.href='#'"></i>
-      </form>
       
-      
-     <!-- 로그인 창, 관리자 : 0 -->
+<form class="d-flex" role="search" action="search-all" method="post">
+  <input class="form-control me-2" type="search" name="search" placeholder="검색하기" aria-label="Search">
+  <button type="submit" style="border: none; background-color: transparent;">
+    <i class="bi bi-search"></i>
+  </button>
+</form>
+
+	  <!-- 로그인 창, 관리자 : 0 -->
+
       <c:choose>
          <c:when test="${loginstate == true && member.auth_id == 0}">
           <ul class="nav navbar-nav navbar-right">
