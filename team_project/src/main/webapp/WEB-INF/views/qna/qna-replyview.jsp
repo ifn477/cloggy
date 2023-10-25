@@ -4,27 +4,47 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" a href="/dog/css/heighttable.css">
+<style type="text/css">
+th{
+	width: 15%;
+}
+textarea {
+	padding-left: 10px;
+	width: 100%;
+	max-height:200px;
+	min-height:200px;
+	border-style: none;
+}
+.btn{
+	width: 90px;
+	height: 30px;
+	line-height: 15px;
+	font-size: 13px;
+	background-color: #e28b3a; 
+	margin-top: 10px;
+}
+.btn:hover {
+    background-color: #e28b3a; /* 원래 색상으로 설정 */
+}
+</style>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
-<c:forEach items="${list}" var="qna">
 <form action="qna-replysave" method="post">
-<table border="1" align="center">
+<table  align="center" style="width: 700px;">
+<c:forEach items="${list}" var="qna">
 <caption>답글작성</caption>
-<!--  -->
-<tr>
-<!-- hidden 사용해서 사용자에게는 안보이고 replysave에서는 받아줄수있음 -->
-    <td><input type="hidden" name="q_number" value="${qna.q_number}"></td>
-    <td><input type="hidden" name="q_groups" value="${qna.q_groups}"></td>
-    <td><input type="hidden" name="q_step" value="${qna.q_step }"></td>
-    <td><input type="hidden" name="q_indent" value="${qna.q_indent }"></td>
-</tr>
-
-<!--  -->
 <tr>
     <th>작성자</th>
-    <td><input type="text" name="userId"></td>
+    <td>
+    	<input type="text" name="userId" value="${member.userId}">
+    	<input type="hidden" name="q_number" value="${qna.q_number}">
+	    <input type="hidden" name="q_indent" value="${qna.q_indent }">
+	    <input type="hidden" name="q_groups" value="${qna.q_groups}">
+	    <input type="hidden" name="q_step" value="${qna.q_step }">
+    </td>
 </tr>
 <tr>
     <th>제목</th>
@@ -37,14 +57,12 @@
     </td>
 </tr>
 <tr>
-   
-    <td colspan="2">
-       <input type="submit" value="등록">
-       <button type="button" onclick="location.href='qna-out'">취소</button>
-       
-       </td>
+    <td colspan="2" style="border-bottom: none; text-align: right;">
+       <button class="btn btn-primary py-2" type="submit">등록</button>
+       <button class="btn btn-primary py-2" onclick="location.href='qna-out'">취소</button>
+    </td>
 </tr>
-</table>
 </c:forEach>
+</table>
 </body>
 </html>
