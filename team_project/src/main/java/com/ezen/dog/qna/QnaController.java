@@ -39,7 +39,7 @@ public class QnaController {
 	}
 
 	
-	//qna占쏙옙占쏙옙
+	//qna저장
 	@RequestMapping(value="/qna-save",method = RequestMethod.POST)
 	public String qnasave(HttpServletRequest request) {
 		String q_userId=request.getParameter("userId");
@@ -52,7 +52,7 @@ public class QnaController {
 		return "redirect:main";
 	}
 	
-	//qna 占쏙옙占�
+	//qna 출력
 	@RequestMapping(value="/qna-out")
 	public String qnaout(Model mo) {
 		
@@ -63,7 +63,7 @@ public class QnaController {
 		return "qna-out";
 	}
 	
-	//qna占쏙옙占쏙옙占쏙옙占�
+	//qna 내용
 	@RequestMapping(value = "/qna-detail")
 	public String qnadetil(HttpServletRequest request,Model mo) {
 		
@@ -76,20 +76,19 @@ public class QnaController {
 		return "qna-detail";
 	}
 	
-	//qna占쏙옙占�
+	//qna 답글달기
 	@RequestMapping(value = "/qna-reply",method = RequestMethod.POST)
 	public String qnareply(HttpServletRequest request,Model mo) {
 				
-		String userId = request.getParameter("userId");
+		int q_number = Integer.parseInt(request.getParameter("q_number"));
 		Qservice qs = sqlSession.getMapper(Qservice.class);
-		ArrayList<QnaDTO>list= qs.qnareplyview(userId);
+		ArrayList<QnaDTO>list= qs.qnareplyview(q_number);
 		mo.addAttribute("list", list);
 		
 		return "qna-replyview";
 	}
 	
-	//qna占쏙옙占쏙옙占쏙옙占�
-
+	//qna 댓글 저장
 	@RequestMapping(value = "/qna-replysave",method = RequestMethod.POST)
 	public String qnareplysave(HttpServletRequest request) {
 

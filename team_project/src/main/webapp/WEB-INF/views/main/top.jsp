@@ -238,9 +238,6 @@ a {
    <c:otherwise>
    </c:otherwise>
 </c:choose>
-        
-        
-
       </ul>
       <form class="d-flex" role="search">
         <input class="form-control me-2" type="search" placeholder="검색하기" aria-label="Search">
@@ -251,14 +248,14 @@ a {
      <!-- 로그인 창, 관리자 : 0 -->
       <c:choose>
          <c:when test="${loginstate == true && member.auth_id == 0}">
-                  <ul class="nav navbar-nav navbar-right">
-                     <li><a href="#"><span class="glyphicon glyphicon-user"></span>&nbsp; ${member.userName}님 반갑습니다! &nbsp;</a></li>
+          <ul class="nav navbar-nav navbar-right">
+           	<li>&nbsp; ${member.userName}님 반갑습니다! &nbsp;</li>
          <li class="nav-item dropdown list-unstyled" onmouseenter="openDropdown(this)" onmouseleave="closeDropdown(this)">
         <a class="glyphicon glyphicon-log-in" href="search-all" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-        회원 관리 &nbsp;</a>
+        회원관리 &nbsp;</a>
         <ul class="dropdown-menu" id="dropdown-menu-left">
-          <li><a class="dropdown-item" href="member-out">회원 출력/ 수정/ 삭제</a></li>
-          <li><a class="dropdown-item" href="member-searchForm">회원 검색</a></li>
+          <li><a class="dropdown-item" href="member-out">회원정보수정</a></li>
+          <li><a class="dropdown-item" href="member-searchForm">회원검색</a></li>
         </ul>
         </li>
          <li class="nav-item dropdown list-unstyled" onmouseenter="openDropdown(this)" onmouseleave="closeDropdown(this)">
@@ -282,7 +279,7 @@ a {
           마이페이지 &nbsp;</a>
         <ul class="dropdown-menu" id="dropdown-menu-left">
           <li><a class="dropdown-item" href="member-info?userId=${member.userId}">내정보</a></li>
-          <li><a class="dropdown-item" href="mybaby-input">우리 아이 등록</a></li>
+          <li><a class="dropdown-item" href="mybaby-input">우리아이등록</a></li>
           <li><a class="dropdown-item" href="cart-out">장바구니</a></li>
           <li><a class="dropdown-item" href="like-out">찜목록</a></li>
           <li><a class="dropdown-item" href="recent-products?userId=${member.userId}">최근 본 상품</a></li>  

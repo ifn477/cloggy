@@ -30,6 +30,10 @@ insert into product
 <select id="productout" resultType="com.ezen.dog.product.ProductDTO">
 select * from product
 </select>
+<!-- 조회수순 상품리스트 -->
+<select id="productbestout" resultType="com.ezen.dog.product.ProductDTO">
+SELECT * FROM product ORDER BY p_hits DESC
+</select>
 <!-- 상품리스트 대분류 -->
 <select id="productouttotal" resultType="com.ezen.dog.product.ProductDTO">
 	select * from product where category1_id=#{param1}

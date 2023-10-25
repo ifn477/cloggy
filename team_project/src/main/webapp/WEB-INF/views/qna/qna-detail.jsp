@@ -47,17 +47,15 @@ textarea {
   </td>
 </tr>
 <tr>
+<td colspan="2" style="border-bottom: none; text-align: right;">	
 	<c:choose>
 		<c:when test="${loginstate==true && member.auth_id == 0}">
-			<td colspan="2" style="text-align: center;"><input type="submit" value="답글달기"></td>
+			<button class="btn btn-primary py-2" type="submit">답글달기</button>
 		</c:when>
 		<c:otherwise></c:otherwise>
 	</c:choose>
-</tr>
-<tr>
-<td colspan="2" style="border-bottom: none; text-align: right;">	
-	<button class="btn btn-primary py-2" type="button" onclick="location.href='qna-out'">취소</button>
 	<button class="btn btn-primary py-2" type="button" onclick="location.href='qna-modifyForm?q_number=${qna.q_number}'">수정</button>
+	<button class="btn btn-primary py-2" type="button" onclick="location.href='qna-out'">취소</button>
 	<button class="btn btn-primary py-2" type="button" onclick="location.href='qna-delete?q_number=${qna.q_number}'">삭제</button>
 </td>
 </tr>
