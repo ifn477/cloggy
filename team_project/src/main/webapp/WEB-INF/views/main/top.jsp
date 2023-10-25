@@ -224,7 +224,6 @@ a {
 	</c:otherwise>
 </c:choose>
       </ul>
-<<<<<<< HEAD
       
 <form class="d-flex" role="search" action="search-all" method="post">
   <input class="form-control me-2" type="search" name="search" placeholder="검색하기" aria-label="Search">
@@ -233,13 +232,11 @@ a {
   </button>
 </form>
       
-=======
       <form class="d-flex" role="search">
         <input class="form-control me-2" type="search" placeholder="검색하기" aria-label="Search">
          <i class="bi bi-search" id="searchicon" onclick="location.href='#'"></i>
       </form>
       
->>>>>>> b8d32cd13ea3aa940b15a12ce62fbcafef362ac3
 	  <!-- 로그인 창, 관리자 : 0 -->
       <c:choose>
       	<c:when test="${loginstate == true && member.auth_id == 0}">
