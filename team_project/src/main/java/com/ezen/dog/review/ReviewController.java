@@ -28,7 +28,6 @@ public class ReviewController {
 	
 	String imgPath = "C:\\Users\\dywlr\\git\\team_project\\team_project\\src\\main\\webapp\\review-img";
 	
-	
 	//¸®ºä ÀÛ¼ºÆû ºÒ·¯¿À±â
 	@RequestMapping(value="/review-input")
 	public String reviewinput(Model mo) {
@@ -58,12 +57,11 @@ public class ReviewController {
 	
 	//¸®ºä Ãâ·Â
 	@RequestMapping(value="/review-out")
-	public String reviewout(Model mo, ProductDTO pdto) {
-		int product_id = pdto.getProduct_id();
-		mo.addAttribute("pdto", pdto);
+	public String reviewout(Model mo, HttpServletRequest request) {
+		int product_id = Integer.parseInt(request.getParameter("product_id"));
 		
-		Rservice qs = sqlSession.getMapper(Rservice.class);
-		ArrayList<ReviewDTO> list= qs.reviewout();
+		Rservice rs = sqlSession.getMapper(Rservice.class);
+		ArrayList<ReviewDTO> list= rs.reviewout(product_id);
 		mo.addAttribute("list", list);
 		
 		return "review-out";
