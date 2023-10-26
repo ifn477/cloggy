@@ -22,14 +22,14 @@
     display: block;
     clear: both;
     width: 100%;
-    margin-left: 20px;
+    margin-left: 80px;
 }
 .product_item {
     display: block;
     float: left;
     width: calc(33.33% - 20px);
     margin-right: 10px;
-    margin-bottom: 30px;
+    margin-bottom: 15px;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -56,7 +56,7 @@
 .product_name_price {
     font-size: 13px;
     text-decoration: none;
-    margin-top: 10px;
+    margin-top: 5px;
     padding: 30px;
     width: 220px;
 }
@@ -69,6 +69,7 @@ p {
     font-weight: 500;
     top: 0;
     margin-bottom: 40px;
+    margin-left: 3px;
 }
 </style>
 <meta charset="UTF-8">
