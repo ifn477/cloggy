@@ -430,49 +430,37 @@
 			return null;
 		}
 		/*찜하기*/
-		$(document).ready(
-				function() {
-					$('.container_box').on(
-							'click',
-							'.likeAddButton, .likeDeleteButton',
-							function() {
-								var button = $(this);
-								var isLikeButton = button
-										.hasClass('likeAddButton');
-								var productId = button.data('productid');
-								var userId = button.data('userid');
-								var url = isLikeButton ? 'like-add'
-										: 'like-delete';
+		$(document).ready(function () {
+		    $('.container_box').on('click', '.likeAddButton, .likeDeleteButton', function () {
+		        var button = $(this);
+		        var isLikeButton = button.hasClass('likeAddButton');
+		        var productId = button.data('productid');
+		        var userId = button.data('userid');
+		        var url = isLikeButton ? 'like-add' : 'like-delete';
 
-								var memberLoginState = $
-								{
-									loginstate
-								}
-								;
-								if (!memberLoginState) {
-									alert('로그인 후 이용해 주세요.');
-									return;
-								}
-
-								$.ajax({
-									type : 'POST',
-									url : url,
-									data : {
-										product_id : productId,
-										userId : userId
-									},
-									success : function(response) {
-										console.log(isLikeButton ? '추가 성공'
-												: '삭제 성공');
-										location.reload();
-									},
-									error : function(error) {
-										console.error('오류 발생', error);
-									}
-								});
-							});
-				});
-
+		        var memberLoginState = ${loginstate};
+		        if (!memberLoginState) {
+		            alert('로그인 후 이용해 주세요.');
+		            return;
+		        }
+		        
+		        $.ajax({
+		            type: 'POST',
+		            url: url,
+		            data: {
+		                product_id: productId,
+		                userId: userId
+		            },
+		            success: function (response) {
+		                console.log(isLikeButton ? '추가 성공' : '삭제 성공');
+		                location.reload();
+		            },
+		            error: function (error) {
+		                console.error('오류 발생', error);
+		            }
+		        });
+		    });
+		});
 		/*장바구니*/
 		$(document)
 				.ready(

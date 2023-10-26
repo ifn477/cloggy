@@ -15,21 +15,21 @@
     max-width: 70%;
     margin: 0 auto;
     margin-top: 50px;
-    margin-bottom: 10rem;
+    margin-bottom: 15rem;
 }
 
 .container_box {
     display: block;
     clear: both;
     width: 100%;
-    margin-left: 50px;
+    margin-left: 20px;
 }
 .product_item {
     display: block;
     float: left;
     width: calc(33.33% - 20px);
-    margin-right: 20px;
-    margin-bottom: 40px;
+    margin-right: 10px;
+    margin-bottom: 30px;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -58,6 +58,7 @@
     text-decoration: none;
     margin-top: 10px;
     padding: 30px;
+    width: 220px;
 }
 .product_price{
 	margin-top: 5px;
@@ -67,7 +68,7 @@ p {
     font-size: 17px;
     font-weight: 500;
     top: 0;
-    margin-bottom: 50px;
+    margin-bottom: 40px;
 }
 </style>
 <meta charset="UTF-8">
@@ -83,7 +84,7 @@ p {
                 <div class="product_item">
                     <div class="product_thumbnail">
                         <a href="product-detail?product_id=${pout.product_id}&userId=${member.userId}">
-                            <img alt="상품썸네일" src="/dog/image/${pout.p_thumbnail}" width="100px;" height="115px;">
+                            <img alt="상품썸네일" src="/dog/image/${pout.p_thumbnail}" width="80px;" height="90px;">
                         </a>
                     </div>
                     <div class="product_name_price">
