@@ -122,17 +122,32 @@
     font-weight: 500;
     color: #463528;
 }
-.content{
-	max-width: 1300px;	
-	margin: 0 auto;
-	margin-top: 50px;
-	margin-bottom: 10rem;
+.new-product-area{
 	text-align: center;
+	margin: 0 auto;
+    width: 1300px;	
+    margin-bottom: 10rem;
 }
-.container_box{
+.new-product-items{
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: flex-start;
+    padding-left: 30px; 
+}
+.new-product-thumbnail{
+    background-color: aquamarine;
+    height: 20rem;
+    width: auto;
+    position: relative;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+}
+.new-product-thumbnail img {
+  max-width: 100%; 
+  max-height: 100%;
+  object-fit: cover;
+  margin-right: 30px;  
 }
 .product_item {
     min-height: 200px;
@@ -143,7 +158,12 @@
     padding-left: 5px;
     padding-right: 5px;
 }
-
+.btn {
+    border-radius: 0;
+    height: 50px;
+    width: 200px;
+	border: 0;
+}
 </style>
 <meta charset="UTF-8">
 <title>Insert title here</title>
@@ -185,7 +205,6 @@
    </button>
 </div>
 
-
 <div id="one_text">
 	<h2>
 		cloggy는
@@ -209,7 +228,7 @@
     <c:forEach items="${bestlist}" var="best">
       <li class="swiper-slide product-item">
         <div class="best_product_thumbnail">
-          <a href="product-detail?product_id=${bestproduct.product_id}&userId=${member.userId}">
+          <a href="product-detail?product_id=${best.product_id}&userId=${member.userId}">
           	<div class="best_product_thumbnail_image">
             	<img alt="썸네일 자리" src="/dog/image/${best.p_thumbnail}">
           	</div>
@@ -236,35 +255,74 @@
 	<p class="new-product-title1">따끈따끈한 신상품</p>
 	<h2 class="new-product-title2">NEW ITEM</h2>
 </div>
-<section class="content">
-<div class="container_box">
-<c:forEach items="${list}" var="pout">
-<div class="product_item">
+
+<section class="new-product-area">
+<div class="new-product-items" id="product-container">
+<c:forEach items="${newlist}" var="newitem">
+<div class="product_item" >
 	<!-- 썸네일 -->
-     	<div class="product_thumbnail">
-         <a href="product-detail?product_id=${pout.product_id}&userId=${member.userId}">
-         	<div class="image-container">
-         		<img alt="상품썸네일" src="/dog/image/${pout.p_thumbnail}" width="300px;" height="350px;">
-         	</div>
-         </a>
-     	</div>
-	
+    	<div class="product_thumbnail">
+	        <a href="product-detail?product_id=${newitem.product_id}&userId=${member.userId}">
+	        	<img alt="상품썸네일" src="/dog/image/${newitem.p_thumbnail}" width="300px;">
+	        </a>
+    	</div>
+
 	<!-- 상품명 -->
-     	<div class="product_name">
-         <a href="product-detail?product_id=${pout.product_id }" style="font-size: 20px; text-decoration: none; color: black;">
-         ${pout.p_name}
-         </a>
-       </div>
-       
-	<!-- 가격 -->
-	<div class="product_price" style="padding-top: 15px;">
-        ${pout.p_price}
-	</div>
+    	<div class="product_name">
+	        <a href="product-detail?product_id=${newitem.product_id }" style="font-size:20px; text-decoration: none; color: black;">
+	         <p class="product-name" style="width: 250px; text-align: center; margin: 0 auto;">${newitem.p_name}</p>
+	        </a>
+        </div>
+      
+   <!-- 가격 -->
+	   <div class="product_price" style="padding-top: 15px;">
+	        ${newitem.p_price}
+	   </div>
 </div>
 </c:forEach>
 </div>
+<button class="btn btn-primary py-2" style="background-color: #e28b3a; margin-top: 30px;" id="load-more-button">더 보기</button>
 </section>
-</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const productContainer = document.getElementById("product-container");
+    const loadMoreButton = document.getElementById("load-more-button");
+    
+    const itemsPerPage = 8; // 한 번에 표시할 정보 개수
+    let currentIndex = itemsPerPage; // 초기에는 처음 8개만 표시, 다음부터 인덱스 조절
+    let maxClicks = 1; // 두 번만 클릭 가능하도록 설정
+
+    // 처음에 8개의 정보를 표시하는 함수
+    function showItems(startIndex, count) {
+        const items = productContainer.getElementsByClassName("product_item");
+        for (let i = 0; i < items.length; i++) {
+            if (i >= startIndex && i < startIndex + count) {
+                items[i].style.display = "block";
+            } else {
+                items[i].style.display = "none";
+            }
+        }
+    }
+    // 초기에 8개의 정보를 표시
+    showItems(0, itemsPerPage);
+
+    // "더 보기" 버튼을 클릭할 때 호출되는 함수
+    function loadMoreClick() {
+        if (maxClicks > 0) {
+            currentIndex += itemsPerPage; // 다음 8개 정보 표시
+            showItems(0, currentIndex); // 처음부터 currentIndex까지 표시
+            maxClicks--;
+
+            if (maxClicks === 0) {
+                loadMoreButton.removeEventListener("click", loadMoreClick); // 이벤트 리스너 제거
+                loadMoreButton.style.display = "none"; // 버튼 숨김
+            }
+        }
+    }
+    loadMoreButton.addEventListener("click", loadMoreClick);
+});
+</script>
 <script type="text/javascript" src="./js/main.js"></script>
 </body>
 </html>

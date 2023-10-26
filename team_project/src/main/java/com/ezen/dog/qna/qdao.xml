@@ -19,7 +19,7 @@ select * from qna where q_number=#{param1}
 </select>
 
 <select id="qnareplyview" resultType="com.ezen.dog.qna.QnaDTO">
-select * from qna where userId=#{param1}
+select * from qna where q_number=#{param1}
 </select>
 
 <insert id="qnainsertreply">

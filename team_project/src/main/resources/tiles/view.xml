@@ -244,4 +244,58 @@
 		<put-attribute name="body" value="/WEB-INF/views/coupon/coupon-modifyform.jsp"/>
 	</definition>	
 	
+<!-- 주문-->
+	
+	<definition name="order" extends="baseLayout">
+		<put-attribute name="title" value="결제입력"/>
+		<put-attribute name="body" value="/WEB-INF/views/order/order.jsp"/>
+	</definition>
+	
+	<definition name="kgin" extends="baseLayout">
+		<put-attribute name="title" value="결제입력"/>
+		<put-attribute name="body" value="/WEB-INF/views/order/kgin.jsp"/>
+	</definition>
+	
+	<definition name="order-completed" extends="baseLayout">
+		<put-attribute name="title" value="결제완료"/>
+		<put-attribute name="body" value="/WEB-INF/views/order/order-completed.jsp"/>
+	</definition>
+
+	<definition name="orderlistout" extends="baseLayout">
+		<put-attribute name="title" value="주문내역"/>
+		<put-attribute name="body" value="/WEB-INF/views/order/orderlistout.jsp"/>
+	</definition>
+	
+	<definition name="order-detail" extends="baseLayout">
+		<put-attribute name="title" value="주문상세"/>
+		<put-attribute name="body" value="/WEB-INF/views/order/order-detail.jsp"/>
+	</definition>
+	
+<!-- 	공지사항 -->
+
+	<definition name="notice-input" extends="baseLayout">
+		<put-attribute name="title" value="공지등록"/>
+		<put-attribute name="body" value="/WEB-INF/views/notice/notice-input.jsp"/>
+	</definition>	
+
+	<definition name="notice-detail" extends="baseLayout">
+		<put-attribute name="title" value="공지상세"/>
+		<put-attribute name="body" value="/WEB-INF/views/notice/notice-detail.jsp"/>
+	</definition>
+
+	<definition name="notice-modifyForm" extends="baseLayout">
+		<put-attribute name="title" value="공지수정"/>
+		<put-attribute name="body" value="/WEB-INF/views/notice/notice-modifyForm.jsp"/>
+	</definition>
+
+	<definition name="notice-out" extends="baseLayout">
+		<put-attribute name="title" value="공지목록"/>
+		<put-attribute name="body" value="/WEB-INF/views/notice/notice-out.jsp"/>
+	</definition>
+
+	<definition name="notice-searchview" extends="baseLayout">
+		<put-attribute name="title" value="공지목록"/>
+		<put-attribute name="body" value="/WEB-INF/views/notice/notice-searchview.jsp"/>
+	</definition>		
+	
 </tiles-definitions>

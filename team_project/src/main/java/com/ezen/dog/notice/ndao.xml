@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ezen.dog.notice.Nservice">
+
+<insert id="noticeinsert">
+insert into notice(n_number,USERID,n_title,n_content) 
+values (n_number_seq.nextval,#{param1},#{param2},#{param3})
+</insert>
+
+<select id="noticeout" resultType="com.ezen.dog.notice.NoticeDTO">
+select n_number,userId,n_title,n_content,n_date from notice ORDER BY n_number DESC
+</select>
+
+<select id="noticedetail" resultType="com.ezen.dog.notice.NoticeDTO">
+select n_number,userId,n_title,n_content,n_date from notice where n_number=#{param1}
+</select>
+
+
+<select id="noticemodifydata" resultType="com.ezen.dog.notice.NoticeDTO">
+select n_number,userId,n_title,n_content,n_date from notice where n_number = #{param1}
+</select>
+
+<update id="noticemodifysave">
+update notice set n_title=#{param3}, n_content=#{param4} where n_number=#{param1} and userId=#{param2}
+</update>
+
+<delete id="noticedelete">
+delete from notice where n_number=#{param1}
+</delete>
+
+<select id="noticesearchqtitle" resultType="com.ezen.dog.notice.NoticeDTO">
+select n_number,userId,n_title,n_content,n_date from notice where n_title like '%'|| #{param1} ||'%'
+</select>
+
+<select id="noticesearchqcontent" resultType="com.ezen.dog.notice.NoticeDTO">
+select n_number,userId,n_title,n_content,n_date from notice where n_content like '%'|| #{param1} ||'%'
+</select>
+
+
+
+
+</mapper>
