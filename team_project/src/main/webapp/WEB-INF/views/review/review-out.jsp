@@ -6,7 +6,13 @@
 <html>
 <head>
 <style type="text/css">
+.wrap{
+	min-height: calc(100vh - 266px); /* footer 높이를 빼준다. */
+}
+
+
 .review-container {
+	display : flex;
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
@@ -81,11 +87,16 @@
     position: absolute;
     top : 350px;
 }
+
+<%
+int product_id = Integer.parseInt(request.getParameter("product_id"));
+%>
 </style>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
+<div class="wrap">
 	<c:choose>
 		<c:when test="${loginstate == true}">
 			<div class="btnToSave">
@@ -93,6 +104,10 @@
 			</div>
 			<div class="review-container">
 				<ul class="review-table">
+<%-- 					<c:forEach items="${pdto}" var="pid"> --%>
+					<input type="hidden" value="${pdto.product_id}" id="pid">
+<%-- 					</c:forEach> --%>
+					
 					<c:forEach items="${list}" var="rv">
 						<input type="hidden" value="${rv.product_id}" id="product_id">
 						<li class="each_review">
@@ -137,10 +152,11 @@
 		src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 	<script type="text/javascript">
 		function openTermsPopup1() {
-			var productId = $("#product_id").val();
+			var productId = $("#pid").val();
 			window.open('review-input?product_id=' + productId, '',
-					'width=500,height=500');
+					'width=500,height=800');
 		}
 	</script>
+</div>
 </body>
 </html>

@@ -42,6 +42,7 @@ public class ReviewController {
 		ArrayList<ProductDTO> plist = ps.productdetail(product_id);
 		mo.addAttribute("plist", plist);
 		mo.addAttribute("member", member);
+
 		
 		return "review-input";
 	}
@@ -72,9 +73,9 @@ public class ReviewController {
 		Rservice rs = sqlSession.getMapper(Rservice.class);
 		ArrayList<ReviewDTO> list= rs.reviewout(product_id);
 		mo.addAttribute("list", list);
-
-
-				
+		mo.addAttribute("product_id", product_id);
+		pdto.setProduct_id(product_id);	
+		mo.addAttribute("pdto", pdto);
 		
 		return "review-out";
 	}

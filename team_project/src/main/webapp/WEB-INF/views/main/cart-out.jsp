@@ -12,7 +12,9 @@ th {
 	width: 100px;
 	text-align: center;
 }
-
+.wrap{
+	min-height: calc(100vh - 266px); /* footer 높이를 빼준다. */
+}
 .row-description {
 	width: 400px;
 }
@@ -32,7 +34,7 @@ th {
 <!-- 		<li>주문/결제</li> -->
 <!-- 		<li>완료</li> -->
 <!-- 	</ul> -->
-	
+	<div class="wrap">
 		<table align="center">
 			<caption>CART 장바구니에 담긴 상품은 30일 동안 보관됩니다.</caption>
 
@@ -102,7 +104,7 @@ th {
 		<div>
 			 <button type="button" id="order-button">주문하기</button>
 		</div>
-	</form>
+	</div>
 	<!-- 	<script src="/dog/js/cart-out.js"></script> -->
 	<script type="text/javascript">
 	$(document).ready(function() {

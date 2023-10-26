@@ -9,10 +9,13 @@
 td{
 align : left;
 }
-
+.wrap{
+	min-height: calc(100vh - 266px); /* footer 높이를 빼준다. */
+}
 </style>
 </head>
 <body>
+<div class="wrap">
 <form action="member-save" method="post" name="memberincheck">
 <table border="1" align="center">
 <tr>
@@ -74,6 +77,7 @@ align : left;
      <a href="https://kauth.kakao.com/oauth/authorize?client_id=4b174c23998fabfa7c3c09869f3e67a7&redirect_uri=http://localhost:8333/dog/kakaoMember&response_type=code">
         <img alt="카카오 로그인" src="/dog/image/kakao_login_medium_narrow.png" style="margin-bottom: 5px;">
    	 </a>
+</div>
 <script type="text/javascript" src="./js/check.js"></script>
 <!-- 이메일 값들 합쳐서 인증메일 보내기 위한 js -->
 <script type="text/javascript">
