@@ -6,6 +6,9 @@
 <head>
 <style type="text/css">
 /* 대메인 */
+body{
+	min-height: calc(100vh - 266px); /* footer 높이를 빼준다. */
+}
 .carousel-item {
    height: 35rem;
 }	

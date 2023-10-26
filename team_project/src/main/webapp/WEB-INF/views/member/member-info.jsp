@@ -4,13 +4,17 @@
 <!DOCTYPE html>
 <html>
 <head>
+<style type="text/css">
+.wrap{
+	min-height: calc(100vh - 266px); /* footer 높이를 빼준다. */
+}
+</style>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script type="text/javascript"  src="./js/member.js"></script>
 </head>
 <body>
-
-<table border="1" align="center" width="500px">
+<div class="wrap"><table border="1" align="center" width="500px">
 
 <c:forEach items="${list}" var="dto">
 <tr><th>아이디</th><td>${dto.userId}</td></tr>
@@ -28,6 +32,6 @@
 </tr>
 </c:forEach>
 </table>
-
+</div>
 </body>
 </html>

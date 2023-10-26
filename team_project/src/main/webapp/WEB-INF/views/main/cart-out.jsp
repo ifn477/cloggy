@@ -12,7 +12,9 @@ th {
    width: 100px;
    text-align: center;
 }
-
+.wrap{
+	min-height: calc(100vh - 266px); /* footer 높이를 빼준다. */
+}
 .row-description {
    width: 400px;
 }
@@ -26,15 +28,17 @@ th {
 <title>Insert title here</title>
 </head>
 <body>
-<!--    <!-- 진행상태바 -->
-<!--    <ul class="order-status"> -->
-<!--       <li>장바구니</li> -->
-<!--       <li>주문/결제</li> -->
-<!--       <li>완료</li> -->
-<!--    </ul> -->
-   
-      <table align="center">
-         <caption>CART 장바구니에 담긴 상품은 30일 동안 보관됩니다.</caption>
+
+<!-- 	<!-- 진행상태바 -->
+<!-- 	<ul class="order-status"> -->
+<!-- 		<li>장바구니</li> -->
+<!-- 		<li>주문/결제</li> -->
+<!-- 		<li>완료</li> -->
+<!-- 	</ul> -->
+	<div class="wrap">
+		<table align="center">
+			<caption>CART 장바구니에 담긴 상품은 30일 동안 보관됩니다.</caption>
+
 
          <tr>
             <td colspan="7"><button type="button" id="deletethis" >선택
@@ -83,49 +87,50 @@ th {
             </tr>
          </c:forEach>
 
-      </table>
-      <table align="center">
-         <tr>
-            <th>총 상품금액</th>
-            <th>총 배송비</th>
-            <th>총 결제금액</th>
-         </tr>
-         <tr>
-            <td class="totalprice"><fmt:formatNumber pattern="#,##0원">${totalprice}</fmt:formatNumber></td>
-            <c:set var="shipping" value="${totalprice < 30000 ? 2500 : 0}" />
-            <td class="shipping"><fmt:formatNumber pattern="#,##0원">${shipping}</fmt:formatNumber></td>
-            <c:set var="finalprice" value="${totalprice + shipping}" />
-            <td class="finalprice"><fmt:formatNumber pattern="#,##0원">${finalprice}</fmt:formatNumber>
-            </td>
-         </tr>
-      </table>
-      <div>
-          <button type="button" id="order-button">주문하기</button>
-      </div>
-   </form>
-   <!--    <script src="/dog/js/cart-out.js"></script> -->
-   <script type="text/javascript">
-   $(document).ready(function() {
-            
-            // 초기 로딩 시 전체박스, 개별체크박스 선택
-            $("input[name='chk-all']").prop('checked', true);
-            $("input[name='check-one']").prop('checked', $("input[name='chk-all']").prop('checked'));
-            
-            
-            
-            ///이벤트들///
-            
-            // 1. 전체 선택 버튼 클릭 시 모든 체크박스 체크
-             $("#chk-all").click(function() {
-                    $("input[name='check-one']").prop('checked', $(this).prop('checked'));
-                    updateTotalPrice();
-              });
-            
-            // 2. 체크박스가 변경될 때 totalprice 업데이트
-             $("input[name='check-one']").change(function() {
-                  updateTotalPrice();
-             });
-            
+
+		</table>
+		<table align="center">
+			<tr>
+				<th>총 상품금액</th>
+				<th>총 배송비</th>
+				<th>총 결제금액</th>
+			</tr>
+			<tr>
+				<td class="totalprice"><fmt:formatNumber pattern="#,##0원">${totalprice}</fmt:formatNumber></td>
+				<c:set var="shipping" value="${totalprice < 30000 ? 2500 : 0}" />
+				<td class="shipping"><fmt:formatNumber pattern="#,##0원">${shipping}</fmt:formatNumber></td>
+				<c:set var="finalprice" value="${totalprice + shipping}" />
+				<td class="finalprice"><fmt:formatNumber pattern="#,##0원">${finalprice}</fmt:formatNumber>
+				</td>
+			</tr>
+		</table>
+		<div>
+			 <button type="button" id="order-button">주문하기</button>
+		</div>
+	</div>
+	<!-- 	<script src="/dog/js/cart-out.js"></script> -->
+	<script type="text/javascript">
+	$(document).ready(function() {
+				
+				// 초기 로딩 시 전체박스, 개별체크박스 선택
+				$("input[name='chk-all']").prop('checked', true);
+				$("input[name='check-one']").prop('checked', $("input[name='chk-all']").prop('checked'));
+				
+				
+				
+				///이벤트들///
+				
+				// 1. 전체 선택 버튼 클릭 시 모든 체크박스 체크
+				 $("#chk-all").click(function() {
+			           $("input[name='check-one']").prop('checked', $(this).prop('checked'));
+			           updateTotalPrice();
+			     });
+				
+				// 2. 체크박스가 변경될 때 totalprice 업데이트
+				 $("input[name='check-one']").change(function() {
+				      updateTotalPrice();
+				 });
+				
 
             // 3. check-one 버튼이 모두 체크되면 chk-all도 체크, 하나라도 해제되면 chk-all도 해제
             $(".check-one").click(function() {
