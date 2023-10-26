@@ -231,7 +231,16 @@ a {
     <i class="bi bi-search"></i>
   </button>
 </form>
+<<<<<<< HEAD
+      
+      <form class="d-flex" role="search">
+        <input class="form-control me-2" type="search" placeholder="검색하기" aria-label="Search">
+         <i class="bi bi-search" id="searchicon" onclick="location.href='#'"></i>
+      </form>
+      
+=======
 
+>>>>>>> 8ce079856184b513e699c955345e89da1ea7209b
 	  <!-- 로그인 창, 관리자 : 0 -->
 
       <c:choose>
