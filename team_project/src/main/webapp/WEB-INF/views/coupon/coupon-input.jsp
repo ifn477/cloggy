@@ -4,19 +4,21 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" a href="/dog/css/heighttable.css">
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
 <form action="coupon-save" method="post">
-<table border="1" align="center">
+<table align="center">
+<caption>쿠폰등록</caption>
 <tr> <th>쿠폰명</th> <td><input type="text" name="c_name"></td> </tr>
 <tr> <th>수량(인당)</th> <td><input type="text" name="c_stock"></td> </tr>
 <tr> <th>할인율(%)</th> <td><input type="text" name="c_discount">%</td> </tr>
 <tr> <th>혜택시작일</th> <td><input type="date" name="c_startdate" id="coupon_startdate_limit"></td> </tr>
 <tr> <th>혜택종료일</th> <td><input type="date" name="c_enddate" id="coupon_enddate_limit"></td> </tr>
-<tr> <td colspan="2" style="text-align: center;">
-	 <input type="submit" value="등록"></td>
+<tr> <td colspan="2" style="text-align: center; border-bottom: none;">
+<button class="btn btn-primary py-2" type="submit" style="background-color: #e28b3a; margin-top: 30px;">등록</button></td>
 </tr>
 </table>
 </form>

@@ -121,21 +121,6 @@ a {
       },
     });
   </script>
-<c:choose>
-<c:when test="${loginstate == true && member.auth_id == 0}">
-
-
-</c:when>
-<c:when test="${loginstate == true && member.auth_id == 1}">
-
-
-</c:when>
-<c:otherwise>
-
-
-
-</c:otherwise>
-</c:choose>
 
 <!-- 네비바 -->
 <nav class="navbar navbar-expand-lg bg-transparent" style="margin-top: 1.7rem; margin-bottom: 0.5rem;">
@@ -217,8 +202,9 @@ a {
         <li class="nav-item dropdown"  onmouseenter="openDropdown(this)" onmouseleave="closeDropdown(this)">
           <a class="nav-link" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">게시판</a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">공지사항</a></li>
-            <li><a class="dropdown-item" href="#">Q&A게시판</a></li>
+            <li><a class="dropdown-item" href="info">회사정보</a></li>
+            <li><a class="dropdown-item" href="notice-out">공지사항</a></li>
+            <li><a class="dropdown-item" href="qna-out">Q&A게시판</a></li>
           </ul>
         </li>
         
@@ -237,27 +223,27 @@ a {
    <c:otherwise>
    </c:otherwise>
 </c:choose>
-        
-        
-
       </ul>
-      <form class="d-flex" role="search">
-        <input class="form-control me-2" type="search" placeholder="검색하기" aria-label="Search">
-         <i class="bi bi-search" id="searchicon" onclick="location.href='#'"></i>
-      </form>
       
-      
-     <!-- 로그인 창, 관리자 : 0 -->
+<form class="d-flex" role="search" action="search-all" method="post">
+  <input class="form-control me-2" type="search" name="search" placeholder="검색하기" aria-label="Search">
+  <button type="submit" style="border: none; background-color: transparent;">
+    <i class="bi bi-search"></i>
+  </button>
+</form>
+
+	  <!-- 로그인 창, 관리자 : 0 -->
+
       <c:choose>
          <c:when test="${loginstate == true && member.auth_id == 0}">
-                  <ul class="nav navbar-nav navbar-right">
-                     <li><a href="#"><span class="glyphicon glyphicon-user"></span>&nbsp; ${member.userName}님 반갑습니다! &nbsp;</a></li>
+          <ul class="nav navbar-nav navbar-right">
+           	<li>&nbsp; ${member.userName}님 반갑습니다! &nbsp;</li>
          <li class="nav-item dropdown list-unstyled" onmouseenter="openDropdown(this)" onmouseleave="closeDropdown(this)">
         <a class="glyphicon glyphicon-log-in" href="search-all" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-        회원 관리 &nbsp;</a>
+        회원관리 &nbsp;</a>
         <ul class="dropdown-menu" id="dropdown-menu-left">
-          <li><a class="dropdown-item" href="member-out">회원 출력/ 수정/ 삭제</a></li>
-          <li><a class="dropdown-item" href="member-searchForm">회원 검색</a></li>
+          <li><a class="dropdown-item" href="member-out">회원정보수정</a></li>
+          <li><a class="dropdown-item" href="member-searchForm">회원검색</a></li>
         </ul>
         </li>
          <li class="nav-item dropdown list-unstyled" onmouseenter="openDropdown(this)" onmouseleave="closeDropdown(this)">
@@ -281,7 +267,7 @@ a {
           마이페이지 &nbsp;</a>
         <ul class="dropdown-menu" id="dropdown-menu-left">
           <li><a class="dropdown-item" href="member-info?userId=${member.userId}">내정보</a></li>
-          <li><a class="dropdown-item" href="mybaby-input">우리 아이 등록</a></li>
+          <li><a class="dropdown-item" href="mybaby-input">우리아이등록</a></li>
           <li><a class="dropdown-item" href="cart-out">장바구니</a></li>
           <li><a class="dropdown-item" href="like-out">찜목록</a></li>
           <li><a class="dropdown-item" href="recent-products?userId=${member.userId}">최근 본 상품</a></li>  
