@@ -126,9 +126,11 @@ public class ProductController {
 	    } 
 		
 		PService ps = sqlSession.getMapper(PService.class);
-		ArrayList<ProductDTO> list = ps.productouttotal(a);
+		list = ps.productouttotal(a);
+		ArrayList<ProductDTO> bestlist = ps.bestproductouttotal(a);
 		
 		mo.addAttribute("list", list);
+		mo.addAttribute("bestlist", bestlist);
 		
 		Likeservice ls = sqlSession.getMapper(Likeservice.class);
 	    ArrayList<LikeDTO> likelist = null;
@@ -153,7 +155,10 @@ public class ProductController {
 		
 		PService ps = sqlSession.getMapper(PService.class);
 		ArrayList<ProductDTO> list = ps.productoutcate(a, b);
+		ArrayList<ProductDTO> bestlist = ps.bestproductoutcate(a, b);
+		
 		mo.addAttribute("list", list);
+		mo.addAttribute("bestlist", bestlist);
 		
 		Likeservice ls = sqlSession.getMapper(Likeservice.class);
 	    ArrayList<LikeDTO> likelist = null;

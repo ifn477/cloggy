@@ -18,7 +18,7 @@ select userId,password,userName,email,phone,address,enroll_date from member wher
 
 <update id="membermodifyView" parameterType="com.ezen.dog.member.MemberDTO">
 update member set password=#{param2},userName=#{param3},
-email=#{param5},phone=#{param6},address=#{param7},last_update=sysdate where userId=#{param1}
+email=#{param4},phone=#{param5},address=#{param6},last_update=sysdate where userId=#{param1}
 </update>
 
 <update id="memberdelete" parameterType="com.ezen.dog.member.MemberDTO">
@@ -26,15 +26,15 @@ delete from member where userId=#{param1}
 </update>
 
 <select id="membersearchViewId" resultType="com.ezen.dog.member.MemberDTO">
-select userId,password,userName,email,phone,address,enroll_date from member where userId like '%' || #{param1} || '%'
+select userId,password,userName,email,phone,address,enroll_date,last_update from member where userId like '%' || #{param1} || '%'
 </select>
 
 <select id="membersearchViewName" resultType="com.ezen.dog.member.MemberDTO">
-select userId,password,userName,email,phone,address,enroll_date from member where userName like '%' || #{param1} || '%'
+select userId,password,userName,email,phone,address,enroll_date,last_update from member where userName like '%' || #{param1} || '%'
 </select>
 
 <select id="membersearchViewEmail" resultType="com.ezen.dog.member.MemberDTO">
-select userId,password,userName,email,phone,address,enroll_date from member where email like '%' || #{param1} || '%'
+select userId,password,userName,email,phone,address,enroll_date,last_update from member where email like '%' || #{param1} || '%'
 </select>
 
 <select id="idcheck" resultType="int">

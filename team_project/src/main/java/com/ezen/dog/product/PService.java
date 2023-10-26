@@ -12,7 +12,9 @@ public interface PService {
 	public ArrayList<ProductDTO> productbestout();
 	public ArrayList<OptionDTO> optdetail(int product_id);
 	public ArrayList<ProductDTO> productouttotal(int a);
+	public ArrayList<ProductDTO> bestproductouttotal(int a);	
 	public ArrayList<ProductDTO> productoutcate(int a, int b);
+	public ArrayList<ProductDTO> bestproductoutcate(int a, int b);	
 	public ArrayList<ProductDTO> productuserout();
 	public ArrayList<ProductDTO> productdetail(int product_id);
 	public ArrayList<ProductDTO> productrecommendout(int product_id);
