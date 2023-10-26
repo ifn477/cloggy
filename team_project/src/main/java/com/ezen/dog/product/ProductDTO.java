@@ -8,6 +8,7 @@ public class ProductDTO {
 	int p_stock;
 	String p_enroll;
 	int p_sell, p_hits;
+	int p_option;
 	
 	public ProductDTO() {	super();	}
 
@@ -98,5 +99,15 @@ public class ProductDTO {
 	public void setP_hits(int p_hits) {
 		this.p_hits = p_hits;
 	}
+
+	public int getP_option() {
+		return p_option;
+	}
+
+	public void setP_option(int p_option) {
+		this.p_option = p_option;
+	}
+	
+	
 
 }

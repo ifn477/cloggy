@@ -61,9 +61,17 @@ input[type="checkbox"] {
     height: 20px;
 	vertical-align: middle;
 }
+td{
+	align : left;
+}
+.wrap{
+	min-height: calc(100vh - 266px); /* footer 높이를 빼준다. */
+
+}
 </style>
 </head>
 <body>
+<div class="wrap">
 <form action="member-save" method="post" name="memberincheck">
 <table border="1" align="center">
 <caption>cloggy 회원 가입</caption>

@@ -5,8 +5,8 @@
 <mapper namespace="com.ezen.dog.review.Rservice">
 
 <insert id="reviewinsert">
-insert into review( r_number,  userId, r_content, r_photo) 
-values (review_seq.nextval, #{param1},#{param2},#{param3})
+insert into review( r_number,  userId, r_content, r_photo, rate) 
+values (review_seq.nextval, #{param1},#{param2},#{param3},#{param4})
 </insert>
 <select id="reviewout" resultType="com.ezen.dog.review.ReviewDTO">
 select * from review where product_id=#{param1}

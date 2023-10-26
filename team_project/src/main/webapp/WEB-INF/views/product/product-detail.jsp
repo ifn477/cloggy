@@ -169,6 +169,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+
 	<c:forEach items="${list}" var="pdetail">
 		<div class="container_box">
 			<div class="product-detail">
@@ -184,6 +185,7 @@
 							<img alt="상품썸네일" src="/dog/image/${pdetail.p_thumbnail}">
 						</div>
 					</div>
+
 
 					<!-- 상단 오른쪽 -->
 					<div class="order-area">
@@ -360,7 +362,42 @@
 				</div>
 			</div>
 		</div>
-	</c:forEach>
+
+		
+		<!-- 리뷰 -->
+		<div class="review-container">
+			<div class="review">
+				<table width="500px" align="center">
+					<tr>
+						<td colspan="2"><a
+							href="review-out?product_id=${pdetail.product_id}" align="right">리뷰
+								전체보기</a></td>
+					</tr>
+
+					<tr>
+						<td rowspan="2" width="120px"><img
+							src="/dog/review-img/${rdto.r_photo}" width="100px"
+							height="100px"></td>
+						<td height="30px">${rdto.userId}</td>
+					</tr>
+					<tr>
+						<td>${rdto.r_content}</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+		
+		
+		
+		
+		<!-- 수정버튼 -->
+		<div style="text-align: center; margin-top:30px; margin-bottom:70px;">
+		    <button class="btn btn-primary py-2" id="modibnt" style="background-color: #e28b3a;" 
+		    onclick="location.href='product-modifyForm?product_id=${pdetail.product_id}'">수정</button>
+		</div>
+	</div>
+</div>
+</c:forEach>
 
 	<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
