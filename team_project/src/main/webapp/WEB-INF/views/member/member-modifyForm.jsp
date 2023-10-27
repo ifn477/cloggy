@@ -69,7 +69,6 @@ caption {
 }
 </style>
 <script type="text/javascript" src="./js/member.js"></script>
-<title>Insert title here</title>
 </head>
 <body>
 <form action="member-modifyView">

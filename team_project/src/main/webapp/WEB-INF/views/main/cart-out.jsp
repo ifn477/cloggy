@@ -478,8 +478,8 @@ button {
 							productIds : productIds.join(",")
 						},
 						success : function(response) {
-							$('body').html(response);
-							$('head').html(response);
+		                      $('body').html(response);
+		                      $('#order-results').html(response);
 						},
 						error : function(xhr, status, error) {
 							alert("오류 발생: " + error);

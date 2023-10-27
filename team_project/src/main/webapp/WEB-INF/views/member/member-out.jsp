@@ -7,15 +7,6 @@
 <meta charset="UTF-8">
 <style type="text/css">
 @charset "UTF-8";
-
-.btn {
-    border-radius: 0;
-    width: 200px;
-	border: 0;
-}
-#recommendbnt{
-	width: 200px;
-}
 table {
 	font-family: 'Noto Sans KR', sans-serif;
 	width: 70rem;
@@ -41,33 +32,19 @@ th,td {
 td{
 	text-align: center;
 }
-input {
-	padding-left: 10px;
-	width: 500px;
-	height: 40px;
-	border-style: none;
-    outline: none;
-}
-textarea {
-	padding-left: 10px;
-	width: 800px;
-	max-height:200px;
-	min-height:200px;
-	border-style: none;
-}
 caption {
 	font-size: 17px;
 	margin-bottom: 15px;
 	margin-left: 3px;
 	font-weight: 500;
-	caption-side: top; /* 표 제목을 표의 상단에 배치 */
+	caption-side: top;
 }
 </style>
 <title>Insert title here</title>
 </head>
 <body>
-
 <table border="1" align="center" width="900px">
+<caption>회원 정보</caption>
 <tr>
 <th>아이디</th><th>패스워드</th><th>이름</th>
 <th>이메일</th><th>전화번호</th><th>주소</th>

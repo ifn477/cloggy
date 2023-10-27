@@ -145,12 +145,15 @@ public class Membercontroller {
 			
 			if(item.equals("userId")) {
 				ArrayList<MemberDTO> list = ms.membersearchViewId(value);
+				mo.addAttribute("list",list);
 			}
 			else if(item.equals("userName")) {
 				ArrayList<MemberDTO> list = ms.membersearchViewName(value);
+				mo.addAttribute("list",list);
 			}
 			else {
 				ArrayList<MemberDTO> list = ms.membersearchViewEmail(value);
+				mo.addAttribute("list",list);
 			}
 			return "redirect:member-out";
 		}

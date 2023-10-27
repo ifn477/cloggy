@@ -88,20 +88,17 @@ delete from product where product_id=#{param2}
 </delete>
 
 <select id="searchAll" resultType="com.ezen.dog.product.ProductDTO">
-SELECT product_id, category1_id, p_name, p_price, p_info, p_image, p_thumbnail, p_stock, p_enroll, p_sell, p_hits
-FROM product
+SELECT * FROM product
 WHERE p_name LIKE '%' || #{param1} || '%'
 </select>
 
 <select id="search1" resultType="com.ezen.dog.product.ProductDTO">
-SELECT product_id, category1_id, p_name, p_price, p_info, p_image, p_thumbnail, p_stock, p_enroll, p_sell, p_hits
-FROM product
+SELECT * FROM product
 WHERE p_name LIKE '%' || #{param1} || '%' and category1_id=1001
 </select>
 
 <select id="search2" resultType="com.ezen.dog.product.ProductDTO">
-SELECT product_id, category1_id, p_name, p_price, p_info, p_image, p_thumbnail, p_stock, p_enroll, p_sell, p_hits
-FROM product
+SELECT * FROM product
 WHERE p_name LIKE '%' || #{param1} || '%' and category1_id=1002
 </select>
 
