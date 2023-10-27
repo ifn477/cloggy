@@ -18,7 +18,7 @@
     transform: translateX(-50%);
     width: 1200px;
     height: 500px;
-    background-color: antiquewhite;
+    background-color: rgb(255, 246, 233);
 }
 
 .each_review{
