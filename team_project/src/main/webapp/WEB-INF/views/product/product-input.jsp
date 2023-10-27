@@ -131,7 +131,7 @@ function readThumbnailURL(input, thumbnailID) {
 function recommendpopup() {
 	var productID = "${input_product_id}"; // product_id 가져옴
 	var url = "/dog/product-recommendlist?product_id=" + productID;
-	window.open(url, "추천상품팝업창", "width=700,height=1000");
+	window.open(url, "추천상품팝업창", "width=700,height=800");
 }
 
 // 카테고리

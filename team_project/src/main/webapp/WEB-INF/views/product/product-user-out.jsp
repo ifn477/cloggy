@@ -164,7 +164,7 @@
 <div class="best-product">
 <div class="swiper-container" id="best-product-slide">
   <ul class="swiper-wrapper">
-	<c:forEach items="${list}" var="bestproduct" begin="0" end="6">
+	<c:forEach items="${bestlist}" var="bestproduct" begin="0" end="6">
       <li class="swiper-slide product-item">
         <div class="best_product_thumbnail">
          <a href="product-detail?product_id=${bestproduct.product_id}&userId=${member.userId}">

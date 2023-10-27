@@ -38,9 +38,17 @@ SELECT * FROM product ORDER BY p_hits DESC
 <select id="productouttotal" resultType="com.ezen.dog.product.ProductDTO">
 	select * from product where category1_id=#{param1}
 </select>
+<!-- 베스트 상품리스트 대분류 -->
+<select id="bestproductouttotal" resultType="com.ezen.dog.product.ProductDTO">
+	SELECT * FROM product WHERE category1_id=#{param1} ORDER BY p_hits DESC
+</select>
 <!-- 상품리스트 중분류-->
 <select id="productoutcate" resultType="com.ezen.dog.product.ProductDTO">
 	select * from product where category1_id=#{param1} and category2_id=#{param2}
+</select>
+<!-- 베스트 상품리스트 중분류-->
+<select id="bestproductoutcate" resultType="com.ezen.dog.product.ProductDTO">
+	SELECT * FROM product WHERE category1_id=#{param1} and category2_id=#{param2} ORDER BY p_hits DESC
 </select>
 <!-- 상품 사용자 리스트 -->
 <select id="productuserout" resultType="com.ezen.dog.product.ProductDTO">
