@@ -34,7 +34,7 @@ public class ProductController {
 
 	@Autowired
 	SqlSession sqlSession;
-	String image_path = "C:\\Users\\이한솔\\git\\team_project_hansol\\team_project\\src\\main\\webapp\\image";
+	String image_path = "C:\\Users\\meata\\git\\team_project\\team_project\\src\\main\\webapp\\image";
 	ArrayList<ProductDTO>list = new ArrayList<ProductDTO>();
 	ArrayList<OptionDTO> optlist = new ArrayList<OptionDTO>();
 	

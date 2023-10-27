@@ -9,8 +9,8 @@ public interface Mservice {
 	public void membermodifyView(String userId,String password,String userName,String email,String phone,String address);
 	public void memberdelete(String userId);
 	public ArrayList<MemberDTO> membersearchViewId(String value);
-	public ArrayList<MemberDTO> membersearchViewName(String userId);
-	public ArrayList<MemberDTO> membersearchViewEmail(String userId);
+	public ArrayList<MemberDTO> membersearchViewName(String value);
+	public ArrayList<MemberDTO> membersearchViewEmail(String value);
 	public int idcheck(String userId);
 	public ArrayList<MemberDTO> memberinfo(String userId);
 	public void memberdeleteSelf(String userId);
