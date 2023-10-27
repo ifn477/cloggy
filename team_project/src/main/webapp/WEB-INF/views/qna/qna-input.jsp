@@ -30,14 +30,14 @@ textarea {
 <table align="center" style="width: 700px;">
 <caption>문의글 작성</caption>
 <tr><th>제목</th>
-	<td style="text-align: center;">
-		<input type="text" placeholder="문의 제목을 입력해주세요" name="q_title" style="text-align: center;">
+	<td>
+		<input type="text" placeholder="문의 제목을 입력해주세요" name="q_title">
 		<input type="hidden" name="userId" value="${member.userId}">
 	</td>
 </tr>
 <tr><th>내용</th>
 	<td>
-		<textarea rows="10" cols="30" placeholder="문의 내용을 입력해주세요" name="q_content" style="text-align: center;"></textarea>
+		<textarea rows="10" cols="30" placeholder="문의 내용을 입력해주세요" name="q_content" ></textarea>
 	</td>
 </tr>
 <tr>
