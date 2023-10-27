@@ -12,7 +12,8 @@
 
 		<task:annotation-driven />
 	<beans:bean id="MembershipScheduler" class="com.ezen.dog.member.MembershipScheduler" />
-
+	<beans:bean id="CouponScheduler" class="com.ezen.dog.coupon.CouponScheduler" />
+	
     <!-- pool-size 지정하지 않을 경우 쓰레드 풀의 기본값은 1 -->   
     <task:scheduler id="scheduler" pool-size="10"/>
     <task:executor id="executor" pool-size="10"/>

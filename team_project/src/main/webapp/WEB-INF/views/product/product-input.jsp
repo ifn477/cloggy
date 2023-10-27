@@ -5,6 +5,14 @@
 <head>
 <style type="text/css">
 
+#productbnt{
+    width: 200px;
+    background-color: #e28b3a;
+    color: white;
+    font-size: 15px;
+    height: 40px;
+}
+
 .btn {
     border-radius: 0;
     width: 200px;
@@ -96,7 +104,7 @@ caption {
 <tr> <th>재고수량</th> <td><input type="text" name="p_stock"></td> </tr>
 <tr> <th>추천상품</th> <td><input type="button" value="상품리스트" onclick="recommendpopup()" id="recommendbnt"></a></td> </tr>
 <tr> <td colspan="2" style="text-align: center; border-bottom: none;">
-<button class="btn btn-primary py-2" type="submit" style="background-color: #e28b3a; margin-top: 30px;" onclick="productcheck()">등록</button></td> </tr>
+<button class="btn btn-primary py-2" style="background-color: #e28b3a; margin-top: 30px;" onclick="productcheck()">등록</button></td> </tr>
 </table>
 </form>
 

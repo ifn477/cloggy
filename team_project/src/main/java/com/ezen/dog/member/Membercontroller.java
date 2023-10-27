@@ -142,20 +142,20 @@ public class Membercontroller {
 			String value = request.getParameter("value");
 			
 			Mservice ms = sqlSession.getMapper(Mservice.class);
+			ArrayList<MemberDTO> list;
 			
 			if(item.equals("userId")) {
-				ArrayList<MemberDTO> list = ms.membersearchViewId(value);
-				mo.addAttribute("list",list);
+				list = ms.membersearchViewId(value);
 			}
 			else if(item.equals("userName")) {
-				ArrayList<MemberDTO> list = ms.membersearchViewName(value);
-				mo.addAttribute("list",list);
+				list = ms.membersearchViewName(value);
 			}
 			else {
-				ArrayList<MemberDTO> list = ms.membersearchViewEmail(value);
-				mo.addAttribute("list",list);
+				list = ms.membersearchViewEmail(value);
 			}
-			return "member-out";
+			
+			mo.addAttribute("list", list);
+			return "member-search-out";
 		}
 
 		@ResponseBody

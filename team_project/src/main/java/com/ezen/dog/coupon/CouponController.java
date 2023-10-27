@@ -88,17 +88,25 @@ public class CouponController {
 		mo.addAttribute("list", list);
 		return "coupon-list";
 	}
+
+	@RequestMapping(value = "/coupon-list-popup")
+	public String couponlistpopup(HttpServletRequest request, Model mo) {
+		String userId = request.getParameter("userId");
+		CouponService couponservice = sqlSession.getMapper(CouponService.class);
+		list = couponservice.couponlist(userId);
+		mo.addAttribute("list", list);
+		return "coupon-list-popup";
+	}
 	
 	@RequestMapping(value = "/coupondiscount")
-	public ModelAndView coupondiscount(HttpServletRequest request) {
+	public String coupondiscount(HttpServletRequest request, Model mo) {
 		String selectcoupon = request.getParameter("selectcoupon");
 		CouponService couponservice = sqlSession.getMapper(CouponService.class);
 		int c_discount = couponservice.coupondiscount(selectcoupon);
 		System.out.println("##할인율##:"+c_discount);
-		int price = 10000;
-		int discount_price = (int)(price -(price * c_discount/100.0));
-		System.out.println("##할인된 가격##"+discount_price);
-		return null;
+//		int discount_price = (int)(price -(price * c_discount/100.0));
+		mo.addAttribute("coupon", c_discount);
+		return "order";
 	}
 	
 	@RequestMapping(value = "/coupon-delete")

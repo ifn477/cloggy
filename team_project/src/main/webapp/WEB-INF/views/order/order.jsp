@@ -108,8 +108,15 @@
         </c:otherwise> 
     </c:choose>
 			</table>
-				<!--  쿠폰 -->
-				<!-- 포인트 정보 -->
+
+
+				<!-- 쿠폰 -->
+				쿠폰선택(결제 시 적용)<br>
+				<select name="selectcoupon" id="selectcoupon">
+					<c:forEach items="${couponlist }" var="couponlist">
+						<option value="${couponlist.c_discount}">${couponlist.c_name}/${couponlist.c_discount}% 할인</option>
+					</c:forEach>
+				</select>
 		
 				<!-- 결제금액 -->
 				<h2 class="sub-title2">최종 결제정보</h2>
@@ -221,6 +228,7 @@ function kakakoPayorder() {
 
 		
 		var totalprice = document.getElementById("totalprice").value;
+		var selectcoupon = $("#selectcoupon").val();
 		var shipping = document.getElementById("shipping").value;
 		var userId = $("#userId").val();
 		var ordermemo = $("#ordermemo").val();
@@ -229,7 +237,8 @@ function kakakoPayorder() {
 	   	var add1 = $(".address1_input").val();
 	   	var add2 = $(".address2_input").val();
 	   	var add3 = $(".address3_input").val();
-
+		
+		var finaltotalprice = totalprice - (totalprice * selectcoupon/100.0);
 	   	
 	   	
 	   var today = new Date();
@@ -261,7 +270,7 @@ function kakakoPayorder() {
             pay_method: "card",   // 결제 방법
             merchant_uid: orderId, // 주문번호
             name: "(주)Cloggy",     // 상품 명
-            amount: totalprice,            // 금액
+            amount: finaltotalprice,            // 금액
             buyer_email: "gildong@gmail.com",
             buyer_name: "홍길동",
             buyer_tel: "010-4242-4242",
@@ -283,6 +292,7 @@ function kakakoPayorder() {
                     	"add2": add2,
                     	"add3": add3,
                     	"totalprice": totalprice,
+                    	"selectcoupon": selectcoupon,
                     	"userId": userId,
                     	"shipping": shipping,
                     	"ordermemo": ordermemo,
@@ -318,6 +328,7 @@ function inicisPay() {
 
 	
 	var totalprice = document.getElementById("totalprice").value;
+	var selectcoupon = $("#selectcoupon").val();
 	var shipping = document.getElementById("shipping").value;
 	var userId = $("#userId").val();
 	var ordermemo = $("#ordermemo").val();
@@ -327,7 +338,7 @@ function inicisPay() {
    	var add2 = $(".address2_input").val();
    	var add3 = $(".address3_input").val();
 
-   	
+   	var finaltotalprice = totalprice - (totalprice * selectcoupon/100.0);
    	
    var today = new Date();
    var hours = today.getHours(); // 시
@@ -337,7 +348,8 @@ function inicisPay() {
    var orderId = `${hours}` + `${minutes}` + `${seconds}` + `${milliseconds}`;
    
 
-   
+   console.log("##쿠폰할인율##:"+selectcoupon); // 콘솔에 값 출력
+   console.log("##쿠폰적용가격##:"+totalprice); // 콘솔에 값 출력   
    console.log("받는사람 : " +addressee);
    console.log("주소1 : " +add1);
    console.log("주소2 : " +add2);
@@ -358,7 +370,7 @@ IMP.request_pay(
         pay_method: "card",   // 결제 방법
         merchant_uid: orderId, // 주문번호
         name: "(주)Cloggy",     // 상품 명
-        amount: totalprice,            // 금액
+        amount: finaltotalprice,            // 금액
         buyer_email: "gildong@gmail.com",
         buyer_name: "홍길동",
         buyer_tel: "010-4242-4242",
@@ -380,6 +392,7 @@ IMP.request_pay(
                 	"add2": add2,
                 	"add3": add3,
                 	"totalprice": totalprice,
+                	"selectcoupon": selectcoupon,
                 	"userId": userId,
                 	"shipping": shipping,
                 	"ordermemo": ordermemo,
