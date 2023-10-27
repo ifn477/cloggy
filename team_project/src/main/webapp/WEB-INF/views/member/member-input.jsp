@@ -8,7 +8,7 @@
 <script type="text/javascript" src="./js/member.js"></script>
 <style type="text/css">		
 
-.btns {
+.btn {
     border-radius: 0;
     width: 90px;
     height: 50;
@@ -17,7 +17,7 @@
 }
 table {
 	font-family: 'Noto Sans KR', sans-serif;
-	width: 50rem;
+	width: 45rem;
 	text-align: center;
 	margin-top: 5rem;
 	margin-bottom: 13rem;
@@ -71,7 +71,6 @@ td{
 </style>
 </head>
 <body>
-<div class="wrap">
 <form action="member-save" method="post" name="memberincheck">
 <table border="1" align="center">
 <caption>cloggy 회원 가입</caption>
@@ -84,7 +83,7 @@ td{
 <th>비밀번호</th><td colspan="2"><input type="password" name="password" id="password"></td>
 <tr><th>비밀번호 확인</th>
 <td><input type="password" name="passwordcheck" id="passwordcheck"></td>
-<td><button type="button" id="button6" onclick="checkPassword()" class="btns">pw 중복 검사</button>
+<td><button type="button" id="button6" onclick="checkPassword()">pw 중복 검사</button>
 </td>
 </tr>
 
@@ -102,18 +101,18 @@ td{
 		</datalist>
 	<input type="hidden" name="email" id="email">	
 </td>
-<td><button type="button" id="button3" class="btns">메일 전송</button></td>
+<td><button type="button" id="button3">메일 전송</button></td>
 </tr>
 <tr>
 <th>인증 코드</th>
 <td><input type="text" name="userInputKey" id="userInputKey"></td>
-<td><button type="button" id="button4" class="btns">인증 확인</button></td>
+<td><button type="button" id="button4">인증 확인</button></td>
 </tr>
 <tr><th>핸드폰 번호</th><td colspan="2"><input type="text" name="phone"></td></tr>
 <tr>
 <th>주소</th>
 <td><input type="text" id="roadFullAddr"  name="roadFullAddr" /></td>
-<td><input type="button" onClick="goPopup();" value="검색" class="btns"/></td>
+<td><input type="button" onClick="goPopup();" value="검색"/></td>
 </tr>
 <tr>
 <td colspan="4" style="text-align: left;" class="checkbox-style">

@@ -155,7 +155,7 @@ public class Membercontroller {
 				ArrayList<MemberDTO> list = ms.membersearchViewEmail(value);
 				mo.addAttribute("list",list);
 			}
-			return "redirect:member-out";
+			return "member-out";
 		}
 
 		@ResponseBody

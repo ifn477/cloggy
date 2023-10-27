@@ -226,7 +226,7 @@ a {
       </ul>
       
 <form class="d-flex" role="search" action="search-all" method="post">
-  <input class="form-control me-2" type="search" name="search" placeholder="검색하기" aria-label="Search">
+  <input class="form-control me-2" type="text" name="p_name" placeholder="검색하기" aria-label="Search">
   <button type="submit" style="border: none; background-color: transparent;">
     <i class="bi bi-search"></i>
   </button>
