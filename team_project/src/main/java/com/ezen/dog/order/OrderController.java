@@ -99,10 +99,11 @@ public class OrderController {
 	}
 	
 	@RequestMapping(value = "/orderlistout")
-	public String orderlistout(HttpServletRequest request ,Model mo)
+	public String orderlistout(HttpSession session ,Model mo)
 	{
 
-		String userId = request.getParameter("uesrId");
+		MemberDTO mdto = (MemberDTO) session.getAttribute("member");
+		String userId = mdto.getUserId();
 		System.out.println("##유저아디##"+userId);
 	
 		Oservice os = sqlSession.getMapper(Oservice.class);

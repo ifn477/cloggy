@@ -252,6 +252,7 @@ a {
         <ul class="dropdown-menu" id="dropdown-menu-left">
           <li><a class="dropdown-item" href="member-info?userId=${member.userId}">내정보</a></li>
           <li><a class="dropdown-item" href="cart-out">장바구니</a></li>
+          <li><a class="dropdown-item" href="orderlistout?userId=${member.userId}">주문내역</a></li>
           <li><a class="dropdown-item" href="like-out">찜목록</a></li>
           <li><a class="dropdown-item" href="recent-products?userId=${member.userId}">최근 본 상품</a></li>
         </ul>
@@ -269,6 +270,7 @@ a {
           <li><a class="dropdown-item" href="member-info?userId=${member.userId}">내정보</a></li>
           <li><a class="dropdown-item" href="mybaby-input">우리아이등록</a></li>
           <li><a class="dropdown-item" href="cart-out">장바구니</a></li>
+          <li><a class="dropdown-item" href="orderlistout">주문내역</a></li>
           <li><a class="dropdown-item" href="like-out">찜목록</a></li>
           <li><a class="dropdown-item" href="recent-products?userId=${member.userId}">최근 본 상품</a></li>  
         </ul>
