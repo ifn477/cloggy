@@ -7,7 +7,7 @@
     <title>Insert title here</title>
     <style type="text/css">
         @charset "UTF-8";
-        .container {
+        .search_box {
             font-family: 'Noto Sans KR', sans-serif;
             width: 30rem;
             text-align: left;
@@ -16,6 +16,7 @@
             border-collapse: collapse;
             border-left: none;
             border-right: none;
+            margin-left: 40rem;
         }
         .btn {
             border-radius: 0;
@@ -62,7 +63,7 @@
 </head>
 <body>
 
-<div class="container">
+<div class="search_box">
     <p>회원 검색</p>
     <form action="member-searchView" method="post">
         <div class="search_option">

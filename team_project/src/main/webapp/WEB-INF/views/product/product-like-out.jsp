@@ -8,7 +8,7 @@
 <head>	
 <style>
 * {
-    font-family: 'NanumBarunGothic';
+    font-family: 'Noto Sans KR', sans-serif;
 }
 
 .content {
@@ -103,7 +103,7 @@ p {
             </c:forEach>
         </c:if>
         <c:if test="${empty list}">
-            <h4 style="text-align: center;"><strong>찜한 상품이 없습니다.</strong></h4>
+            <p style="text-align: center; margin-top: 7rem;">찜한 상품이 없습니다.</p>
         </c:if>
     </div>
 </section>

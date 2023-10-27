@@ -8,7 +8,7 @@
 <head>	
 <style type="text/css">
 *{
-	font-family: 'NanumBarunGothic';
+	font-family: 'Noto Sans KR', sans-serif;
 }
 .content{
 	max-width: 70%;	
@@ -104,7 +104,7 @@ p{
     </c:if>
   </div>
   <c:if test="${empty rplist}">
-            <p style="text-align: center; margin-top: 7rem;">최근 본 상품이 없습니다.</p>
+            <p style="text-align: center; margin-top: 6rem;">최근 본 상품이 없습니다.</p>
   </c:if>
 </section>
 </body>
