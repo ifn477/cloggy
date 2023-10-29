@@ -39,7 +39,7 @@ public class MMailSend {
 	        Session session = Session.getDefaultInstance(p, auth);
 	        MimeMessage msg = new MimeMessage(session);
 	        
-	        // �����
+	        // 占쏙옙占쏙옙占�
 	        Session ss = Session.getDefaultInstance(p, auth);
 	        ss.setDebug(true);
 	         
@@ -50,11 +50,15 @@ public class MMailSend {
 	            msg.setFrom(from);
 	            InternetAddress to = new InternetAddress(email);
 	            msg.setRecipient(Message.RecipientType.TO, to);
-	            msg.setSubject("[cloggy] 본인 인증 메일", "UTF-8");
-	            
+	            msg.setSubject("[cloggy] 회원가입 메일 인증", "UTF-8");
 	            String authKey = createKey();
-	            String emailBody = " cloggy 본인 인증 메일입니다. 인증 코드 : " + authKey;
-
+	            String emailBody = " cloggy 회원가입 인증번호는 : " + authKey + "입니다.";
+	            emailBody += "<br><br><table border='1'>";
+	            emailBody += "<tr>";
+	            emailBody += "<th>인증 번호</th>";
+	            emailBody += "<td>authKey</td>";
+	            emailBody += "</tr>";
+	            emailBody += "<br><br>";
 	            msg.setText(emailBody, "UTF-8");
 	            msg.setHeader("content-Type", "text/html");
 	            javax.mail.Transport.send(msg, msg.getAllRecipients());
@@ -88,7 +92,7 @@ public class MMailSend {
 	    
 	}
 
-	// ���� ���� �ڵ�
+	// 占쏙옙占쏙옙 占쏙옙占쏙옙 占쌘듸옙
 	public static String createKey() {
 		StringBuffer key = new StringBuffer();
 		Random rnd = new Random();
@@ -109,7 +113,7 @@ public class MMailSend {
 		return key.toString();
 	}
 	
-    //  ���� �ڵ� ����
+    //  占쏙옙占쏙옙 占쌘듸옙 占쏙옙占쏙옙
     public static boolean verifyKey(String email, String userInputKey) {
         String storedKey = authKeyMap.get(email);
         return storedKey != null && storedKey.equals(userInputKey);
