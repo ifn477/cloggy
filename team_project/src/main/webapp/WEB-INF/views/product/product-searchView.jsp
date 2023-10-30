@@ -5,7 +5,6 @@
 <!DOCTYPE html>
 <html>
 <head>  
-
 <style type="text/css">
 *{
 	 	font-family: 'Noto Sans KR', sans-serif;
@@ -58,7 +57,12 @@
 </head>
 <body>
 <br>
-<h3 style="text-align: center; margin-top: 5rem; margin-bottom: 3rem;"><strong>'${p_name}'</strong>에 대한 검색결과입니다.</h3>
+<c:choose>
+	<c:when test="${empty listall}">
+	<h3 style="text-align: center; margin-top: 5rem; margin-bottom: 25rem;"><strong>'${p_name}'</strong>에 대한 검색결과가 없습니다.</h3>
+	</c:when>
+	<c:otherwise>
+	<h3 style="text-align: center; margin-top: 5rem; margin-bottom: 3rem;"><strong>'${p_name}'</strong>에 대한 검색결과입니다.</h3>
 <br>
 <section class="content">
 <p class="listcomment"> 전체 : 총 <strong>${fn:length(listall)}</strong> 건의 상품이 검색되었습니다. </p>
@@ -167,5 +171,7 @@
     </c:choose>
 </div>
 </section>
+	</c:otherwise>
+</c:choose>
 </body>
 </html>

@@ -21,11 +21,30 @@
 	font-size: 14px;
 	font-weight: 300;
 }
+#scrollToTopButton{
+	width: 30px;
+	height: 30px;
+	border-radius: 30px;
+	border: none;
+    margin-bottom: 50px;
+    background: none;
+    position: fixed;
+    right: 35px; /* 오른쪽 여백 조절 */
+    bottom: 10px; /* 아래 여백 조절 */
+    opacity: 0;
+}
+#scrollToTopButton i{
+	width: 50px;
+	color: #e28b3a;
+}
 </style>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
+
+<button id="scrollToTopButton"><h2><i class="bi bi-chevron-double-up"></i></h2></button>
+
 <!-- footer -->
 <div class="footercontainer">
 <div class="container">
@@ -67,5 +86,25 @@
   </footer>
 </div>
 </div>
+
+<script>
+    // JavaScript를 사용하여 스크롤 위치에 따라 버튼을 표시/숨김
+    window.addEventListener('scroll', function() {
+        var button = document.getElementById('scrollToTopButton');
+        if (window.scrollY > 150) { // 스크롤 위치가 150px 이상일 때
+            button.style.opacity = '1'; // 버튼을 표시
+        } else {
+            button.style.opacity = '0'; // 버튼을 숨김
+        }
+    });
+
+    // 버튼 클릭 시 페이지 맨 위로 스크롤
+    document.getElementById('scrollToTopButton').addEventListener('click', function() {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+</script>
 </body>
 </html>

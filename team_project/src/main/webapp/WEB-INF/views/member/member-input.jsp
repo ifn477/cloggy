@@ -4,11 +4,18 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<style type="text/css">		
-
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript" src="./js/member.js"></script>
+<style type="text/css">
+.btns{
+    border-radius: 0;
+    width: 100px;
+	border: 0;
+	padding: 10px;
+}		
 table {
 	font-family: 'Noto Sans KR', sans-serif;
-	width: 45rem;
+	width: 50rem;
 	text-align: center;
 	margin-top: 5rem;
 	margin-bottom: 13rem;
@@ -21,14 +28,14 @@ th{
 	writing-mode: horizontal-tb;
 	white-space: nowrap;
 }
+td{
+	text-align: left;
+}
 th,td {
     border-bottom: 1px solid #f6eddf;
     padding: 10px;
 	font-size: 13px;
 	color: #463528; 
-}
-td{
-	text-align: left;
 }
 input {
 	padding-left: 10px;
@@ -50,23 +57,6 @@ input[type="checkbox"] {
     height: 20px;
 	vertical-align: middle;
 }
-td{
-	align : left;
-}
-#membnt{
-    width: 200px;
-    background-color: #e28b3a;
-    color: white;
-    font-size: 15px;
-    height: 40px;
-    margin-top: 30px;
-}
-#cbnt{
-	width: 200px;
-	font-size: 15px;
-    height: 40px;
-    margin-top: 30px;
-}
 </style>
 </head>
 <body>
@@ -76,14 +66,14 @@ td{
 <tr>
 <th>아이디</th>
 <td><input type="text" name="userId" id="userId"></td>
-<td><button type="button" id="button1">id 중복 검사</button></td>
+<td><button type="button" id="button1" class="btns">id 중복 검사</button></td>
 </tr>
 <tr>
-<th>비밀번호</th><td colspan="2" ><input type="password" name="password" id="password"></td>
+<th>비밀번호</th>
+<td><input type="password" name="password" id="password"></td>
 <tr><th>비밀번호 확인</th>
-<td colspan="2"><input type="password" name="passwordcheck" id="passwordcheck">
-<button type="button" id="button6" onclick="checkPassword()">pw 중복 검사</button>
-</td>
+<td><input type="password" name="passwordcheck" id="passwordcheck"></td>
+<td><button type="button" id="button6" onclick="checkPassword()" class="btns" >pw 중복 검사</button></td>
 </tr>
 <tr><th>이름</th><td colspan="2"><input type="text" name="userName"></td></tr>
 <tr>
@@ -100,18 +90,18 @@ td{
 		</datalist>
 	<input type="hidden" name="email" id="email">	
 </td>
-<td><button type="button" id="button3">메일 전송</button></td>
+<td><button type="button" id="button3" class="btns">메일 전송</button></td>
 </tr>
 <tr>
 <th>인증 코드</th>
 <td><input type="text" name="userInputKey" id="userInputKey"></td>
-<td><button type="button" id="button4">인증 확인</button></td>
+<td><button type="button" id="button4" class="btns">인증 확인</button></td>
 </tr>
 <tr><th>핸드폰 번호</th><td colspan="2"><input type="text" name="phone"></td></tr>
 <tr>
 <th>주소</th>
 <td><input type="text" id="roadFullAddr"  name="roadFullAddr" /></td>
-<td><input type="button" onClick="goPopup();" value="검색"/></td>
+<td><input type="button" onClick="goPopup();" value="검색" class="btns"	/></td>
 </tr>
 <tr>
 <td colspan="4" style="text-align: left; margin-left: 100px;">
@@ -122,15 +112,14 @@ td{
 </tr>
 <tr>
 <td colspan="3" style="text-align: center; border-bottom: none;">
-<input type="button" value="확인" id="membnt" onclick="memcheck(); checkTerms();">
-<input type="reset" id="cbnt" value="취소">
+<div style="margin-top: 15px;">
+<input type="button" value="확인" id="membnt" onclick="memcheck(); checkTerms();" style="background-color: #e28b3a; color: #ffffff; font-weight: 600; width: 250px;"> &nbsp;
+<input type="reset" id="cbnt" value="취소" style="width:250px;">
+</div>
 </td>
 </tr>
 </table>
 </form>
-
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script type="text/javascript" src="./js/member.js"></script>
 <script type="text/javascript" src="./js/check.js"></script>
 <!-- 이메일 값들 합쳐서 인증메일 보내기 위한 js -->
 <script type="text/javascript">
