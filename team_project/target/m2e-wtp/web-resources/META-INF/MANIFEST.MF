@@ -1,6 +1,5 @@
 Manifest-Version: 1.0
-
-Built-By: dywlr
-Build-Jdk: 11.0.18
+Built-By: ￬ﾝﾴ￭ﾕﾜ￬ﾆﾔ
+Build-Jdk: 11.0.20
 Created-By: Maven Integration for Eclipse
 

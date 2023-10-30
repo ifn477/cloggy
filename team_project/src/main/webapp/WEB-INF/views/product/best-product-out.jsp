@@ -102,7 +102,7 @@
 
 <section class="content">
 <div class="container_box">
-<c:forEach items="${list}" var="pout">
+<c:forEach items="${list}" var="pout" begin="0" end="19">
 <div class="product_item">
 	<!-- 썸네일 -->
      	<div class="product_thumbnail">

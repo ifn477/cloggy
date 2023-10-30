@@ -1,5 +1,5 @@
  <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+   pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
@@ -65,7 +65,7 @@ input {
     
 }
 .address1_input{
-	width:  150px;
+   width:  150px;
 }
 
   /* 추가된 스타일 */
@@ -77,23 +77,23 @@ input {
     margin: 0 10px; /* 왼쪽과 오른쪽 마진 설정 */
   }
 .ordermemo{
-	width: 500px; 
-	margin: 0 10px;
-	border: 1px solid #e6e6e6; /* 테두리 스타일 및 색상 설정 */
+   width: 500px; 
+   margin: 0 10px;
+   border: 1px solid #e6e6e6; /* 테두리 스타일 및 색상 설정 */
     border-radius: 10px; /* 외곽선을 둥글게 만듭니다. */
     padding: 0 0 0 5px;
     height: 33px;
 }
 .addname_input
 {
-	width: 275px;
+   width: 275px;
 }
 .phone_in{
-	width: 275px;
+   width: 275px;
 }
 .payment{
-	text-align: center;
-	padding: 40px;
+   text-align: center;
+   padding: 40px;
 }
 
 </style>
@@ -134,7 +134,7 @@ input {
       <th>배송 메세지</th>
       <input type="hidden" id="userId" value="${member.userId}" >
       <td>
-      	<select class="ordermemo" title="택배배송 메시지를 선택해주세요." name="ordermemo" id="ordermemo">
+         <select class="ordermemo" title="택배배송 메시지를 선택해주세요." name="ordermemo" id="ordermemo">
             <option value="MH">배송메시지를 선택해주세요.</option>
             <option value="10">그냥 문 앞에 놓아 주시면 돼요.</option>
             <option value="20">도착 후 전화주시면 직접 받으러 갈게요.</option>
@@ -157,10 +157,10 @@ input {
    <tr>
       <td><img src="/dog/image/${order.p_thumbnail}" width="100px"></td>
       <td class="pname">${order.p_name} <br>
-      	<c:choose>
-			<c:when test="${order.opt_id == 0}"> [옵션: 없음] </c:when>
-			<c:otherwise>[옵션: ${order.opt_name}]</c:otherwise>
-		</c:choose>		
+         <c:choose>
+         <c:when test="${order.opt_id == 0}"> [옵션: 없음] </c:when>
+         <c:otherwise>[옵션: ${order.opt_name}]</c:otherwise>
+      </c:choose>      
 </td>
       <td><fmt:formatNumber pattern="#,##0원">${order.p_price}</fmt:formatNumber>
          <span id="price-${loop.index}" style="display: none;">${order.p_price}</span></td>
@@ -185,133 +185,47 @@ input {
  </c:choose>
 </table>
 
-         
-            <h1 class="page-header">배송지정보</h1>
-            <table border="1" align="center">
-                    <colgroup>
-                        <col style="width: 170px">
-                        <col style="width: *">
-                    </colgroup>
-				<!-- 배송지정보 -->
-                    <tr>
-                        <th>이름</th>
-                        <td><input class="addname_input" type="text" name="addressee" id="addressee"></td>
-                    </tr>
-                    <tr>
-                        <th>전화번호</th>
-                        <td><input class="phone_in" type="text" name="phone" id="phone"></td>
-                    </tr>
-                    <tr>
-                        <th>주소</th>
-                        <td>
-                        <input class="address1_input" name="address1"  readonly="readonly">
-                            <a class="address_search_btn" onclick="execution_daum_address()">우편번호검색</a><br>
-                            <input class="address2_input" name="address2"  readonly="readonly"><br>
-                            <input class="address3_input" name="address3" ></td>
-                    </tr>
-                     
-                </table>
-      				<input type="hidden" id="userId" value="${member.userId}" >
-    		  <!-- 배송지요청사항 -->
-    		   <h1 class="page-header">배송 요청사항</h1>
-    		  <table align="center">
-    		   <tr>
-    		   <th>배송 메세지</th>
-    		   <td>
-				<select class="ordermemo" title="택배배송 메시지를 선택해주세요." name="ordermemo" style="width:350px" id="ordermemo">
-				    <option value="MH">배송메시지를 선택해주세요.</option>
-				    <option value="10">그냥 문 앞에 놓아 주시면 돼요.</option>
-				    <option value="20">도착 후 전화주시면 직접 받으러 갈게요.</option>
-				    <option value="30">벨을 누르지 말아주세요.</option>
-				    <option value="40">직접 받을게요.(부재 시 문앞)</option>
-				</select>
-						</td>
-    		   </tr>
-    		  </table>
-    		  
-    	
-				<!-- 상품 정보 -->
-				 <h1 class="page-header">배송상품</h1>
-				<table border="1" align="center">
-					<tr>
-						<th>이미지</th>
-						<th>상품명</th>
-						<th>가격</th>
-						<th>수량</th>
-						<th>상품구매금액</th>
-						
-					
-					<c:forEach items="${ list}" var="order">
-				
-					<tr>
-					    <td><img src="/dog/image/${order.p_thumbnail}" width="100px"></td>
-					    <td>${order.p_name}</td>
-					    <td><fmt:formatNumber pattern="#,##0원">${order.p_price}</fmt:formatNumber>
-					        <span id="price-${loop.index}" style="display: none;">${order.p_price}</span></td>
-					    <td>${order.cart_quantity}</td>
-					    <td id="subtotal-${loop.index}">${order.cart_quantity * order.p_price}</td>
-					    <input type="hidden" name="product_id" id="product_id" class="product_id" value="${order.product_id}">
-						<td><input type="hidden" name="p_price" id="o_price" class="o_price" value="${order.p_price}"></td>
-						<td><input type="hidden" name="cart_quantity" id="o_quantity" class="o_quantity" value="${order.cart_quantity}"></td>
-					</tr>
-					
-					  <c:set var="subtotal" value="${order.cart_quantity * order.p_price}" />
-    				<c:set var="totalPrice" value="${totalPrice + subtotal}" />
-
-					</c:forEach>
-
-    <c:choose>
-        <c:when test="${totalPrice < 30000}">
-            <c:set var="shipping" value="3000" /> <!-- 배송료를 3000원으로 설정 -->
-          
-        </c:when>
-        <c:otherwise>
-        	<c:set var="shipping" value="0" /> 
-         
-        </c:otherwise> 
-    </c:choose>
-			</table>
-
-
-				<!-- 쿠폰 -->
-				쿠폰선택(결제 시 적용)<br>
-				<select name="selectcoupon" id="selectcoupon">
-					<c:forEach items="${couponlist }" var="couponlist">
-						<option value="${couponlist.c_discount}">${couponlist.c_name}/${couponlist.c_discount}% 할인</option>
-					</c:forEach>
-				</select>
-		
-				<!-- 결제금액 -->
-				<h2 class="sub-title2">최종 결제정보</h2>
-			<table align="center">
-			<tr>
-				<th>총 상품금액</th>
-				<th>총 배송비</th>
-				<th>총 결제금액</th>
-			</tr>
-			<tr>
-				<td>${totalPrice}</td>
-				<td>${shipping}</td>
-				<td>${totalPrice+shipping}</td>
-				<input name="totalprice" type="hidden" value="${totalPrice }" id="totalprice">
-				<input name="shipping" type="hidden" value="${shipping }" id="shipping">
-				
-			</tr>
-			
-		</table>
-			
-	
+<!-- 결제금액 -->
+<table align="center" class="result">
+   <tr>
+      <th>총 상품금액</th>
+      <th>총 배송비</th>
+      <th>총 결제금액</th>
+   </tr>
+   <tr>
+      <td>${totalPrice}</td>
+      <td>${shipping}</td>
+      <td>${totalPrice+shipping}</td>
+         <input name="totalprice" type="hidden" value="${totalPrice }" id="totalprice">
+         <input name="shipping" type="hidden" value="${shipping }" id="shipping">
+   </tr>
+   <tr>
+        <td colspan="3">
+        
+      <!-- 쿠폰 -->
+      쿠폰선택(결제 시 적용)
+      <select name="selectcoupon" id="selectcoupon">
+            <option value="0">쿠폰없음</option>
+         <c:forEach items="${couponlist }" var="couponlist">
+            <option value="${couponlist.c_discount}">${couponlist.c_name}/${couponlist.c_discount}% 할인</option>
+         </c:forEach>
+      </select>
+     </td>
+   </tr>
+</table>
+</div>   
+   
 <script
-	src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+   src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
 /* 다음 주소 연동 */
 function execution_daum_address(){
- 		console.log("동작");
-	   new daum.Postcode({
-	        oncomplete: function(data) {
-	            // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분입니다.
-	            
-	        	// 각 주소의 노출 규칙에 따라 주소를 조합한다.
+       console.log("동작");
+      new daum.Postcode({
+           oncomplete: function(data) {
+               // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분입니다.
+               
+              // 각 주소의 노출 규칙에 따라 주소를 조합한다.
                 // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
                 var addr = ''; // 주소 변수
                 var extraAddr = ''; // 참고항목 변수
@@ -338,28 +252,28 @@ function execution_daum_address(){
                     if(extraAddr !== ''){
                         extraAddr = ' (' + extraAddr + ')';
                     }
-                 	// 추가해야할 코드
+                    // 추가해야할 코드
                     // 주소변수 문자열과 참고항목 문자열 합치기
                       addr += extraAddr;
                 
                 } else {
-                	addr += ' ';
+                   addr += ' ';
                 }
  
-             	// 제거해야할 코드
+                // 제거해야할 코드
                 // 우편번호와 주소 정보를 해당 필드에 넣는다.
                 $(".address1_input").val(data.zonecode);
-                $(".address2_input").val(addr);				
+                $(".address2_input").val(addr);            
                 // 커서를 상세주소 필드로 이동한다.
                 $(".address3_input").attr("readonly", false);
-                $(".address3_input").focus();	 
-	            
-	            
-	        }
-	    }).open();  	
-	
+                $(".address3_input").focus();    
+               
+               
+           }
+       }).open();     
+   
 }
-</script>	
+</script>   
 
 <!-- jQuery -->
  <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
@@ -369,67 +283,67 @@ function execution_daum_address(){
             src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
 
 <script>
-	
-	let productIds = [];
-	$("input.product_id").each(function() {
-	    productIds.push($(this).val());
-	});
-	
-	let prices=[];
-	$("input.o_price").each(function() {
-		prices.push($(this).val());
-	});
-	
-	let quantity=[];
-	$("input.o_quantity").each(function() {
-		quantity.push($(this).val());
-	});
-	
-	let optid=[];
-	$("input.opt_id").each(function() {
-		optid.push($(this).val());
-	});
+   
+   let productIds = [];
+   $("input.product_id").each(function() {
+       productIds.push($(this).val());
+   });
+   
+   let prices=[];
+   $("input.o_price").each(function() {
+      prices.push($(this).val());
+   });
+   
+   let quantity=[];
+   $("input.o_quantity").each(function() {
+      quantity.push($(this).val());
+   });
+   
+   let optid=[];
+   $("input.opt_id").each(function() {
+      optid.push($(this).val());
+   });
 
 
 
 function kakakoPayorder() {
 
-		
-		var totalprice = document.getElementById("totalprice").value;
-		var selectcoupon = $("#selectcoupon").val();
-		var shipping = document.getElementById("shipping").value;
-		var userId = $("#userId").val();
-		var ordermemo = $("#ordermemo").val();
-	   	var addressee = $("#addressee").val();
-	   	var phone = $("#phone").val();
-	   	var add1 = $(".address1_input").val();
-	   	var add2 = $(".address2_input").val();
-	   	var add3 = $(".address3_input").val();
-		
-		var finaltotalprice = totalprice - (totalprice * selectcoupon/100.0);
-	   	
-	   	
-	   var today = new Date();
-	   var hours = today.getHours(); // 시
-	   var minutes = today.getMinutes();  // 분
-	   var seconds = today.getSeconds();  // 초
-	   var milliseconds = today.getMilliseconds();
-	   var orderId = `${hours}` + `${minutes}` + `${seconds}` + `${milliseconds}`;
-	   
+      
+      var totalprice = document.getElementById("totalprice").value;
+      var selectcoupon = $("#selectcoupon").val();
+      var shipping = document.getElementById("shipping").value;
+      var userId = $("#userId").val();
+      var ordermemo = $("#ordermemo").val();
+         var addressee = $("#addressee").val();
+         var phone = $("#phone").val();
+         var add1 = $(".address1_input").val();
+         var add2 = $(".address2_input").val();
+         var add3 = $(".address3_input").val();
+      
+      var finaltotalprice = totalprice - (totalprice * selectcoupon/100.0);
+         
+         
+      var today = new Date();
+      var hours = today.getHours(); // 시
+      var minutes = today.getMinutes();  // 분
+      var seconds = today.getSeconds();  // 초
+      var milliseconds = today.getMilliseconds();
+      var orderId = `${hours}` + `${minutes}` + `${seconds}` + `${milliseconds}`;
+      
 
-	   
-	   console.log("받는사람 : " +addressee);
-	   console.log("주소1 : " +add1);
-	   console.log("주소2 : " +add2);
-	   console.log("주소3 : " +add3);
-	   console.log("전번 : " +phone);
-	   console.log("제품아이디 : " +productIds);
-	   console.log("옵션아이디 : " +optid);
-	   console.log("가격 : " +prices);
-	   console.log("수량 : " +quantity);
-	   
-	      
-	
+      
+      console.log("받는사람 : " +addressee);
+      console.log("주소1 : " +add1);
+      console.log("주소2 : " +add2);
+      console.log("주소3 : " +add3);
+      console.log("전번 : " +phone);
+      console.log("제품아이디 : " +productIds);
+      console.log("옵션아이디 : " +optid);
+      console.log("가격 : " +prices);
+      console.log("수량 : " +quantity);
+      
+         
+   
     var IMP = window.IMP;
     IMP.init("imp55581632");
     
@@ -454,22 +368,22 @@ function kakakoPayorder() {
                     type: "POST",
                     url: "ordersave",
                     data: {
-                    	productIds : productIds.join(","),
-                    	optid : optid.join(","),
-                    	prices : prices.join(","),
-                    	quantity : quantity.join(","),
-                    	"add1": add1,
-                    	"add2": add2,
-                    	"add3": add3,
-                    	"totalprice": totalprice,
-                    	"selectcoupon": selectcoupon,
-                    	"userId": userId,
-                    	"shipping": shipping,
-                    	"ordermemo": ordermemo,
-                    	"phone": phone,
-                    	"addressee": addressee
+                       productIds : productIds.join(","),
+                       optid : optid.join(","),
+                       prices : prices.join(","),
+                       quantity : quantity.join(","),
+                       "add1": add1,
+                       "add2": add2,
+                       "add3": add3,
+                       "totalprice": totalprice,
+                       "selectcoupon": selectcoupon,
+                       "userId": userId,
+                       "shipping": shipping,
+                       "ordermemo": ordermemo,
+                       "phone": phone,
+                       "addressee": addressee
              
-                    	
+                       
                     },
                     
                     
@@ -496,20 +410,20 @@ function kakakoPayorder() {
 
 function inicisPay() {
 
-	
-	var totalprice = document.getElementById("totalprice").value;
-	var selectcoupon = $("#selectcoupon").val();
-	var shipping = document.getElementById("shipping").value;
-	var userId = $("#userId").val();
-	var ordermemo = $("#ordermemo").val();
-   	var addressee = $("#addressee").val();
-   	var phone = $("#phone").val();
-   	var add1 = $(".address1_input").val();
-   	var add2 = $(".address2_input").val();
-   	var add3 = $(".address3_input").val();
+   
+   var totalprice = document.getElementById("totalprice").value;
+   var selectcoupon = $("#selectcoupon").val();
+   var shipping = document.getElementById("shipping").value;
+   var userId = $("#userId").val();
+   var ordermemo = $("#ordermemo").val();
+      var addressee = $("#addressee").val();
+      var phone = $("#phone").val();
+      var add1 = $(".address1_input").val();
+      var add2 = $(".address2_input").val();
+      var add3 = $(".address3_input").val();
 
-   	var finaltotalprice = totalprice - (totalprice * selectcoupon/100.0);
-   	
+      var finaltotalprice = totalprice - (totalprice * selectcoupon/100.0);
+      
    var today = new Date();
    var hours = today.getHours(); // 시
    var minutes = today.getMinutes();  // 분
@@ -556,22 +470,22 @@ IMP.request_pay(
                 type: "POST",
                 url: "ordersave",
                 data: {
-                	productIds : productIds.join(","),
-                	optid : optid.join(","),
-                	prices : prices.join(","),
-                	quantity : quantity.join(","),
-                	"add1": add1,
-                	"add2": add2,
-                	"add3": add3,
-                	"totalprice": totalprice,
-                	"selectcoupon": selectcoupon,
-                	"userId": userId,
-                	"shipping": shipping,
-                	"ordermemo": ordermemo,
-                	"phone": phone,
-                	"addressee": addressee
+                   productIds : productIds.join(","),
+                   optid : optid.join(","),
+                   prices : prices.join(","),
+                   quantity : quantity.join(","),
+                   "add1": add1,
+                   "add2": add2,
+                   "add3": add3,
+                   "totalprice": totalprice,
+                   "selectcoupon": selectcoupon,
+                   "userId": userId,
+                   "shipping": shipping,
+                   "ordermemo": ordermemo,
+                   "phone": phone,
+                   "addressee": addressee
          
-                	
+                   
                 },
                 
                 
@@ -608,4 +522,4 @@ IMP.request_pay(
 
 </div>
 </body>
-</html>
+</html>ㅍ
