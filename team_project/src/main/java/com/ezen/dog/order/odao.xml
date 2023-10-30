@@ -21,8 +21,8 @@ select orderid_seq.nextval from dual
 </select>
 
 <insert id="inserto">
-insert into c_order (address,totalprice,userId,shipping,ordermemo,phone,addressee,order_id,d_status)
- values (#{param1},#{param2},#{param3},#{param4},#{param5},#{param6},#{param7},#{param8},'배송준비')
+insert into c_order (address,totalprice,userId,shipping,ordermemo,phone,addressee,order_id,d_status,COUPON)
+ values (#{param1},#{param2},#{param3},#{param4},#{param5},#{param6},#{param7},#{param8},'배송준비',#{param9})
 </insert>
 
 
