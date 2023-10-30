@@ -52,19 +52,11 @@ public class MMailSend {
 	            msg.setRecipient(Message.RecipientType.TO, to);
 	            msg.setSubject("[cloggy] 회원가입 메일 인증", "UTF-8");
 	            String authKey = createKey();
-	            String emailBody = " cloggy 회원가입 인증번호는 : " + authKey + "입니다.";
-	            emailBody += "<br><br><table border='1'>";
-	            emailBody += "<tr>";
-	            emailBody += "<th>인증 번호</th>";
-	            emailBody += "<td>authKey</td>";
-	            emailBody += "</tr>";
-	            emailBody += "<br><br>";
+	            String emailBody = "회원님의 인증번호는 : " + authKey + "입니다.";
 	            msg.setText(emailBody, "UTF-8");
 	            msg.setHeader("content-Type", "text/html");
 	            javax.mail.Transport.send(msg, msg.getAllRecipients());
-	            
 	            authKeyMap.put(email, authKey);
-	            
 	            
 	        }catch (AddressException addr_e) {
 	            addr_e.printStackTrace();
@@ -73,7 +65,6 @@ public class MMailSend {
 	        }catch (Exception msg_e) {
 	            msg_e.printStackTrace();
 	        }
-	       
 	    }
 
 	 

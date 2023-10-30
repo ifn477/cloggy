@@ -23,6 +23,7 @@ import com.ezen.dog.likecheck.LikeDTO;
 import com.ezen.dog.likecheck.Likeservice;
 import com.ezen.dog.login.Lservice;
 import com.ezen.dog.member.MemberDTO;
+import com.ezen.dog.qna.Qservice;
 import com.ezen.dog.review.ReviewDTO;
 import com.ezen.dog.review.Rservice;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -311,5 +312,18 @@ public class ProductController {
 		mo.addAttribute("likelist",likelist);
 		return "product-user-out";
 	}
-	
+
+	@RequestMapping(value = "/product-searchview")
+	public String qnasearchview(HttpServletRequest request,Model mo) {
+		
+		String p_item = request.getParameter("p_item");
+		String p_value = request.getParameter("p_value");
+		PService ps = sqlSession.getMapper(PService.class);
+		if(p_item.equals("p_name")) list = ps.searchproductname(p_value);
+		else if(p_item.equals("category1")) list = ps.searchcategory1(p_value);
+		else list = ps.searchcategory2(p_value);
+		mo.addAttribute("list", list);
+		
+		return "product-out";
+	}
 }

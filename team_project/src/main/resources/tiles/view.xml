@@ -267,7 +267,6 @@
 	</definition>
 	
 <!-- 	공지사항 -->
-
 	<definition name="notice-input" extends="baseLayout">
 		<put-attribute name="title" value="공지등록"/>
 		<put-attribute name="body" value="/WEB-INF/views/notice/notice-input.jsp"/>

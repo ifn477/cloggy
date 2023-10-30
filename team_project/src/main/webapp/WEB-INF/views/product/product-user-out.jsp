@@ -2,14 +2,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!DOCTYPE html>
 <html>
 <head>		
 <style type="text/css">
-*{
-	 font-family: 'NanumBarunGothic';
-}
 .content{
 	max-width: 1300px;	
 	margin: 0 auto;
@@ -110,7 +108,7 @@
 	margin-bottom: 3rem;
 }
 .best-product-title1 {
-    font-size: 13px;
+    font-size: 15px;
     font-weight: 400;
     margin-bottom: 5px;
     color: #d88402;
@@ -140,14 +138,47 @@
     height: 120%;
 	text-align: center;
 }
-#product_name{
-	font-size: 20px;
-    font-weight: 500;
-    margin-top: 20px;
-    margin-bottom: 5px;
-}
 .best_product_price{
-	color: black;
+	font-family: 'Noto Sans KR', sans-serif;
+	font-weight: 300;
+	font-size: 18px;
+    padding-top: 5px;
+}
+#best_product_name{
+	font-family: 'Noto Sans KR', sans-serif;
+	font-weight: 400;
+	font-size: 20px;
+    width: 80%;
+    text-align: center;
+    margin: 0 auto;
+	text-decoration: none;
+	color: #463528;
+	opacity: 0.95;
+}
+.best_product_name{
+	padding-top: 10px;
+}
+
+/* 상품리스트 */
+.product_price{
+	font-family: 'Noto Sans KR', sans-serif;
+	font-weight: 300;
+	font-size: 16px;
+	padding-top: 3px;
+}
+.product_name{
+    width: 85%;
+    text-align: center;
+    margin: 0 auto;    
+}
+#product_name{
+	text-decoration: none;
+	font-family: 'Noto Sans KR', sans-serif;
+	font-weight: 400;
+	font-size: 18px;
+	text-decoration: none;
+	color: #463528;
+	opacity: 0.95;
 }
 </style>
 <meta charset="UTF-8">
@@ -173,13 +204,13 @@
     		</div>
          </a>
         </div>
-        <div class="product_name" id="product_name">
-          <a href="product-detail?product_id=${bestproduct.product_id}&userId=${member.userId}" style="text-decoration: none; color: black;">
+        <div class="best_product_name">
+          <a href="product-detail?product_id=${bestproduct.product_id}&userId=${member.userId}" id="best_product_name">
 			${bestproduct.p_name}
           </a>
         </div>
         <div class="best_product_price">
-			${bestproduct.p_price}
+        	<fmt:formatNumber pattern="#,###" value="${bestproduct.p_price}"/>원 
         </div>
       </li>
     </c:forEach>
@@ -245,14 +276,14 @@ var mySwiper = new Swiper('#best-product-slide', {
 	
 	<!-- 상품명 -->
      	<div class="product_name">
-         <a href="product-detail?product_id=${pout.product_id }" style="font-size: 20px; text-decoration: none; color: black;">
+         <a href="product-detail?product_id=${pout.product_id }" id="product_name">
          ${pout.p_name}
          </a>
        </div>
        
 	<!-- 가격 -->
-	<div class="product_price" style="padding-top: 15px;">
-        ${pout.p_price}
+	<div class="product_price">
+        <fmt:formatNumber pattern="#,###" value="${pout.p_price}"/>원 
 	</div>
 </div>
 </c:forEach>

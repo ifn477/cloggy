@@ -156,7 +156,7 @@ function jusoCallBack(roadFullAddr){
 
 /* 약관 동의 */
 function openTermsPopup1() {
-    window.open('member-terms1', '약관 내용(필수)', 'width=600,height=400');
+    window.open('member-terms1', '약관 내용(필수)', 'width=1000,height=800');
 }
 
 function openTermsPopup2() {

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>    
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -102,10 +103,21 @@ body{
  	text-align: center; 
 }
 #product_name{
-	font-size: 20px;
-    font-weight: 500;
-    margin-top: 20px;
+	font-family: 'Noto Sans KR', sans-serif;
+	font-weight: 400;
+	font-size: 21px;
+    padding-top: 15px;
     margin-bottom: 5px;
+    width: 90%;
+    text-align: center;
+    margin: 0 auto;
+    opacity: 0.9;
+}
+.product_price{
+	font-family: 'Noto Sans KR', sans-serif;
+	font-weight: 300;
+	font-size: 18px;
+    padding-top: 5px;
 }
 
 /* 신상품 */
@@ -167,6 +179,22 @@ body{
     width: 200px;
 	border: 0;
 }
+.new-product-name{
+	font-family: 'Noto Sans KR', sans-serif;
+	font-weight: 400;
+	font-size: 18px;
+    padding-top: 5px;
+    width: 90%;
+    text-align: center;
+    margin: 0 auto;
+    opacity: 0.9;
+}
+.new-product-price{
+	font-family: 'Noto Sans KR', sans-serif;
+	font-weight: 300;
+	font-size: 17px;
+	padding-top: 5px;
+}
 </style>
 <meta charset="UTF-8">
 <title>Insert title here</title>
@@ -185,7 +213,7 @@ body{
 	 </div>
      <div class="carousel-item">
        <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
-       <a href="#">
+       <a href="product-detail?product_id=2&userId=${member.userId}">
        <image width="100%" height="100%" xlink:href="/dog/resources/mainimage/클로기%20대메인2.jpg" preserveAspectRatio="xMidYMid slice" />
        </a>
        </svg>
@@ -193,7 +221,7 @@ body{
      <div class="carousel-item">
        <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
        <a href="#">
-       <image width="100%" height="100%" xlink:href="/dog/resources/mainimage/cloggymain.jpg" preserveAspectRatio="xMidYMid slice" />
+       <image width="100%" height="100%" xlink:href="/dog/resources/mainimage/cloggymain2.jpg" preserveAspectRatio="xMidYMid slice" />
        </a>
        </svg>
      </div>
@@ -238,12 +266,12 @@ body{
           </a>
         </div>
         <div class="product_name" id="product_name">
-          <a href="product-detail?product_id=${best.product_id}&userId=${member.userId}" style="text-decoration: none; color: black;">
+          <a href="product-detail?product_id=${best.product_id}&userId=${member.userId}" style="text-decoration: none; color: #463528;">
 			${best.p_name}
           </a>
         </div>
         <div class="product_price" style="color: black;">
-          ${best.p_price}
+           <fmt:formatNumber pattern="#,###" value="${best.p_price}"/>원 
         </div>
       </li>
     </c:forEach>
@@ -271,15 +299,15 @@ body{
     	</div>
 
 	<!-- 상품명 -->
-    	<div class="product_name">
-	        <a href="product-detail?product_id=${newitem.product_id }" style="font-size:20px; text-decoration: none; color: black;">
-	         <p class="product-name" style="width: 250px; text-align: center; margin: 0 auto;">${newitem.p_name}</p>
+    	<div class="new-product-name">
+	        <a href="product-detail?product_id=${newitem.product_id }" style="text-decoration: none; color: #463528;">
+	         <p class="new-product-name2" style="width: 250px; text-align: center; margin: 0 auto;">${newitem.p_name}</p>
 	        </a>
         </div>
       
    <!-- 가격 -->
-	   <div class="product_price" style="padding-top: 15px;">
-	        ${newitem.p_price}
+	   <div class="new-product-price">
+	        <fmt:formatNumber pattern="#,###" value="${newitem.p_price}"/>원 
 	   </div>
 </div>
 </c:forEach>
