@@ -32,8 +32,10 @@ public class LoginController {
 	        for (Cookie cookie : cookies) {
 	            if (cookie.getName().equals("rememberedUserId")) {
 	                String rememberedUserId = cookie.getValue();
+	                String rememberedUserPw = cookie.getValue();
 	                // Set the remembered user ID in the model to pre-fill the input field
 	                mo.addAttribute("rememberedUserId", rememberedUserId);
+	                mo.addAttribute("rememberedUserPw", rememberedUserPw);
 	                break;
 	            }
 	        }

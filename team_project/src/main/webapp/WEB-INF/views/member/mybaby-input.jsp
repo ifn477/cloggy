@@ -4,9 +4,14 @@
 <html>
 <head>
 <style type="text/css">
+body{
+min-height: calc(100vh - 500px);
+}
+
 .babyTable {
+	margin-top : 50px;
 	display: flex;
-	height: 100vh;
+	height: 100%;
 	flex-flow: column nowrap; /*direction+wrap*/
 	gap: 10px;
 	/* 중심축 기준 정렬 */
@@ -14,6 +19,7 @@
 	/* 반대축(수평축) 기준 정렬 */
 	align-items: center;
 	align-content: center;
+	flex-direction : column;
 }
 
 .baby_input_table {
@@ -21,6 +27,42 @@
 	grid-template-columns: 1fr 2fr;
 	grid-auto-rows: minmax(30px, auto);
 	grid-gap: 5px;
+}
+
+input[type=text], select {
+	width: 1fr 2fr;
+/* 	height: ; */
+/* 	font-size: ; */
+	border-color : #d88402;
+	background-color : rgb(255, 246, 233);
+	box-shadow: none;
+	border: 2px solid #ffffff;
+    box-shadow: 0 0 5px #ffffff;
+}
+input:focus { outline: none !important; border-color: #d88402; box-shadow: 0 0 5px #d88402; background-color :rgb(255, 246, 233); }
+
+.baby_photo{
+	margin-bottom : 20px;
+}
+
+button {
+	background-color: rgb(255, 246, 233);
+	border: none;
+	  &:hover {
+    background: #ED9309;
+    color: rgb(255, 246, 233);
+    }
+}
+.submitbtn{
+	margin-top : 20px;
+	background-color: #ED9309;
+	text-align: center;
+	margin-bottom: 2rem;
+	width: 120px;
+	height: 40px;
+	color: white;
+	border-radius: 0;
+	border: 0;
 }
 </style>
 <meta charset="UTF-8">
@@ -107,7 +149,7 @@
 
 			<!-- 			사진 업로드 -->
 			<div class="baby_photo">
-				<img src="/dog/image/camera.png" id="upload" height="200px"> <input
+				<img src="/dog/image/graypreview.png" id="upload" height="200px"> <input
 					type="file" class="real-upload" name="baby_photo"
 					style="display: none;" accept=".jpg, .png">
 			</div>
@@ -117,6 +159,8 @@
 				<div class="baby_name">
 					<input type="text" name="baby_name">
 				</div>
+		
+				
 				<div>견종을 등록해주세요</div>
 				<div class="baby_type">
 					<select>
@@ -288,8 +332,7 @@
 					<button class="bodytypebtn" name="bodytype">통통</button>
 				</div>
 			</div>
-		</div>
-		<input type="submit" name="submit" value="작성완료">
+		<input type="submit" name="submit" class="submitbtn"	value="작성완료">
 		</div>
 	</form>
 </html>

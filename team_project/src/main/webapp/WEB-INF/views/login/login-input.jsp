@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 <html lang="en" data-bs-theme="auto">
 <head>
+ <script src="https://code.jquery.com/jquery-latest.min.js"></script>
   <style>
   	  .login-form{
   	  margin : 120px 0px 130px 0px;
@@ -38,12 +39,12 @@
             <div class="container_bottom">
 		 <p style="font-size: 23px;"><strong>로그인</strong></p>
           <div class="form-floating">
-              <input class="form-control" type="text" name="userId" value="${rememberedUserId}">
-              <input type="password" class="form-control" name="password">
+              <input class="form-control" type="text" name="userId" id="inputId" value="${rememberedUserId}">
+              <input type="password" class="form-control" id="inputPw" name="password" value="${rememberedUserPw}">
           </div>
           
 <div style="font-size: small; margin-top: 10px; margin-bottom: 10px;">
-    <input type="checkbox" class="custom-control-nput" id="customCheck" name="customCheck" ${checked} />&nbsp; 아이디 기억하기
+    <input type="checkbox" class="custom-control-nput" id="customCheck" name="customCheck" ${checked} />&nbsp; 로그인 정보 기억하기
     <a href="pw-searchForm" style="float: right;">비밀번호 찾기 &nbsp;</a><a href="id-searchForm" style="float: right;">아이디 찾기 /&nbsp;</a>
 </div>
           
@@ -65,7 +66,7 @@
       </div>
       </div>              
       </form>
-<script type="text/javascript">
+
 <c:if test="${loginFailed==true}">
 alert('회원정보가 일치하지 않습니다.');
 </c:if>
@@ -73,38 +74,84 @@ alert('회원정보가 일치하지 않습니다.');
 alert('회원님의 비밀번호를 메일로 발송하였습니다.');
 </c:if>
 
+<script type="text/javascript">
 function redirectToKakaoLogin() {
     window.location.href = "https://kauth.kakao.com/oauth/authorize?client_id=4b174c23998fabfa7c3c09869f3e67a7&redirect_uri=http://localhost:8333/dog/kakaoMember&response_type=code";
 }
 
 $(document).ready(function () {
+	//저장된 userId 가져오기
+    var rememberedUserId = getCookie("rememberedUserId");
+    
+    //이미 저장된 아이디(쿠키)가 있는 경우
+    //로딩될 때 아이디정보 기억하기에 체크된 채로~
+    if (rememberedUserId) {
+        $("input[name='customCheck']").prop('checked', true);
+    }
+    
+    
+    //로그인버튼 클릭 시 id와 pw 전송
+	
 	$('#loginBtn').click(function() {
 		var id = $('#inputId').val();
-// 		var remember_us = $('#remember_us').is(':checked');
+		var pw = $('#inputPw').val();
+		var customCheck = $('#customCheck').is(':checked');
+		
+        console.log(userId);
+        console.log(userPw);
+		
+		
+	    // 'customCheck'가 체크되어 있을 때만 쿠키에 저장
+	    if ($('#customCheck').is(':checked')) {
+	        // 아이디와 패스워드 쿠키에 저장
+	        document.cookie = "rememberedUserId=" + id + "; expires=" + new Date(new Date().getTime() + 30 * 24 * 60 * 60 * 1000).toUTCString();
+	        document.cookie = "rememberedUserPw=" + pw + "; expires=" + new Date(new Date().getTime() + 30 * 24 * 60 * 60 * 1000).toUTCString();
+	    } else {
+	        // If unchecked, remove the cookie
+	        document.cookie = "rememberedUserId=; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
+	        document.cookie = "rememberedUserPw=; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
+	    }
 			$.ajax({
 			type : 'post',
 			url : '${pageContext.request.contextPath}/',
 			data : {
 				user_id : id,
-// 				remember_userId : remember_us
+				user_pw : pw,
+				remember_userId : customCheck
+				remember_userPw : customCheck
 				},
 				success : function(data) {
 					console.log(data);
 				}
 			});
 		});
-// Check if the "아이디 기억하기" checkbox is checked
-$('#customCheck').change(function () {
-    if (this.checked) {
-        var userId = $('#inputId').val();
-        // Set a cookie with the user's ID that expires in 30 days
-        document.cookie = "rememberedUserId=" + userId + "; expires=" + new Date(new Date().getTime() + 30 * 24 * 60 * 60 * 1000).toUTCString();
-    } else {
-        // If unchecked, remove the cookie
-        document.cookie = "rememberedUserId=; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
+    
+// 	// "아이디 기억하기" ㅊㅔ크박크에 변화 있을 때 
+// 	$('#customCheck').change(function () {
+// 	    if (this.checked) {
+// 	        var userId = $('#inputId').val();
+// 	        var userPw = $('#inputPw').val();
+// 	        console.log(userId);
+// 	        console.log(userPw);
+	        // Set a cookie with the user's ID that expires in 30 days
+// 	        document.cookie = "rememberedUserId=" + userId + "; expires=" + new Date(new Date().getTime() + 30 * 24 * 60 * 60 * 1000).toUTCString();
+// 	        document.cookie = "rememberedUserPw=" + userPw + "; expires=" + new Date(new Date().getTime() + 30 * 24 * 60 * 60 * 1000).toUTCString();
+// 	    } else {
+// 	        // If unchecked, remove the cookie
+// 	        document.cookie = "rememberedUserId=; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
+// 	        document.cookie = "rememberedUserPw=; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
+// 	    }
+// 	});
+});
+
+
+function getCookie(name) {
+    var value = "; " + document.cookie;
+    var parts = value.split("; " + name + "=");
+    if (parts.length === 2) {
+        return parts.pop().split(";").shift();
     }
-});
-});
+}
 </script>
 </body>
 </html>
