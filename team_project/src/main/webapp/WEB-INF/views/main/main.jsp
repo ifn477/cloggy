@@ -214,7 +214,7 @@ body{
      <div class="carousel-item">
        <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
        <a href="product-detail?product_id=2&userId=${member.userId}">
-       <image width="100%" height="100%" xlink:href="/dog/resources/mainimage/cloggymain-product.jpg" preserveAspectRatio="xMidYMid slice" />
+       <image width="100%" height="100%" xlink:href="/dog/resources/mainimage/클로기%20대메인2.jpg" preserveAspectRatio="xMidYMid slice" />
        </a>
        </svg>
      </div>

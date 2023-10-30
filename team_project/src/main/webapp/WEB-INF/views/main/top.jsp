@@ -164,13 +164,10 @@ a {
               <li><a class="dropdown-item" href="product-out-total?category1_id=1">전체보기</a></li>
               <li><a class="dropdown-item" href="product-out-cate?category1_id=1&category2_id=13">퍼피(1세미만)-건식사료</a></li>
               <li><a class="dropdown-item" href="product-out-cate?category1_id=1&category2_id=11">퍼피(1세미만)-습식사료</a></li>
-              <li><a class="dropdown-item" href="product-out-cate?category1_id=1&category2_id=12">퍼피(1세미만)-자연식</a></li>
               <li><a class="dropdown-item" href="product-out-cate?category1_id=1&category2_id=16">어덜트(1-7세)-건식사료</a></li>
               <li><a class="dropdown-item" href="product-out-cate?category1_id=1&category2_id=14">어덜트(1-7세)-습식사료</a></li>
-              <li><a class="dropdown-item" href="product-out-cate?category1_id=1&category2_id=15">어덜트(1-7세)-자연식</a></li>
               <li><a class="dropdown-item" href="product-out-cate?category1_id=1&category2_id=19">시니어(7세이상)-건식사료</a></li>
               <li><a class="dropdown-item" href="product-out-cate?category1_id=1&category2_id=17">시니어(7세이상)-습식사료</a></li>
-              <li><a class="dropdown-item" href="product-out-cate?category1_id=1&category2_id=18">시니어(7세이상)-자연식</a></li>
           </ul>
       </li>
 
