@@ -30,6 +30,10 @@ insert into product
 <select id="productout" resultType="com.ezen.dog.product.ProductDTO">
 select * from product
 </select>
+<!-- 베스트 상품리스트 -->
+<select id="totalbest" resultType="com.ezen.dog.product.ProductDTO">
+SELECT * FROM product ORDER BY p_hits DESC
+</select>
 <!-- 조회수순 상품리스트 -->
 <select id="productbestout" resultType="com.ezen.dog.product.ProductDTO">
 SELECT * FROM product ORDER BY p_hits DESC
@@ -115,4 +119,19 @@ SELECT * FROM PRODUCT WHERE product_Id IN
 </foreach>
 </select>
 
+<select id="searchproductname" resultType="com.ezen.dog.product.ProductDTO">
+select * from product where p_name like '%' || #{param1} || '%'
+</select>
+<select id="searchcategory1" resultType="com.ezen.dog.product.ProductDTO">
+select p.p_thumbnail, p.p_name, p.p_price, p.p_stock, p.p_hits, p.p_sell
+from product p, category_1 c
+where p.category1_id = c.category1_id
+and c.category1_name like '%' || #{param1} || '%'
+</select>
+<select id="searchcategory2" resultType="com.ezen.dog.product.ProductDTO">
+select p.p_thumbnail, p.p_name, p.p_price, p.p_stock, p.p_hits, p.p_sell
+from product p, category_2 c
+where p.category2_id = c.category2_id
+and c.category2_name like '%' || #{param1} || '%'
+</select>
 </mapper>
