@@ -39,7 +39,7 @@ public class MMailSend {
 	        Session session = Session.getDefaultInstance(p, auth);
 	        MimeMessage msg = new MimeMessage(session);
 	        
-	        // 占쏙옙占쏙옙占�
+	        // �뜝�룞�삕�뜝�룞�삕�뜝占�
 	        Session ss = Session.getDefaultInstance(p, auth);
 	        ss.setDebug(true);
 	         
@@ -50,9 +50,9 @@ public class MMailSend {
 	            msg.setFrom(from);
 	            InternetAddress to = new InternetAddress(email);
 	            msg.setRecipient(Message.RecipientType.TO, to);
-	            msg.setSubject("[cloggy] 회원가입 메일 인증", "UTF-8");
+	            msg.setSubject("[cloggy] 회원가입 인증 메일", "UTF-8");
 	            String authKey = createKey();
-	            String emailBody = "회원님의 인증번호는 : " + authKey + "입니다.";
+	            String emailBody = "인증 번호는 : " + authKey + "입니다.";
 	            msg.setText(emailBody, "UTF-8");
 	            msg.setHeader("content-Type", "text/html");
 	            javax.mail.Transport.send(msg, msg.getAllRecipients());
@@ -83,7 +83,7 @@ public class MMailSend {
 	    
 	}
 
-	// 占쏙옙占쏙옙 占쏙옙占쏙옙 占쌘듸옙
+	// �뜝�룞�삕�뜝�룞�삕 �뜝�룞�삕�뜝�룞�삕 �뜝�뙓�벝�삕
 	public static String createKey() {
 		StringBuffer key = new StringBuffer();
 		Random rnd = new Random();
@@ -104,7 +104,7 @@ public class MMailSend {
 		return key.toString();
 	}
 	
-    //  占쏙옙占쏙옙 占쌘듸옙 占쏙옙占쏙옙
+    //  �뜝�룞�삕�뜝�룞�삕 �뜝�뙓�벝�삕 �뜝�룞�삕�뜝�룞�삕
     public static boolean verifyKey(String email, String userInputKey) {
         String storedKey = authKeyMap.get(email);
         return storedKey != null && storedKey.equals(userInputKey);

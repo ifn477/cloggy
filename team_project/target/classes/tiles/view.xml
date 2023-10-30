@@ -169,16 +169,6 @@
 		<put-attribute name="body" value="/WEB-INF/views/member/member-search-out.jsp"/>
 	</definition>
 
-	<definition name="member-terms1" extends="baseLayout">
-		<put-attribute name="title" value="회원가입약관1"/>
-		<put-attribute name="body" value="/WEB-INF/views/member/member-terms1.jsp"/>
-	</definition>	
-
-	<definition name="member-terms2" extends="baseLayout">
-		<put-attribute name="title" value="회원가입약관2"/>
-		<put-attribute name="body" value="/WEB-INF/views/member/member-terms2.jsp"/>
-	</definition>	
-
 	<definition name="order" extends="baseLayout">
 		<put-attribute name="title" value="결제"/>
 		<put-attribute name="body" value="/WEB-INF/views/pay/order.jsp"/>
@@ -277,7 +267,6 @@
 	</definition>
 	
 <!-- 	공지사항 -->
-
 	<definition name="notice-input" extends="baseLayout">
 		<put-attribute name="title" value="공지등록"/>
 		<put-attribute name="body" value="/WEB-INF/views/notice/notice-input.jsp"/>
