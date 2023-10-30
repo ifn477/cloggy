@@ -139,7 +139,7 @@ a {
           <a class="nav-link" href="main" role="button" aria-expanded="false">main</a>
           </li>
           <li class="nav-item">
-          <a class="nav-link" href="#" role="button" aria-expanded="false">best♥</a>
+          <a class="nav-link" href="totalbest" role="button" aria-expanded="false">best♥</a>
           </li>
 <!-- 관리자모드로 옮기기  -->
 

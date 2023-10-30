@@ -41,6 +41,11 @@
 		<put-attribute name="body" value="/WEB-INF/views/product/product-out.jsp"/>
 	</definition>
 	
+	<definition name="best-product-out" extends="baseLayout">
+		<put-attribute name="title" value="best♥"/>
+		<put-attribute name="body" value="/WEB-INF/views/product/best-product-out.jsp"/>
+	</definition>
+	
 	<definition name="product-user-out" extends="baseLayout">
 		<put-attribute name="title" value="사용자상품리스트"/>
 		<put-attribute name="body" value="/WEB-INF/views/product/product-user-out.jsp"/>
@@ -267,7 +272,6 @@
 	</definition>
 	
 <!-- 	공지사항 -->
-
 	<definition name="notice-input" extends="baseLayout">
 		<put-attribute name="title" value="공지등록"/>
 		<put-attribute name="body" value="/WEB-INF/views/notice/notice-input.jsp"/>

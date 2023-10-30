@@ -112,6 +112,17 @@ public class ProductController {
 		
 		return "product-out";
 	}
+
+	//best카테 출력
+	@RequestMapping(value = "/totalbest")
+	public String totalbest(Model mo) {
+		
+		PService ps = sqlSession.getMapper(PService.class);
+		list = ps.totalbest();
+		mo.addAttribute("list", list);
+		
+		return "best-product-out";
+	}
 	
 	//상품리스트 대분류 출력
 	@RequestMapping(value = "/product-out-total")
