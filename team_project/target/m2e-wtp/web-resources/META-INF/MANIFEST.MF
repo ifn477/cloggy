@@ -1,10 +1,5 @@
 Manifest-Version: 1.0
-<<<<<<< HEAD
 Built-By: meata
 Build-Jdk: 11.0.18
-=======
-Built-By: ￬ﾝﾴ￭ﾕﾜ￬ﾆﾔ
-Build-Jdk: 11.0.20
->>>>>>> eab85bd16992ff3da8804150677d2625f2c51022
 Created-By: Maven Integration for Eclipse
 

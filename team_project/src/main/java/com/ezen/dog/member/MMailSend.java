@@ -18,6 +18,7 @@ import javax.mail.internet.MimeMessage;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import javax.mail.*;
 
 public class MMailSend {
 	
@@ -52,7 +53,14 @@ public class MMailSend {
 	            msg.setRecipient(Message.RecipientType.TO, to);
 	            msg.setSubject("[cloggy] 회원가입 메일 인증", "UTF-8");
 	            String authKey = createKey();
-	            String emailBody = "회원님의 인증번호는 : " + authKey + "입니다.";
+	            String emailBody = "안녕하세요. 클로기입니다.<br>";
+	            emailBody += "회원님의 인증번호를 확인해주세요.<br>";
+				emailBody += "<table style=\"font-family: 'Noto Sans KR', sans-serif; border: 1px solid #463528; font-size: 12px; padding: 5px;\">";
+					emailBody += "<tr>";
+					emailBody += "<th style=\"background-color: #f6eddf;\">인증 번호</th>";
+					emailBody += "<td style=\"\">" + authKey + "</td>";
+					emailBody += "</tr>";
+					emailBody += "</table><br>";
 	            msg.setText(emailBody, "UTF-8");
 	            msg.setHeader("content-Type", "text/html");
 	            javax.mail.Transport.send(msg, msg.getAllRecipients());
