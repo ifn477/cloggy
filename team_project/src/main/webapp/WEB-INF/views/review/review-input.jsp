@@ -339,19 +339,19 @@ cursor: pointer;
 <!-- 				 <i class="bi bi-x-lg">></i> -->
 				<button type="button" class="closebtn1" onclick="window.close()">X</button>
 			</div>
-			<c:forEach items="${plist}" var="plist">
+			<c:forEach items="${olist}" var="olist">
 				<div class="itemInfo">
 					<div class="thumb">
-						<img src="/dog/image/${plist.p_thumbnail}" class="img">
+						<img src="/dog/image/${olist.p_thumbnail}" class="img">
 					</div>
 					<div class="itemInfo2">
-						<div class="item-name">${plist.p_name}</div>
-						<div class="item-option">
-							<c:choose>
-								<c:when test="${plist.p_option == 0}"> 선택 : 없음 </c:when>
-								<c:otherwise>${plist.p_option}</c:otherwise>
-							</c:choose>
-						</div>
+						<div class="item-name">${olist.p_name}</div>
+<!-- 						<div class="item-option"> -->
+<%-- 							<c:choose> --%>
+<%-- 								<c:when test="${olist.p_option == 0}"> 선택 : 없음 </c:when> --%>
+<%-- 								<c:otherwise>${olist.p_option}</c:otherwise> --%>
+<%-- 							</c:choose> --%>
+<!-- 						</div> -->
 					</div>
 				</div>
 			</c:forEach>
