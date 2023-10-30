@@ -11,16 +11,7 @@
 <style type="text/css">
 /* 폰트 */
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;500&display=swap');
-@font-face {
- font-family: 'NanumBarunGothic';
- font-style: normal;
- font-weight: 400;
- src: url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.eot');
- src: url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.eot?#iefix') format('embedded-opentype'), url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.woff') format('woff'), url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.ttf') format('truetype');
-}
-.nanumbarungothic * {
- font-family: 'NanumBarunGothic', sans-serif;
- }
+ 
 /* 맨위 안내 라인   */
 #topswiper {
   width: 100%;
@@ -53,7 +44,9 @@ color: white;
 /* 네비바 */
 .navbar-nav .nav-link {
   font-family: 'Noto Sans KR', sans-serif;
-  font-size: 15px; /* 네비게이션 링크의 글꼴 크기 설정 */
+}
+.dropdown-item{
+	font-weight: 300;
 }
 .form-control.me-2 {
   width: 200px; /* 입력 필드의 너비 설정 */
@@ -65,10 +58,17 @@ color: white;
    line-height: 15px;
    border-color: #a26300;
    color: #a26300;
-  font-size: 13px; /* 버튼의 글꼴 크기 설정 */
+   font-size: 13px; /* 버튼의 글꼴 크기 설정 */
 }
 .nav-link:hover {
   color: #e48b00; /* 마우스 호버 시 변경할 색상으로 설정 */
+}
+#authnav{
+  font-family: 'Noto Sans KR', sans-serif; 
+  color: gray;
+}
+.nav-item.dropdown.list-unstyled:hover > a {
+  color: #e48b00;
 }
 .dropdown-menu {
    border-style: none;
@@ -102,9 +102,9 @@ a {
 <!-- 맨위안내 -->
   <div class="swiper-container" id="topswiper">
     <div class="swiper-wrapper" id="topwrapper">
-      <div class="swiper-slide" id="topslide"><a href="login-input">♥로그인 후 클로기의 다양한 혜택을 만나보세요♥</a></div>
+      <div class="swiper-slide" id="topslide"><a href="login-input">❤️로그인 후 클로기의 다양한 혜택을 만나보세요❤️</a></div>
       <div class="swiper-slide" id="topslide">지금 클로기는 전품목 무료배송 이벤트 중!</div>
-      <div class="swiper-slide" id="topslide">♥건강에도 좋고 맛있는 덴탈껌 10% SALE♥ ~2024.02.15 23:59PM</div>
+      <div class="swiper-slide" id="topslide">❤️건강에도 좋고 맛있는 덴탈껌 10% SALE❤️ ~2024.02.15 23:59PM</div>
     </div>
   </div>
 
@@ -196,9 +196,12 @@ a {
             <li><a class="dropdown-item" href="product-out-cate?category1_id=3&category2_id=35">장난감</a></li>
           </ul>
         </li>
-          <li class="nav-item">
-          <a class="nav-link" href="#" role="button" aria-expanded="false">event</a>
-          </li>
+        <li class="nav-item dropdown"  onmouseenter="openDropdown(this)" onmouseleave="closeDropdown(this)">
+          <a class="nav-link" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">event</a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="coupon-downloadform">쿠폰다운로드</a></li>
+          </ul>
+        </li>
         <li class="nav-item dropdown"  onmouseenter="openDropdown(this)" onmouseleave="closeDropdown(this)">
           <a class="nav-link" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">게시판</a>
           <ul class="dropdown-menu">
@@ -216,7 +219,7 @@ a {
             <li><a class="dropdown-item" href="coupon-input">쿠폰생성</a></li>
             <li><a class="dropdown-item" href="coupon-out">쿠폰조회</a></li>
             <li><a class="dropdown-item" href="coupon-downloadform">쿠폰다운로드</a></li>
-            <li><a class="dropdown-item" href="coupon-list?userId=${member.userId }">쿠폰사용</a></li>
+<%--             <li><a class="dropdown-item" href="coupon-list?userId=${member.userId }">쿠폰사용</a></li> --%>
           </ul>
         </li>
    </c:when>
@@ -236,7 +239,7 @@ a {
 
       <c:choose>
          <c:when test="${loginstate == true && member.auth_id == 0}">
-          <ul class="nav navbar-nav navbar-right">
+          <ul class="nav navbar-nav navbar-right" id="authnav">
            	<li>&nbsp; ${member.userName}님 반갑습니다! &nbsp;</li>
          <li class="nav-item dropdown list-unstyled" onmouseenter="openDropdown(this)" onmouseleave="closeDropdown(this)">
         <a class="glyphicon glyphicon-log-in" href="search-all" role="button" data-bs-toggle="dropdown" aria-expanded="false">

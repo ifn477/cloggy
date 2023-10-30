@@ -27,4 +27,7 @@ public interface PService {
 	public ArrayList<ProductDTO> search2(String p_name);
 	public ArrayList<ProductDTO> search3(String p_name);
 	public ArrayList<ProductDTO> recentProducts(String[] productIds);
+	public ArrayList<ProductDTO> searchproductname(String p_value);
+	public ArrayList<ProductDTO> searchcategory1(String p_value);
+	public ArrayList<ProductDTO> searchcategory2(String p_value);
 }
