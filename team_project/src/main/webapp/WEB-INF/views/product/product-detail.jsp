@@ -164,7 +164,18 @@
 	text-align: center;
 	margin: 0 auto;
 }
-
+#toggleButton{
+	padding: 5px 20px; /* 위아래 패딩과 좌우 패딩을 조절 */
+    border: 1px solid #d88402;
+    border-radius: 10px;
+    color: #d88402;
+    background: #fff;
+    display: inline-block;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 20px;
+    margin-bottom: 30px;
+    border-radius: 20px;
+}
 /* 수정버튼 */
 #modibnt {
 	border-radius: 0;
@@ -356,6 +367,7 @@
 							<img alt="상세페이지" src="/dog/image/${pdetail.p_image}"
 								style="margin-top: 50px;">
 						</div>
+						<button id="toggleButton">자세히보기</button>
 						<div class="product-info">
 							<div class="info">${pdetail.p_info}</div>
 						</div>
@@ -377,7 +389,6 @@
 		</div>
 
 </c:forEach>
-
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
@@ -621,6 +632,22 @@
 		document.body.removeChild(textarea);
 		alert("URL이 복사되었습니다.")
 	}
+	
+	//상세설명 접었다 피기
+    const productInfo = document.querySelector(".product-info");
+    const toggleButton = document.getElementById("toggleButton");
+
+    // 초기에는 product-info를 숨겨둘 것이므로 display 속성을 'none'으로 설정
+    productInfo.style.display = "none";
+
+    // 버튼 클릭 시 product-info를 토글 (보이거나 숨김)
+    toggleButton.addEventListener("click", function() {
+      if (productInfo.style.display === "none") {
+        productInfo.style.display = "block"; // 보이게 함
+      } else {
+        productInfo.style.display = "none"; // 숨김
+      }
+    });
 </script>
 </body>
 </html>
