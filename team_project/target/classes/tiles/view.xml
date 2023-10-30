@@ -168,20 +168,15 @@
 		<put-attribute name="title" value="회원검색"/>
 		<put-attribute name="body" value="/WEB-INF/views/member/member-searchForm.jsp"/>
 	</definition>	
-	
-	<definition name="member-search-out" extends="baseLayout">
-		<put-attribute name="title" value="회원검색결과"/>
-		<put-attribute name="body" value="/WEB-INF/views/member/member-search-out.jsp"/>
-	</definition>
 
-	<definition name="order" extends="baseLayout">
-		<put-attribute name="title" value="결제"/>
-		<put-attribute name="body" value="/WEB-INF/views/pay/order.jsp"/>
+	<definition name="member-terms1" extends="baseLayout">
+		<put-attribute name="title" value="회원가입약관1"/>
+		<put-attribute name="body" value="/WEB-INF/views/member/member-terms1.jsp"/>
 	</definition>	
-	
-	<definition name="naverpay" extends="baseLayout">
-		<put-attribute name="title" value="네이버간편결제"/>
-		<put-attribute name="body" value="/WEB-INF/views/pay/naverpay.jsp"/>
+
+	<definition name="member-terms2" extends="baseLayout">
+		<put-attribute name="title" value="회원가입약관2"/>
+		<put-attribute name="body" value="/WEB-INF/views/member/member-terms2.jsp"/>
 	</definition>	
 	
 	<definition name="member-info" extends="baseLayout">
@@ -296,5 +291,13 @@
 		<put-attribute name="title" value="공지목록"/>
 		<put-attribute name="body" value="/WEB-INF/views/notice/notice-searchview.jsp"/>
 	</definition>		
+	
+
+	<definition name="mypage" extends="baseLayout">
+		<put-attribute name="title" value="마이페이지"/>
+		<put-attribute name="body" value="/WEB-INF/views/main/mypage.jsp"/>
+	</definition>		
+	
+	
 	
 </tiles-definitions>

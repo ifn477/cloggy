@@ -448,45 +448,47 @@ button {
 						});
 
 		//주문하기버튼
-		$("#order-button").click(
-				function() {
-					const checkedBoxes = $('.chk:checked');
-					let productIds = [];
+$("#order-button").click(function() {
+    const checkedBoxes = $('.chk:checked');
+    let productIds = [];
+    let optionIds = []; // 옵션 아이디 배열 추가
 
-					// 선택된 제품의 product_id를 수집해서 배열에 저장
-					$("input[name='check-one']:checked").each(
-							function() {
-								const productId = $(this).closest("tr").find(
-										"input[name='product_id']").val();
-								productIds.push(productId);
-							});
+    // 선택된 제품의 product_id와 opt_id(옵션 아이디)를 수집해서 배열에 저장
+    $("input[name='check-one']:checked").each(function() {
+        const productId = $(this).closest("tr").find("input[name='product_id']").val();
+        const optionId = $(this).closest("tr").find("input[name='opt_id']").val(); // 옵션 아이디 수집
+        productIds.push(productId);
+        optionIds.push(optionId); // 옵션 아이디를 배열에 추가
+    });
 
-					console.log("제품아이디 : " + productIds);
+    console.log("제품 아이디: " + productIds);
+    console.log("옵션 아이디: " + optionIds);
 
-					if (productIds.length === 0) {
-						console.log('선택한 상품이 없습니다.');
-						return;
-					} else {
-						console.log('주문하러~고고');
-					}
+    if (productIds.length === 0) {
+        console.log('선택한 상품이 없습니다.');
+        return;
+    } else {
+        console.log('주문하러~고고');
+    }
 
-					$.ajax({
-						type : "POST",
-						url : "/dog/order",
-						async : false,
-						data : {
-							productIds : productIds.join(",")
-						},
-						success : function(response) {
-		                      $('body').html(response);
-		                      $('#order-results').html(response);
-						},
-						error : function(xhr, status, error) {
-							alert("오류 발생: " + error);
-						}
-					});
-
-				});
+    // 서버로 제품 아이디와 옵션 아이디 배열을 전송
+    $.ajax({
+        type: "POST",
+        url: "/dog/order",
+        async: false,
+        data: {
+            productIds: productIds.join(","),
+            optionIds: optionIds.join(",") // 옵션 아이디 전송
+        },
+        success: function(response) {
+            $('body').html(response);
+            $('#order-results').html(response);
+        },
+        error: function(xhr, status, error) {
+            alert("오류 발생: " + error);
+        }
+    });
+});
 	</script>
 </body>
 </html>

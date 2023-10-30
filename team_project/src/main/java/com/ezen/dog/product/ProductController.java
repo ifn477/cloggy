@@ -191,6 +191,9 @@ public class ProductController {
 		ps.productcount(product_id);
 		
 		
+		System.out.println("##상품##"+product_id);
+		System.out.println("##유저##"+userId);
+		
 		mo.addAttribute("list", list);
 		mo.addAttribute("optlist", optlist);
 		

@@ -4,6 +4,7 @@ public class OrderitemDTO {
 	
 	private String orderId;/* 주문 번호 */
     private int product_id;/* 상품 번호 */
+    private int opt_id;/* 상품 번호 */
     private int o_quantity;	/* 주문 수량 */
     private int orderitem_id;/*  기본키 */
     private int o_price;/* 상품 한 개 가격 */
@@ -14,6 +15,8 @@ public class OrderitemDTO {
     private String userId;
     private int p_price;
     private int cart_quantity;
+    private String opt_name;
+    
 
 	/* DB테이블 존재 하지 않는 데이터 */
     private int saleprice;/* 할인 적용된 가격 */
@@ -43,6 +46,20 @@ public class OrderitemDTO {
 	}
 	
 	
+	
+	public String getOpt_name() {
+		return opt_name;
+	}
+	public void setOpt_name(String opt_name) {
+		this.opt_name = opt_name;
+	}
+	
+	public int getOpt_id() {
+		return opt_id;
+	}
+	public void setOpt_id(int opt_id) {
+		this.opt_id = opt_id;
+	}
 	public int getCart_quantity() {
 		return cart_quantity;
 	}
