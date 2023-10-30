@@ -173,16 +173,6 @@
 		<put-attribute name="title" value="회원가입약관2"/>
 		<put-attribute name="body" value="/WEB-INF/views/member/member-terms2.jsp"/>
 	</definition>	
-
-	<definition name="order" extends="baseLayout">
-		<put-attribute name="title" value="결제"/>
-		<put-attribute name="body" value="/WEB-INF/views/pay/order.jsp"/>
-	</definition>	
-	
-	<definition name="naverpay" extends="baseLayout">
-		<put-attribute name="title" value="네이버간편결제"/>
-		<put-attribute name="body" value="/WEB-INF/views/pay/naverpay.jsp"/>
-	</definition>	
 	
 	<definition name="member-info" extends="baseLayout">
 		<put-attribute name="title" value="회원개인정보"/>
@@ -297,5 +287,13 @@
 		<put-attribute name="title" value="공지목록"/>
 		<put-attribute name="body" value="/WEB-INF/views/notice/notice-searchview.jsp"/>
 	</definition>		
+	
+
+	<definition name="mypage" extends="baseLayout">
+		<put-attribute name="title" value="마이페이지"/>
+		<put-attribute name="body" value="/WEB-INF/views/main/mypage.jsp"/>
+	</definition>		
+	
+	
 	
 </tiles-definitions>

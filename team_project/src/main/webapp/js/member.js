@@ -57,10 +57,8 @@ function goPopupself(){
 }
 
 
-function jusoCallBack(roadFullAddr){
-		document.member-input.roadFullAddr.value = roadFullAddr;
-}
-
+function jusoCallBack(roadFullAddr,addrDetail){
+		document.form.roadFullAddr.value = roadFullAddr;
 
 /* 메일 전송 */
 $(function(){
@@ -172,4 +170,5 @@ function checkAllTerms() {
     var checkAll = document.getElementById('checktermsall').checked;
     document.getElementById('checkterms1').checked = checkAll;
     document.getElementById('checkterms2').checked = checkAll;
+}
 }
