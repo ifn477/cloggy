@@ -38,28 +38,28 @@ public class OrderController {
 	    String userId = mdto.getUserId();
 	    
 	    String productIds = request.getParameter("productIds");
-	    String optionIds = request.getParameter("optionIds"); // ¿É¼Ç ¾ÆÀÌµğ ¹Ş±â
+	    String optionIds = request.getParameter("optionIds");  // ì˜µì…˜ ì•„ì´ë”” ë°›ê¸°
 	    
-	    System.out.println("Á¦Ç° ¾ÆÀÌµğ: " + productIds);
-	    System.out.println("¿É¼Ç ¾ÆÀÌµğ: " + optionIds);
+	    System.out.println("ì œí’ˆ ì•„ì´ë””: " + productIds);
+	    System.out.println("ì˜µì…˜ ì•„ì´ë””: " + optionIds);
 	    
 	    String[] ProductIdss = productIds.split(",");
-	    String[] OptionIdss = optionIds.split(","); // ¿É¼Ç ¾ÆÀÌµğ¸¦ ¹è¿­·Î º¯È¯
+	    String[] OptionIdss = optionIds.split(",");  // ì˜µì…˜ ì•„ì´ë””ë¥¼ ë°°ì—´ë¡œ ë³€í™˜
 	    
 	    Oservice os = sqlSession.getMapper(Oservice.class);
 	    ArrayList<OrderitemDTO> list = new ArrayList<>();
 	    
 	    for (int i = 0; i < ProductIdss.length; i++) {
 	        int product_id = Integer.parseInt(ProductIdss[i]);
-	        int option_id = Integer.parseInt(OptionIdss[i]); // ¿É¼Ç ¾ÆÀÌµğ »ç¿ë
-	        list.add(os.orderitem(userId, product_id, option_id)); // ¿É¼Ç ¾ÆÀÌµğµµ Àü´Ş
+	        int option_id = Integer.parseInt(OptionIdss[i]); // ì˜µì…˜ ì•„ì´ë”” ì‚¬ìš©
+	        list.add(os.orderitem(userId, product_id, option_id)); // ì˜µì…˜ ì•„ì´ë””ë„ ì „ë‹¬
 	    }
 
 	    mo.addAttribute("list", list);
-	    System.out.println("ÀúÀåµÈ ¸®½ºÆ®" + list);
+	    System.out.println("ì €ì¥ëœ ë¦¬ìŠ¤íŠ¸" + list);
 
-	    // ÄíÆù
-	    // ÁÖ¹® ÆäÀÌÁö¿¡ ¹Ù·Î ¶ç¿ì±â
+	     // ì¿ í°
+	    // ì£¼ë¬¸ í˜ì´ì§€ì— ë°”ë¡œ ë„ìš°ê¸°
 	    CouponService couponservice = sqlSession.getMapper(CouponService.class);
 	    ArrayList<CouponDTO> couponlist = couponservice.couponlist(userId);
 	    mo.addAttribute("couponlist", couponlist);
@@ -75,9 +75,9 @@ public class OrderController {
 		String prices = request.getParameter("prices");
 		String quantity = request.getParameter("quantity");
 		String optid = request.getParameter("optid");
-		System.out.println("!!!!Á¦Ç° "+ productIds);//
-		System.out.println("!!!!Á¦Ç° "+ prices);//
-		System.out.println("!!!!Á¦Ç° "+ quantity);//
+		System.out.println("!!!!ì œí’ˆ "+ productIds);//
+		System.out.println("!!!!ì œí’ˆ "+ prices);//
+		System.out.println("!!!!ì œí’ˆ "+ quantity);//
 		
 		 String[] ProductIdss = productIds.split(",");
 		 String[] pricess = prices.split(",");
@@ -112,7 +112,7 @@ public class OrderController {
 
 		MemberDTO mdto = (MemberDTO) session.getAttribute("member");
 		String userId = mdto.getUserId();
-		System.out.println("##À¯Àú¾Æµğ##"+userId);
+		System.out.println("##ìœ ì €ì•„ë””##"+userId);
 	
 		Oservice os = sqlSession.getMapper(Oservice.class);
 		ArrayList<OrderDTO>listo  = os.orderlist(userId);
