@@ -1,0 +1,19 @@
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ezen.dog.mypage.Myservice">
+
+
+<select id="likeout" resultType="com.ezen.dog.mypage.MyDTO">
+select l.product_id, p.category1_id, p.p_name, p.p_price, p.p_info, p.p_image, p.p_thumbnail, p.p_stock, p.p_enroll, p.p_sell, p.p_hits
+from likecheck l, product p
+INNER JOIN l.product_id=p.product_id 
+where l.userId = #{param1}
+</select>
+
+
+
+
+
+</mapper>

@@ -26,7 +26,6 @@ public class OrderDTO {
 	private String d_status;/*주문수량*/
 	
 	
-	
 
 	/* DB테이블 존재 하지 않는 데이터 */
 	private int orderSalePrice; /* 판매가(모든 상품 비용) */

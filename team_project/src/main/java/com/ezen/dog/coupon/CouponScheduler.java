@@ -15,7 +15,7 @@ public class CouponScheduler {
 		
 		
 		//매월 1일마다 업데이트!
-		@Scheduled(cron = "0 0 * * * ?")
+		@Scheduled(cron = "0 0 0 * * ?")
 		public void AutoCoupon() {
 			AutodeleteCoupon();
 			System.out.println("=========쿠폰 업데이트 완료!!!!=========");

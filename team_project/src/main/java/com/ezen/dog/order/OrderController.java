@@ -32,40 +32,52 @@ public class OrderController {
 	ArrayList<OrderitemDTO> list = new ArrayList<OrderitemDTO>();
 	ArrayList<OrderDTO> listo=new ArrayList<OrderDTO>();
 	
-	@RequestMapping(value = "/order",  method = { RequestMethod.GET, RequestMethod.POST })
-	public String order(HttpServletRequest request,HttpSession session,Model mo) {
-		
-		MemberDTO mdto = (MemberDTO) session.getAttribute("member");
-		String userId = mdto.getUserId();
-		
-		 String productIds = request.getParameter("productIds");
-		 System.out.println("!!!!Á¦Ç° "+ productIds);
-	
-
-	     String[] ProductIdss = productIds.split(",");
+	@RequestMapping(value = "/order", method = { RequestMethod.GET, RequestMethod.POST })
+	public String order(HttpServletRequest request, HttpSession session, Model mo) {
+	    MemberDTO mdto = (MemberDTO) session.getAttribute("member");
+	    String userId = mdto.getUserId();
 	    
-		  	Oservice os = sqlSession.getMapper(Oservice.class);
-		  	ArrayList<OrderitemDTO> list = new ArrayList<>(); // ArrayList
-		  	for (int i = 0; i < ProductIdss.length; i++) {
-		  	    int product_id = Integer.parseInt(ProductIdss[i]);
-		  	    // product_id
-		  	    list.add(os.orderitem(userId, product_id));
-		  	}
+	    String productIds = request.getParameter("productIds");
 
-		  	// for 
-		  	mo.addAttribute("list", list);
-		  	System.out.println("ÀúÀåµÈ ¸®½ºÆ®" +list);
-		  	
-		  	//ÄíÆù
-		  	//ÁÖ¹® ÆäÀÌÁö¿¡ ¹Ù·Î ¶ç¿ì±â	  	
-			CouponService couponservice = sqlSession.getMapper(CouponService.class);
-			ArrayList<CouponDTO> couponlist = couponservice.couponlist(userId);
-			mo.addAttribute("couponlist", couponlist);
-		  	
-		  	
+	    String optionIds = request.getParameter("optionIds");  // ï¿½ìƒƒï¿½ë€¡ ï¿½ë¸˜ï¿½ì” ï¿½ëµ’ è«›ì„ë¦°
+	    
+	    System.out.println("ï¿½ì £ï¿½ë­¹ ï¿½ë¸˜ï¿½ì” ï¿½ëµ’: " + productIds);
+	    System.out.println("ï¿½ìƒƒï¿½ë€¡ ï¿½ë¸˜ï¿½ì” ï¿½ëµ’: " + optionIds);
+	    
+	    String[] ProductIdss = productIds.split(",");
+	    String[] OptionIdss = optionIds.split(",");  // ï¿½ìƒƒï¿½ë€¡ ï¿½ë¸˜ï¿½ì” ï¿½ëµ’ç‘œï¿½ è«›ê³—ë¿´æ¿¡ï¿½ è¹‚ï¿½ï¿½ì†š
 
-		return "order";
+	    
+	    Oservice os = sqlSession.getMapper(Oservice.class);
+	    ArrayList<OrderitemDTO> list = new ArrayList<>();
+	    
+	    for (int i = 0; i < ProductIdss.length; i++) {
+	        int product_id = Integer.parseInt(ProductIdss[i]);
+
+	        int option_id = Integer.parseInt(OptionIdss[i]); // ï¿½ìƒƒï¿½ë€¡ ï¿½ë¸˜ï¿½ì” ï¿½ëµ’ ï¿½ê¶—ï¿½ìŠœ
+	        list.add(os.orderitem(userId, product_id, option_id)); // ï¿½ìƒƒï¿½ë€¡ ï¿½ë¸˜ï¿½ì” ï¿½ëµ’ï¿½ë£„ ï¿½ìŸ¾ï¿½ë––
+	    }
+
+	    mo.addAttribute("list", list);
+	    System.out.println("ï¿½ï¿½ï¿½ì˜£ï¿½ë§‚ ç”±ÑŠë’ªï¿½ë“ƒ" + list);
+
+	     // è‘ì¢ë£¿
+	    // äºŒì‡°Ğ¦ ï¿½ëŸ¹ï¿½ì” ï§ï¿½ï¿½ë¿‰ è«›ë¶¾ì¤ˆ ï¿½ì“£ï¿½ìŠ¦æ¹²ï¿½
+
+	    CouponService couponservice = sqlSession.getMapper(CouponService.class);
+	    ArrayList<CouponDTO> couponlist = couponservice.couponlist(userId);
+	    mo.addAttribute("couponlist", couponlist);
+
+	    return "order";
 	}
+	
+    @ResponseBody
+    @RequestMapping(value = "/couponin", method = RequestMethod.POST)
+    public String couponin(@RequestParam("totalprice") int totalprice, @RequestParam("discount") int discount, @RequestParam("shipping") int shipping) {
+		int producttotalprice = (int) (totalprice - (totalprice * discount/100.0));
+		int finaltotalprice = producttotalprice + shipping;
+		return Integer.toString(finaltotalprice); // ê²°ê³¼ë¥¼ ë¬¸ìì—´ë¡œ ë°˜í™˜
+    }
 	
 	@ResponseBody
 	@RequestMapping(value = "/ordersave",method = RequestMethod.POST)
@@ -74,24 +86,28 @@ public class OrderController {
 		String productIds = request.getParameter("productIds");
 		String prices = request.getParameter("prices");
 		String quantity = request.getParameter("quantity");
-		System.out.println("!!!!Á¦Ç° "+ productIds);//
-		System.out.println("!!!!Á¦Ç° "+ prices);//
-		System.out.println("!!!!Á¦Ç° "+ quantity);//
+		String optid = request.getParameter("optid");
+
+		System.out.println("!!!!ï¿½ì £ï¿½ë­¹ "+ productIds);//
+		System.out.println("!!!!ï¿½ì £ï¿½ë­¹ "+ prices);//
+		System.out.println("!!!!ï¿½ì £ï¿½ë­¹ "+ quantity);//
 		
 		 String[] ProductIdss = productIds.split(",");
 		 String[] pricess = prices.split(",");
 		 String[] quantities = quantity.split(",");
+		 String[] optids = optid.split(",");
 	
 		 Oservice os = sqlSession.getMapper(Oservice.class);
 		 int orderid = os.orderid();
 		 
 			for (int i = 0; i < ProductIdss.length; i++) {
 		  	    int oproduct_id = Integer.parseInt(ProductIdss[i]);
+		  	    int ooptid = Integer.parseInt(optids[i]);
 		  	    int oprice = Integer.parseInt(pricess[i]);
 		  	    int oquantity = Integer.parseInt(quantities[i]);
 		  	    int savepoint = (int)((oprice*oquantity)*0.01);
 		  	    
-		  	   os.inserti(oproduct_id,oprice,oquantity,savepoint,orderid);
+		  	   os.inserti(oproduct_id,oprice,oquantity,savepoint,orderid,ooptid);
 		  	}
 
 		String address = add1+add2+add3;	
@@ -104,11 +120,13 @@ public class OrderController {
 	}
 	
 	@RequestMapping(value = "/orderlistout")
-	public String orderlistout(HttpServletRequest request ,Model mo)
+	public String orderlistout(HttpSession session ,Model mo)
 	{
 
-		String userId = request.getParameter("uesrId");
-		System.out.println("##À¯Àú¾Æµğ##"+userId);
+		MemberDTO mdto = (MemberDTO) session.getAttribute("member");
+		String userId = mdto.getUserId();
+
+		System.out.println("##ï¿½ì‘€ï¿½ï¿½ï¿½ë¸˜ï¿½ëµ’##"+userId);
 	
 		Oservice os = sqlSession.getMapper(Oservice.class);
 		ArrayList<OrderDTO>listo  = os.orderlist(userId);
@@ -116,6 +134,7 @@ public class OrderController {
 		
 		return "orderlistout";
 	}
+	
 	
 	@RequestMapping(value = "/order-detail")
 	public String orderdetail(HttpServletRequest request,Model mo)
@@ -125,7 +144,6 @@ public class OrderController {
 		
 		ArrayList<OrderDTO>list= os.orderdetail(order_id);
 		mo.addAttribute("list", list);
-		
 		return "order-detail";
 	}
 	
@@ -135,14 +153,8 @@ public class OrderController {
 	{
 		int order_id =Integer.parseInt(request.getParameter("order_id"));
 		Oservice os=sqlSession.getMapper(Oservice.class);
-		
 		os.ordercancle(order_id);
 		
-//		MemberDTO mdto = (MemberDTO) session.getAttribute("member");
-//		String userId = mdto.getUserId();  
-//		System.out.println("À¯Àú¾ÆÀÌµğ"+userId);
-//		ArrayList<OrderDTO>list= os.ordercancleout(userId);
-//		mo.addAttribute("list", list);
 		
 		return "redirect:orderlistout";
 	}

@@ -15,7 +15,13 @@
 	margin-top: 5rem;
 	margin-bottom: 5rem;
 }
-
+.updownbnt{
+	background-color: #e28b3a;
+	color: white;
+	width: 25px;
+	height: 25px;
+	border: none;
+}
 .product-detail {
 	width: 1000px;
 }
@@ -58,7 +64,10 @@
 
 /* 상품정보 */
 .product-title {
+	font-family: 'Noto Sans KR', sans-serif;
 	font-size: 27px;
+	font-weight: 400;
+	color: #463528;	
 }
 
 .product-price {
@@ -155,7 +164,18 @@
 	text-align: center;
 	margin: 0 auto;
 }
-
+#toggleButton{
+	padding: 5px 20px; /* 위아래 패딩과 좌우 패딩을 조절 */
+    border: 1px solid #d88402;
+    border-radius: 10px;
+    color: #d88402;
+    background: #fff;
+    display: inline-block;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 20px;
+    margin-bottom: 30px;
+    border-radius: 20px;
+}
 /* 수정버튼 */
 #modibnt {
 	border-radius: 0;
@@ -245,9 +265,9 @@
 						<div class="cart-container">
 							<div class="button-container"
 								style="display: inline-block; vertical-align: top;">
-								<button id="decrease">-</button>
+								<button id="decrease" class="updownbnt">-</button>
 								<span id="quantity">1</span>
-								<button id="increase">+</button>
+								<button id="increase" class="updownbnt">+</button>
 							</div>
 							<div class="total-price"
 								style="display: inline-block; float: right;">
@@ -346,6 +366,7 @@
 							<img alt="상세페이지" src="/dog/image/${pdetail.p_image}"
 								style="margin-top: 50px;">
 						</div>
+						<button id="toggleButton">자세히보기</button>
 						<div class="product-info">
 							<div class="info">${pdetail.p_info}</div>
 						</div>
@@ -353,12 +374,16 @@
 				</div>
 
 				<!-- 수정버튼 -->
-				<div
-					style="text-align: center; margin-top: 30px; margin-bottom: 70px;">
-					<button class="btn btn-primary py-2" id="modibnt"
-						style="background-color: #e28b3a;"
-						onclick="location.href='product-modifyForm?product_id=${pdetail.product_id}'">수정</button>
-				</div>
+				<c:choose>
+					<c:when test="${loginstate == true && member.auth_id == 0}">
+						<div style="text-align: center; margin-top: 30px; margin-bottom: 70px;">
+							<button class="btn btn-primary py-2" id="modibnt"
+								style="background-color: #e28b3a;"
+								onclick="location.href='product-modifyForm?product_id=${pdetail.product_id}'">수정</button>
+						</div>
+					</c:when>
+					<c:otherwise></c:otherwise>
+				</c:choose>
 			</div>
 		</div>
 
@@ -392,82 +417,84 @@
 		</div>
 	</div>
 </div>
+
 </c:forEach>
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
-		/* 쿠키 생성 및 저장 */
-		function onPageLoad() {
-			var url = window.location.href;
-			var product_Id = getProduct_IDFromURL(url);
-			console.log("product_Id::" + product_Id);
 
-			if (product_Id) {
-				var recentProducts = getCookie('recent_products');
-				var recentProductIds = recentProducts ? recentProducts
-						.split('/') : [];
+	/* 쿠키 생성 및 저장 */
+	function onPageLoad() {
+		var url = window.location.href;
+		var product_Id = getProduct_IDFromURL(url);
+		console.log("product_Id::" + product_Id);
 
-				if (!recentProductIds.includes(product_Id)) {
-					recentProductIds.push(product_Id);
-				}
+		if (product_Id) {
+			var recentProducts = getCookie('recent_products');
+			var recentProductIds = recentProducts ? recentProducts
+					.split('/') : [];
 
-				if (recentProductIds.length > 10) {
-					recentProductIds.shift();
-				}
+			if (!recentProductIds.includes(product_Id)) {
+				recentProductIds.push(product_Id);
+			}
 
-				recentProducts = recentProductIds.join('/');
+			if (recentProductIds.length > 10) {
+				recentProductIds.shift();
+			}
 
-				var expirationDate = new Date();
-				expirationDate.setTime(expirationDate.getTime()
-						+ (24 * 60 * 60 * 1000));
-				console.log("expirationDate::" + expirationDate);
-				setCookie('recent_products', recentProducts, expirationDate);
+			recentProducts = recentProductIds.join('/');
+
+			var expirationDate = new Date();
+			expirationDate.setTime(expirationDate.getTime()
+					+ (24 * 60 * 60 * 1000));
+			console.log("expirationDate::" + expirationDate);
+			setCookie('recent_products', recentProducts, expirationDate);
+		}
+	}
+
+	window.addEventListener('load', onPageLoad);
+
+	function setCookie(cookieName, value, expirationDate) {
+		var cookieValue = escape(value)
+				+ ((expirationDate == null) ? '' : '; expires='
+						+ expirationDate.toUTCString());
+		document.cookie = cookieName + '=' + cookieValue;
+	}
+
+	/* 쿠키 가져오기 */
+	function getCookie(cookieName) {
+		var name = cookieName + '=';
+		var decodedCookie = decodeURIComponent(document.cookie);
+		var cookieArray = decodedCookie.split(';');
+
+		for (var i = 0; i < cookieArray.length; i++) {
+			var cookie = cookieArray[i];
+			while (cookie.charAt(0) == ' ') {
+				cookie = cookie.substring(1);
+			}
+			if (cookie.indexOf(name) == 0) {
+				return cookie.substring(name.length, cookie.length);
 			}
 		}
+		return '';
+	}
 
-		window.addEventListener('load', onPageLoad);
-
-		function setCookie(cookieName, value, expirationDate) {
-			var cookieValue = escape(value)
-					+ ((expirationDate == null) ? '' : '; expires='
-							+ expirationDate.toUTCString());
-			document.cookie = cookieName + '=' + cookieValue;
+	function getProduct_IDFromURL(url) {
+		var regex = /[?&]product_id=(\d+)/;
+		var match = regex.exec(url);
+		if (match && match[1]) {
+			return match[1];
 		}
-
-		/* 쿠키 가져오기 */
-		function getCookie(cookieName) {
-			var name = cookieName + '=';
-			var decodedCookie = decodeURIComponent(document.cookie);
-			var cookieArray = decodedCookie.split(';');
-
-			for (var i = 0; i < cookieArray.length; i++) {
-				var cookie = cookieArray[i];
-				while (cookie.charAt(0) == ' ') {
-					cookie = cookie.substring(1);
-				}
-				if (cookie.indexOf(name) == 0) {
-					return cookie.substring(name.length, cookie.length);
-				}
-			}
-			return '';
-		}
-
-		function getProduct_IDFromURL(url) {
-			var regex = /[?&]product_id=(\d+)/;
-			var match = regex.exec(url);
-			if (match && match[1]) {
-				return match[1];
-			}
-			return null;
-		}
-		/*찜하기*/
-		$(document).ready(function () {
-		    $('.container_box').on('click', '.likeAddButton, .likeDeleteButton', function () {
-		        var button = $(this);
-		        var isLikeButton = button.hasClass('likeAddButton');
-		        var productId = button.data('productid');
-		        var userId = button.data('userid');
-		        var url = isLikeButton ? 'like-add' : 'like-delete';
+		return null;
+	}
+	/*찜하기*/
+	$(document).ready(function () {
+	    $('.container_box').on('click', '.likeAddButton, .likeDeleteButton', function () {
+	        var button = $(this);
+	        var isLikeButton = button.hasClass('likeAddButton');
+	        var productId = button.data('productid');
+	        var userId = button.data('userid');
+	        var url = isLikeButton ? 'like-add' : 'like-delete';
 
 		        var memberLoginState = ${loginstate};
 		        if (!memberLoginState) {
@@ -496,150 +523,172 @@
 		        });
 		    });
 		});
-		/*장바구니*/
-		$(document)
-				.ready(
-						function() {
-							var quantity = 1; // 초기 수량은 1으로 설정
-							let priceValue = parseFloat($("#price").text()
+
+	/*장바구니*/
+	$(document)
+			.ready(
+					function() {
+						var quantity = 1; // 초기 수량은 1으로 설정
+						let priceValue = parseFloat($("#price").text()
+								.replace(/[^0-9.-]+/g, ""));
+
+						// 옵션 선택 시 이벤트 핸들러
+						$("#haha")
+								.change(
+										function() {
+											var selectedOption = $(this)
+													.find("option:selected");
+											var optName = selectedOption
+													.data("opt_name");
+											var optPrice = selectedOption
+													.data("opt_price");
+
+											// 제품 가격 -> optPrice + 기존 가격으로 업데이트
+											var updatedPrice = priceValue
+													+ optPrice;
+											$("#price")
+													.text(
+															formatNumberWithCommas(updatedPrice)); // 업데이트된 가격을 화면에 출력
+											updateTotalPrice(); // total_price 업데이트 함수 호출
+										});
+
+
+
+						function formatNumberWithCommas(number) {
+							return number.toString().replace(
+									/\B(?=(\d{3})+(?!\d))/g, ",")
+									+ '원';
+						}
+
+						// total_price 업데이트 함수
+						function updateTotalPrice() {
+							var quantityValue = parseInt($("#quantity")
+									.text(), 10);
+							var priceValue = parseFloat($("#price").text()
+
 									.replace(/[^0-9.-]+/g, ""));
 
-							// 옵션 선택 시 이벤트 핸들러
-							$("#haha")
-									.change(
-											function() {
-												var selectedOption = $(this)
-														.find("option:selected");
-												var optName = selectedOption
-														.data("opt_name");
-												var optPrice = selectedOption
-														.data("opt_price");
+							var totalPrice = quantityValue * priceValue;
+							var formattedTotalPrice = formatNumberWithCommas(totalPrice);
+							$("#totalPrice").text(formattedTotalPrice);
+						}
 
-												// 제품 가격 -> optPrice + 기존 가격으로 업데이트
-												var updatedPrice = priceValue
-														+ optPrice;
-												$("#price")
-														.text(
-																formatNumberWithCommas(updatedPrice)); // 업데이트된 가격을 화면에 출력
-												updateTotalPrice(); // total_price 업데이트 함수 호출
-											});
-
-							function formatNumberWithCommas(number) {
-								return number.toString().replace(
-										/\B(?=(\d{3})+(?!\d))/g, ",")
-										+ '원';
-							}
-
-							// total_price 업데이트 함수
-							function updateTotalPrice() {
-								var quantityValue = parseInt($("#quantity")
-										.text(), 10);
-								var priceValue = parseFloat($("#price").text()
-										.replace(/[^0-9.-]+/g, ""));
-
-								var totalPrice = quantityValue * priceValue;
-								var formattedTotalPrice = formatNumberWithCommas(totalPrice);
-								$("#totalPrice").text(formattedTotalPrice);
-							}
-
-							// + 버튼을 클릭할 때 수량을 증가시키는 이벤트 핸들러
-							$("#increase").click(function() {
-								quantity++;
-								$("#quantity").text(quantity);
-								updateTotalPrice();
-							});
-
-							// - 버튼을 클릭할 때 수량을 감소시키는 이벤트 핸들러
-							$("#decrease").click(function() {
-								if (quantity > 1) {
-									quantity--;
-									$("#quantity").text(quantity);
-									updateTotalPrice();
-								}
-							});
-
-							$("#addToCart")
-									.click(
-											function() {
-												var product_id = $(
-														"#product_id").val();
-												var selectedOption = $(
-														"#haha option:selected")
-														.val();
-
-												var selectedOption = $("#haha")
-														.find("option:selected");
-												var optId = selectedOption
-														.data("opt_id");
-
-												// 추출된 데이터 사용
-												console.log("product id: "
-														+ product_id);
-												console.log("quantity: "
-														+ quantity);
-												console.log("선택한 옵션의 번호: "
-														+ optId);
-
-												// Ajax를 사용하여 서버로 데이터 전송
-												$
-														.ajax({
-															type : "POST", // 또는 "GET"에 따라 적절하게 변경
-															url : "/dog/addtocart", // 컨트롤러의 URL을 여기에 지정
-															data : {
-																product_id : product_id,
-																quantity : quantity,
-																optId : optId
-															},
-															success : function(
-																	response) {
-																if (response === "success") {
-																	alert("장바구니에 상품이 추가되었습니다.");
-																} else if (response === "no") {
-																	alert("사용자가 로그인하지 않았습니다.");
-																	// 다른 처리를 수행할 수 있음
-																} else {
-																	alert("알 수 없는 응답: "
-																			+ response);
-																}
-															},
-
-														});
-											});
+						// + 버튼을 클릭할 때 수량을 증가시키는 이벤트 핸들러
+						$("#increase").click(function() {
+							quantity++;
+							$("#quantity").text(quantity);
+							updateTotalPrice();
 						});
 
-		//카카오 공유하기
-		function shareKakao() {
-			console.log('shareKakao 함수가 호출되었습니다.');
-			var thisUrl = document.URL;
-			// 사용할 앱의 JavaScript 키 설정
-			Kakao.init('3eebd9335d1049afaa57ca1a1e68a170');
-			// 카카오링크 버튼 생성
-			Kakao.Link.createDefaultButton({
-				container : '#btnKakao', // 카카오공유버튼ID
-				objectType : 'feed',
-				content : {
-					title : "클로기", // 보여질 제목
-					description : "클로기 상세페이지", // 보여질 설명
-					imageUrl : thisUrl, // 콘텐츠 URL
-					link : {
-						webUrl : thisUrl
-					}
-				}
-			});
-		}
-		//url 공유하기
-		function clip() {
+						// - 버튼을 클릭할 때 수량을 감소시키는 이벤트 핸들러
+						$("#decrease").click(function() {
+							if (quantity > 1) {
+								quantity--;
+								$("#quantity").text(quantity);
+								updateTotalPrice();
+							}
+						});
 
-			var url = '';
-			var textarea = document.createElement("textarea");
-			document.body.appendChild(textarea);
-			url = window.document.location.href;
-			textarea.value = url;
-			textarea.select();
-			document.execCommand("copy");
-			document.body.removeChild(textarea);
-			alert("URL이 복사되었습니다.")
-		}
+
+						$("#addToCart")
+								.click(
+										function() {
+											var product_id = $(
+													"#product_id").val();
+											var selectedOption = $(
+													"#haha option:selected")
+													.val();
+
+											var selectedOption = $("#haha")
+													.find("option:selected");
+											var optId = selectedOption
+													.data("opt_id");
+
+											// 추출된 데이터 사용
+											console.log("product id: "
+													+ product_id);
+											console.log("quantity: "
+													+ quantity);
+											console.log("선택한 옵션의 번호: "
+													+ optId);
+
+											// Ajax를 사용하여 서버로 데이터 전송
+											$
+													.ajax({
+														type : "POST", // 또는 "GET"에 따라 적절하게 변경
+														url : "/dog/addtocart", // 컨트롤러의 URL을 여기에 지정
+														data : {
+															product_id : product_id,
+															quantity : quantity,
+															optId : optId
+														},
+														success : function(
+																response) {
+															if (response === "success") {
+																alert("장바구니에 상품이 추가되었습니다.");
+															} else if (response === "no") {
+																alert("사용자가 로그인하지 않았습니다.");
+																// 다른 처리를 수행할 수 있음
+															} else {
+																alert("알 수 없는 응답: "
+																		+ response);
+															}
+														},
+
+													});
+										});
+					});
+
+	//카카오 공유하기
+	function shareKakao() {
+		console.log('shareKakao 함수가 호출되었습니다.');
+		var thisUrl = document.URL;
+		// 사용할 앱의 JavaScript 키 설정
+		Kakao.init('3eebd9335d1049afaa57ca1a1e68a170');
+		// 카카오링크 버튼 생성
+		Kakao.Link.createDefaultButton({
+			container : '#btnKakao', // 카카오공유버튼ID
+			objectType : 'feed',
+			content : {
+				title : "클로기", // 보여질 제목
+				description : "클로기 상세페이지", // 보여질 설명
+				imageUrl : thisUrl, // 콘텐츠 URL
+				link : {
+					webUrl : thisUrl
+				}
+			}
+		});
+	}
+	//url 공유하기
+	function clip() {
+
+		var url = '';
+		var textarea = document.createElement("textarea");
+		document.body.appendChild(textarea);
+		url = window.document.location.href;
+		textarea.value = url;
+		textarea.select();
+		document.execCommand("copy");
+		document.body.removeChild(textarea);
+		alert("URL이 복사되었습니다.")
+	}
+	
+	//상세설명 접었다 피기
+    const productInfo = document.querySelector(".product-info");
+    const toggleButton = document.getElementById("toggleButton");
+
+    // 초기에는 product-info를 숨겨둘 것이므로 display 속성을 'none'으로 설정
+    productInfo.style.display = "none";
+
+    // 버튼 클릭 시 product-info를 토글 (보이거나 숨김)
+    toggleButton.addEventListener("click", function() {
+      if (productInfo.style.display === "none") {
+        productInfo.style.display = "block"; // 보이게 함
+      } else {
+        productInfo.style.display = "none"; // 숨김
+      }
+    });
+
 </script>
 </body>
 </html>

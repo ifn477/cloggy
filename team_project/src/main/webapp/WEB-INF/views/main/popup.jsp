@@ -8,7 +8,7 @@
 </head>
 <body>
 <form name="pop"> 
-	<img alt="무료배송" src="/dog/image/2708925.jpg">
+	<img alt="무료배송" src="/dog/image/shippingpopup.jpg">
 	<input type="checkbox" name="Notice" value="">다음부터 공지창 띄우지 않음 
 	<input type="button" value="닫기" onclick="closeWin()">
 </form> 
