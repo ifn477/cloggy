@@ -4,12 +4,12 @@
 <html>
 <head>
 <style type="text/css">
-body{
-min-height: calc(100vh - 500px);
+body {
+	min-height: calc(100vh - 500px);
 }
 
 .babyTable {
-	margin-top : 50px;
+	margin-top: 50px;
 	display: flex;
 	height: 100%;
 	flex-flow: column nowrap; /*direction+wrap*/
@@ -19,7 +19,7 @@ min-height: calc(100vh - 500px);
 	/* 반대축(수평축) 기준 정렬 */
 	align-items: center;
 	align-content: center;
-	flex-direction : column;
+	flex-direction: column;
 }
 
 .baby_input_table {
@@ -31,30 +31,35 @@ min-height: calc(100vh - 500px);
 
 input[type=text], select {
 	width: 1fr 2fr;
-/* 	height: ; */
-/* 	font-size: ; */
-	border-color : #d88402;
-	background-color : rgb(255, 246, 233);
+	/* 	height: ; */
+	/* 	font-size: ; */
+	border-color: #d88402;
+	background-color: rgb(255, 246, 233);
 	box-shadow: none;
 	border: 2px solid #ffffff;
-    box-shadow: 0 0 5px #ffffff;
+	box-shadow: 0 0 5px #ffffff;
 }
-input:focus { outline: none !important; border-color: #d88402; box-shadow: 0 0 5px #d88402; background-color :rgb(255, 246, 233); }
 
-.baby_photo{
-	margin-bottom : 20px;
+input:focus {
+	outline: none !important;
+	border-color: #d88402;
+	box-shadow: 0 0 5px #d88402;
+	background-color: rgb(255, 246, 233);
+}
+
+.baby_photo {
+	margin-bottom: 20px;
 }
 
 button {
 	background-color: rgb(255, 246, 233);
-	border: none;
-	  &:hover {
-    background: #ED9309;
-    color: rgb(255, 246, 233);
-    }
+	border: none; &: hover { background : #ED9309;
+	color: rgb(255, 246, 233);
 }
-.submitbtn{
-	margin-top : 20px;
+
+}
+.submitbtn {
+	margin-top: 20px;
 	background-color: #ED9309;
 	text-align: center;
 	margin-bottom: 2rem;
@@ -149,8 +154,8 @@ button {
 
 			<!-- 			사진 업로드 -->
 			<div class="baby_photo">
-				<img src="/dog/image/graypreview.png" id="upload" height="200px"> <input
-					type="file" class="real-upload" name="baby_photo"
+				<img src="/dog/image/graypreview.png" id="upload" height="200px">
+				<input type="file" class="real-upload" name="baby_photo"
 					style="display: none;" accept=".jpg, .png">
 			</div>
 
@@ -159,11 +164,11 @@ button {
 				<div class="baby_name">
 					<input type="text" name="baby_name">
 				</div>
-		
-				
+
+
 				<div>견종을 등록해주세요</div>
-				<div class="baby_type">
-					<select>
+				<div name="baby_type">
+					<select name="baby_type">
 						<option value="">-- 강아지 종류를 선택하세요 --</option>
 						<option value="믹스">세상에서 하나뿐인 믹스</option>
 						<option value="골든 리트리버">골든 리트리버</option>
@@ -252,7 +257,7 @@ button {
 					</select>
 				</div>
 				<div>생일을 입력해주세요</div>
-			<div class="baby_birth" name="baby_birth">
+				<div class="baby_birth" name="baby_birth">
 					<select>
 						<option name="baby_birth_year" value="">-- 년 --</option>
 						<option name="baby_birth_year" value="2023">2023년</option>
@@ -322,17 +327,19 @@ button {
 				</div>
 				<div>성별을 선택해 주세요</div>
 				<div>
-					<button class="genderbtn" name="babygender">남아</button>
-					<button class="genderbtn" name="babygender">여아</button>
+					<input type="hidden" name="baby_gender" id="babyGenderField"
+						value="">
+					<button class="genderbtn" data-value="남자">남아</button>
+					<button class="genderbtn" data-value="여자">여아</button>
 				</div>
 				<div>체형을 선택해 주세요</div>
 				<div>
-					<button class="bodytypebtn" name="bodytype">날씬</button>
-					<button class="bodytypebtn" name="bodytype">보통</button>
-					<button class="bodytypebtn" name="bodytype">통통</button>
+					<button class="bodytypebtn" name="baby_bodytype" data-value="날씬">날씬</button>
+					<button class="bodytypebtn" name="baby_bodytype" data-value="보통">보통</button>
+					<button class="bodytypebtn" name="baby_bodytype" data-value="통통">통통</button>
 				</div>
 			</div>
-		<input type="submit" name="submit" class="submitbtn"	value="작성완료">
+			<input type="submit" name="submit" class="submitbtn" value="작성완료">
 		</div>
 	</form>
 </html>

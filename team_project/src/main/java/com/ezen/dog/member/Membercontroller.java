@@ -40,20 +40,20 @@ public class Membercontroller {
 		
 		MemberDTO mdto = (MemberDTO) session.getAttribute("member");
 		String userId = mdto.getUserId();
+		
+		
 		String baby_name = request.getParameter("baby_name");
 		String baby_type =request.getParameter("baby_type");
-		String babybirth_year = request.getParameter("baby_birth_year");
-		String babybirth_month = request.getParameter("babybirth_month");
-		String babybirth_day = request.getParameter("babybirth_day");
+		String baby_gender =request.getParameter("baby_gender");
+		String baby_bodytype = request.getParameter("baby_bodytype");
 		
-		String baby_birth = babybirth_year+"/"+babybirth_month+"/"+babybirth_day;
+//		String babybirth_year = request.getParameter("baby_birth_year");
+//		String babybirth_month = request.getParameter("babybirth_month");
+//		String babybirth_day = request.getParameter("babybirth_day");
+//		String baby_birth = babybirth_year+"/"+babybirth_month+"/"+babybirth_day;
 		
-		System.out.println("»ýÀÏ :" + baby_birth);		
+//		System.out.println("애기생일 :" + baby_birth);		
 		
-		
-		
-		String babygender = request.getParameter("babygender");
-		String bodytype = request.getParameter("bodytype");
 		
 		
 		String baby_photo = request.getParameter("baby_photo");
@@ -62,7 +62,7 @@ public class Membercontroller {
 		mf.transferTo(new File(imgPath+"\\"+fname));
 		
 		Mservice ms = sqlSession.getMapper(Mservice.class);
-		ms.babysave(baby_name, baby_birth, baby_type, fname, babygender, bodytype,  userId);
+		ms.babysave(baby_name, baby_type, fname, baby_gender, baby_bodytype, userId);
 		return "redirect:main";
 	}
 	
