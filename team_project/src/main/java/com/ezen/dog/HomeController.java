@@ -54,7 +54,7 @@ public class HomeController {
 	
     @RequestMapping("/popup")
     public String popup(Model model) {
-        model.addAttribute("message", "ï¿½ë™˜ï¿½ë¾½ï§¡ï¿½");
+        model.addAttribute("message", "¸ÞÀÎÆË¾÷Ã¢");
         return "popup";
     }
 	

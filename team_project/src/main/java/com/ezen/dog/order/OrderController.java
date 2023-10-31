@@ -39,13 +39,13 @@ public class OrderController {
 	    
 	    String productIds = request.getParameter("productIds");
 
-	    String optionIds = request.getParameter("optionIds");  // 옵션 아이디 받기
+	    String optionIds = request.getParameter("optionIds");  // �샃�뀡 �븘�씠�뵒 諛쏄린
 	    
-	    System.out.println("제품 아이디: " + productIds);
-	    System.out.println("옵션 아이디: " + optionIds);
+	    System.out.println("�젣�뭹 �븘�씠�뵒: " + productIds);
+	    System.out.println("�샃�뀡 �븘�씠�뵒: " + optionIds);
 	    
 	    String[] ProductIdss = productIds.split(",");
-	    String[] OptionIdss = optionIds.split(",");  // 옵션 아이디를 배열로 변환
+	    String[] OptionIdss = optionIds.split(",");  // �샃�뀡 �븘�씠�뵒瑜� 諛곗뿴濡� 蹂��솚
 
 	    
 	    Oservice os = sqlSession.getMapper(Oservice.class);
@@ -54,15 +54,15 @@ public class OrderController {
 	    for (int i = 0; i < ProductIdss.length; i++) {
 	        int product_id = Integer.parseInt(ProductIdss[i]);
 
-	        int option_id = Integer.parseInt(OptionIdss[i]); // 옵션 아이디 사용
-	        list.add(os.orderitem(userId, product_id, option_id)); // 옵션 아이디도 전달
+	        int option_id = Integer.parseInt(OptionIdss[i]); // �샃�뀡 �븘�씠�뵒 �궗�슜
+	        list.add(os.orderitem(userId, product_id, option_id)); // �샃�뀡 �븘�씠�뵒�룄 �쟾�떖
 	    }
 
 	    mo.addAttribute("list", list);
-	    System.out.println("저장된 리스트" + list);
+	    System.out.println("���옣�맂 由ъ뒪�듃" + list);
 
-	     // 쿠폰
-	    // 주문 페이지에 바로 띄우기
+	     // 荑좏룿
+	    // 二쇰Ц �럹�씠吏��뿉 諛붾줈 �쓣�슦湲�
 
 	    CouponService couponservice = sqlSession.getMapper(CouponService.class);
 	    ArrayList<CouponDTO> couponlist = couponservice.couponlist(userId);
@@ -70,6 +70,14 @@ public class OrderController {
 
 	    return "order";
 	}
+	
+    @ResponseBody
+    @RequestMapping(value = "/couponin", method = RequestMethod.POST)
+    public String couponin(@RequestParam("totalprice") int totalprice, @RequestParam("discount") int discount, @RequestParam("shipping") int shipping) {
+		int producttotalprice = (int) (totalprice - (totalprice * discount/100.0));
+		int finaltotalprice = producttotalprice + shipping;
+		return Integer.toString(finaltotalprice); // 결과를 문자열로 반환
+    }
 	
 	@ResponseBody
 	@RequestMapping(value = "/ordersave",method = RequestMethod.POST)
@@ -80,9 +88,9 @@ public class OrderController {
 		String quantity = request.getParameter("quantity");
 		String optid = request.getParameter("optid");
 
-		System.out.println("!!!!제품 "+ productIds);//
-		System.out.println("!!!!제품 "+ prices);//
-		System.out.println("!!!!제품 "+ quantity);//
+		System.out.println("!!!!�젣�뭹 "+ productIds);//
+		System.out.println("!!!!�젣�뭹 "+ prices);//
+		System.out.println("!!!!�젣�뭹 "+ quantity);//
 		
 		 String[] ProductIdss = productIds.split(",");
 		 String[] pricess = prices.split(",");
@@ -118,7 +126,7 @@ public class OrderController {
 		MemberDTO mdto = (MemberDTO) session.getAttribute("member");
 		String userId = mdto.getUserId();
 
-		System.out.println("##유저아디##"+userId);
+		System.out.println("##�쑀���븘�뵒##"+userId);
 	
 		Oservice os = sqlSession.getMapper(Oservice.class);
 		ArrayList<OrderDTO>listo  = os.orderlist(userId);

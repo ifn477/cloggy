@@ -276,7 +276,7 @@ var mySwiper = new Swiper('#best-product-slide', {
 	
 	<!-- 상품명 -->
      	<div class="product_name">
-         <a href="product-detail?product_id=${pout.product_id }" id="product_name">
+         <a href="product-detail?product_id=${pout.product_id }&userId=${member.userId}" id="product_name">
          ${pout.p_name}
          </a>
        </div>

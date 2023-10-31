@@ -195,7 +195,8 @@ input {
    <tr>
       <td>${totalPrice}</td>
       <td>${shipping}</td>
-      <td>${totalPrice+shipping}</td>
+<%--       <td>${totalPrice+shipping}</td> --%>
+	  <td><div id="finalprice">${totalPrice}</div></td>
          <input name="totalprice" type="hidden" value="${totalPrice }" id="totalprice">
          <input name="shipping" type="hidden" value="${shipping }" id="shipping">
    </tr>
@@ -203,13 +204,13 @@ input {
         <td colspan="3">
         
       <!-- 쿠폰 -->
-      쿠폰선택(결제 시 적용)
-      <select name="selectcoupon" id="selectcoupon">
-            <option value="0">쿠폰없음</option>
-         <c:forEach items="${couponlist }" var="couponlist">
-            <option value="${couponlist.c_discount}">${couponlist.c_name}/${couponlist.c_discount}% 할인</option>
-         </c:forEach>
-      </select>
+		<select name="selectcoupon" id="selectcoupon" style="font-size: 15px;">
+			<option value="0">쿠폰사용안함</option>
+			<c:forEach items="${couponlist}" var="couponlist">
+				<option value="${couponlist.c_discount}">${couponlist.c_name}/${couponlist.c_discount}% 할인</option>
+			</c:forEach>
+		</select>
+		<button id="couponbnt" style="font-size: 15px; height: 25px; border: none;">쿠폰적용</button>
      </td>
    </tr>
 </table>
@@ -509,6 +510,29 @@ IMP.request_pay(
     }
 );
 }
+
+//쿠폰 적용 가격 보여주기
+$(function(){
+	$("#couponbnt").click(function(){ // 버튼에 id 추가
+		
+		var totalprice = document.getElementById("totalprice").value;
+		var discount = $("#selectcoupon").val();
+		var shipping = document.getElementById("shipping").value;
+		
+		$.ajax({
+			type: "post",
+			async: true,
+			url: "couponin", // 실제 컨트롤러 경로로 수정
+			data: { "totalprice": totalprice, "discount": discount, "shipping": shipping},
+			success: function(result){
+				$("#finalprice").html(result);
+			},
+			error: function(result){
+				alert("에러");
+			}
+		});
+	});
+});
 </script>
 <div class="payment">
 <a onclick="inicisPay()">
@@ -522,4 +546,4 @@ IMP.request_pay(
 
 </div>
 </body>
-</html>ㅍ
+</html>
