@@ -226,7 +226,7 @@
 </div>
 <br>
 <div style="text-align: center;">
-	<button onclick="closePopup();" style="background-color: transparent; border: 0; margin-bottom: 3rem; background-color: buttonface; font-weight: 400; width: 150px; border-radius: 0; border: 0; font-size: 15px; height: 30px;">확인</button>
+	<button onclick="closePopup();" style="background-color: transparent; border: 0; margin-bottom: 3rem; background-color: buttonface; font-weight: 400; width: 150px; border-radius: 0; border: 0; font-size: 14px; height: 30px; font-weight: bold;">확인</button>
   </div>
 </body>
 </html>
