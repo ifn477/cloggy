@@ -325,6 +325,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
     loadMoreButton.addEventListener("click", loadMoreClick);
 });
+
 </script>
 <script type="text/javascript" src="./js/main.js"></script>
 </body>

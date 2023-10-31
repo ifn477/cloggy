@@ -261,6 +261,7 @@ var mySwiper = new Swiper('#best-product-slide', {
 
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script type="text/javascript">
+/*찜하기*/
 $(document).ready(function () {
     $('.container_box').on('click', '.likeAddButton, .likeDeleteButton', function () {
         var button = $(this);
@@ -268,8 +269,7 @@ $(document).ready(function () {
         var productId = button.data('productid');
         var userId = button.data('userid');
         var url = isLikeButton ? 'like-add' : 'like-delete';
-        
-        
+
         var memberLoginState = ${loginstate};
         if (!memberLoginState) {
             alert('로그인 후 이용해 주세요.');
@@ -284,8 +284,12 @@ $(document).ready(function () {
                 userId: userId
             },
             success: function (response) {
-                console.log(isLikeButton ? '추가 성공' : '삭제 성공');
-                location.reload();
+                var buttonParent = button.closest('.likecheck');
+                if (isLikeButton) {
+                    buttonParent.html('<button class="likeDeleteButton" data-productid="' + productId + '" data-userid="' + userId + '"><img alt="찜해제" src="/dog/image/Footprint_full_pink_s.png" width="50px" height="50px"></button>');
+                } else {
+                    buttonParent.html('<button class="likeAddButton" data-productid="' + productId + '" data-userid="' + userId + '"><img alt="찜하기" src="/dog/image/Footprint_s.png" width="50px" height="50px"></button>');
+                }
             },
             error: function (error) {
                 console.error('오류 발생', error);

@@ -43,11 +43,18 @@
 
       <div class="col-3 mb-3">
         <h5>C/S Center</h5>
-        <ul class="nav flex-column">
-          <li class="nav-item mb-2">전화번호: 1588-2700</li>
-          <li class="nav-item mb-2">통화가능시간: 9:00AM - 6:00PM</li>
-        </ul>
-      </div>
+		<ul class="nav flex-column">
+  			<li class="nav-item mb-2">전화번호: 1588-2700</li>
+  			<li class="nav-item mb-2">통화가능시간: 9:00AM - 6:00PM</li>
+  			<li class="nav-item" style="position: relative;">
+   			 카카오톡 상담하기
+   			<img src="/dog/image/kakao.png" alt="Kakao" style="margin-left: 10px; height: 30px; position: absolute;">
+			<button id="kakao-talk-channel-chat-button" data-channel-public-id="_xenxmCG" data-title="consult"  data-support-multiple-densities="true"
+  			style="background: none; border: none; padding: 0; opacity: 0; position: absolute;"
+			></button>
+  			</li>
+		</ul>
+	 </div>
 
       <div class="col-3 mb-3">
         <h5>Bank Info</h5>
@@ -67,5 +74,23 @@
   </footer>
 </div>
 </div>
+<script type="text/javascript">
+/* 카카오 상담 */
+  window.kakaoAsyncInit = function() {
+    Kakao.Channel.createChatButton({
+      container: '#kakao-talk-channel-chat-button',
+    });
+  };
+
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = 'https://t1.kakaocdn.net/kakao_js_sdk/2.4.0/kakao.channel.min.js';
+    js.integrity = 'sha384-bg2pMhokxyx1zeEM2ol2hJtBagKMjRIZDVI/KITe+j2U5K+Or6HPY1lWDWY8ubEN';
+    js.crossOrigin = 'anonymous';
+    fjs.parentNode.insertBefore(js, fjs);
+  })(document, 'script', 'kakao-js-sdk');
+</script>
 </body>
 </html>

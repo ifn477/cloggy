@@ -43,9 +43,9 @@ public class LMailSend {
 	            msg.setFrom(from);
 	            InternetAddress to = new InternetAddress(email);
 	            msg.setRecipient(Message.RecipientType.TO, to);
-	            msg.setSubject("[cloggy] 비밀번호 찾기", "UTF-8");
+	            msg.setSubject("[cloggy] 비밀 번호 찾기", "UTF-8");
 	            String emailBody = "안녕하세요. (주)클로기입니다.<br>";
-	            emailBody += "회원님의 비밀번호 찾기 결과입니다.<br><br>";
+	            emailBody += "회원님의 비밀 번호 찾기 결과입니다.<br><br>";
 				emailBody += "<table style=\"text-align:center; height: 50px; width:200px; background-color: #e28b3a; font-family: 'Noto Sans KR', sans-serif; border: 1px solid #e28b3a; font-size: 12px;\">";
 				emailBody += "<tr>";
 				emailBody += "<th style=\"color:#ffffff;\">비밀 번호</th>";

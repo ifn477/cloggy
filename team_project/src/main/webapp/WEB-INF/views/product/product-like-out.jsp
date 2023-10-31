@@ -69,7 +69,6 @@ p {
     font-weight: 500;
     top: 0;
     margin-bottom: 40px;
-    margin-left: 3px;
 }
 </style>
 <meta charset="UTF-8">
@@ -79,7 +78,7 @@ p {
 
 <section class="content">
     <div class="container_box">
-        <p>찜목록</p>
+            <p>찜목록</p>
         <c:if test="${not empty list}">
             <c:forEach items="${list}" var="pout" varStatus="loop">
                 <div class="product_item">
@@ -103,7 +102,7 @@ p {
             </c:forEach>
         </c:if>
         <c:if test="${empty list}">
-            <p style="text-align: center; margin-top: 7rem;">찜한 상품이 없습니다.</p>
+            <p style="text-align: center; margin-top: 7rem; margin-bottom: 25rem; color: gray;">찜한 상품이 없습니다.</p>
         </c:if>
     </div>
 </section>
