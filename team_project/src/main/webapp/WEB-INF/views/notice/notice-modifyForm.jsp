@@ -33,13 +33,13 @@ textarea {
 </head>
 <body>
 <form action="notice-modifysave" method="post">
-	<c:forEach items="${list }" var="notice">
-	<table align="center" width="700px">
-	<caption>공지수정</caption>
+<table align="center" width="700px">
+<c:forEach items="${list }" var="notice">
+<caption>공지수정</caption>
 			
 		<tr><th>제목</th>
 			<td>
-			<input type="hidden" name="n_number" value="${notice.n_number }">
+			<input type="hidden" name="n_number" value="${notice.n_number}">
 			<input type="hidden" name="userId" value="${notice.userId }">
 			<input type="text" name="n_title" value="${notice.n_title }"></td>
 		</tr>
@@ -56,8 +56,8 @@ textarea {
 			<button class="btn btn-primary py-2" type="submit">수정</button>
 			<button class="btn btn-primary py-2" type="button" onclick="location.href='notice-out'">취소</button></td>
 		</tr>
-	</table>
 </c:forEach>
+</table>
 </form>
 </body>
 </html>

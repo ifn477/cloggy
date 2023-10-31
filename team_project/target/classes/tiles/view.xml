@@ -246,11 +246,6 @@
 		<put-attribute name="body" value="/WEB-INF/views/order/order.jsp"/>
 	</definition>
 	
-	<definition name="kgin" extends="baseLayout">
-		<put-attribute name="title" value="결제입력"/>
-		<put-attribute name="body" value="/WEB-INF/views/order/kgin.jsp"/>
-	</definition>
-	
 	<definition name="order-completed" extends="baseLayout">
 		<put-attribute name="title" value="결제완료"/>
 		<put-attribute name="body" value="/WEB-INF/views/order/order-completed.jsp"/>

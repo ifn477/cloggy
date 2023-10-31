@@ -86,11 +86,10 @@ public class NoticeController {
 		
 		int n_number=Integer.parseInt(request.getParameter("n_number"));
 		Nservice ns= sqlSession.getMapper(Nservice.class);
-		ns.noticemodifydata(n_number);
-		
+		ArrayList<NoticeDTO>list= ns.noticemodifydata(n_number);
 		mo.addAttribute("list", list);
 		
-		return "qna-modifyForm";
+		return "notice-modifyForm";
 	}
 		
 		@RequestMapping(value = "/notice-modifysave",method = RequestMethod.POST)
@@ -116,7 +115,7 @@ public class NoticeController {
 			Nservice ns= sqlSession.getMapper(Nservice.class);
 			ns.noticedelete(n_number);
 			
-			return "redirect:qna-out";
+			return "redirect:notice-out";
 		}
 		
 		

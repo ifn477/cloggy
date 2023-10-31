@@ -11,6 +11,10 @@ public class MyDTO {
 	String p_enroll;
 	int p_sell, p_hits;
 	String userId;
+	String d_status;
+	int order_id;
+	int coupon_count;
+	
 	public MyDTO() {}
 	
 	public MyDTO(int product_id, int category_id, String p_name, int p_price, String p_info, String p_image,
@@ -31,6 +35,30 @@ public class MyDTO {
 	}
 	
 	
+	public int getCoupon_count() {
+		return coupon_count;
+	}
+
+	public void setCoupon_count(int coupon_count) {
+		this.coupon_count = coupon_count;
+	}
+
+	public int getOrder_id() {
+		return order_id;
+	}
+
+	public void setOrder_id(int order_id) {
+		this.order_id = order_id;
+	}
+
+	public String getD_status() {
+		return d_status;
+	}
+
+	public void setD_status(String d_status) {
+		this.d_status = d_status;
+	}
+
 	public int getProduct_id() {
 		return product_id;
 	}

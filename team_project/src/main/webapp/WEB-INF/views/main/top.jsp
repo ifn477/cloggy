@@ -67,6 +67,10 @@ color: white;
   font-family: 'Noto Sans KR', sans-serif; 
   color: gray;
 }
+#memnav{
+  font-family: 'Noto Sans KR', sans-serif; 
+  color: gray;
+}
 .nav-item.dropdown.list-unstyled:hover > a {
   color: #e48b00;
 }
@@ -250,6 +254,7 @@ a {
         <a class="glyphicon glyphicon-log-in" href="search-all" role="button" data-bs-toggle="dropdown" aria-expanded="false">
           마이페이지 &nbsp;</a>
         <ul class="dropdown-menu" id="dropdown-menu-left">
+          <li><a class="dropdown-item" href="mypage?userId=${member.userId}">마이페이지</a></li>
           <li><a class="dropdown-item" href="member-info?userId=${member.userId}">내정보</a></li>
           <li><a class="dropdown-item" href="cart-out">장바구니</a></li>
           <li><a class="dropdown-item" href="orderlistout?userId=${member.userId}">주문내역</a></li>
@@ -261,16 +266,17 @@ a {
       </ul>
       </c:when>
         <c:when test="${loginstate == true && member.auth_id == 1}">
-                  <ul class="nav navbar-nav navbar-right">
+                  <ul class="nav navbar-nav navbar-right" id="memnav">
                      <li><a href="#"><span class="glyphicon glyphicon-user"></span>&nbsp; ${member.userName}님 반갑습니다! &nbsp;</a></li>
          <li class="nav-item dropdown list-unstyled" onmouseenter="openDropdown(this)" onmouseleave="closeDropdown(this)">
         <a class="glyphicon glyphicon-log-in" href="search-all" role="button" data-bs-toggle="dropdown" aria-expanded="false">
           마이페이지 &nbsp;</a>
         <ul class="dropdown-menu" id="dropdown-menu-left">
+       	  <li><a class="dropdown-item" href="mypage?userId=${member.userId}">마이페이지</a></li>
           <li><a class="dropdown-item" href="member-info?userId=${member.userId}">내정보</a></li>
           <li><a class="dropdown-item" href="mybaby-input">우리아이등록</a></li>
           <li><a class="dropdown-item" href="cart-out">장바구니</a></li>
-          <li><a class="dropdown-item" href="orderlistout">주문내역</a></li>
+          <li><a class="dropdown-item" href="orderlistout?userId=${member.userId}">주문내역</a></li>
           <li><a class="dropdown-item" href="like-out">찜목록</a></li>
           <li><a class="dropdown-item" href="recent-products?userId=${member.userId}">최근 본 상품</a></li>  
         </ul>

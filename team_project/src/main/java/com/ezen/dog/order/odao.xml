@@ -8,7 +8,7 @@
     SELECT c.userId, c.product_id, c.cart_quantity, p.p_name, p.p_thumbnail, p.p_price, o.opt_name
     FROM cart c
     INNER JOIN product p ON c.product_id = p.product_id AND c.userId = #{param1} AND p.product_id = #{param2}
-    LEFT JOIN p_option o ON o.product_id = p.product_id -- 이 부분은 옵션 테이블과 연결합니다
+    LEFT JOIN p_option o ON o.product_id = p.product_id 
 </select>
 
 <select id="cartitem">
@@ -41,7 +41,7 @@ from c_order o, c_orderitem oi, product p
 where o.order_id = oi.ORDER_ID
 and oi.PRODUCT_ID = p.product_id
 and o.userId = #{param1}
-
+ORDER BY o.order_id DESC
 </select>
 
 <select id="orderdetail" resultType="com.ezen.dog.order.OrderDTO">

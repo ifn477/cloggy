@@ -5,6 +5,6 @@ import java.util.ArrayList;
 
 public interface Myservice {
 
-	
-	public ArrayList<MyDTO> mlikeout(String userId);
+	public ArrayList<MyDTO> ordercnt(String userId);
+	public Integer cpcnt(String userId);
 }
