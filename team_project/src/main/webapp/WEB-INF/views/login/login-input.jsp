@@ -80,14 +80,15 @@
 		</div>
 	</form>
 
+	<script type="text/javascript">
+	
 	<c:if test="${loginFailed==true}">
 	alert('회원정보가 일치하지 않습니다.');
 	</c:if>
 	<c:if test="${mailSent==true}">
 	alert('회원님의 비밀번호를 메일로 발송하였습니다.');
 	</c:if>
-
-	<script type="text/javascript">
+	
 		function redirectToKakaoLogin() {
 			window.location.href = "https://kauth.kakao.com/oauth/authorize?client_id=4b174c23998fabfa7c3c09869f3e67a7&redirect_uri=http://localhost:8333/dog/kakaoMember&response_type=code";
 		}
