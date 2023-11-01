@@ -53,7 +53,7 @@
 <c:forEach items="${list }" var="qna">
 <tr>
 <td>${qna.q_number}</td>
-<td><a href="qna-detail?userId=${qna.userId}">${qna.q_title}</a></td>
+<td><a href="qna-detail?q_number=${qna.q_number}">${qna.q_title}</a></td>
 <td>${qna.userId}</td>
 <td>${fn:substring(qna.q_date,0,10)}</td>
 </tr>
