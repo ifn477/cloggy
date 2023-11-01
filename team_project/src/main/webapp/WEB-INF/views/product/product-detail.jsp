@@ -387,36 +387,6 @@
 			</div>
 		</div>
 
-		<!-- 리뷰 -->
-		<div class="review-container">
-			<div class="review">
-				<table width="500px" align="center">
-					<tr>
-						<td colspan="2"><a
-							href="review-out?product_id=${pdetail.product_id}" align="right">리뷰
-								전체보기</a></td>
-					</tr>
-
-					<tr>
-						<td rowspan="2" width="120px"><img
-							src="/dog/review-img/${rdto.r_photo}" width="100px"
-							height="100px"></td>
-						<td height="30px">${rdto.userId}</td>
-					</tr>
-					<tr>
-						<td>${rdto.r_content}</td>
-					</tr>
-				</table>
-			</div>
-		</div>
-		
-		<!-- 수정버튼 -->
-		<div style="text-align: center; margin-top:30px; margin-bottom:70px;">
-		    <button class="btn btn-primary py-2" id="modibnt" style="background-color: #e28b3a;" 
-		    onclick="location.href='product-modifyForm?product_id=${pdetail.product_id}'">수정</button>
-		</div>
-	</div>
-</div>
 
 </c:forEach>
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
