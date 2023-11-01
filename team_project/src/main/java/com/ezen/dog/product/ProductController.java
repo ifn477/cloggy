@@ -104,11 +104,29 @@ public class ProductController {
 
 	//전체상품출력
 	@RequestMapping(value = "/product-out")
-	public String productout(Model mo) {
+	public String productout(Model mo,HttpServletRequest request,ProductPageDTO dto) {
 		
 		PService ps = sqlSession.getMapper(PService.class);
 		list = ps.productout();
 		mo.addAttribute("list", list);
+		
+	    String nowPage=request.getParameter("nowPage");
+	    String cntPerPage=request.getParameter("cntPerPage");
+	    PService notice = sqlSession.getMapper(PService.class);
+	    int total=notice.cntnotice();
+	    if(nowPage==null && cntPerPage == null) {
+	       nowPage="1";
+	       cntPerPage="5";
+	    }
+	    else if(nowPage==null) {
+	       nowPage="1";
+	    }
+	    else if(cntPerPage==null) {
+	       cntPerPage="5";
+	    }      
+	    dto=new ProductPageDTO(total,Integer.parseInt(nowPage),Integer.parseInt(cntPerPage));
+	    mo.addAttribute("paging",dto);
+	    mo.addAttribute("list",notice.selectnotice(dto));
 		
 		return "product-out";
 	}

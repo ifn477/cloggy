@@ -54,11 +54,24 @@ textarea {
 		</c:when>
 		<c:otherwise></c:otherwise>
 	</c:choose>
-	<button class="btn btn-primary py-2" type="button" onclick="location.href='qna-modifyForm?q_number=${qna.q_number}'">수정</button>
-	<button class="btn btn-primary py-2" type="button" onclick="location.href='qna-out'">취소</button>
-	<button class="btn btn-primary py-2" type="button" onclick="location.href='qna-delete?q_number=${qna.q_number}'">삭제</button>
+	
+	
+	<c:choose>
+  	  <c:when test="${qna.q_secret eq true || qna.userId eq member.userId || member.auth_id == 0}">
+		<button class="btn btn-primary py-2" type="button" onclick="location.href='qna-modifyForm?q_number=${qna.q_number}'">수정</button>
+		<button class="btn btn-primary py-2" type="button" onclick="location.href='qna-out'">취소</button>
+		<button class="btn btn-primary py-2" type="button" onclick="location.href='qna-delete?q_number=${qna.q_number}'">삭제</button>
+	  </c:when>
+   	 <c:otherwise></c:otherwise>
+	</c:choose>
+		<button class="btn btn-primary py-2" type="button" onclick="location.href='qna-out'">목록</button>
 </td>
 </tr>
+
+
+
+
+
 </table>
 </c:forEach>
 </form>

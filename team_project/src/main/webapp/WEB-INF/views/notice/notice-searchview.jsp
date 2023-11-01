@@ -52,7 +52,7 @@
 <c:forEach items="${list }" var="notice">
 <tr>
 <td>${notice.n_number}</td>
-<td><a href="notice-detail?userId=${notice.userId}">${notice.n_title}</a></td>
+<td><a href="notice-detail?n_number=${notice.n_number}">${notice.n_title}</a></td>
 <td>${notice.userId}</td>
 <td>${fn:substring(notice.n_date,0,10)}</td>
 </tr>

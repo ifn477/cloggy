@@ -31,4 +31,6 @@ public interface PService {
 	public ArrayList<ProductDTO> searchproductname(String p_value);
 	public ArrayList<ProductDTO> searchcategory1(String p_value);
 	public ArrayList<ProductDTO> searchcategory2(String p_value);
+	public int cntnotice();
+	public ArrayList<ProductDTO> selectnotice(ProductPageDTO dto);
 }

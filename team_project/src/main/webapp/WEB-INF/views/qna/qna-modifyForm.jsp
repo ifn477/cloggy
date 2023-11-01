@@ -47,7 +47,7 @@ textarea {
 </tr>
 	<tr>
 		<td colspan="2" style="text-align: right; border-bottom: none;">
-			<button class="btn btn-primary py-2" type="button">수정</button>
+			<button class="btn btn-primary py-2" type="submit">수정</button>
 			<button class="btn btn-primary py-2" onclick="location.href='qna-out'">취소</button>
 		</td>
 	</tr>
