@@ -67,8 +67,14 @@ select userId,password,userName,email,phone,address,enroll_date,last_update from
 </select>
 
 <insert id="babysave">
-insert into mybaby values(#{param1},#{param2},#{param3},#{param4},#{param5},#{param6})
+insert into mybaby values(#{param1}, #{param2},#{param3}
+,#{param4},#{param5},#{param6},#{param7})
 </insert>
+
+
+<select id="babyView" resultType="com.ezen.dog.member.MyBabyDTO">
+select * from mybaby where userId=#{param1}
+</select>
 
 
 <update id="updateMembershipByPurchaseAmount" parameterType="map">

@@ -29,9 +29,9 @@ public class HomeController {
 		hs.setAttribute("loginstate", false);
 		PService ps = sqlSession.getMapper(PService.class);
 		list = ps.totalbest();
-		ArrayList<ProductDTO> list2 = ps.productnewout();
+//		ArrayList<ProductDTO> list2 = ps.productnewout();
 		mo.addAttribute("bestlist", list);
-		mo.addAttribute("newlist", list2);
+//		mo.addAttribute("newlist", list2);
 		
 		return "main";
 	}
@@ -54,7 +54,7 @@ public class HomeController {
 	
     @RequestMapping("/popup")
     public String popup(Model model) {
-        model.addAttribute("message", "메인팝업창");
+        model.addAttribute("message", "硫붿씤�뙘�뾽李�");
         return "popup";
     }
 	

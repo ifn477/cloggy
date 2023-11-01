@@ -134,4 +134,16 @@ from product p, category_2 c
 where p.category2_id = c.category2_id
 and c.category2_name like '%' || #{param1} || '%'
 </select>
+<!-- 페이징처리 -->
+<select id="cntnotice" resultType="int">
+   select count(*) from product
+</select>
+<!-- 페이징처리 -->
+<select id="selectnotice" resultType="com.ezen.dog.product.ProductDTO">
+   select * from (
+   select rownum rn,A.* from(  
+	   select p_thumbnail,p_name,p_price,p_stock,p_hits,p_sell,
+	   rank() over(order by product_id DESC) as rank from product)A)
+   where rn between #{start} AND #{end}
+</select>	
 </mapper>

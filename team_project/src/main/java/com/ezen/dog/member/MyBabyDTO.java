@@ -2,16 +2,16 @@ package com.ezen.dog.member;
 
 public class MyBabyDTO {
 	String baby_photo, baby_name, baby_type, baby_birth;
-	String babygender, bodytype;
-	public MyBabyDTO(String baby_photo, String baby_name, String baby_type, String baby_birth, String babygender,
-			String bodytype) {
+	String baby_gender, baby_bodytype;
+	public MyBabyDTO(String baby_photo, String baby_name, String baby_type, String baby_birth, String baby_gender,
+			String baby_bodytype) {
 		super();
 		this.baby_photo = baby_photo;
 		this.baby_name = baby_name;
 		this.baby_type = baby_type;
 		this.baby_birth = baby_birth;
-		this.babygender = babygender;
-		this.bodytype = bodytype;
+		this.baby_gender = baby_gender;
+		this.baby_bodytype = baby_bodytype;
 	}
 	public MyBabyDTO() {
 		super();
@@ -40,18 +40,20 @@ public class MyBabyDTO {
 	public void setBaby_birth(String baby_birth) {
 		this.baby_birth = baby_birth;
 	}
-	public String getBabygender() {
-		return babygender;
+	public String getBaby_gender() {
+		return baby_gender;
 	}
-	public void setBabygender(String babygender) {
-		this.babygender = babygender;
+	public void setBaby_gender(String baby_gender) {
+		this.baby_gender = baby_gender;
 	}
-	public String getBodytype() {
-		return bodytype;
+	public String getBaby_bodytype() {
+		return baby_bodytype;
 	}
-	public void setBodytype(String bodytype) {
-		this.bodytype = bodytype;
+	public void setBaby_bodytype(String baby_bodytype) {
+		this.baby_bodytype = baby_bodytype;
 	}
+
+	
 	
 	
 	

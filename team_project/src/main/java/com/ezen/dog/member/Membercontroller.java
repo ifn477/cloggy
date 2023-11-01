@@ -26,7 +26,7 @@ public class Membercontroller {
 	@Autowired
 	SqlSession sqlSession;
 	
-	static String imgPath = "C:\\Users\\dywlr\\git\\team_project\\team_project\\src\\main\\webapp\\image";
+	static String imgPath = "C:\\Users\\dywlr\\git\\team_project_1024\\team_project\\src\\main\\webapp\\image";
 	
 	@RequestMapping(value = "/mybaby-input")
 	public String mybaby()
@@ -40,31 +40,28 @@ public class Membercontroller {
 		
 		MemberDTO mdto = (MemberDTO) session.getAttribute("member");
 		String userId = mdto.getUserId();
-		
-		
 		String baby_name = request.getParameter("baby_name");
 		String baby_type =request.getParameter("baby_type");
-		String baby_gender =request.getParameter("baby_gender");
-		String baby_bodytype = request.getParameter("baby_bodytype");
+
+		String baby_birth = request.getParameter("baby_birth");
 		
-//		String babybirth_year = request.getParameter("baby_birth_year");
-//		String babybirth_month = request.getParameter("babybirth_month");
-//		String babybirth_day = request.getParameter("babybirth_day");
-//		String baby_birth = babybirth_year+"/"+babybirth_month+"/"+babybirth_day;
 		
-//		System.out.println("애기생일 :" + baby_birth);		
+		String babygender = request.getParameter("selectedGender");
+		String bodytype = request.getParameter("selectedBodyType");
 		
+		System.out.println("아기 성별 :"+babygender);
+		System.out.println("아기 체형  :"+bodytype);
 		
 		
 		String baby_photo = request.getParameter("baby_photo");
 		MultipartFile mf = request.getFile("baby_photo");
 		String fname = mf.getOriginalFilename();
-		mf.transferTo(new File(imgPath+"\\"+fname));
-		
 		Mservice ms = sqlSession.getMapper(Mservice.class);
-		ms.babysave(baby_name, baby_type, fname, baby_gender, baby_bodytype, userId);
+		mf.transferTo(new File(imgPath+"\\"+fname));
+		ms.babysave(baby_name, baby_birth, baby_type, fname, babygender, bodytype, userId);
 		return "redirect:main";
 	}
+	
 	
 	@RequestMapping(value = "/member-input")
 	public String memberinput()

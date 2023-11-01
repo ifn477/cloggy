@@ -4,12 +4,12 @@
 <html>
 <head>
 <style type="text/css">
-body {
-	min-height: calc(100vh - 500px);
+body{
+min-height: calc(100vh - 500px);
 }
 
 .babyTable {
-	margin-top: 50px;
+	margin-top : 50px;
 	display: flex;
 	height: 100%;
 	flex-flow: column nowrap; /*direction+wrap*/
@@ -19,7 +19,7 @@ body {
 	/* 반대축(수평축) 기준 정렬 */
 	align-items: center;
 	align-content: center;
-	flex-direction: column;
+	flex-direction : column;
 }
 
 .baby_input_table {
@@ -31,35 +31,30 @@ body {
 
 input[type=text], select {
 	width: 1fr 2fr;
-	/* 	height: ; */
-	/* 	font-size: ; */
-	border-color: #d88402;
-	background-color: rgb(255, 246, 233);
+/* 	height: ; */
+/* 	font-size: ; */
+	border-color : #d88402;
+	background-color : rgb(255, 246, 233);
 	box-shadow: none;
 	border: 2px solid #ffffff;
-	box-shadow: 0 0 5px #ffffff;
+    box-shadow: 0 0 5px #ffffff;
 }
+input:focus { outline: none !important; border-color: #d88402; box-shadow: 0 0 5px #d88402; background-color :rgb(255, 246, 233); }
 
-input:focus {
-	outline: none !important;
-	border-color: #d88402;
-	box-shadow: 0 0 5px #d88402;
-	background-color: rgb(255, 246, 233);
-}
-
-.baby_photo {
-	margin-bottom: 20px;
+.baby_photo{
+	margin-bottom : 20px;
 }
 
 button {
 	background-color: rgb(255, 246, 233);
-	border: none; &: hover { background : #ED9309;
-	color: rgb(255, 246, 233);
+	border: none;
+	  &:hover {
+    background: #ED9309;
+    color: rgb(255, 246, 233);
+    }
 }
-
-}
-.submitbtn {
-	margin-top: 20px;
+.submitbtn{
+	margin-top : 20px;
 	background-color: #ED9309;
 	text-align: center;
 	margin-bottom: 2rem;
@@ -79,35 +74,56 @@ button {
 	    const realUpload = $('.real-upload');
 	    const upload = $('#upload');
 
+	    var baby_gender = null;
+	    var baby_bodytype = null;
+	    
 // 	    upload.addEventListener('click', () => realUpload.click());
 		upload[0].addEventListener('click', function() {
 		    realUpload.click();
 		});
 
+	
 		
-		// 성별 버튼 클릭 시 색깔 변경
 		$('.genderbtn').click(function() {
-			// 모든 성별 버튼의 색상 초기화
-			$('.genderbtn').css('background-color', '');
+		    // 모든 성별 버튼의 색상 초기화
+		    $('.genderbtn').css('background-color', '');
+		    $('.genderbtn').css('color', ''); // 추가 - 기존에 선택되었던 버튼의 텍스트 색상 초기화
 
-			// 클릭된 버튼의 색상을 변경
-			$(this).css('background-color', 'orange');
-			$(this).css('color', 'white');
+		    // 클릭된 버튼의 색상을 변경
+		    $(this).css('background-color', 'orange');
+		    $(this).css('color', 'white');
 
-			return false; // 폼 제출 방지
+		    var baby_gender = $(this).val(); // 선택된 버튼의 value 값 추출
+		    
+		    $('input[name="selectedGender"]').val(baby_gender); // hidden input 필드에 선택된 값을 설정
+
+		    console.log("선택된 gender 값: " + baby_gender);
+
+		    return false; // 폼 제출 방지
 		});
+
 
 		// 체형 버튼 클릭 시 색깔 변경
 		$('.bodytypebtn').click(function() {
-			// 모든 성별 버튼의 색상 초기화
-			$('.bodytypebtn').css('background-color', '');
+		    // 모든 성별 버튼의 색상 초기화
+		    $('.bodytypebtn').css('background-color', '');
+		    $('.bodytypebtn').css('color', ''); // 추가 - 기존에 선택되었던 버튼의 텍스트 색상 초기화
 
-			// 클릭된 버튼의 색상을 변경
-			$(this).css('background-color', 'orange');
-			$(this).css('color', 'white');
+		    // 클릭된 버튼의 색상을 변경
+		    $(this).css('background-color', 'orange');
+		    $(this).css('color', 'white');
 
-			return false; // 폼 제출 방지
+		    var baby_bodytype = $(this).val(); // 선택된 버튼의 value 값 추출
+		    $('input[name="selectedBodyType"]').val(baby_bodytype); // hidden input 필드에 선택된 값을 설정
+
+		    console.log("선택된 bodyType 값: " + baby_bodytype);
+
+		    return false; // 폼 제출 방지
 		});
+
+		
+		
+		
 		
 		$('.real-upload').on('change', function() {
 		    if (this.files && this.files[0]) {
@@ -154,8 +170,8 @@ button {
 
 			<!-- 			사진 업로드 -->
 			<div class="baby_photo">
-				<img src="/dog/image/graypreview.png" id="upload" height="200px">
-				<input type="file" class="real-upload" name="baby_photo"
+				<img src="/dog/image/graypreview.png" id="upload" height="200px"> <input
+					type="file" class="real-upload" name="baby_photo"
 					style="display: none;" accept=".jpg, .png">
 			</div>
 
@@ -164,10 +180,10 @@ button {
 				<div class="baby_name">
 					<input type="text" name="baby_name">
 				</div>
-
-
+		
+				
 				<div>견종을 등록해주세요</div>
-				<div name="baby_type">
+				<div class="baby_type">
 					<select name="baby_type">
 						<option value="">-- 강아지 종류를 선택하세요 --</option>
 						<option value="믹스">세상에서 하나뿐인 믹스</option>
@@ -257,89 +273,25 @@ button {
 					</select>
 				</div>
 				<div>생일을 입력해주세요</div>
-				<div class="baby_birth" name="baby_birth">
-					<select>
-						<option name="baby_birth_year" value="">-- 년 --</option>
-						<option name="baby_birth_year" value="2023">2023년</option>
-						<option name="baby_birth_year" value="2022">2022년</option>
-						<option name="baby_birth_year" value="2021">2021년</option>
-						<option name="baby_birth_year" value="2020">2020년</option>
-						<option name="baby_birth_year" value="2019">2019년</option>
-						<option name="baby_birth_year" value="2018">2018년</option>
-						<option name="baby_birth_year" value="2017">2017년</option>
-						<option name="baby_birth_year" value="2016">2016년</option>
-						<option name="baby_birth_year" value="2015">2015년</option>
-						<option name="baby_birth_year" value="2014">2014년</option>
-						<option name="baby_birth_year" value="2013">2013년</option>
-						<option name="baby_birth_year" value="2012">2012년</option>
-						<option name="baby_birth_year" value="2011">2011년</option>
-						<option name="baby_birth_year" value="2010">2010년</option>
-					</select> <select>
-						<option name="baby_birth_month" value="">-- 월 --</option>
-						<option name="baby_birth_month" value="12">12월</option>
-						<option name="baby_birth_month" value="11">11월</option>
-						<option name="baby_birth_month" value="10">10월</option>
-						<option name="baby_birth_month" value="9">9월</option>
-						<option name="baby_birth_month" value="8">8월</option>
-						<option name="baby_birth_month" value="7">7월</option>
-						<option name="baby_birth_month" value="6">6월</option>
-						<option name="baby_birth_month" value="5">5월</option>
-						<option name="baby_birth_month" value="4">4월</option>
-						<option name="baby_birth_month" value="3">3월</option>
-						<option name="baby_birth_month" value="2">2월</option>
-						<option name="baby_birth_month" value="1">1월</option>
-					</select> <select name="birth_day">
-						<option value="">-- 일 --</option>
-						<!-- 1일부터 31일까지 옵션 추가 -->
-						<option name="baby_birth_day" value="31">31일</option>
-						<option name="baby_birth_day" value="30">30일</option>
-						<option name="baby_birth_day" value="29">29일</option>
-						<option name="baby_birth_day" value="28">28일</option>
-						<option name="baby_birth_day" value="27">27일</option>
-						<option name="baby_birth_day" value="26">26일</option>
-						<option name="baby_birth_day" value="25">25일</option>
-						<option name="baby_birth_day" value="24">24일</option>
-						<option name="baby_birth_day" value="23">23일</option>
-						<option name="baby_birth_day" value="22">22일</option>
-						<option name="baby_birth_day" value="21">21일</option>
-						<option name="baby_birth_day" value="20">20일</option>
-						<option name="baby_birth_day" value="19">19일</option>
-						<option name="baby_birth_day" value="18">18일</option>
-						<option name="baby_birth_day" value="17">17일</option>
-						<option name="baby_birth_day" value="16">16일</option>
-						<option name="baby_birth_day" value="15">15일</option>
-						<option name="baby_birth_day" value="14">14일</option>
-						<option name="baby_birth_day" value="13">13일</option>
-						<option name="baby_birth_day" value="12">12일</option>
-						<option name="baby_birth_day" value="11">11일</option>
-						<option name="baby_birth_day" value="10">10일</option>
-						<option name="baby_birth_day" value="9">9일</option>
-						<option name="baby_birth_day" value="8">8일</option>
-						<option name="baby_birth_day" value="7">7일</option>
-						<option name="baby_birth_day" value="6">6일</option>
-						<option name="baby_birth_day" value="5">5일</option>
-						<option name="baby_birth_day" value="4">4일</option>
-						<option name="baby_birth_day" value="3">3일</option>
-						<option name="baby_birth_day" value="2">2일</option>
-						<option name="baby_birth_day" value="1">1일</option>
-						<!-- 1일부터 31일까지의 일을 추가 -->
-					</select>
+			<div class="baby_birth">
+				<input type="date" name="baby_birth">
 				</div>
 				<div>성별을 선택해 주세요</div>
 				<div>
-					<input type="hidden" name="baby_gender" id="babyGenderField"
-						value="">
-					<button class="genderbtn" data-value="남자">남아</button>
-					<button class="genderbtn" data-value="여자">여아</button>
+					<button class="genderbtn" name="baby_gender" value="남아">남아</button>
+					<button class="genderbtn" name="baby_gender" value="여아">여아</button>
+					<input type="hidden" name="selectedGender" value="">
+
 				</div>
 				<div>체형을 선택해 주세요</div>
 				<div>
-					<button class="bodytypebtn" name="baby_bodytype" data-value="날씬">날씬</button>
-					<button class="bodytypebtn" name="baby_bodytype" data-value="보통">보통</button>
-					<button class="bodytypebtn" name="baby_bodytype" data-value="통통">통통</button>
+					<button class="bodytypebtn" name="baby_bodytype" value="날씬">날씬</button>
+					<button class="bodytypebtn" name="baby_bodytype" value="보통">보통</button>
+					<button class="bodytypebtn" name="baby_bodytype" value="통통">통통</button>
+					<input type="hidden" name="selectedBodyType" value="">
 				</div>
 			</div>
-			<input type="submit" name="submit" class="submitbtn" value="작성완료">
+		<input type="submit" name="submit" class="submitbtn" value="작성완료">
 		</div>
 	</form>
 </html>
