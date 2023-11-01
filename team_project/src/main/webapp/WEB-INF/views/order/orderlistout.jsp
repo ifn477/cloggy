@@ -11,41 +11,13 @@ td{
 text-align: center;
 }
 
-.mypage-container {
-    display: flex;
-    justify-content: space-between;
 
-}
-.mypage{
- text-align: left;
- padding-left: 50px;
- padding-top: 100px;
-}
-.mypage a:hover {
-    color:#d88402; /* 원하는 hover 컬러로 변경하세요 */
-    text-decoration: none; /* 밑줄 제거 (선택 사항) */
-}
-
-.mypage ul {
-    list-style: none;
-    padding: 0;
-
-}
 </style>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
-<div class="mypage-container">
-<div class="mypage">
-<ul>
-<li><a href="member-info">내정보</a></li>
-<li><a href="orderlistout">주문내역</a></li>
-<li><a href="recent-products">장바구니</a></li>
-<li><a href="like-out">찜한 상품</a></li>
-<li><a href="recent-products">최근본상품</a></li>
-</ul>
-</div>
+
 <table align="center">
 <caption>주문내역조회</caption>
 <tr>
@@ -70,21 +42,9 @@ text-align: center;
 		</c:when>
 	</c:choose>
 	</td>
-	<td>
-		<input type="hidden" id="order_id" name="order_id" value="${olist.order_id}">
-		<input type="button" value="리뷰 작성하기" onclick="openTermsPopup1()">
-	</td>
 
 </tr>
 </c:forEach>
 </table>
-<script type="text/javascript">
-		function openTermsPopup1() {
-			var order_id = $("#order_id").val();
-			console.log("order_id");
-			window.open('review-input?order_id=' + order_id, '',
-					'width=500,height=800');
-		}
-	</script>
 </body>
 </html>

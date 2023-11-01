@@ -22,21 +22,24 @@ public class Mycontroller {
 	ArrayList<MyDTO> list = new ArrayList<MyDTO>();
 	
 	@RequestMapping(value = "/mypage")
-	public String mypage()
+	public String mypage(HttpServletRequest request,Model mo)
 	{
-		return "mypage";
-	}
-	
-	@RequestMapping(value = "mylike")
-	public String mylike(HttpServletRequest request, Model mo) {
 		
 		String userId = request.getParameter("userId");
 		Myservice ms = sqlSession.getMapper(Myservice.class);
-		ArrayList<MyDTO> list = ms.mlikeout(userId);
-		mo.addAttribute("list",list);
+		ArrayList<MyDTO>list= ms.ordercnt(userId);
+		mo.addAttribute("list", list);
+		
+		  int couponCount  = ms.cpcnt(userId);
+		  System.out.println("##쿠폰카운트##"+couponCount);
+		  mo.addAttribute("couponCount", couponCount);
 		
 		return "mypage";
 	}
+	
+	
+	
+	
 	
 	
 	

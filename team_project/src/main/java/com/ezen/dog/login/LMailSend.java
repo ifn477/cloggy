@@ -43,10 +43,17 @@ public class LMailSend {
 	            msg.setFrom(from);
 	            InternetAddress to = new InternetAddress(email);
 	            msg.setRecipient(Message.RecipientType.TO, to);
-	            msg.setSubject("[cloggy] ��� ��ȣ ã��", "UTF-8");
-	            
-	            String emailBody = "ȸ������ ��� ��ȣ�� " + password +"�Դϴ�.";
-
+	            msg.setSubject("[cloggy] 비밀 번호 찾기", "UTF-8");
+	            String emailBody = "안녕하세요. (주)클로기입니다.<br>";
+	            emailBody += "회원님의 비밀 번호 찾기 결과입니다.<br><br>";
+				emailBody += "<table style=\"text-align:center; height: 50px; width:200px; background-color: #e28b3a; font-family: 'Noto Sans KR', sans-serif; border: 1px solid #e28b3a; font-size: 12px;\">";
+				emailBody += "<tr>";
+				emailBody += "<th style=\"color:#ffffff;\">비밀 번호</th>";
+				emailBody += "<td style=\"background-color:#ffffff; color:red; font-weight: bold;\">" + password + "</td>";
+				emailBody += "</tr>";
+				emailBody += "</table><br>";
+	            emailBody += "로그인 창으로 돌아가 로그인해 주세요.<br>";
+	            emailBody += "<p style=\"color:gray; \">본 메일은 발신 전용 메일이므로, 문의사항은 홈페이지 내 고객센터를 이용해주세요.</p>";	            
 	            msg.setText(emailBody, "UTF-8");
 	            msg.setHeader("content-Type", "text/html");
 	            javax.mail.Transport.send(msg, msg.getAllRecipients());

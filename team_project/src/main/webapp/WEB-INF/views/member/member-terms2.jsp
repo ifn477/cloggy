@@ -35,7 +35,7 @@
 선택 약관에 동의하지 않으셔도 회원가입은 가능하며, 회원가입 후 회원정보수정 페이지에서 언제든지 수신여부를 변경하실 수 있습니다.<br>
 </div>
 <div style="text-align: center;">
-	<button onclick="closePopup();" style="background-color: transparent; border: 0; margin-bottom: 3rem; background-color: buttonface; font-weight: 400; width: 150px; border-radius: 0; border: 0; font-size: 15px; height: 30px;">확인</button>
+	<button onclick="closePopup();" style="background-color: transparent; border: 0; margin-bottom: 3rem; background-color: buttonface; font-weight: 400; width: 150px; border-radius: 0; border: 0; font-size: 14px; height: 30px; font-weight: bold;">확인</button>
 </div>
 </body>
 </html>

@@ -206,11 +206,13 @@
 						</div>
 					</div>
 
-
 					<!-- 상단 오른쪽 -->
 					<div class="order-area">
 						<div class="product-title">${pdetail.p_name}</div>
 
+						<div class="product-price">
+							<span id="price">판매가&emsp;<fmt:formatNumber
+									pattern="#,##0원">${pdetail.p_price}</fmt:formatNumber></span>
 						<!-- 찜하기 -->
 						<div class="likecheck"
 							style="display: inline-block; float: right;">
@@ -245,10 +247,7 @@
 								</c:otherwise>
 							</c:choose>
 						</div>
-
-						<div class="product-price">
-							<span id="price">판매가&emsp;<fmt:formatNumber
-									pattern="#,##0원">${pdetail.p_price}</fmt:formatNumber></span>
+						<!-- 찜하기 end -->			
 						</div>
 
 						<!-- 옵션, 수량 -->
@@ -388,10 +387,42 @@
 			</div>
 		</div>
 
+		<!-- 리뷰 -->
+		<div class="review-container">
+			<div class="review">
+				<table width="500px" align="center">
+					<tr>
+						<td colspan="2"><a
+							href="review-out?product_id=${pdetail.product_id}" align="right">리뷰
+								전체보기</a></td>
+					</tr>
+
+					<tr>
+						<td rowspan="2" width="120px"><img
+							src="/dog/review-img/${rdto.r_photo}" width="100px"
+							height="100px"></td>
+						<td height="30px">${rdto.userId}</td>
+					</tr>
+					<tr>
+						<td>${rdto.r_content}</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+		
+		<!-- 수정버튼 -->
+		<div style="text-align: center; margin-top:30px; margin-bottom:70px;">
+		    <button class="btn btn-primary py-2" id="modibnt" style="background-color: #e28b3a;" 
+		    onclick="location.href='product-modifyForm?product_id=${pdetail.product_id}'">수정</button>
+		</div>
+	</div>
+</div>
+
 </c:forEach>
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
+
 	/* 쿠키 생성 및 저장 */
 	function onPageLoad() {
 		var url = window.location.href;
@@ -465,29 +496,34 @@
 	        var userId = button.data('userid');
 	        var url = isLikeButton ? 'like-add' : 'like-delete';
 
-	        var memberLoginState = ${loginstate};
-	        if (!memberLoginState) {
-	            alert('로그인 후 이용해 주세요.');
-	            return;
-	        }
-	        
-	        $.ajax({
-	            type: 'POST',
-	            url: url,
-	            data: {
-	                product_id: productId,
-	                userId: userId
-	            },
-	            success: function (response) {
-	                console.log(isLikeButton ? '추가 성공' : '삭제 성공');
-	                location.reload();
-	            },
-	            error: function (error) {
-	                console.error('오류 발생', error);
-	            }
-	        });
-	    });
-	});
+		        var memberLoginState = ${loginstate};
+		        if (!memberLoginState) {
+		            alert('로그인 후 이용해 주세요.');
+		            return;
+		        }
+		        
+		        $.ajax({
+		            type: 'POST',
+		            url: url,
+		            data: {
+		                product_id: productId,
+		                userId: userId
+		            },
+		            success: function (response) {
+		                var buttonParent = button.closest('.likecheck');
+		                if (isLikeButton) {
+		                    buttonParent.html('<button class="likeDeleteButton" data-productid="' + productId + '" data-userid="' + userId + '"><img alt="찜해제" src="/dog/image/Footprint_full_pink_s.png" width="50px" height="50px"></button>');
+		                } else {
+		                    buttonParent.html('<button class="likeAddButton" data-productid="' + productId + '" data-userid="' + userId + '"><img alt="찜하기" src="/dog/image/Footprint_s.png" width="50px" height="50px"></button>');
+		                }
+		            },
+		            error: function (error) {
+		                console.error('오류 발생', error);
+		            }
+		        });
+		    });
+		});
+
 	/*장바구니*/
 	$(document)
 			.ready(
@@ -516,6 +552,8 @@
 											updateTotalPrice(); // total_price 업데이트 함수 호출
 										});
 
+
+
 						function formatNumberWithCommas(number) {
 							return number.toString().replace(
 									/\B(?=(\d{3})+(?!\d))/g, ",")
@@ -527,6 +565,7 @@
 							var quantityValue = parseInt($("#quantity")
 									.text(), 10);
 							var priceValue = parseFloat($("#price").text()
+
 									.replace(/[^0-9.-]+/g, ""));
 
 							var totalPrice = quantityValue * priceValue;
@@ -549,6 +588,7 @@
 								updateTotalPrice();
 							}
 						});
+
 
 						$("#addToCart")
 								.click(
@@ -648,6 +688,7 @@
         productInfo.style.display = "none"; // 숨김
       }
     });
+
 </script>
 </body>
 </html>
