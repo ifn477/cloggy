@@ -339,7 +339,7 @@ cursor: pointer;
 <!-- 				 <i class="bi bi-x-lg">></i> -->
 				<button type="button" class="closebtn1" onclick="window.close()">X</button>
 			</div>
-			<c:forEach items="${olist}" var="olist">
+<%-- 			<c:forEach items="${olist}" var="olist"> --%>
 				<div class="itemInfo">
 					<div class="thumb">
 						<img src="/dog/image/${olist.p_thumbnail}" class="img">
@@ -354,7 +354,7 @@ cursor: pointer;
 <!-- 						</div> -->
 					</div>
 				</div>
-			</c:forEach>
+<%-- 			</c:forEach> --%>
 			<div class="question">
 				상품을 사용해보셨나요?
 			</div>

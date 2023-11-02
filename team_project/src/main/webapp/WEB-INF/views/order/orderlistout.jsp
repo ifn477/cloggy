@@ -30,7 +30,9 @@ text-align: center;
 <c:forEach items="${listo }" var="olist">
 <tr>
 	<td><a href="order-detail?order_id=${olist.order_id }">${olist.order_id }</a></td>
+	<input type="hidden" class="order_id" value="${olist.order_id}">
 	<td><a href="product-detail?product_id=${olist.product_id}&userId=${userId}">
+	<input type="hidden" class="product_id" value="${olist.product_id}">
 	<img src="/dog/image/${olist.p_thumbnail}" width="100px"></a>
 	<a href="product-detail?product_id=${olist.product_id}&userId=${userId}" style="text-decoration: none;">${olist.p_name}</a></td>
 	<td>${olist.orderdate}</td>
@@ -38,7 +40,8 @@ text-align: center;
 	<td>${olist.d_status}<br>
 	<c:choose> 
 		<c:when test="${olist.d_status eq '배송준비'}">
-		<button type="button" onclick="location.href='order-cancle?order_id=${olist.order_id }'">주문취소</button>
+		<button type="button" onclick="location.href='order-cancle?order_id=${olist.order_id }'">주문 취소</button>
+		 <button type="button" onclick="openTermsPopup1(this)">리뷰 등록</button>
 		</c:when>
 	</c:choose>
 	</td>
@@ -46,5 +49,15 @@ text-align: center;
 </tr>
 </c:forEach>
 </table>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script type="text/javascript">
+    function openTermsPopup1(button) {
+        var order_id = $(button).closest('tr').find('.order_id').val();
+        var product_id = $(button).closest('tr').find('.product_id').val();
+        console.log("주문번호: " + order_id);
+        console.log("제품번호: " + product_id);
+        window.open('review-input?order_id=' + order_id + '&product_id='+ product_id, '', 'width=500,height=800');
+    }
+</script>
 </body>
 </html>

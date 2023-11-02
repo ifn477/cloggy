@@ -19,6 +19,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import com.ezen.dog.cart.Cservice;
 import com.ezen.dog.member.MemberDTO;
 import com.ezen.dog.order.OrderDTO;
+import com.ezen.dog.order.OrderitemDTO;
 import com.ezen.dog.order.Oservice;
 import com.ezen.dog.product.PService;
 import com.ezen.dog.product.ProductDTO;
@@ -39,9 +40,10 @@ public class ReviewController {
 		MemberDTO member = (MemberDTO) hs.getAttribute("member");
 		
 		int order_id = Integer.parseInt(request.getParameter("order_id"));
+		int product_id= Integer.parseInt(request.getParameter("product_id"));
 		
 		Oservice ps = sqlSession.getMapper(Oservice.class);
-		ArrayList<OrderDTO> olist = ps.orderdetail(order_id);
+		OrderitemDTO olist = ps.orderdetailToReview(order_id, product_id);
 		mo.addAttribute("olist", olist);
 		mo.addAttribute("member", member);
 

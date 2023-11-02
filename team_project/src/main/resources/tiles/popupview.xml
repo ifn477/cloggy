@@ -18,15 +18,9 @@
 	<definition name="closePopup" extends="popupbaseLayout">
 		<put-attribute name="title" value="팝업창"/>
 		<put-attribute name="body" value="/WEB-INF/views/main/closePopup.jsp"/>
-	</definition>	
-
-<!-- 추천상품 팝업 -->
-	<definition name="product-recommendlist" extends="popupbaseLayout">
-		<put-attribute name="title" value="추천상품걸기용 상품리스트"/>
-		<put-attribute name="body" value="/WEB-INF/views/product/product-recommendlist.jsp"/>
 	</definition>
 
-<!-- 추천상품 팝업 -->
+<!-- 리뷰작성 팝업 -->
 	<definition name="review-input" extends="popupbaseLayout">
 		<put-attribute name="title" value="리뷰 작성"/>
 		<put-attribute name="body" value="/WEB-INF/views/review/review-input.jsp"/>
@@ -41,6 +35,6 @@
 	<definition name="member-terms2" extends="popupbaseLayout">
 		<put-attribute name="title" value="회원가입약관2"/>
 		<put-attribute name="body" value="/WEB-INF/views/member/member-terms2.jsp"/>
-	</definition>	
-
+	</definition>
+		
 </tiles-definitions>

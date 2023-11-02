@@ -119,10 +119,6 @@
 		<put-attribute name="body" value="/WEB-INF/views/member/member-input.jsp"/>
 	</definition>
 
-	<definition name="mybaby-input" extends="baseLayout">
-		<put-attribute name="title" value="우리아이입력"/>
-		<put-attribute name="body" value="/WEB-INF/views/member/mybaby-input.jsp"/>
-	</definition>
 	
 		<definition name="login-input" extends="baseLayout">
 		<put-attribute name="title" value="로그인폼"/>
@@ -293,6 +289,18 @@
 		<put-attribute name="body" value="/WEB-INF/views/main/mypage.jsp"/>
 	</definition>		
 	
+	
+<!-- 	우리아이 -->
+
+	<definition name="mybaby-input" extends="baseLayout">
+		<put-attribute name="title" value="우리아이입력"/>
+		<put-attribute name="body" value="/WEB-INF/views/member/mybaby-input.jsp"/>
+	</definition>
+
+	<definition name="mybaby-modifyForm" extends="baseLayout">
+		<put-attribute name="title" value="우리아이수정"/>
+		<put-attribute name="body" value="/WEB-INF/views/member/mybaby-modifyForm.jsp"/>
+	</definition>
 	
 	
 </tiles-definitions>

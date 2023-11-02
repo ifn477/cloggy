@@ -53,6 +53,13 @@ and o.order_id = #{param1}
 
 </select>
 
+<select id="orderdetailToReview" resultType="com.ezen.dog.order.OrderitemDTO">
+select p.p_name,p.p_thumbnail, oi.o_price, oi.o_quantity, oi.order_id, oi.product_id
+from c_orderitem oi
+inner join product p on p.product_id=oi.product_id
+where oi.order_id=#{param1} and p.product_id=#{param2}
+</select>
+
 <update id="ordercancle" parameterType="int">
 update c_order set d_status = '주문취소' where order_id = #{param1}
 </update>

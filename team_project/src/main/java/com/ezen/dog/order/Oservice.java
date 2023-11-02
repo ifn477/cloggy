@@ -13,4 +13,5 @@ public interface Oservice {
 	public ArrayList<OrderDTO> orderdetail(int order_id);
 	public int ordercancle(int order_id);
 	
+	public OrderitemDTO orderdetailToReview(int order_id, int product_id);
 }

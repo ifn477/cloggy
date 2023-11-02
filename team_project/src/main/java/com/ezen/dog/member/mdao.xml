@@ -12,6 +12,10 @@ insert into member values(#{param1},0,#{param2},#{param3},#{param4},#{param5},#{
 select userId , auth_id, password,userName,email,phone,address,enroll_date,last_update from member
 </select>
 
+<select id="membership" resultType="com.ezen.dog.member.MemberDTO">
+select membership_id from member where userId=#{param1}
+</select>
+
 <select id="membermodifyForm" resultType="com.ezen.dog.member.MemberDTO">
 select userId,password,userName,email,phone,address,enroll_date from member where userId=#{param1}
 </select>
@@ -76,6 +80,9 @@ insert into mybaby values(#{param1}, #{param2},#{param3}
 select * from mybaby where userId=#{param1}
 </select>
 
+<select id="babymodifyForm" resultType="com.ezen.dog.member.MyBabyDTO">
+select * from mybaby where userId=#{param1} and baby_name=#{param2}
+</select>
 
 <update id="updateMembershipByPurchaseAmount" parameterType="map">
     UPDATE member

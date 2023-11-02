@@ -28,6 +28,7 @@ public class Mycontroller {
 	public String mypage(HttpServletRequest request, Model mo) {
 
 		String userId = request.getParameter("userId");
+		
 		Myservice ms = sqlSession.getMapper(Myservice.class);
 		ArrayList<MyDTO> list = ms.ordercnt(userId);
 		mo.addAttribute("list", list);
@@ -36,9 +37,16 @@ public class Mycontroller {
 		System.out.println("##쿠폰수량##" + couponCount);
 		mo.addAttribute("couponCount", couponCount);
 
+		
+		
+		
 		Mservice mems = sqlSession.getMapper(Mservice.class);
 		ArrayList<MyBabyDTO> babyList = mems.babyView(userId);
+	
+		
 		mo.addAttribute("babyList", babyList);
+		MemberDTO mdto = mems.membership(userId);
+		mo.addAttribute("mdto", mdto);
 		
 		return "mypage";
 	}
