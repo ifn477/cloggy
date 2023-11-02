@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.ezen.dog.member.MemberDTO;
+import com.ezen.dog.product.PService;
+import com.ezen.dog.product.ProductPageDTO;
 
 
 
@@ -58,11 +60,29 @@ public class NoticeController {
 	
 	//qna ���
 	@RequestMapping(value="/notice-out")
-	public String noticeout(Model mo) {
+	public String noticeout(HttpServletRequest request,Model mo,ProductPageDTO dto) {
 		
 		Nservice ns = sqlSession.getMapper(Nservice.class);
 		ArrayList<NoticeDTO>list= ns.noticeout();		
 		mo.addAttribute("list", list);
+		
+			String nowPage=request.getParameter("nowPage");
+		    String cntPerPage=request.getParameter("cntPerPage");
+		    Nservice notice = sqlSession.getMapper(Nservice.class);
+		    int total=notice.cntnotice();
+		    if(nowPage==null && cntPerPage == null) {
+		       nowPage="1";
+		       cntPerPage="10";
+		    }
+		    else if(nowPage==null) {
+		       nowPage="1";
+		    }
+		    else if(cntPerPage==null) {
+		       cntPerPage="5";
+		    }      
+		    dto = new ProductPageDTO(total,Integer.parseInt(nowPage),Integer.parseInt(cntPerPage));
+		    mo.addAttribute("paging",dto);
+		    mo.addAttribute("list",notice.selectnotice(dto));
 		
 		return "notice-out";
 	}
