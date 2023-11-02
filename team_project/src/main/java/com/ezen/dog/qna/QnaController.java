@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.ezen.dog.member.MemberDTO;
+import com.ezen.dog.notice.Nservice;
+import com.ezen.dog.product.ProductPageDTO;
 
 
 
@@ -54,11 +56,30 @@ public class QnaController {
 	
 	//qna 출력
 	@RequestMapping(value="/qna-out")
-	public String qnaout(Model mo) {
+	public String qnaout(HttpServletRequest request,Model mo,ProductPageDTO dto) {
 		
 		Qservice qs = sqlSession.getMapper(Qservice.class);
 		ArrayList<QnaDTO>list= qs.qnaout();
 		mo.addAttribute("list", list);
+		
+		String nowPage=request.getParameter("nowPage");
+	    String cntPerPage=request.getParameter("cntPerPage");
+	    Qservice notice = sqlSession.getMapper(Qservice.class);
+	    int total=notice.cntnotice();
+	    if(nowPage==null && cntPerPage == null) {
+	       nowPage="1";
+	       cntPerPage="10";
+	    }
+	    else if(nowPage==null) {
+	       nowPage="1";
+	    }
+	    else if(cntPerPage==null) {
+	       cntPerPage="5";
+	    }      
+	    dto = new ProductPageDTO(total,Integer.parseInt(nowPage),Integer.parseInt(cntPerPage));
+	    mo.addAttribute("paging",dto);
+	    mo.addAttribute("list",notice.selectnotice(dto));
+		
 		
 		return "qna-out";
 	}
