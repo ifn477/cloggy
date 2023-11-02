@@ -28,10 +28,10 @@ public class HomeController {
 		HttpSession hs = request.getSession();
 		hs.setAttribute("loginstate", false);
 		PService ps = sqlSession.getMapper(PService.class);
-		list = ps.totalbest();
-		ArrayList<ProductDTO> list2 = ps.productnewout();
-		mo.addAttribute("bestlist", list);
-		mo.addAttribute("newlist", list2);
+		ArrayList<ProductDTO> bestlist = ps.totalbest();
+		ArrayList<ProductDTO> newlist = ps.productnewout();
+		mo.addAttribute("bestlist", bestlist);
+		mo.addAttribute("newlist", newlist);
 		
 		return "main";
 	}
@@ -39,11 +39,10 @@ public class HomeController {
 	@RequestMapping(value = "/main")
 	public String main2(Model mo) {
 		PService ps = sqlSession.getMapper(PService.class);
-		list = ps.productout();
-		ArrayList<ProductDTO> list2 = ps.productout();
-		mo.addAttribute("bestlist", list);
-		mo.addAttribute("newlist", list2);
-
+		ArrayList<ProductDTO> bestlist = ps.totalbest();
+		ArrayList<ProductDTO> newlist = ps.productnewout();
+		mo.addAttribute("bestlist", bestlist);
+		mo.addAttribute("newlist", newlist);
 		return "main";
 	}
 	
