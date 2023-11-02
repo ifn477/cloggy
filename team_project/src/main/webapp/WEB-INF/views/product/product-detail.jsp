@@ -288,8 +288,9 @@
 									style="text-decoration: none;"> <img
 										src="/dog/image/url.png">
 								</a>
-								</span> <a href="javascript:shareKakao();" id="btnKakao"><img
-									src="/dog/image/icon-kakao.png"></a>
+								</span> 
+								
+								<a id="kakaotalk-sharing-btn" href="javascript:;"><img src="/dog/image/icon-kakao.png"></a>
 							</div>
 						</div>
 
@@ -387,9 +388,29 @@
 			</div>
 		</div>
 
-
 </c:forEach>
-<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+
+<!-- 카카오공유하기 -->
+<script src="https://t1.kakaocdn.net/kakao_js_sdk/2.4.0/kakao.min.js"
+  integrity="sha384-mXVrIX2T/Kszp6Z0aEWaA8Nm7J6/ZeWXbL8UpGRjKwWe56Srd/iyNmWMBhcItAjH" crossorigin="anonymous"></script>
+<script>
+  Kakao.init('3eebd9335d1049afaa57ca1a1e68a170'); // 사용하려는 앱의 JavaScript 키 입력
+</script>
+<script>
+  Kakao.Share.createDefaultButton({
+    container: '#kakaotalk-sharing-btn',
+    objectType: 'feed',
+    content: {
+      title: '클로기',
+      description: '댕댕이의 선택! 클로기:-)',
+      imageUrl:
+        'https://vitapet.com/media/sz1czkya/benefits-of-getting-a-puppy-900x600.jpg?anchor=center&mode=crop&width=1240&rnd=132503927246630000',
+      link: {
+        webUrl: window.location.href,
+      },
+    },
+  });
+</script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
 
@@ -609,26 +630,6 @@
 										});
 					});
 
-	//카카오 공유하기
-	function shareKakao() {
-		console.log('shareKakao 함수가 호출되었습니다.');
-		var thisUrl = document.URL;
-		// 사용할 앱의 JavaScript 키 설정
-		Kakao.init('3eebd9335d1049afaa57ca1a1e68a170');
-		// 카카오링크 버튼 생성
-		Kakao.Link.createDefaultButton({
-			container : '#btnKakao', // 카카오공유버튼ID
-			objectType : 'feed',
-			content : {
-				title : "클로기", // 보여질 제목
-				description : "클로기 상세페이지", // 보여질 설명
-				imageUrl : thisUrl, // 콘텐츠 URL
-				link : {
-					webUrl : thisUrl
-				}
-			}
-		});
-	}
 	//url 공유하기
 	function clip() {
 
@@ -658,7 +659,6 @@
         productInfo.style.display = "none"; // 숨김
       }
     });
-
 </script>
 </body>
 </html>
