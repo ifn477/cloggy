@@ -29,9 +29,9 @@ public class HomeController {
 		hs.setAttribute("loginstate", false);
 		PService ps = sqlSession.getMapper(PService.class);
 		list = ps.totalbest();
-//		ArrayList<ProductDTO> list2 = ps.productnewout();
+		ArrayList<ProductDTO> list2 = ps.productnewout();
 		mo.addAttribute("bestlist", list);
-//		mo.addAttribute("newlist", list2);
+		mo.addAttribute("newlist", list2);
 		
 		return "main";
 	}
