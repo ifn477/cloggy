@@ -103,7 +103,7 @@
 .product-price {
 	font-size: 20px;
 	padding-bottom: 20px;
-	padding-top: 150px;
+	padding-top: 70px;
 }
 
 .options-container {
@@ -118,7 +118,7 @@
 	cursor: pointer;
 	opacity: 0.8;
 	padding-top: 30px;
-	padding-bottom: 150px;
+	padding-bottom: 70px;
 	padding-right: 5px;
 }
 
@@ -385,8 +385,9 @@
 									style="text-decoration: none;"> <img
 										src="/dog/image/url.png">
 								</a>
-								</span> <a href="javascript:shareKakao();" id="btnKakao"><img
-									src="/dog/image/icon-kakao.png"></a>
+								</span> 
+								
+								<a id="kakaotalk-sharing-btn" href="javascript:;"><img src="/dog/image/icon-kakao.png"></a>
 							</div>
 						</div>
 
@@ -500,20 +501,31 @@
 		</div>
 
 
-	</c:forEach>
-	<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
-	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-	<script type="text/javascript">
-		/* 쿠키 생성 및 저장 */
-		function onPageLoad() {
-			var url = window.location.href;
-			var product_Id = getProduct_IDFromURL(url);
-			console.log("product_Id::" + product_Id);
+</c:forEach>
 
-			if (product_Id) {
-				var recentProducts = getCookie('recent_products');
-				var recentProductIds = recentProducts ? recentProducts
-						.split('/') : [];
+<!-- 카카오공유하기 -->
+<script src="https://t1.kakaocdn.net/kakao_js_sdk/2.4.0/kakao.min.js"
+  integrity="sha384-mXVrIX2T/Kszp6Z0aEWaA8Nm7J6/ZeWXbL8UpGRjKwWe56Srd/iyNmWMBhcItAjH" crossorigin="anonymous"></script>
+<script>
+  Kakao.init('3eebd9335d1049afaa57ca1a1e68a170'); // 사용하려는 앱의 JavaScript 키 입력
+</script>
+<script>
+  Kakao.Share.createDefaultButton({
+    container: '#kakaotalk-sharing-btn',
+    objectType: 'feed',
+    content: {
+      title: '클로기',
+      description: '댕댕이의 선택! 클로기:-)',
+      imageUrl:
+        'https://vitapet.com/media/sz1czkya/benefits-of-getting-a-puppy-900x600.jpg?anchor=center&mode=crop&width=1240&rnd=132503927246630000',
+      link: {
+        webUrl: window.location.href,
+      },
+    },
+  });
+</script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript">
 
 				if (!recentProductIds.includes(product_Id)) {
 					recentProductIds.push(product_Id);
@@ -741,55 +753,85 @@
 											});
 						});
 
-		//카카오 공유하기
-		function shareKakao() {
-			console.log('shareKakao 함수가 호출되었습니다.');
-			var thisUrl = document.URL;
-			// 사용할 앱의 JavaScript 키 설정
-			Kakao.init('3eebd9335d1049afaa57ca1a1e68a170');
-			// 카카오링크 버튼 생성
-			Kakao.Link.createDefaultButton({
-				container : '#btnKakao', // 카카오공유버튼ID
-				objectType : 'feed',
-				content : {
-					title : "클로기", // 보여질 제목
-					description : "클로기 상세페이지", // 보여질 설명
-					imageUrl : thisUrl, // 콘텐츠 URL
-					link : {
-						webUrl : thisUrl
-					}
-				}
-			});
-		}
-		//url 공유하기
-		function clip() {
 
-			var url = '';
-			var textarea = document.createElement("textarea");
-			document.body.appendChild(textarea);
-			url = window.document.location.href;
-			textarea.value = url;
-			textarea.select();
-			document.execCommand("copy");
-			document.body.removeChild(textarea);
-			alert("URL이 복사되었습니다.")
-		}
+						$("#addToCart")
+								.click(
+										function() {
+											var product_id = $(
+													"#product_id").val();
+											var selectedOption = $(
+													"#haha option:selected")
+													.val();
 
-		//상세설명 접었다 피기
-		const productInfo = document.querySelector(".product-info");
-		const toggleButton = document.getElementById("toggleButton");
+											var selectedOption = $("#haha")
+													.find("option:selected");
+											var optId = selectedOption
+													.data("opt_id");
 
-		// 초기에는 product-info를 숨겨둘 것이므로 display 속성을 'none'으로 설정
-		productInfo.style.display = "none";
+											// 추출된 데이터 사용
+											console.log("product id: "
+													+ product_id);
+											console.log("quantity: "
+													+ quantity);
+											console.log("선택한 옵션의 번호: "
+													+ optId);
 
-		// 버튼 클릭 시 product-info를 토글 (보이거나 숨김)
-		toggleButton.addEventListener("click", function() {
-			if (productInfo.style.display === "none") {
-				productInfo.style.display = "block"; // 보이게 함
-			} else {
-				productInfo.style.display = "none"; // 숨김
-			}
-		});
-	</script>
+											// Ajax를 사용하여 서버로 데이터 전송
+											$
+													.ajax({
+														type : "POST", // 또는 "GET"에 따라 적절하게 변경
+														url : "/dog/addtocart", // 컨트롤러의 URL을 여기에 지정
+														data : {
+															product_id : product_id,
+															quantity : quantity,
+															optId : optId
+														},
+														success : function(
+																response) {
+															if (response === "success") {
+																alert("장바구니에 상품이 추가되었습니다.");
+															} else if (response === "no") {
+																alert("사용자가 로그인하지 않았습니다.");
+																// 다른 처리를 수행할 수 있음
+															} else {
+																alert("알 수 없는 응답: "
+																		+ response);
+															}
+														},
+
+													});
+										});
+					});
+
+	//url 공유하기
+	function clip() {
+
+		var url = '';
+		var textarea = document.createElement("textarea");
+		document.body.appendChild(textarea);
+		url = window.document.location.href;
+		textarea.value = url;
+		textarea.select();
+		document.execCommand("copy");
+		document.body.removeChild(textarea);
+		alert("URL이 복사되었습니다.")
+	}
+	
+	//상세설명 접었다 피기
+    const productInfo = document.querySelector(".product-info");
+    const toggleButton = document.getElementById("toggleButton");
+
+    // 초기에는 product-info를 숨겨둘 것이므로 display 속성을 'none'으로 설정
+    productInfo.style.display = "none";
+
+    // 버튼 클릭 시 product-info를 토글 (보이거나 숨김)
+    toggleButton.addEventListener("click", function() {
+      if (productInfo.style.display === "none") {
+        productInfo.style.display = "block"; // 보이게 함
+      } else {
+        productInfo.style.display = "none"; // 숨김
+      }
+    });
+</script>
 </body>
 </html>
