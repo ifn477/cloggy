@@ -77,6 +77,34 @@ caption {
         <td>${fn:substring(notice.n_date,0,10)}</td>
     </tr>
 </c:forEach>
+
+<!--페이징 처리-->
+<tr style="border-left: none;border-right: none; border-bottom: none;">
+   <td colspan="4" style="text-align: center; border-bottom: none;">
+   
+   <c:if test="${paging.startPage!=1 }">
+      <a href="notice-out?nowPage=${paging.startPage-1 }&cntPerPage=${paging.cntPerPage}">◀</a>
+      
+   </c:if>   
+   
+      <c:forEach begin="${paging.startPage }" end="${paging.endPage}" var="p"> 
+         <c:choose>
+            <c:when test="${p == paging.nowPage }">
+               <b><span style="color: #d88402;">${p}</span></b>
+            </c:when>   
+            <c:when test="${p != paging.nowPage }">
+               <a href="notice-out?nowPage=${p}&cntPerPage=${paging.cntPerPage}">${p}</a>
+            </c:when>   
+         </c:choose>
+      </c:forEach>
+     
+      <c:if test="${paging.endPage != paging.lastPage}">
+      <a href="notice-out?nowPage=${paging.endPage+1}&cntPerPage=${paging.cntPerPage }">▶</a>
+   </c:if>
+   
+   </td>
+</tr>
+<!--페이징 처리-->
 	<tr>
 		<td colspan="4" style="text-align: center; border-bottom: none;">
 		    <form action="notice-searchview" method="post">
