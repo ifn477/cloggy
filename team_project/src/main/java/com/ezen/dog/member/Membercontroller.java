@@ -115,6 +115,7 @@ public class Membercontroller {
 			Mservice ms = sqlSession.getMapper(Mservice.class);
 			ArrayList<MyBabyDTO> babylist = ms.babymodifyForm(userId, mybaby_name);
 			mo.addAttribute("babylist", babylist);
+			
 			return "mybaby-modifyForm";
 		}
 

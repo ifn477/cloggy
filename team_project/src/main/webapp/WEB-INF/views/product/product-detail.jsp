@@ -6,7 +6,32 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 <style type="text/css">
+/* 별점 */
+@import
+	url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
+
+@font-face {
+	font-family: 'ChosunSg';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@1.0/ChosunSg.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+.rate {
+	display: inline-block;
+	font-size: 14px;
+	margin: 0;
+	cursor: pointer;
+	font-family: FontAwesome;
+	content: "\f005 ";
+	color: orange;
+}
+
 .container_box {
 	display: flex;
 	flex-direction: column;
@@ -15,22 +40,27 @@
 	margin-top: 5rem;
 	margin-bottom: 5rem;
 }
-.updownbnt{
+
+.updownbnt {
 	background-color: #e28b3a;
 	color: white;
 	width: 25px;
 	height: 25px;
 	border: none;
 }
+
 .product-detail {
 	width: 1000px;
+	display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .detail-top {
 	display: flex;
 	flex-wrap: nowrap;
 	height: 28rem;
-	margin-bottom: 10rem;
+	margin-bottom: 230px;
 }
 /* 썸네일 */
 .thumbnail-area {
@@ -67,7 +97,7 @@
 	font-family: 'Noto Sans KR', sans-serif;
 	font-size: 27px;
 	font-weight: 400;
-	color: #463528;	
+	color: #463528;
 }
 
 .product-price {
@@ -164,17 +194,18 @@
 	text-align: center;
 	margin: 0 auto;
 }
-#toggleButton{
+
+#toggleButton {
 	padding: 5px 20px; /* 위아래 패딩과 좌우 패딩을 조절 */
-    border: 1px solid #d88402;
-    border-radius: 10px;
-    color: #d88402;
-    background: #fff;
-    display: inline-block;
-    font-family: 'Noto Sans KR', sans-serif;
-    font-size: 20px;
-    margin-bottom: 30px;
-    border-radius: 20px;
+	border: 1px solid #d88402;
+	border-radius: 10px;
+	color: #d88402;
+	background: #fff;
+	display: inline-block;
+	font-family: 'Noto Sans KR', sans-serif;
+	font-size: 20px;
+	margin-bottom: 30px;
+	border-radius: 20px;
 }
 /* 수정버튼 */
 #modibnt {
@@ -182,6 +213,72 @@
 	width: 300px;
 	height: 50px;
 	border: 0;
+}
+
+/* 리뷰 */
+.review-container {
+	overflow: hidden;
+	width: 729px;
+	height: auto;
+	align: center;
+	/* 	margin-top: 130px; /* 상단 여백 추가 */ */
+	border-radius: 10px;
+	border: 1px solid #f6eddf;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: flex-start;
+	text-align: center;
+	/* 	margin: 0 auto; */
+	padding: 20px;
+}
+
+.review-contents {
+	margin-left: 50px;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+}
+
+.review {
+	display: flex;
+}
+
+#r_userid {
+	text-align: left;
+	font-weight: bold;
+	color: #e28b3a;
+}
+
+.review-box {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: center;
+}
+
+.comment {
+	color: #e28b3a;
+	margin-bottom: 10px;
+}
+
+.photo>img {
+	border-radius: 10px;
+}
+
+.r_content {
+	margin-top: 20px;
+	text-align: left;
+}
+.empty-review{
+	width: 500px;
+    border: 1px solid #f6eddf;
+    height: 100px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    display: flex;
+    align-items: center;
 }
 </style>
 <meta charset="UTF-8">
@@ -213,41 +310,41 @@
 						<div class="product-price">
 							<span id="price">판매가&emsp;<fmt:formatNumber
 									pattern="#,##0원">${pdetail.p_price}</fmt:formatNumber></span>
-						<!-- 찜하기 -->
-						<div class="likecheck"
-							style="display: inline-block; float: right;">
-							<c:choose>
-								<c:when test="${empty likelist}">
-									<button class="likeAddButton"
-										data-productid="${pdetail.product_id}"
-										data-userid="${member.userId}">
-										<img alt="찜하기" src="/dog/image/Footprint_s.png" width="50px"
-											height="50px">
-									</button>
-								</c:when>
-								<c:otherwise>
-									<c:choose>
-										<c:when test="${fn:contains(likelist, pdetail.product_id)}">
-											<button class="likeDeleteButton"
-												data-productid="${pdetail.product_id}"
-												data-userid="${member.userId}">
-												<img alt="찜해제" src="/dog/image/Footprint_full_pink_s.png"
-													width="50px" height="50px">
-											</button>
-										</c:when>
-										<c:otherwise>
-											<button class="likeAddButton"
-												data-productid="${pdetail.product_id}"
-												data-userid="${member.userId}">
-												<img alt="찜하기" src="/dog/image/Footprint_s.png" width="50px"
-													height="50px">
-											</button>
-										</c:otherwise>
-									</c:choose>
-								</c:otherwise>
-							</c:choose>
-						</div>
-						<!-- 찜하기 end -->			
+							<!-- 찜하기 -->
+							<div class="likecheck"
+								style="display: inline-block; float: right;">
+								<c:choose>
+									<c:when test="${empty likelist}">
+										<button class="likeAddButton"
+											data-productid="${pdetail.product_id}"
+											data-userid="${member.userId}">
+											<img alt="찜하기" src="/dog/image/Footprint_s.png" width="50px"
+												height="50px">
+										</button>
+									</c:when>
+									<c:otherwise>
+										<c:choose>
+											<c:when test="${fn:contains(likelist, pdetail.product_id)}">
+												<button class="likeDeleteButton"
+													data-productid="${pdetail.product_id}"
+													data-userid="${member.userId}">
+													<img alt="찜해제" src="/dog/image/Footprint_full_pink_s.png"
+														width="50px" height="50px">
+												</button>
+											</c:when>
+											<c:otherwise>
+												<button class="likeAddButton"
+													data-productid="${pdetail.product_id}"
+													data-userid="${member.userId}">
+													<img alt="찜하기" src="/dog/image/Footprint_s.png"
+														width="50px" height="50px">
+												</button>
+											</c:otherwise>
+										</c:choose>
+									</c:otherwise>
+								</c:choose>
+							</div>
+							<!-- 찜하기 end -->
 						</div>
 
 						<!-- 옵션, 수량 -->
@@ -298,28 +395,42 @@
 							style="background-color: #e28b3a;">add to cart</button>
 					</div>
 				</div>
-				<!-- 리뷰 -->
-				<div class="review-container">
-					<div class="review">
-						<table width="500px">
-							<tr>
-								<td colspan="2"><a
-									href="review-out?product_id=${pdetail.product_id}"
-									align="right">리뷰 전체보기</a></td>
-							</tr>
 
-							<tr>
-								<td rowspan="2" width="120px"><img
-									src="/dog/review-img/${rdto.r_photo}" width="100px"
-									height="100px"></td>
-								<td height="30px">${rdto.userId}</td>
-							</tr>
-							<tr>
-								<td>${rdto.r_content}</td>
-							</tr>
-						</table>
-					</div>
-				</div>
+
+
+				<!-- 리뷰 -->
+				<c:choose>
+					<c:when test="${empty rdto}">
+						<div class="empty-review">아직 등록된 리뷰가 없습니다</div>
+					</c:when>
+					<c:otherwise>
+						<div class="review-box">
+							<div class="comment">
+								<a href="review-list?product_id=${pdetail.product_id}"
+									align="right">리뷰 전체보기</a>
+							</div>
+
+							<div class="review-container" style="border-radius: 10px;">
+								<div class="review">
+									<div class="photo">
+										<img src="/dog/image/${rdto.r_photo}" width="100px"
+											height="100px">
+									</div>
+
+									<div class="review-contents">
+										<div id="r_userid">${rdto.userId}</div>
+										<div class="rate">
+											<c:forEach begin="1" end="${rdto.rate}" varStatus="loop">
+												<i class="fa fa-star" style="color: orange;"></i>
+											</c:forEach>
+										</div>
+										<div class="r_content">${rdto.r_content}</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</c:otherwise>
+				</c:choose>
 
 				<!-- 추천상품리스트 -->
 				<div class="detail-recommend" id="recommendContainer">
@@ -376,7 +487,8 @@
 				<!-- 수정버튼 -->
 				<c:choose>
 					<c:when test="${loginstate == true && member.auth_id == 0}">
-						<div style="text-align: center; margin-top: 30px; margin-bottom: 70px;">
+						<div
+							style="text-align: center; margin-top: 30px; margin-bottom: 70px;">
 							<button class="btn btn-primary py-2" id="modibnt"
 								style="background-color: #e28b3a;"
 								onclick="location.href='product-modifyForm?product_id=${pdetail.product_id}'">수정</button>
@@ -388,277 +500,296 @@
 		</div>
 
 
-</c:forEach>
-<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script type="text/javascript">
+	</c:forEach>
+	<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script type="text/javascript">
+		/* 쿠키 생성 및 저장 */
+		function onPageLoad() {
+			var url = window.location.href;
+			var product_Id = getProduct_IDFromURL(url);
+			console.log("product_Id::" + product_Id);
 
-	/* 쿠키 생성 및 저장 */
-	function onPageLoad() {
-		var url = window.location.href;
-		var product_Id = getProduct_IDFromURL(url);
-		console.log("product_Id::" + product_Id);
+			if (product_Id) {
+				var recentProducts = getCookie('recent_products');
+				var recentProductIds = recentProducts ? recentProducts
+						.split('/') : [];
 
-		if (product_Id) {
-			var recentProducts = getCookie('recent_products');
-			var recentProductIds = recentProducts ? recentProducts
-					.split('/') : [];
+				if (!recentProductIds.includes(product_Id)) {
+					recentProductIds.push(product_Id);
+				}
 
-			if (!recentProductIds.includes(product_Id)) {
-				recentProductIds.push(product_Id);
-			}
+				if (recentProductIds.length > 10) {
+					recentProductIds.shift();
+				}
 
-			if (recentProductIds.length > 10) {
-				recentProductIds.shift();
-			}
+				recentProducts = recentProductIds.join('/');
 
-			recentProducts = recentProductIds.join('/');
-
-			var expirationDate = new Date();
-			expirationDate.setTime(expirationDate.getTime()
-					+ (24 * 60 * 60 * 1000));
-			console.log("expirationDate::" + expirationDate);
-			setCookie('recent_products', recentProducts, expirationDate);
-		}
-	}
-
-	window.addEventListener('load', onPageLoad);
-
-	function setCookie(cookieName, value, expirationDate) {
-		var cookieValue = escape(value)
-				+ ((expirationDate == null) ? '' : '; expires='
-						+ expirationDate.toUTCString());
-		document.cookie = cookieName + '=' + cookieValue;
-	}
-
-	/* 쿠키 가져오기 */
-	function getCookie(cookieName) {
-		var name = cookieName + '=';
-		var decodedCookie = decodeURIComponent(document.cookie);
-		var cookieArray = decodedCookie.split(';');
-
-		for (var i = 0; i < cookieArray.length; i++) {
-			var cookie = cookieArray[i];
-			while (cookie.charAt(0) == ' ') {
-				cookie = cookie.substring(1);
-			}
-			if (cookie.indexOf(name) == 0) {
-				return cookie.substring(name.length, cookie.length);
+				var expirationDate = new Date();
+				expirationDate.setTime(expirationDate.getTime()
+						+ (24 * 60 * 60 * 1000));
+				console.log("expirationDate::" + expirationDate);
+				setCookie('recent_products', recentProducts, expirationDate);
 			}
 		}
-		return '';
-	}
 
-	function getProduct_IDFromURL(url) {
-		var regex = /[?&]product_id=(\d+)/;
-		var match = regex.exec(url);
-		if (match && match[1]) {
-			return match[1];
+		window.addEventListener('load', onPageLoad);
+
+		function setCookie(cookieName, value, expirationDate) {
+			var cookieValue = escape(value)
+					+ ((expirationDate == null) ? '' : '; expires='
+							+ expirationDate.toUTCString());
+			document.cookie = cookieName + '=' + cookieValue;
 		}
-		return null;
-	}
-	/*찜하기*/
-	$(document).ready(function () {
-	    $('.container_box').on('click', '.likeAddButton, .likeDeleteButton', function () {
-	        var button = $(this);
-	        var isLikeButton = button.hasClass('likeAddButton');
-	        var productId = button.data('productid');
-	        var userId = button.data('userid');
-	        var url = isLikeButton ? 'like-add' : 'like-delete';
 
-		        var memberLoginState = ${loginstate};
-		        if (!memberLoginState) {
-		            alert('로그인 후 이용해 주세요.');
-		            return;
-		        }
-		        
-		        $.ajax({
-		            type: 'POST',
-		            url: url,
-		            data: {
-		                product_id: productId,
-		                userId: userId
-		            },
-		            success: function (response) {
-		                var buttonParent = button.closest('.likecheck');
-		                if (isLikeButton) {
-		                    buttonParent.html('<button class="likeDeleteButton" data-productid="' + productId + '" data-userid="' + userId + '"><img alt="찜해제" src="/dog/image/Footprint_full_pink_s.png" width="50px" height="50px"></button>');
-		                } else {
-		                    buttonParent.html('<button class="likeAddButton" data-productid="' + productId + '" data-userid="' + userId + '"><img alt="찜하기" src="/dog/image/Footprint_s.png" width="50px" height="50px"></button>');
-		                }
-		            },
-		            error: function (error) {
-		                console.error('오류 발생', error);
-		            }
-		        });
-		    });
-		});
+		/* 쿠키 가져오기 */
+		function getCookie(cookieName) {
+			var name = cookieName + '=';
+			var decodedCookie = decodeURIComponent(document.cookie);
+			var cookieArray = decodedCookie.split(';');
 
-	/*장바구니*/
-	$(document)
-			.ready(
-					function() {
-						var quantity = 1; // 초기 수량은 1으로 설정
-						let priceValue = parseFloat($("#price").text()
-								.replace(/[^0-9.-]+/g, ""));
-
-						// 옵션 선택 시 이벤트 핸들러
-						$("#haha")
-								.change(
-										function() {
-											var selectedOption = $(this)
-													.find("option:selected");
-											var optName = selectedOption
-													.data("opt_name");
-											var optPrice = selectedOption
-													.data("opt_price");
-
-											// 제품 가격 -> optPrice + 기존 가격으로 업데이트
-											var updatedPrice = priceValue
-													+ optPrice;
-											$("#price")
-													.text(
-															formatNumberWithCommas(updatedPrice)); // 업데이트된 가격을 화면에 출력
-											updateTotalPrice(); // total_price 업데이트 함수 호출
-										});
-
-
-
-						function formatNumberWithCommas(number) {
-							return number.toString().replace(
-									/\B(?=(\d{3})+(?!\d))/g, ",")
-									+ '원';
-						}
-
-						// total_price 업데이트 함수
-						function updateTotalPrice() {
-							var quantityValue = parseInt($("#quantity")
-									.text(), 10);
-							var priceValue = parseFloat($("#price").text()
-
-									.replace(/[^0-9.-]+/g, ""));
-
-							var totalPrice = quantityValue * priceValue;
-							var formattedTotalPrice = formatNumberWithCommas(totalPrice);
-							$("#totalPrice").text(formattedTotalPrice);
-						}
-
-						// + 버튼을 클릭할 때 수량을 증가시키는 이벤트 핸들러
-						$("#increase").click(function() {
-							quantity++;
-							$("#quantity").text(quantity);
-							updateTotalPrice();
-						});
-
-						// - 버튼을 클릭할 때 수량을 감소시키는 이벤트 핸들러
-						$("#decrease").click(function() {
-							if (quantity > 1) {
-								quantity--;
-								$("#quantity").text(quantity);
-								updateTotalPrice();
-							}
-						});
-
-
-						$("#addToCart")
-								.click(
-										function() {
-											var product_id = $(
-													"#product_id").val();
-											var selectedOption = $(
-													"#haha option:selected")
-													.val();
-
-											var selectedOption = $("#haha")
-													.find("option:selected");
-											var optId = selectedOption
-													.data("opt_id");
-
-											// 추출된 데이터 사용
-											console.log("product id: "
-													+ product_id);
-											console.log("quantity: "
-													+ quantity);
-											console.log("선택한 옵션의 번호: "
-													+ optId);
-
-											// Ajax를 사용하여 서버로 데이터 전송
-											$
-													.ajax({
-														type : "POST", // 또는 "GET"에 따라 적절하게 변경
-														url : "/dog/addtocart", // 컨트롤러의 URL을 여기에 지정
-														data : {
-															product_id : product_id,
-															quantity : quantity,
-															optId : optId
-														},
-														success : function(
-																response) {
-															if (response === "success") {
-																alert("장바구니에 상품이 추가되었습니다.");
-															} else if (response === "no") {
-																alert("사용자가 로그인하지 않았습니다.");
-																// 다른 처리를 수행할 수 있음
-															} else {
-																alert("알 수 없는 응답: "
-																		+ response);
-															}
-														},
-
-													});
-										});
-					});
-
-	//카카오 공유하기
-	function shareKakao() {
-		console.log('shareKakao 함수가 호출되었습니다.');
-		var thisUrl = document.URL;
-		// 사용할 앱의 JavaScript 키 설정
-		Kakao.init('3eebd9335d1049afaa57ca1a1e68a170');
-		// 카카오링크 버튼 생성
-		Kakao.Link.createDefaultButton({
-			container : '#btnKakao', // 카카오공유버튼ID
-			objectType : 'feed',
-			content : {
-				title : "클로기", // 보여질 제목
-				description : "클로기 상세페이지", // 보여질 설명
-				imageUrl : thisUrl, // 콘텐츠 URL
-				link : {
-					webUrl : thisUrl
+			for (var i = 0; i < cookieArray.length; i++) {
+				var cookie = cookieArray[i];
+				while (cookie.charAt(0) == ' ') {
+					cookie = cookie.substring(1);
+				}
+				if (cookie.indexOf(name) == 0) {
+					return cookie.substring(name.length, cookie.length);
 				}
 			}
+			return '';
+		}
+
+		function getProduct_IDFromURL(url) {
+			var regex = /[?&]product_id=(\d+)/;
+			var match = regex.exec(url);
+			if (match && match[1]) {
+				return match[1];
+			}
+			return null;
+		}
+		/*찜하기*/
+		$(document)
+				.ready(
+						function() {
+							$('.container_box')
+									.on(
+											'click',
+											'.likeAddButton, .likeDeleteButton',
+											function() {
+												var button = $(this);
+												var isLikeButton = button
+														.hasClass('likeAddButton');
+												var productId = button
+														.data('productid');
+												var userId = button
+														.data('userid');
+												var url = isLikeButton ? 'like-add'
+														: 'like-delete';
+
+												var memberLoginState = $
+												{
+													loginstate
+												}
+												;
+												if (!memberLoginState) {
+													alert('로그인 후 이용해 주세요.');
+													return;
+												}
+
+												$
+														.ajax({
+															type : 'POST',
+															url : url,
+															data : {
+																product_id : productId,
+																userId : userId
+															},
+															success : function(
+																	response) {
+																var buttonParent = button
+																		.closest('.likecheck');
+																if (isLikeButton) {
+																	buttonParent
+																			.html('<button class="likeDeleteButton" data-productid="' + productId + '" data-userid="' + userId + '"><img alt="찜해제" src="/dog/image/Footprint_full_pink_s.png" width="50px" height="50px"></button>');
+																} else {
+																	buttonParent
+																			.html('<button class="likeAddButton" data-productid="' + productId + '" data-userid="' + userId + '"><img alt="찜하기" src="/dog/image/Footprint_s.png" width="50px" height="50px"></button>');
+																}
+															},
+															error : function(
+																	error) {
+																console
+																		.error(
+																				'오류 발생',
+																				error);
+															}
+														});
+											});
+						});
+
+		/*장바구니*/
+		$(document)
+				.ready(
+						function() {
+							var quantity = 1; // 초기 수량은 1으로 설정
+							let priceValue = parseFloat($("#price").text()
+									.replace(/[^0-9.-]+/g, ""));
+
+							// 옵션 선택 시 이벤트 핸들러
+							$("#haha")
+									.change(
+											function() {
+												var selectedOption = $(this)
+														.find("option:selected");
+												var optName = selectedOption
+														.data("opt_name");
+												var optPrice = selectedOption
+														.data("opt_price");
+
+												// 제품 가격 -> optPrice + 기존 가격으로 업데이트
+												var updatedPrice = priceValue
+														+ optPrice;
+												$("#price")
+														.text(
+																"판매가 "
+																		+ formatNumberWithCommas(updatedPrice)); // 업데이트된 가격을 화면에 출력
+												updateTotalPrice(); // total_price 업데이트 함수 호출
+											});
+
+							function formatNumberWithCommas(number) {
+								return number.toString().replace(
+										/\B(?=(\d{3})+(?!\d))/g, ",")
+										+ '원';
+							}
+
+							// total_price 업데이트 함수
+							function updateTotalPrice() {
+								var quantityValue = parseInt($("#quantity")
+										.text(), 10);
+								var priceValue = parseFloat($("#price").text()
+
+								.replace(/[^0-9.-]+/g, ""));
+
+								var totalPrice = quantityValue * priceValue;
+								var formattedTotalPrice = formatNumberWithCommas(totalPrice);
+								$("#totalPrice").text(formattedTotalPrice);
+							}
+
+							// + 버튼을 클릭할 때 수량을 증가시키는 이벤트 핸들러
+							$("#increase").click(function() {
+								quantity++;
+								$("#quantity").text(quantity);
+								updateTotalPrice();
+							});
+
+							// - 버튼을 클릭할 때 수량을 감소시키는 이벤트 핸들러
+							$("#decrease").click(function() {
+								if (quantity > 1) {
+									quantity--;
+									$("#quantity").text(quantity);
+									updateTotalPrice();
+								}
+							});
+
+							$("#addToCart")
+									.click(
+											function() {
+												var product_id = $(
+														"#product_id").val();
+												var selectedOption = $(
+														"#haha option:selected")
+														.val();
+
+												var selectedOption = $("#haha")
+														.find("option:selected");
+												var optId = selectedOption
+														.data("opt_id");
+
+												// 추출된 데이터 사용
+												console.log("product id: "
+														+ product_id);
+												console.log("quantity: "
+														+ quantity);
+												console.log("선택한 옵션의 번호: "
+														+ optId);
+
+												// Ajax를 사용하여 서버로 데이터 전송
+												$
+														.ajax({
+															type : "POST", // 또는 "GET"에 따라 적절하게 변경
+															url : "/dog/addtocart", // 컨트롤러의 URL을 여기에 지정
+															data : {
+																product_id : product_id,
+																quantity : quantity,
+																optId : optId
+															},
+															success : function(
+																	response) {
+																if (response === "success") {
+																	alert("장바구니에 상품이 추가되었습니다.");
+																} else if (response === "no") {
+																	alert("사용자가 로그인하지 않았습니다.");
+																	// 다른 처리를 수행할 수 있음
+																} else {
+																	alert("알 수 없는 응답: "
+																			+ response);
+																}
+															},
+
+														});
+											});
+						});
+
+		//카카오 공유하기
+		function shareKakao() {
+			console.log('shareKakao 함수가 호출되었습니다.');
+			var thisUrl = document.URL;
+			// 사용할 앱의 JavaScript 키 설정
+			Kakao.init('3eebd9335d1049afaa57ca1a1e68a170');
+			// 카카오링크 버튼 생성
+			Kakao.Link.createDefaultButton({
+				container : '#btnKakao', // 카카오공유버튼ID
+				objectType : 'feed',
+				content : {
+					title : "클로기", // 보여질 제목
+					description : "클로기 상세페이지", // 보여질 설명
+					imageUrl : thisUrl, // 콘텐츠 URL
+					link : {
+						webUrl : thisUrl
+					}
+				}
+			});
+		}
+		//url 공유하기
+		function clip() {
+
+			var url = '';
+			var textarea = document.createElement("textarea");
+			document.body.appendChild(textarea);
+			url = window.document.location.href;
+			textarea.value = url;
+			textarea.select();
+			document.execCommand("copy");
+			document.body.removeChild(textarea);
+			alert("URL이 복사되었습니다.")
+		}
+
+		//상세설명 접었다 피기
+		const productInfo = document.querySelector(".product-info");
+		const toggleButton = document.getElementById("toggleButton");
+
+		// 초기에는 product-info를 숨겨둘 것이므로 display 속성을 'none'으로 설정
+		productInfo.style.display = "none";
+
+		// 버튼 클릭 시 product-info를 토글 (보이거나 숨김)
+		toggleButton.addEventListener("click", function() {
+			if (productInfo.style.display === "none") {
+				productInfo.style.display = "block"; // 보이게 함
+			} else {
+				productInfo.style.display = "none"; // 숨김
+			}
 		});
-	}
-	//url 공유하기
-	function clip() {
-
-		var url = '';
-		var textarea = document.createElement("textarea");
-		document.body.appendChild(textarea);
-		url = window.document.location.href;
-		textarea.value = url;
-		textarea.select();
-		document.execCommand("copy");
-		document.body.removeChild(textarea);
-		alert("URL이 복사되었습니다.")
-	}
-	
-	//상세설명 접었다 피기
-    const productInfo = document.querySelector(".product-info");
-    const toggleButton = document.getElementById("toggleButton");
-
-    // 초기에는 product-info를 숨겨둘 것이므로 display 속성을 'none'으로 설정
-    productInfo.style.display = "none";
-
-    // 버튼 클릭 시 product-info를 토글 (보이거나 숨김)
-    toggleButton.addEventListener("click", function() {
-      if (productInfo.style.display === "none") {
-        productInfo.style.display = "block"; // 보이게 함
-      } else {
-        productInfo.style.display = "none"; // 숨김
-      }
-    });
-
-</script>
+	</script>
 </body>
 </html>

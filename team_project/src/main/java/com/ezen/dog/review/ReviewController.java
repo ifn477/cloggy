@@ -18,6 +18,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.ezen.dog.cart.Cservice;
 import com.ezen.dog.member.MemberDTO;
+import com.ezen.dog.member.Mservice;
 import com.ezen.dog.order.OrderDTO;
 import com.ezen.dog.order.OrderitemDTO;
 import com.ezen.dog.order.Oservice;
@@ -31,7 +32,7 @@ public class ReviewController {
 	SqlSession sqlSession;
 	ArrayList<ReviewDTO>list = new ArrayList<ReviewDTO>();
 	
-	String imgPath = "C:\\Users\\dywlr\\git\\team_project\\team_project\\src\\main\\webapp\\review-img";
+	String imgPath = "C:\\Users\\dywlr\\git\\team_project_1024\\team_project\\src\\main\\webapp\\image";
 	
 	//리뷰 작성폼 불러오기
 	@RequestMapping(value="/review-input")
@@ -57,14 +58,17 @@ public class ReviewController {
 //		회원 아이디 가져오기
 		MemberDTO mdto = (MemberDTO) session.getAttribute("member");
 		String userId = mdto.getUserId();
+		int product_id= Integer.parseInt(multi.getParameter("product_id"));
 		String rating =	multi.getParameter("rating");
 		String r_content=multi.getParameter("r_content");
+		
+		String r_photo = multi.getParameter("r_photo");
 		MultipartFile mf = multi.getFile("r_photo");
 		String fname = mf.getOriginalFilename();
 		mf.transferTo(new File(imgPath+"\\"+fname));
 		
 		Rservice qs =sqlSession.getMapper(Rservice.class);
-		qs.reviewinsert(userId, r_content, fname, rating);
+		qs.reviewinsert(userId, product_id, r_content, fname, rating);
 		
 		return "redirect:main";
 	}
@@ -75,7 +79,21 @@ public class ReviewController {
 		int product_id = Integer.parseInt(request.getParameter("product_id"));
 		
 		Rservice rs = sqlSession.getMapper(Rservice.class);
-		ArrayList<ReviewDTO> list= rs.reviewout(product_id);
+		ReviewDTO list= rs.reviewout(product_id);
+		mo.addAttribute("list", list);
+		mo.addAttribute("product_id", product_id);
+		pdto.setProduct_id(product_id);	
+		mo.addAttribute("pdto", pdto);
+		
+		return "review-out";
+	}
+	//리뷰 출력
+	@RequestMapping(value="/review-list")
+	public String reviewlist(Model mo, HttpServletRequest request, ProductDTO pdto) {
+		int product_id = Integer.parseInt(request.getParameter("product_id"));
+		
+		Rservice rs = sqlSession.getMapper(Rservice.class);
+		ArrayList<ReviewDTO> list= rs.reviewlist(product_id);
 		mo.addAttribute("list", list);
 		mo.addAttribute("product_id", product_id);
 		pdto.setProduct_id(product_id);	
