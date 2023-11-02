@@ -73,7 +73,7 @@
 .product-price {
 	font-size: 20px;
 	padding-bottom: 20px;
-	padding-top: 150px;
+	padding-top: 70px;
 }
 
 .options-container {
@@ -88,7 +88,7 @@
 	cursor: pointer;
 	opacity: 0.8;
 	padding-top: 30px;
-	padding-bottom: 150px;
+	padding-bottom: 70px;
 	padding-right: 5px;
 }
 
