@@ -2,6 +2,9 @@ package com.ezen.dog.member;
 
 import java.io.File;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -34,6 +37,7 @@ public class Membercontroller {
 		return "mybaby-input";
 	}
 	
+	
 	@RequestMapping(value = "/mybaby-save",method = RequestMethod.POST)
 	public String mybabysave(MultipartHttpServletRequest request, HttpSession session) throws IllegalStateException, IOException
 	{
@@ -44,7 +48,6 @@ public class Membercontroller {
 		String baby_type =request.getParameter("baby_type");
 
 		String baby_birth = request.getParameter("baby_birth");
-		
 		
 		String babygender = request.getParameter("selectedGender");
 		String bodytype = request.getParameter("selectedBodyType");
@@ -102,6 +105,17 @@ public class Membercontroller {
 			ArrayList<MemberDTO> list = ms.membermodifyForm(userId);
 			mo.addAttribute("list",list);
 			return "member-modifyForm";
+		}
+		
+		@RequestMapping(value = "/mybaby-modifyForm")
+		public String mybabymodifyForm(HttpServletRequest request, Model mo) {
+			String userId = request.getParameter("userId");
+			String mybaby_name= request.getParameter("babyname");
+			
+			Mservice ms = sqlSession.getMapper(Mservice.class);
+			ArrayList<MyBabyDTO> babylist = ms.babymodifyForm(userId, mybaby_name);
+			mo.addAttribute("babylist", babylist);
+			return "mybaby-modifyForm";
 		}
 
 		@RequestMapping(value = "/member-modifyView")

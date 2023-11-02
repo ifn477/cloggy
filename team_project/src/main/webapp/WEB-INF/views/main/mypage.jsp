@@ -216,7 +216,7 @@ table.namecoupon {
 		<table class="namecoupon" align="center">
 			<td class="username"><img src="image/Footprint_full_s.png"
 				style="width: 100px; opacity: 0.5;"> <span
-				style="vertical-align: bottom; margin-left: 5px;">${member.userId}</span>
+				style="vertical-align: bottom; margin-left: 5px;">${member.userId} 님은 ${mdto.membership_id}</span>
 				</caption>
 			<tr>
 				<td class="couponcnt"><img src="image/쿠폰티켓.png"
@@ -262,6 +262,7 @@ table.namecoupon {
 										</p>
 										<div class="modify">
 											<a href="mybaby-modifyForm">수정하기</a>
+<%-- 											<a href="mybaby-modifyForm?userId=${member.userId}&babyname=${bb.baby_name}">수정하기</a> --%>
 										</div>
 									</div>
 								</div>
