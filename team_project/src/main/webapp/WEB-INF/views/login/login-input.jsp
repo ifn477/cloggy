@@ -59,8 +59,8 @@
 
 				<button class="btn btn-primary w-100 py-2" type="submit"
 					style="background-color: #e28b3a;" id="loginBtn">로그인</button>
-				<button class="btn btn-primary w-100 py-2"
-					onclick="redirectToKakaoLogin()"
+				<button class="btn btn-primary w-100 py-2"  type="button"
+					onclick="redirectToKakaoLogin()" 
 					style="background-color: #f6eddf; color: #463528;">카카오로
 					시작하기</button>
 			</div>
