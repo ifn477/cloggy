@@ -345,7 +345,10 @@ cursor: pointer;
 						<img src="/dog/image/${olist.p_thumbnail}" class="img">
 					</div>
 					<div class="itemInfo2">
-						<div class="item-name">${olist.p_name}</div>
+						<div class="item-name">${olist.p_name}
+						<input type="hidden" name="product_id" value="${olist.product_id}">
+						</div>
+						
 <!-- 						<div class="item-option"> -->
 <%-- 							<c:choose> --%>
 <%-- 								<c:when test="${olist.p_option == 0}"> 선택 : 없음 </c:when> --%>
@@ -390,7 +393,7 @@ cursor: pointer;
 			<label for="file">
  			 <div class="btn-upload">파일 업로드하기</div>
 			</label>
-				<input type="file" name="file" id="file" id="imageFile" onchange="readURL(this)">
+				<input type="file" name="r_photo" id="file" id="imageFile" onchange="readURL(this)">
             </div>
           	<div class="img-cont"><div id="previewDiv"></div></div>
 

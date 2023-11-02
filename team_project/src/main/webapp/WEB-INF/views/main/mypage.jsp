@@ -257,12 +257,12 @@ table.namecoupon {
 										             <span class="boy">♂</span>
 										        </c:otherwise>
 										   	 </c:choose>
-											<br> ${bb.baby_birth}
+<%-- 											${bb.baby_birth} --%>
 											${bb.baby_bodytype}
 										</p>
 										<div class="modify">
-											<a href="mybaby-modifyForm">수정하기</a>
-<%-- 											<a href="mybaby-modifyForm?userId=${member.userId}&babyname=${bb.baby_name}">수정하기</a> --%>
+<!-- 											<a href="mybaby-modifyForm">수정하기</a> -->
+											<a href="mybaby-modifyForm?userId=${member.userId}&babyname=${bb.baby_name}">수정하기</a>
 										</div>
 									</div>
 								</div>

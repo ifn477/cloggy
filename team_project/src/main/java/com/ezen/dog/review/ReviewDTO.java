@@ -1,7 +1,7 @@
 package com.ezen.dog.review;
 
 public class ReviewDTO {
-	int r_number, product_id, rank;
+	int r_number, product_id, rate;
 	String userId, r_content, r_date, r_photo;
 	
 	
@@ -10,14 +10,21 @@ public class ReviewDTO {
 		// TODO Auto-generated constructor stub
 	}
 
-	public ReviewDTO(int r_number, String userId, String r_content, String r_date, String r_photo) {
+
+
+	public ReviewDTO(int r_number, int product_id, int rate, String userId, String r_content, String r_date,
+			String r_photo) {
 		super();
 		this.r_number = r_number;
+		this.product_id = product_id;
+		this.rate = rate;
 		this.userId = userId;
 		this.r_content = r_content;
 		this.r_date = r_date;
 		this.r_photo = r_photo;
 	}
+
+
 
 	public int getR_number() {
 		return r_number;
@@ -67,13 +74,18 @@ public class ReviewDTO {
 		this.product_id = product_id;
 	}
 
-	public int getRank() {
-		return rank;
+
+
+	public int getRate() {
+		return rate;
 	}
 
-	public void setRank(int rank) {
-		this.rank = rank;
+
+
+	public void setRate(int rate) {
+		this.rate = rate;
 	}
+
 	
 	
 	

@@ -217,7 +217,7 @@ public class ProductController {
 		
 		
 		Rservice rs = sqlSession.getMapper(Rservice.class);
-		ReviewDTO rdto = rs.reviewlist(product_id);
+		ReviewDTO rdto = rs.reviewout(product_id);
 		mo.addAttribute("rdto", rdto);
 		
 		
