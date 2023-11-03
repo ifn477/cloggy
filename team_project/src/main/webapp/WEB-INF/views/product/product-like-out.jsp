@@ -88,7 +88,7 @@ p {
                         </a>
                     </div>
                     <div class="product_name_price">
-                        <a href="product-detail?product_id=${pout.product_id }">
+                        <a href="product-detail?product_id=${pout.product_id }&userId=${member.userId}">
                             <strong>${pout.p_name}</strong>
                         </a><br>
                     <div class="product_price">

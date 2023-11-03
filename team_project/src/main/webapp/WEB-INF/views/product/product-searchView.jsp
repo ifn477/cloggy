@@ -77,7 +77,7 @@
                         </a>
                     </div>
                     <div class="product_name">
-                        <a href="product-detail?product_id=${pout.product_id}">
+                        <a href="product-detail?product_id=${pout.product_id}&userId=${member.userId}">
                             ${pout.p_name}
                         </a>
                     </div>
