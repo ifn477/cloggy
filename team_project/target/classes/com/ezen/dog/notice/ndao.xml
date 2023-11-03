@@ -38,7 +38,19 @@ select n_number,userId,n_title,n_content,n_date from notice where n_title like '
 select n_number,userId,n_title,n_content,n_date from notice where n_content like '%'|| #{param1} ||'%'
 </select>
 
+<!-- 페이징처리 -->
+<select id="cntnotice" resultType="int">
+   select count(*) from notice
+</select>
 
+<!-- 페이징처리에서 게시글 조회 22222222 -->
+<select id="selectnotice" resultType="com.ezen.dog.notice.NoticeDTO">
+   select * from (
+   select rownum rn,A.* from(  
+	   select n_number,userId,n_title,n_content,n_date,
+	   rank() over(order by n_number DESC) as rank from notice)A)
+   where rn between #{start} AND #{end}
+</select>
 
 
 </mapper>
