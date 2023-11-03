@@ -33,7 +33,7 @@ text-align: center;
 	<input type="hidden" class="order_id" value="${olist.order_id}">
 	<td><a href="product-detail?product_id=${olist.product_id}&userId=${userId}">
 	<input type="hidden" class="product_id" value="${olist.product_id}">
-	<img src="/dog/image/${olist.p_thumbnail}" width="100px"></a>
+	<img src="${olist.p_thumbnail}" width="100px"></a>
 	<a href="product-detail?product_id=${olist.product_id}&userId=${userId}" style="text-decoration: none;">${olist.p_name}</a></td>
 	<td>${olist.orderdate}</td>
 	<td>${olist.o_price}</td>
