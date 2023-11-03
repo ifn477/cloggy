@@ -47,7 +47,7 @@ table {
 <c:forEach items="${list }" var="odlist">
 <tr>
 	<td style="text-align: center;"><a href="product-detail?product_id=${odlist.product_id }&userId=${userId}">
-	<img src="/dog/image/${odlist.p_thumbnail}" width="100px"></a>
+	<img src="${odlist.p_thumbnail}" width="100px"></a>
 	<a href="product-detail?product_id=${odlist.product_id}&userId=${userId}" style="text-decoration: none;">${odlist.p_name}</a></td>
 	<td style="text-align: center;">${odlist.o_price}</td>
 	<td style="text-align: center;">${odlist.o_quantity}</td>
