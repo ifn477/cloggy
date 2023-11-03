@@ -299,7 +299,7 @@
 					<!-- 썸네일(상단 왼쪽) -->
 					<div class="thumbnail-area">
 						<div class="thumbnail">
-							<img alt="상품썸네일" src="/dog/image/${pdetail.p_thumbnail}">
+							<img alt="상품썸네일" src="${pdetail.p_thumbnail}">
 						</div>
 					</div>
 
@@ -475,7 +475,7 @@
 				<div class="detail-info">
 					<div class="info-item">
 						<div class="product-infoimage">
-							<img alt="상세페이지" src="/dog/image/${pdetail.p_image}"
+							<img alt="상세페이지" src="${pdetail.p_image}"
 								style="margin-top: 50px;">
 						</div>
 						<button id="toggleButton">자세히보기</button>
@@ -526,6 +526,13 @@
 </script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
+		/* 쿠키 생성 및 저장 */
+		function onPageLoad() {
+		   var url = window.location.href;
+		   var product_Id = getProduct_IDFromURL(url);
+		   console.log("product_Id::" + product_Id);
+
+
 
 				if (!recentProductIds.includes(product_Id)) {
 					recentProductIds.push(product_Id);
@@ -801,7 +808,7 @@
 
 													});
 										});
-					});
+					}) ;
 
 	//url 공유하기
 	function clip() {

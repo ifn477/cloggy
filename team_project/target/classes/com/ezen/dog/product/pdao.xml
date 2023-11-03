@@ -28,15 +28,16 @@ insert into product
 </insert>
 <!-- 상품리스트 -->
 <select id="productout" resultType="com.ezen.dog.product.ProductDTO">
-select * from product
+SELECT * FROM product
+ORDER BY product_id DESC
+</select>
+<!-- 신상품리스트 -->
+<select id="productnewout" resultType="com.ezen.dog.product.ProductDTO">
+SELECT * FROM product ORDER BY product_id DESC
 </select>
 <!-- 베스트 상품리스트 -->
 <select id="totalbest" resultType="com.ezen.dog.product.ProductDTO">
-SELECT * FROM product ORDER BY p_hits DESC
-</select>
-<!-- 조회수순 상품리스트 -->
-<select id="productbestout" resultType="com.ezen.dog.product.ProductDTO">
-SELECT * FROM product ORDER BY p_hits DESC
+SELECT * FROM product ORDER BY P_HITS DESC
 </select>
 <!-- 상품리스트 대분류 -->
 <select id="productouttotal" resultType="com.ezen.dog.product.ProductDTO">
@@ -145,5 +146,5 @@ and c.category2_name like '%' || #{param1} || '%'
 	   select p_thumbnail,p_name,p_price,p_stock,p_hits,p_sell,
 	   rank() over(order by product_id DESC) as rank from product)A)
    where rn between #{start} AND #{end}
-</select>	
+</select>
 </mapper>

@@ -108,7 +108,7 @@
      	<div class="product_thumbnail">
          <a href="product-detail?product_id=${pout.product_id}&userId=${member.userId}">
          	<div class="image-container">
-         		<img alt="상품썸네일" src="/dog/image/${pout.p_thumbnail}" width="300px;" height="350px;">
+         		<img alt="상품썸네일" src="${pout.p_thumbnail}" width="300px;" height="350px;">
          	</div>
          </a>
      	</div>

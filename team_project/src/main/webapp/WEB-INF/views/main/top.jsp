@@ -183,7 +183,7 @@ a {
             <li><a class="dropdown-item" href="product-out-cate?category1_id=2&category2_id=22">빵/케이크</a></li>
             <li><a class="dropdown-item" href="product-out-cate?category1_id=2&category2_id=23">덴탈껌</a></li>
             <li><a class="dropdown-item" href="product-out-cate?category1_id=2&category2_id=24">뼈간식</a></li>
-            <li><a class="dropdown-item" href="product-out-cate?category1_id=2&category2_id=25">껌</a></li>
+            <li><a class="dropdown-item" href="product-out-cate?category1_id=2&category2_id=25">캔/파우치</a></li>
           </ul>
         </li>
         <li class="nav-item dropdown"  onmouseenter="openDropdown(this)" onmouseleave="closeDropdown(this)">
@@ -191,7 +191,7 @@ a {
           <ul class="dropdown-menu">
             <li><a class="dropdown-item" href="product-out-total?category1_id=3">전체보기</a></li>
             <li><a class="dropdown-item" href="product-out-cate?category1_id=3&category2_id=31">위생용품</a></li>
-            <li><a class="dropdown-item" href="product-out-cate?category1_id=3&category2_id=32">칫솔/치약</a></li>
+            <li><a class="dropdown-item" href="product-out-cate?category1_id=3&category2_id=32">배변용품</a></li>
             <li><a class="dropdown-item" href="product-out-cate?category1_id=3&category2_id=33">미용/관리</a></li>
             <li><a class="dropdown-item" href="product-out-cate?category1_id=3&category2_id=34">목욕용품</a></li>
             <li><a class="dropdown-item" href="product-out-cate?category1_id=3&category2_id=35">장난감</a></li>

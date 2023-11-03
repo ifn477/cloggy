@@ -39,7 +39,7 @@
     <c:forEach items="${list}" var="pout">
       <tr class="product-item">
         <td class="product-thumbnail">
-            <img alt="상품 썸네일" src="/dog/image/${pout.p_thumbnail}" width="50px" height="50px">
+            <img alt="상품 썸네일" src="${pout.p_thumbnail}" width="50px" height="50px">
         </td>
         <td class="product-name">
           <a href="product-detail?product_id=${pout.product_id}&userId=${member.userId}" id="product-name">
