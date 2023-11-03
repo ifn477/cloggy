@@ -19,7 +19,7 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: inherit;
-  	padding-left: 50px; 
+  	padding-left: 50px;
 }
 .product_item {
     min-height: 200px;
@@ -220,22 +220,6 @@
 </div>
 </div>
 
-<script>
-var mySwiper = new Swiper('#best-product-slide', {
-  slidesPerView: 'auto',
-  spaceBetween: 10,
-  scrollbar: {
-    el: '.swiper-scrollbar',
-    hide: false,
-  },
-  autoplay: {
-    delay: 3000, // 3초마다 자동으로 슬라이드 넘김
-    disableOnInteraction: false, // 사용자 상호 작용 후에도 계속 자동 슬라이딩 유지
-  },
-});
-</script>
-
-
 <section class="content">
 <div class="container_box">
 <c:forEach items="${list}" var="pout">
@@ -251,29 +235,39 @@ var mySwiper = new Swiper('#best-product-slide', {
        
 	<!-- 찜하기 -->
 	<div class="like-check">
-	    <c:choose>
-	        <c:when test="${empty likelist}">
-	                    <button class="likeAddButton" data-productid="${pout.product_id}" data-userid="${member.userId}">
-	                        <img alt="찜하기" src="/dog/image/Footprint_s.png" width="40px" height="40px">
-	                    </button>
-	        </c:when>
-	        <c:otherwise>
-	            <c:choose>
-	           		<c:when test="${fn:contains(likelist, pout.product_id)}">
-	                    <button class="likeDeleteButton" data-productid="${pout.product_id}" data-userid="${member.userId}">
-	                        <img alt="찜해제" src="/dog/image/Footprint_full_pink_s.png" width="40px" height="40px">
-	                    </button>
-	                </c:when>
-	                <c:otherwise>
-	                    <button class="likeAddButton" data-productid="${pout.product_id}" data-userid="${member.userId}">
-	                        <img alt="찜하기" src="/dog/image/Footprint_s.png" width="40px" height="40px">
-	                    </button>
-	                </c:otherwise>
-	            </c:choose>
-	        </c:otherwise>
-	    </c:choose>
-	</div>
-	
+		<c:choose>
+		<c:when test="${empty likelist}">
+							<button class="likeAddButton"
+											data-productid="${pout.product_id}"
+											data-userid="${member.userId}">
+											<img alt="찜하기" src="/dog/image/Footprint_s.png" width="40px"
+												height="40px">
+										</button>
+									</c:when>
+									<c:otherwise>
+										<c:choose>
+											<c:when test="${fn:contains(likelist, pout.product_id)}">
+												<button class="likeDeleteButton"
+													data-productid="${pout.product_id}"
+													data-userid="${member.userId}">
+													<img alt="찜해제" src="/dog/image/Footprint_full_pink_s.png"
+														width="40px" height="40px">
+												</button>
+											</c:when>
+											<c:otherwise>
+												<button class="likeAddButton"
+													data-productid="${pout.product_id}"
+													data-userid="${member.userId}">
+													<img alt="찜하기" src="/dog/image/Footprint_s.png"
+														width="40px" height="40px">
+												</button>
+											</c:otherwise>
+										</c:choose>
+									</c:otherwise>
+								</c:choose>
+							</div>
+	<!-- 찜하기 end -->					
+							
 	<!-- 상품명 -->
      	<div class="product_name">
          <a href="product-detail?product_id=${pout.product_id }&userId=${member.userId}" id="product_name">
@@ -289,7 +283,6 @@ var mySwiper = new Swiper('#best-product-slide', {
 </c:forEach>
 </div>
 </section>
-
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script type="text/javascript">
 /*찜하기*/
@@ -315,11 +308,11 @@ $(document).ready(function () {
                 userId: userId
             },
             success: function (response) {
-                var buttonParent = button.closest('.likecheck');
+                var buttonParent = button.closest('.like-check');
                 if (isLikeButton) {
-                    buttonParent.html('<button class="likeDeleteButton" data-productid="' + productId + '" data-userid="' + userId + '"><img alt="찜해제" src="/dog/image/Footprint_full_pink_s.png" width="50px" height="50px"></button>');
+                    buttonParent.html('<button class="likeDeleteButton" data-productid="' + productId + '" data-userid="' + userId + '"><img alt="찜해제" src="/dog/image/Footprint_full_pink_s.png" width="40px" height="40px"></button>');
                 } else {
-                    buttonParent.html('<button class="likeAddButton" data-productid="' + productId + '" data-userid="' + userId + '"><img alt="찜하기" src="/dog/image/Footprint_s.png" width="50px" height="50px"></button>');
+                    buttonParent.html('<button class="likeAddButton" data-productid="' + productId + '" data-userid="' + userId + '"><img alt="찜하기" src="/dog/image/Footprint_s.png" width="40px" height="40px"></button>');
                 }
             },
             error: function (error) {
@@ -328,6 +321,19 @@ $(document).ready(function () {
         });
     });
 });
+/*슬라이드*/
+var mySwiper = new Swiper('#best-product-slide', {
+	  slidesPerView: 'auto',
+	  spaceBetween: 10,
+	  scrollbar: {
+	    el: '.swiper-scrollbar',
+	    hide: false,
+	  },
+	  autoplay: {
+	    delay: 3000, // 3초마다 자동으로 슬라이드 넘김
+	    disableOnInteraction: false, // 사용자 상호 작용 후에도 계속 자동 슬라이딩 유지
+	  },
+	});
 </script>
 </body>
 </html>

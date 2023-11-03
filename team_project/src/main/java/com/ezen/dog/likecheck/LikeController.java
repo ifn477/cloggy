@@ -16,7 +16,7 @@ public class LikeController {
 	@Autowired
 	SqlSession sqlSession;
 	
-	@RequestMapping(value = "like-add")
+	@RequestMapping(value = "/like-add")
 	public String likeadd(HttpServletRequest request) {
 		int product_id = Integer.parseInt(request.getParameter("product_id"));	
 		String userId = request.getParameter("userId");
@@ -25,7 +25,7 @@ public class LikeController {
 		return "product-user-out";
 	}
 	
-	@RequestMapping(value = "like-delete")
+	@RequestMapping(value = "/like-delete")
 	public String likedelete(HttpServletRequest request) {
 		int product_id = Integer.parseInt(request.getParameter("product_id"));	
 		String userId = request.getParameter("userId");
@@ -34,7 +34,7 @@ public class LikeController {
 		return "product-user-out";
 	}
 	
-	@RequestMapping(value = "like-out")
+	@RequestMapping(value = "/like-out")
 	public String likeout(HttpServletRequest request, Model mo) {
 		String userId = request.getParameter("userId");
 		Likeservice ls = sqlSession.getMapper(Likeservice.class);

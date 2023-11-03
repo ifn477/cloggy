@@ -164,7 +164,7 @@ public class ProductController {
 		
 		Likeservice ls = sqlSession.getMapper(Likeservice.class);
 	    ArrayList<LikeDTO> likelist = null;
-		likelist = ls.likecheck(userId);	
+		likelist = ls.likecheck(userId);
 		mo.addAttribute("likelist",likelist);
 		return "product-user-out";
 	}
@@ -192,7 +192,7 @@ public class ProductController {
 		
 		Likeservice ls = sqlSession.getMapper(Likeservice.class);
 	    ArrayList<LikeDTO> likelist = null;
-		likelist = ls.likecheck(userId);	
+		likelist = ls.likecheck(userId);
 		mo.addAttribute("likelist",likelist);
 		return "product-user-out";
 	}
