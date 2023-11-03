@@ -527,14 +527,6 @@
 </script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
-		/* 쿠키 생성 및 저장 */
-		function onPageLoad() {
-		   var url = window.location.href;
-		   var product_Id = getProduct_IDFromURL(url);
-		   console.log("product_Id::" + product_Id);
-
-
-
 	/* 쿠키 생성 및 저장 */
 	function onPageLoad() {
 		var url = window.location.href;
@@ -608,34 +600,29 @@
 	        var userId = button.data('userid');
 	        var url = isLikeButton ? 'like-add' : 'like-delete';
 
-		        var memberLoginState = ${loginstate};
-		        if (!memberLoginState) {
-		            alert('로그인 후 이용해 주세요.');
-		            return;
-		        }
-		        
-		        $.ajax({
-		            type: 'POST',
-		            url: url,
-		            data: {
-		                product_id: productId,
-		                userId: userId
-		            },
-		            success: function (response) {
-		                var buttonParent = button.closest('.likecheck');
-		                if (isLikeButton) {
-		                    buttonParent.html('<button class="likeDeleteButton" data-productid="' + productId + '" data-userid="' + userId + '"><img alt="찜해제" src="/dog/image/Footprint_full_pink_s.png" width="50px" height="50px"></button>');
-		                } else {
-		                    buttonParent.html('<button class="likeAddButton" data-productid="' + productId + '" data-userid="' + userId + '"><img alt="찜하기" src="/dog/image/Footprint_s.png" width="50px" height="50px"></button>');
-		                }
-		            },
-		            error: function (error) {
-		                console.error('오류 발생', error);
-		            }
-		        });
-		    });
-		});
-
+	        var memberLoginState = ${loginstate};
+	        if (!memberLoginState) {
+	            alert('로그인 후 이용해 주세요.');
+	            return;
+	        }
+	        
+	        $.ajax({
+	            type: 'POST',
+	            url: url,
+	            data: {
+	                product_id: productId,
+	                userId: userId
+	            },
+	            success: function (response) {
+	                console.log(isLikeButton ? '추가 성공' : '삭제 성공');
+	                location.reload();
+	            },
+	            error: function (error) {
+	                console.error('오류 발생', error);
+	            }
+	        });
+	    });
+	});
 	/*장바구니*/
 	$(document)
 			.ready(
@@ -664,8 +651,6 @@
 											updateTotalPrice(); // total_price 업데이트 함수 호출
 										});
 
-
-
 						function formatNumberWithCommas(number) {
 							return number.toString().replace(
 									/\B(?=(\d{3})+(?!\d))/g, ",")
@@ -677,7 +662,6 @@
 							var quantityValue = parseInt($("#quantity")
 									.text(), 10);
 							var priceValue = parseFloat($("#price").text()
-
 									.replace(/[^0-9.-]+/g, ""));
 
 							var totalPrice = quantityValue * priceValue;
@@ -700,7 +684,6 @@
 								updateTotalPrice();
 							}
 						});
-
 
 						$("#addToCart")
 								.click(
@@ -749,7 +732,8 @@
 
 													});
 										});
-					}) ;
+					});
+
 
 	//url 공유하기
 	function clip() {
