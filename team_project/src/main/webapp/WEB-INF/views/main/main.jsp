@@ -100,7 +100,8 @@ body{
 .best_product_thumbnail_image img {
     width: 120%;
     height: 120%;
- 	text-align: center; 
+    text-align: center; 
+    overflow: hidden;
 }
 #product_name{
 	font-family: 'Noto Sans KR', sans-serif;
