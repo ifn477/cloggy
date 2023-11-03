@@ -1,0 +1,22 @@
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ezen.dog.mypage.Myservice">
+
+
+
+
+<select id="ordercnt" resultType="com.ezen.dog.mypage.MyDTO">
+select order_id,d_status from c_order where userId=#{param1}
+</select>
+
+<select id="cpcnt" resultType="int">
+SELECT COUNT(C_CODE) 
+        FROM COUPONDOWNLOAD
+        WHERE userId = #{param1}
+</select>
+
+
+
+</mapper>

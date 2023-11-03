@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.ezen.dog.member.MemberDTO;
+import com.ezen.dog.notice.Nservice;
+import com.ezen.dog.product.ProductPageDTO;
 
 
 
@@ -26,13 +28,7 @@ public class QnaController {
 	
 	ArrayList<QnaDTO>list = new ArrayList<QnaDTO>();
 	
-	//qna�����Է�
 	@RequestMapping(value="/qna-input")
-	public String qnainput() {
-		return "qna-input";
-	}
-	
-	@RequestMapping(value="/qna-inputtest")
 	public String qnainputtest(HttpServletRequest request) {
 	    HttpSession hs = request.getSession();
 	    Object loginState = hs.getAttribute("loginstate");
@@ -45,7 +41,7 @@ public class QnaController {
 	}
 
 	
-	//qna����
+	//qna저장
 	@RequestMapping(value="/qna-save",method = RequestMethod.POST)
 	public String qnasave(HttpServletRequest request) {
 		String q_userId=request.getParameter("userId");
@@ -58,18 +54,37 @@ public class QnaController {
 		return "redirect:main";
 	}
 	
-	//qna ���
+	//qna 출력
 	@RequestMapping(value="/qna-out")
-	public String qnaout(Model mo) {
+	public String qnaout(HttpServletRequest request,Model mo,ProductPageDTO dto) {
 		
 		Qservice qs = sqlSession.getMapper(Qservice.class);
 		ArrayList<QnaDTO>list= qs.qnaout();
 		mo.addAttribute("list", list);
 		
+		String nowPage=request.getParameter("nowPage");
+	    String cntPerPage=request.getParameter("cntPerPage");
+	    Qservice notice = sqlSession.getMapper(Qservice.class);
+	    int total=notice.cntnotice();
+	    if(nowPage==null && cntPerPage == null) {
+	       nowPage="1";
+	       cntPerPage="10";
+	    }
+	    else if(nowPage==null) {
+	       nowPage="1";
+	    }
+	    else if(cntPerPage==null) {
+	       cntPerPage="5";
+	    }      
+	    dto = new ProductPageDTO(total,Integer.parseInt(nowPage),Integer.parseInt(cntPerPage));
+	    mo.addAttribute("paging",dto);
+	    mo.addAttribute("list",notice.selectnotice(dto));
+		
+		
 		return "qna-out";
 	}
 	
-	//qna�������
+	//qna 내용
 	@RequestMapping(value = "/qna-detail")
 	public String qnadetil(HttpServletRequest request,Model mo) {
 		
@@ -82,20 +97,19 @@ public class QnaController {
 		return "qna-detail";
 	}
 	
-	//qna���
+	//qna 답글달기
 	@RequestMapping(value = "/qna-reply",method = RequestMethod.POST)
 	public String qnareply(HttpServletRequest request,Model mo) {
 				
-		String userId = request.getParameter("userId");
+		int q_number = Integer.parseInt(request.getParameter("q_number"));
 		Qservice qs = sqlSession.getMapper(Qservice.class);
-		ArrayList<QnaDTO>list= qs.qnareplyview(userId);
+		ArrayList<QnaDTO>list= qs.qnareplyview(q_number);
 		mo.addAttribute("list", list);
 		
 		return "qna-replyview";
 	}
 	
-	//qna�������
-
+	//qna 댓글 저장
 	@RequestMapping(value = "/qna-replysave",method = RequestMethod.POST)
 	public String qnareplysave(HttpServletRequest request) {
 

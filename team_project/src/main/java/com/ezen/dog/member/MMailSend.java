@@ -18,6 +18,7 @@ import javax.mail.internet.MimeMessage;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import javax.mail.*;
 
 public class MMailSend {
 	
@@ -39,7 +40,7 @@ public class MMailSend {
 	        Session session = Session.getDefaultInstance(p, auth);
 	        MimeMessage msg = new MimeMessage(session);
 	        
-	        // �����
+	        // �뜝�룞�삕�뜝�룞�삕�뜝占�
 	        Session ss = Session.getDefaultInstance(p, auth);
 	        ss.setDebug(true);
 	         
@@ -50,17 +51,22 @@ public class MMailSend {
 	            msg.setFrom(from);
 	            InternetAddress to = new InternetAddress(email);
 	            msg.setRecipient(Message.RecipientType.TO, to);
-	            msg.setSubject("[cloggy] 본인 인증 메일", "UTF-8");
-	            
+	            msg.setSubject("[cloggy] 회원가입 메일 인증", "UTF-8");
 	            String authKey = createKey();
-	            String emailBody = " cloggy 본인 인증 메일입니다. 인증 코드 : " + authKey;
-
+	            String emailBody = "안녕하세요. (주)클로기입니다.<br>";
+	            emailBody += "회원님의 회원가입 인증번호입니다.<br><br>";
+				emailBody += "<table style=\"text-align:center; height: 50px; width:200px; background-color: #e28b3a; font-family: 'Noto Sans KR', sans-serif; border: 1px solid #e28b3a; font-size: 12px;\">";
+				emailBody += "<tr>";
+				emailBody += "<th style=\"color:#ffffff;\">인증 번호 &nbsp;</th>";
+				emailBody += "<td style=\"background-color:#ffffff; color:red; font-weight: bold;\">" + authKey + "</td>";
+				emailBody += "</tr>";
+				emailBody += "</table><br>";
+	            emailBody += "인증 코드를 회원가입 창에 입력해 주세요.<br>";
+	            emailBody += "<p style=\"color:gray; \">본 메일은 발신 전용 메일이므로, 문의사항은 홈페이지 내 고객센터를 이용해주세요.</p>";
 	            msg.setText(emailBody, "UTF-8");
 	            msg.setHeader("content-Type", "text/html");
 	            javax.mail.Transport.send(msg, msg.getAllRecipients());
-	            
 	            authKeyMap.put(email, authKey);
-	            
 	            
 	        }catch (AddressException addr_e) {
 	            addr_e.printStackTrace();
@@ -69,7 +75,6 @@ public class MMailSend {
 	        }catch (Exception msg_e) {
 	            msg_e.printStackTrace();
 	        }
-	       
 	    }
 
 	 
@@ -88,7 +93,7 @@ public class MMailSend {
 	    
 	}
 
-	// ���� ���� �ڵ�
+	// �뜝�룞�삕�뜝�룞�삕 �뜝�룞�삕�뜝�룞�삕 �뜝�뙓�벝�삕
 	public static String createKey() {
 		StringBuffer key = new StringBuffer();
 		Random rnd = new Random();
@@ -109,7 +114,7 @@ public class MMailSend {
 		return key.toString();
 	}
 	
-    //  ���� �ڵ� ����
+    //  �뜝�룞�삕�뜝�룞�삕 �뜝�뙓�벝�삕 �뜝�룞�삕�뜝�룞�삕
     public static boolean verifyKey(String email, String userInputKey) {
         String storedKey = authKeyMap.get(email);
         return storedKey != null && storedKey.equals(userInputKey);

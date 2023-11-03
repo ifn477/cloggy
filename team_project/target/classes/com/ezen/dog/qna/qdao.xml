@@ -19,7 +19,7 @@ select * from qna where q_number=#{param1}
 </select>
 
 <select id="qnareplyview" resultType="com.ezen.dog.qna.QnaDTO">
-select * from qna where userId=#{param1}
+select * from qna where q_number=#{param1}
 </select>
 
 <insert id="qnainsertreply">
@@ -55,6 +55,18 @@ select * from qna where userId like '%'|| #{param1} ||'%'
 select * from qna where q_content like '%'|| #{param1} ||'%'
 </select>
 
+<!-- 페이징처리 -->
+<select id="cntnotice" resultType="int">
+   select count(*) from qna
+</select>
+
+<!-- 페이징처리에서 게시글 조회 -->
+<select id="selectnotice" resultType="com.ezen.dog.qna.QnaDTO">
+   select * from (
+   select rownum rn,A.* from(  
+   select *from qna order by q_groups DESC,q_step asc)A)
+   where rn between #{start} AND #{end}
+</select>
 
 
 

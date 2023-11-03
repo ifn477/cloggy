@@ -2,6 +2,9 @@ package com.ezen.dog.member;
 
 import java.io.File;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -26,33 +29,12 @@ public class Membercontroller {
 	@Autowired
 	SqlSession sqlSession;
 	
-	static String imgPath = "C:\\Users\\dywlr\\git\\team_project\\team_project\\src\\main\\webapp\\image";
-	
-	@RequestMapping(value = "/member-input")
-	public String memberinput()
-	{
-		return "member-input";
-	}
+	static String imgPath = "C:\\Users\\dywlr\\git\\team_project_1024\\team_project\\src\\main\\webapp\\image";
 	
 	@RequestMapping(value = "/mybaby-input")
 	public String mybaby()
 	{
 		return "mybaby-input";
-	}
-
-	@RequestMapping(value = "/member-save",method = RequestMethod.POST)
-	public String membersave(HttpServletRequest request)
-	{
-		String userId = request.getParameter("userId");
-		String password =request.getParameter("password");
-		String userName = request.getParameter("userName");
-		String email = request.getParameter("email");
-		String phone = request.getParameter("phone");
-		String address = request.getParameter("roadFullAddr");
-		Mservice ms = sqlSession.getMapper(Mservice.class);
-		ms.membersave(userId,password,userName,email,phone,address);
-		
-		return "redirect:main";
 	}
 	
 	
@@ -64,29 +46,45 @@ public class Membercontroller {
 		String userId = mdto.getUserId();
 		String baby_name = request.getParameter("baby_name");
 		String baby_type =request.getParameter("baby_type");
-		String babybirth_year = request.getParameter("baby_birth_year");
-		String babybirth_month = request.getParameter("babybirth_month");
-		String babybirth_day = request.getParameter("babybirth_day");
+
+		String baby_birth = request.getParameter("baby_birth");
 		
-		String baby_birth = babybirth_year+"/"+babybirth_month+"/"+babybirth_day;
+		String babygender = request.getParameter("selectedGender");
+		String bodytype = request.getParameter("selectedBodyType");
 		
-		System.out.println("���� :" + baby_birth);		
-		
-		
-		
-		String babygender = request.getParameter("babygender");
-		String bodytype = request.getParameter("bodytype");
+		System.out.println("아기 성별 :"+babygender);
+		System.out.println("아기 체형  :"+bodytype);
 		
 		
 		String baby_photo = request.getParameter("baby_photo");
 		MultipartFile mf = request.getFile("baby_photo");
 		String fname = mf.getOriginalFilename();
-		mf.transferTo(new File(imgPath+"\\"+fname));
-		
 		Mservice ms = sqlSession.getMapper(Mservice.class);
-		ms.babysave(baby_name, baby_birth, baby_type, fname, babygender, bodytype,  userId);
-		
-		
+		mf.transferTo(new File(imgPath+"\\"+fname));
+		ms.babysave(baby_name, baby_birth, baby_type, fname, babygender, bodytype, userId);
+		return "redirect:main";
+	}
+	
+	
+	@RequestMapping(value = "/member-input")
+	public String memberinput()
+	{
+		return "member-input";
+	}
+
+	@RequestMapping(value = "/member-save",method = RequestMethod.POST)
+	public String membersave(HttpServletRequest request)
+	{
+		String userId = request.getParameter("userId");
+		String password =request.getParameter("password");
+		String userName = request.getParameter("userName");
+		String user_emailid = request.getParameter("user_emailid");
+		String email_address = request.getParameter("email_address");
+		String email = user_emailid+"@"+email_address;
+		String phone = request.getParameter("phone");
+		String address = request.getParameter("roadFullAddr");
+		Mservice ms = sqlSession.getMapper(Mservice.class);
+		ms.membersave(userId,password,userName,email,phone,address);
 		
 		return "redirect:main";
 	}
@@ -107,6 +105,18 @@ public class Membercontroller {
 			ArrayList<MemberDTO> list = ms.membermodifyForm(userId);
 			mo.addAttribute("list",list);
 			return "member-modifyForm";
+		}
+		
+		@RequestMapping(value = "/mybaby-modifyForm")
+		public String mybabymodifyForm(HttpServletRequest request, Model mo) {
+			String userId = request.getParameter("userId");
+			String mybaby_name= request.getParameter("babyname");
+			
+			Mservice ms = sqlSession.getMapper(Mservice.class);
+			ArrayList<MyBabyDTO> babylist = ms.babymodifyForm(userId, mybaby_name);
+			mo.addAttribute("babylist", babylist);
+			
+			return "mybaby-modifyForm";
 		}
 
 		@RequestMapping(value = "/member-modifyView")
@@ -144,17 +154,20 @@ public class Membercontroller {
 			String value = request.getParameter("value");
 			
 			Mservice ms = sqlSession.getMapper(Mservice.class);
+			ArrayList<MemberDTO> list;
 			
 			if(item.equals("userId")) {
-				ArrayList<MemberDTO> list = ms.membersearchViewId(value);
+				list = ms.membersearchViewId(value);
 			}
 			else if(item.equals("userName")) {
-				ArrayList<MemberDTO> list = ms.membersearchViewName(value);
+				list = ms.membersearchViewName(value);
 			}
 			else {
-				ArrayList<MemberDTO> list = ms.membersearchViewEmail(value);
+				list = ms.membersearchViewEmail(value);
 			}
-			return "redirect:member-out";
+			
+			mo.addAttribute("list", list);
+			return "member-search-out";
 		}
 
 		@ResponseBody

@@ -4,60 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
 <style type="text/css">
-@font-face {
-font-family: 'UhBeeJJIBBABBA';
-src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_five@.2.0/UhBeeJJIBBABBA.woff') format('woff');
-font-weight: normal;
-font-style: normal;
-}
-#maintext{
-	font-family: 'UhBeeJJIBBABBA';
-}
-#title{
-	font-size: 43px;
-	font-family: 'UhBeeJJIBBABBA';
-	color: #8C4164;
-	height: 130px;
-	line-height: 160px;
-	margin-top: 0px;
-	margin-bottom: 0px;
-}
-#container {
-	border: 0px solid #bcbcbc;
-}
-#header {
-	text-align: center;
-	width: 100%;
-}
-#nav {
-	width: 100%;
-}
-#body {
-	text-align: center;
-	width: 100%;
-}
-#footer {
-position:relative;
-top: 200px;
-	width: 100%;
-	text-align: center;
-	font-size: 20px;
-	line-height: 30px;
-	height: 30px;
-	background-color: #000000;
-	color:white;
-}
-
-th{
-	background-color: #988fdf;
-	color: #ffffff;
-	padding-left: 5px;
-}
 </style>
 <meta charset="UTF-8">
 <title><t:insertAttribute name="title"/></title>

@@ -5,15 +5,52 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<style type="text/css">
+@charset "UTF-8";
+table {
+	font-family: 'Noto Sans KR', sans-serif;
+	width: 70rem;
+	text-align: center;
+	margin-top: 5rem;
+	margin-bottom: 16rem;
+	border-top: 1px solid #f6eddf;
+    border-collapse: collapse;
+    border-left: none;
+    border-right: none;
+}
+th{
+/* 	width: 15%; */
+	font-weight: 400;
+	background-color: #f6eddf;
+}
+th,td {
+    border-bottom: 1px solid #f6eddf;
+    padding: 10px;
+	font-size: 13px;
+	color: #463528; 
+}
+td{
+	text-align: center;
+}
+caption {
+	font-size: 17px;
+	margin-bottom: 15px;
+	margin-left: 3px;
+	font-weight: 500;
+	caption-side: top;
+}
+</style>
 <title>Insert title here</title>
 </head>
 <body>
-
 <table border="1" align="center" width="900px">
+<caption>회원 정보</caption>
 <tr>
 <th>아이디</th><th>패스워드</th><th>이름</th>
 <th>이메일</th><th>전화번호</th><th>주소</th>
-<th>가입일</th><th>마지막 수정일</th><th>비고</th>
+<th>가입일</th>
+<th>마지막 수정일</th>
+<th>비고</th>
 </tr>
 <c:forEach items="${list}" var="dto">
 <tr>

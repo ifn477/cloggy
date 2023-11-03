@@ -5,16 +5,65 @@
 <mapper namespace="com.ezen.dog.order.Oservice">
 
 <select id="orderitem" resultType="com.ezen.dog.order.OrderitemDTO">
-	
-	select c.userId, c.product_id, c.cart_quantity, p.p_name, p.p_thumbnail, p.p_price
-	    from cart c
-	    INNER JOIN product p ON c.product_id = p.product_id and c.userId=#{param1} and p.product_id=#{param2}
-
+    SELECT c.userId, c.product_id, c.cart_quantity, p.p_name, p.p_thumbnail, p.p_price, o.opt_name
+    FROM cart c
+    INNER JOIN product p ON c.product_id = p.product_id AND c.userId = #{param1} AND p.product_id = #{param2}
+    LEFT JOIN p_option o ON o.product_id = p.product_id 
 </select>
 
 <select id="cartitem">
  select product_id from  product where userId = #{param1}
  
 </select>
+
+<select id="orderid" resultType="int">
+select orderid_seq.nextval from dual
+</select>
+
+<insert id="inserto">
+insert into c_order (address,totalprice,userId,shipping,ordermemo,phone,addressee,order_id,d_status,COUPON)
+ values (#{param1},#{param2},#{param3},#{param4},#{param5},#{param6},#{param7},#{param8},'배송준비',#{param9})
+</insert>
+
+
+<insert id="inserti">
+insert into c_orderitem (ORDERITEM_ID,product_id,o_price,o_quantity,savepoint,order_id,opt_id)
+ values (ORDERITEM_SEQ.nextval,#{param1},#{param2},#{param3},#{param4},#{param5},#{param6})
+</insert>
+
+<select id="ordercompleted" resultType="com.ezen.dog.order.OrderitemDTO">
+select totalprice,shipping,addressee,phone,address from c_order
+</select>
+
+<select id="orderlist" resultType="com.ezen.dog.order.OrderDTO">
+select p.p_name,p.p_thumbnail,oi.o_price,oi.o_quantity,oi.order_id,o.orderdate,o.d_status,oi.product_id,o.d_status
+from c_order o, c_orderitem oi, product p
+where o.order_id = oi.ORDER_ID
+and oi.PRODUCT_ID = p.product_id
+and o.userId = #{param1}
+ORDER BY o.order_id DESC
+</select>
+
+<select id="orderdetail" resultType="com.ezen.dog.order.OrderDTO">
+select p.p_name,p.p_thumbnail,oi.o_price,oi.o_quantity,oi.order_id,o.orderdate,o.d_status,oi.product_id,o.addressee,o.phone,o.address,o.ordermemo
+from c_order o, c_orderitem oi, product p
+where o.order_id = oi.ORDER_ID
+and oi.PRODUCT_ID = p.product_id
+and o.order_id = #{param1}
+
+</select>
+
+<select id="orderdetailToReview" resultType="com.ezen.dog.order.OrderitemDTO">
+select p.p_name,p.p_thumbnail, oi.o_price, oi.o_quantity, oi.order_id, oi.product_id
+from c_orderitem oi
+inner join product p on p.product_id=oi.product_id
+where oi.order_id=#{param1} and p.product_id=#{param2}
+</select>
+
+<update id="ordercancle" parameterType="int">
+update c_order set d_status = '주문취소' where order_id = #{param1}
+</update>
+
+
 
 </mapper>

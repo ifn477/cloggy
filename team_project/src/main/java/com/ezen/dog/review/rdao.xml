@@ -5,15 +5,21 @@
 <mapper namespace="com.ezen.dog.review.Rservice">
 
 <insert id="reviewinsert">
-insert into review( r_number,  userId, r_content, r_photo) 
-values (review_seq.nextval, #{param1},#{param2},#{param3})
+insert into review( r_number,  userId, product_id, r_content, r_photo, rate) 
+values (review_seq.nextval, #{param1},#{param2},#{param3},#{param4},#{param5})
 </insert>
-<select id="reviewout" resultType="com.ezen.dog.review.ReviewDTO">
-select * from review 
-</select>
 <select id="reviewlist" resultType="com.ezen.dog.review.ReviewDTO">
-select * from review where product_id=#{param1} and rank=1
+select * from review where product_id=#{param1}
 </select>
-
+<select id="reviewout" resultType="com.ezen.dog.review.ReviewDTO" parameterType="map">
+    <![CDATA[
+    SELECT * FROM (
+        SELECT * FROM review
+        WHERE product_id = #{param1} AND rate = 5
+        ORDER BY DBMS_RANDOM.value
+    )
+    WHERE ROWNUM <= 1
+    ]]>
+</select>
 
 </mapper>

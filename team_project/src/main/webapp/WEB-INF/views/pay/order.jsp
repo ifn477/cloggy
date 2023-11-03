@@ -64,10 +64,7 @@ function execution_daum_address(){
        }).open();     
    
 }
-
 </script>
-
-
 
 <meta charset="UTF-8">
 <title>Insert title here</title>
@@ -80,8 +77,9 @@ function execution_daum_address(){
       <li>완료</li>
    </ul>
    
-<!--      <form action="order-save" method="post"> -->
+
          
+            <h1 class="page-header">배송지정보</h1>
             <table border="1" align="center">
                     <colgroup>
                         <col style="width: 170px">
@@ -90,23 +88,46 @@ function execution_daum_address(){
             <!-- 배송지정보 -->
                     <tr>
                         <th>이름</th>
-                        <td><input type="text" name="ordername"></td>
+                        <td><input type="text" name="addressee" id="addressee"></td>
                     </tr>
                     <tr>
                         <th>전화번호</th>
-                        <td><input type="text" name="phone"></td>
+                        <td><input type="text" name="phone" id="phone"></td>
                     </tr>
                     <tr>
                         <th>주소</th>
                         <td>
-                        <input class="address1_input" name="address1" readonly="readonly">
+                        <input class="address1_input" name="address1" id="address1" readonly="readonly">
                             <a class="address_search_btn" onclick="execution_daum_address()">우편번호검색</a><br>
-                            <input class="address2_input" name="address2" readonly="readonly"><br>
-                            <input class="address3_input" name="address3" readonly="readonly"></td>
-                    
+                            <input class="address2_input" name="address2" id="address2" readonly="readonly"><br>
+                            <input class="address3_input" name="address3" id="address3" readonly="readonly"></td>
+                     
                 </table>
+                  <input type="hidden" id="userId" value="${member.userId}" >
+            <!-- 배송지요청사항 -->
+             <h1 class="page-header">배송 요청사항</h1>
+            <table align="center">
+             <tr>
+             <th>배송 메세지</th>
+             <td>
+            <select id="ordermemo" class="selH28" title="택배배송 메시지를 선택해주세요." name="ordermemo" style="width:350px" data-attr="배송요청사항^배송메세지">
+               <option name="배송메시지를 선택해주세요." value="MH">배송메시지를 선택해주세요.</option>
+               <option value="10">그냥 문 앞에 놓아 주시면 돼요.</option>
+               <option value="20">도착 후 전화주시면 직접 받으러 갈게요. </option>
+               <option value="30">벨을 누르지 말아주세요.</option>
+               <option value="40">직접 받을게요.(부재 시 문앞)</option>
+
+               </select>
+                  </td>
+             </tr>
+            </table>
+            
+       
+            
+            
       
             <!-- 상품 정보 -->
+             <h1 class="page-header">배송상품</h1>
             <table border="1" align="center">
                <tr>
                   <th>이미지</th>
@@ -119,27 +140,144 @@ function execution_daum_address(){
                <c:forEach items="${ list}" var="order">
             
                <tr>
-                  <td><img src="/dog/image/${order.p_thumbnail}" width="100px"></td>   
-                  <td>${order.p_name}<input type="hidden" name="product_id"
-                  value="${cart.product_id}"></td>
-                  <td><fmt:formatNumber pattern="#,##0원">${order.p_price}</fmt:formatNumber>
-               <span id="price-${loop.index}"
-                  style="display: none;">${order.p_price}</span>
-               <td> ${order.cart_quantity}</td>
-               <td> ${(order.cart_quantity*order.p_price)}</td>
+                   <td><img src="/dog/image/${order.p_thumbnail}" width="100px"></td>
+                   <td>${order.p_name}<input type="hidden" name="product_id" id="product_id"
+                       value="${cart.product_id}"></td>
+                   <td><fmt:formatNumber pattern="#,##0원">${order.p_price}</fmt:formatNumber>
+                       <span id="price-${loop.index}" style="display: none;">${order.p_price}</span></td>
+                   <td>${order.cart_quantity}</td>
+                   <td id="subtotal-${loop.index}">${order.cart_quantity * order.p_price}</td>
+               </tr>
                
-               </tr>   
-               </c:forEach>
-               
-            </table>
-            <!-- 포인트 정보 -->
-            <!-- 주문 종합 정보 -->
-      
-      <div>
-<!--          <input type="submit" value="결제하기"> -->
-      </div>
-   </form>
+                 <c:set var="subtotal" value="${order.cart_quantity * order.p_price}" />
+                <c:set var="totalPrice" value="${totalPrice + subtotal}" />
 
+               </c:forEach>
+
+    <c:choose>
+        <c:when test="${totalPrice < 30000}">
+            <c:set var="shipping" value="3000" /> <!-- 배송료를 3000원으로 설정 -->
+          
+        </c:when>
+        <c:otherwise>
+           <c:set var="shipping" value="0" /> 
+         
+        </c:otherwise> 
+    </c:choose>
+         </table>
+            <!--  쿠폰 -->
+            <!-- 포인트 정보 -->
+      
+            <!-- 결제금액 -->
+            <h2 class="sub-title2">최종 결제정보</h2>
+         <table align="center">
+         <tr>
+            <th>총 상품금액</th>
+            <th>총 배송비</th>
+            <th>총 결제금액</th>
+         </tr>
+         <tr>
+            <td>${totalPrice}</td>
+            <td>${dprice}</td>
+            <td>${totalPrice+dprice}</td>
+            <input name="totalprice" type="hidden" value="${totalPrice }" id="totalprice">
+            <input name="dprice" type="hidden" value="${dprice }" id="shipping">
+            
+         </tr>
+         
+      </table>
+            <!-- 결제수단선택 -->
+            <h1 class="page-header">결제수단 선택</h1>
+         <div style="text-align: center;">
+            <input type="radio" name="cal_info" value="inicisPay"><label>&nbsp;가상계좌</label>         
+            <input type="radio" name="cal_info" value="kakaopay"><label style="margin-right: 50px;">&nbsp;카카오페이</label>
+            <input type="radio" name="cal_info" value="tosspay"><label style="margin-right: 50px;">&nbsp;토스페이</label>
+            <input type="radio" name="cal_info" value="payco"><label style="margin-right: 50px;">&nbsp;페이코</label>
+            <input type="radio" name="cal_info" value="inicisPay"><label>&nbsp;카드 결제</label>         
+         </div>
+                <input type="button" id="paymentButton" value="결제하기" onclick="getaddress()">
+   
+   
+
+<!-- jQuery -->
+ <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <!-- iamport.payment.js -->
+    <script
+            type="text/javascript"
+            src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
+
+<script>
+
+
+// var addresseeValue = addresseeField.value;
+
+function getaddress(){
+var address1Value = $("#address1").val();
+	console.log(address1Value);
+}
+
+var totalprice = $('#totalprice').val();
+var userId = $('#userId').val();
+
+var today = new Date();
+var hours = today.getHours(); // 시
+var minutes = today.getMinutes();  // 분
+var seconds = today.getSeconds();  // 초
+var milliseconds = today.getMilliseconds();
+var orderId = `${hours}` + `${minutes}` + `${seconds}` + `${milliseconds}`;
+
+function kakakoPayorder() {
+    var IMP = window.IMP;
+    IMP.init("imp55581632");
+    
+    IMP.request_pay(
+        {
+            pg: "kakaopay",       // KG이니시스 pg 파라미터 값
+            pay_method: "card",   // 결제 방법
+            merchant_uid: orderId, // 주문번호
+            name: "(주)Cloggy",     // 상품 명
+            amount: totalprice,            // 금액
+            buyer_email: "gildong@gmail.com",
+            buyer_name: "홍길동",
+            buyer_tel: "010-4242-4242",
+            buyer_addr: "서울특별시 강남구 신사동",
+            buyer_postcode: "01181"
+        },
+        function (rsp) {
+            // rsp.imp_uid 값으로 결제 단건조회 API를 호출하여 결제결과를 판단합니다.
+            if (rsp.success) {
+                // 결제가 성공하면 서버로 요청 보냅니다.
+                $.ajax({
+                    type: "POST",
+                    url: "ordersave",
+                    data: {
+                       
+                       "addresseeValue": addresseeValue
+                       
+                    },
+                    success: function (response) {
+                        if (response.success) {
+                            alert("결제가 완료되었습니다!");
+                            window.location.reload();
+                        } else {
+                            alert("결제 성공, 하지만 서버에서 데이터 처리 오류");
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        alert("서버 오류: " + error);
+                    }
+                });
+            } else {
+                alert("결제에 실패하였습니다. 에러 내용: " + rsp.error_msg);
+            }
+        }
+    );
+}
+</script>
+
+<a onclick="kakakoPayorder()">
+<img alt="카카오페이" src="/dog/image/payment_icon_yellow_medium.png" height="48px">
+</a>
 
 </body>
 </html>

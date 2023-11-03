@@ -41,27 +41,6 @@ $(document).ready(function() {
 		});
 });
 
-/* 주소 input */
-function goPopup(){
-	var pop = window.open("jusoPopup","pop","width=570,height=420, scrollbars=yes, resizable=yes"); 
-}
-
-
-function jusoCallBack(roadFullAddr){
-		document.memberincheck.roadFullAddr.value = roadFullAddr;
-}
-
-/* 주소 inputself */
-function goPopupself(){
-	var pop = window.open("jusoPopup","pop","width=570,height=420, scrollbars=yes, resizable=yes"); 
-}
-
-
-function jusoCallBack(roadFullAddr){
-		document.memberincheckself.roadFullAddr.value = roadFullAddr;
-}
-
-
 /* 메일 전송 */
 $(function(){
     $("#button3").click(function(){
@@ -135,14 +114,6 @@ $(function() {
     });
 });
 
-/* 내정보 수정 */
-$(document).ready(function() {
-    $("#button5").click(function() {
-        var userId = $(this).data("userid");
-        window.location.href = "member-modifySelfForm?userId=" + userId;
-    });
-});
-
 /* 비밀번호 중복 검사 */
 function checkPassword() {
     var password = document.getElementById("password").value;
@@ -156,9 +127,36 @@ function checkPassword() {
     }
 }
 
+/* 내정보 수정 */
+$(document).ready(function() {
+    $("#button5").click(function() {
+        var userId = $(this).data("userid");
+        window.location.href = "member-modifySelfForm?userId=" + userId;
+    });
+});
+
+/* 주소 inputself */
+function goPopupself(){
+	var pop = window.open("jusoPopup","pop","width=570,height=420, scrollbars=yes, resizable=yes"); 
+}
+
+function jusoCallBack(roadFullAddr){
+		document.memberincheckself.roadFullAddr.value = roadFullAddr;
+}
+
+/* 주소 input */
+function goPopup(){
+	var pop = window.open("jusoPopup","pop","width=570,height=420, scrollbars=yes, resizable=yes"); 
+}
+
+
+function jusoCallBack(roadFullAddr){
+		document.memberincheck.roadFullAddr.value = roadFullAddr;
+}
+
 /* 약관 동의 */
 function openTermsPopup1() {
-    window.open('member-terms1', '약관 내용(필수)', 'width=600,height=400');
+    window.open('member-terms1', '약관 내용(필수)', 'width=1000,height=800');
 }
 
 function openTermsPopup2() {

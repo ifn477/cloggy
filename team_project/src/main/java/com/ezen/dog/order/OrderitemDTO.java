@@ -2,161 +2,155 @@ package com.ezen.dog.order;
 
 public class OrderitemDTO {
 	
-//	private String orderId;/* äºŒì‡°Ğ¦ è¸°ëŠìƒ‡ */
-    private int product_id;/* ï¿½ê¸½ï¿½ë­¹ è¸°ëŠìƒ‡ */
-    private int cart_quantity;	/* äºŒì‡°Ğ¦ ï¿½ë‹”ï¿½ì›¾ */
-    private int orderitem_id;/*  æ¹²ê³•ë‚¯ï¿½ê¶ */
-    private int p_price;/* ï¿½ê¸½ï¿½ë­¹ ï¿½ë¸³ åª›ï¿½ åª›ï¿½å¯ƒï¿½ */
-    private double p_discount;/* ï¿½ê¸½ï¿½ë­¹ ï¿½ë¸·ï¿½ì”¤ ï¿½ì‘‰ */
-    private int savePoint;/* ï¿½ê¸½ï¿½ë­¹ ï¿½ë¸³åª›ï¿½ æ´Ñ‰â„“ ï¿½ë–† ï¿½ì‰·ï¿½ë±· ï¿½ë£·ï¿½ì”¤ï¿½ë“ƒ */
+	private String orderId;/* ÁÖ¹® ¹øÈ£ */
+    private int product_id;/* »óÇ° ¹øÈ£ */
+    private int opt_id;/* »óÇ° ¹øÈ£ */
+    private int o_quantity;	/* ÁÖ¹® ¼ö·® */
+    private int orderitem_id;/*  ±âº»Å° */
+    private int o_price;/* »óÇ° ÇÑ °³ °¡°İ */
+    private double p_discount;/* »óÇ° ÇÒÀÎ À² */
+    private int savepoint;/* »óÇ° ÇÑ°³ ±¸¸Å ½Ã È¹µæ Æ÷ÀÎÆ® */
     private String p_name;
     private String p_thumbnail;
     private String userId;
+    private int p_price;
+    private int cart_quantity;
+    private String opt_name;
     
-    
-    
-    
-	public String getUserId() {
-		return userId;
-	}
 
-	public void setUserId(String userId) {
-		this.userId = userId;
-	}
-
-	public String getP_name() {
-		return p_name;
-	}
-
-	public void setP_name(String p_name) {
-		this.p_name = p_name;
-	}
-
-	public String getP_thumbnail() {
-		return p_thumbnail;
-	}
-
-	public void setP_thumbnail(String p_thumbnail) {
-		this.p_thumbnail = p_thumbnail;
-	}
-
-	/* DBï¿½ë€’ï¿½ì” é‡‰ï¿½ è­°ëŒì˜± ï¿½ë¸¯ï§ï¿½ ï¿½ë¸¡ï¿½ë’— ï¿½ëœ²ï¿½ì” ï¿½ê½£ */
-    private int salePrice;/* ï¿½ë¸·ï¿½ì”¤ ï¿½ìŸ»ï¿½ìŠœï¿½ë§‚ åª›ï¿½å¯ƒï¿½ */
-    private int totalPrice;/* ç¥ï¿½ åª›ï¿½å¯ƒï¿½(ï¿½ë¸·ï¿½ì”¤ ï¿½ìŸ»ï¿½ìŠœï¿½ë§‚ åª›ï¿½å¯ƒï¿½ * äºŒì‡°Ğ¦ ï¿½ë‹”ï¿½ì›¾) */
-    private int totalSavePoint;/* ç¥ï¿½ ï¿½ì‰·ï¿½ë±· ï¿½ë£·ï¿½ì”¤ï¿½ë“ƒ(ï¿½ê¸½ï¿½ë­¹ ï¿½ë¸³åª›ï¿½ æ´Ñ‰â„“ ï¿½ë–† ï¿½ì‰·ï¿½ë±· ï¿½ë£·ï¿½ì”¤ï¿½ë“ƒ * ï¿½ë‹”ï¿½ì›¾) */
+	/* DBÅ×ÀÌºí Á¸Àç ÇÏÁö ¾Ê´Â µ¥ÀÌÅÍ */
+    private int saleprice;/* ÇÒÀÎ Àû¿ëµÈ °¡°İ */
+    private int totalprice;/* ÃÑ °¡°İ(ÇÒÀÎ Àû¿ëµÈ °¡°İ * ÁÖ¹® ¼ö·®) */
+    private int totalsavepoint;/* ÃÑ È¹µæ Æ÷ÀÎÆ®(»óÇ° ÇÑ°³ ±¸¸Å ½Ã È¹µæ Æ÷ÀÎÆ® * ¼ö·®) */
 	public OrderitemDTO() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	
-	public OrderitemDTO(int product_id, int cart_quantity, int orderitem_id, int p_price,
-			double p_discount, int savePoint, int salePrice, int totalPrice, int totalSavePoint) {
+	public OrderitemDTO(String orderId, int product_id, int o_quantity, int orderitem_id, int o_price,
+			double p_discount, int savepoint, String p_name, String p_thumbnail, String userId, int saleprice,
+			int totalprice, int totalsavepoint) {
 		super();
-//		this.orderId = orderId;
+		this.orderId = orderId;
 		this.product_id = product_id;
-		this.cart_quantity = cart_quantity;
+		this.o_quantity = o_quantity;
 		this.orderitem_id = orderitem_id;
-		this.p_price = p_price;
+		this.o_price = o_price;
 		this.p_discount = p_discount;
-		this.savePoint = savePoint;
-		this.salePrice = salePrice;
-		this.totalPrice = totalPrice;
-		this.totalSavePoint = totalSavePoint;
+		this.savepoint = savepoint;
+		this.p_name = p_name;
+		this.p_thumbnail = p_thumbnail;
+		this.userId = userId;
+		this.saleprice = saleprice;
+		this.totalprice = totalprice;
+		this.totalsavepoint = totalsavepoint;
 	}
-
-//	public String getOrderId() {
-//		return orderId;
-//	}
-//
-//	public void setOrderId(String orderId) {
-//		this.orderId = orderId;
-//	}
-
-	public int getProduct_id() {
-		return product_id;
+	
+	
+	
+	public String getOpt_name() {
+		return opt_name;
 	}
-
-	public void setProduct_id(int product_id) {
-		this.product_id = product_id;
+	public void setOpt_name(String opt_name) {
+		this.opt_name = opt_name;
 	}
-
+	
+	public int getOpt_id() {
+		return opt_id;
+	}
+	public void setOpt_id(int opt_id) {
+		this.opt_id = opt_id;
+	}
 	public int getCart_quantity() {
 		return cart_quantity;
 	}
-
 	public void setCart_quantity(int cart_quantity) {
 		this.cart_quantity = cart_quantity;
 	}
-
-	public int getOrderitem_id() {
-		return orderitem_id;
-	}
-
-	public void setOrderitem_id(int orderitem_id) {
-		this.orderitem_id = orderitem_id;
-	}
-
 	public int getP_price() {
 		return p_price;
 	}
-
 	public void setP_price(int p_price) {
 		this.p_price = p_price;
 	}
-
+	public String getOrderId() {
+		return orderId;
+	}
+	public void setOrderId(String orderId) {
+		this.orderId = orderId;
+	}
+	public int getProduct_id() {
+		return product_id;
+	}
+	public void setProduct_id(int product_id) {
+		this.product_id = product_id;
+	}
+	public int getO_quantity() {
+		return o_quantity;
+	}
+	public void setO_quantity(int o_quantity) {
+		this.o_quantity = o_quantity;
+	}
+	public int getOrderitem_id() {
+		return orderitem_id;
+	}
+	public void setOrderitem_id(int orderitem_id) {
+		this.orderitem_id = orderitem_id;
+	}
+	public int getO_price() {
+		return o_price;
+	}
+	public void setO_price(int o_price) {
+		this.o_price = o_price;
+	}
 	public double getP_discount() {
 		return p_discount;
 	}
-
 	public void setP_discount(double p_discount) {
 		this.p_discount = p_discount;
 	}
-
-	public int getSavePoint() {
-		return savePoint;
+	public int getSavepoint() {
+		return savepoint;
 	}
-
-	public void setSavePoint(int savePoint) {
-		this.savePoint = savePoint;
+	public void setSavepoint(int savepoint) {
+		this.savepoint = savepoint;
 	}
-
-	public int getSalePrice() {
-		return salePrice;
+	public String getP_name() {
+		return p_name;
 	}
-
-	public void setSalePrice(int salePrice) {
-		this.salePrice = salePrice;
+	public void setP_name(String p_name) {
+		this.p_name = p_name;
 	}
-
-	public int getTotalPrice() {
-		return totalPrice;
+	public String getP_thumbnail() {
+		return p_thumbnail;
 	}
-
-	public void setTotalPrice(int totalPrice) {
-		this.totalPrice = totalPrice;
+	public void setP_thumbnail(String p_thumbnail) {
+		this.p_thumbnail = p_thumbnail;
 	}
-
-	public int getTotalSavePoint() {
-		return totalSavePoint;
+	public String getUserId() {
+		return userId;
 	}
-
-	public void setTotalSavePoint(int totalSavePoint) {
-		this.totalSavePoint = totalSavePoint;
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
-
-	@Override
-	public String toString() {
-		return "OrderitemDTO [product_id=" + product_id + ", quantity=" + cart_quantity
-				+ ", orderitem_id=" + orderitem_id + ", p_price=" + p_price + ", p_discount=" + p_discount
-				+ ", savePoint=" + savePoint + ", salePrice=" + salePrice + ", totalPrice=" + totalPrice
-				+ ", totalSavePoint=" + totalSavePoint + "]";
+	public int getSaleprice() {
+		return saleprice;
 	}
-
-	public void initSaleTotal() {
-		this.salePrice = (int) (this.p_price * (1-this.p_discount));
-		this.totalPrice = this.salePrice*this.cart_quantity;
-		this.savePoint = (int)(Math.floor(this.salePrice*0.05));
-		this.totalSavePoint =this.savePoint * this.cart_quantity;
+	public void setSaleprice(int saleprice) {
+		this.saleprice = saleprice;
 	}
+	public int getTotalprice() {
+		return totalprice;
+	}
+	public void setTotalprice(int totalprice) {
+		this.totalprice = totalprice;
+	}
+	public int getTotalsavepoint() {
+		return totalsavepoint;
+	}
+	public void setTotalsavepoint(int totalsavepoint) {
+		this.totalsavepoint = totalsavepoint;
+	}
+	
+
     
 }

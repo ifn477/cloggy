@@ -11,7 +11,7 @@ public interface Cservice {
 	//장바구니 출력(로그인)
 	public ArrayList<CartProductDTO> cartout(String userId);
 	//장바구니 출력(쿠키)
-	public ArrayList<CartProductDTO> cartoutwithcookie(String userId);
+	public ArrayList<CartProductDTO> cartoutwithcookie(String ckId);
 	//장바구니 선택삭제(로그인)
 	public void cartdelete(String userId, int product_id, int opt_id);
 	//장바구니 선택삭제(쿠키)

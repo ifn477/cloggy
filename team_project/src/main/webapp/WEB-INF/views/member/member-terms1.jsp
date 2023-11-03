@@ -3,12 +3,33 @@
 <!DOCTYPE html>
 <html>
 <head>
+<style type="text/css">
+*{
+	font-family: 'Noto Sans KR', sans-serif;
+}
+#popupWindow1{
+	font-size: 12px;
+	padding: 20px;
+	background-color: #f6eddf;
+	margin: 20px;
+}
+.logoimg{
+   height: 3rem;
+   display: flex; 
+   justify-content: center; 
+   align-items: center; 
+   margin: 2rem;
+}
+</style>
 <script type="text/javascript" src="/dog/js/member.js">
 </script>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
+<div class="logoimg">
+<img alt="로고" src="/dog/resources/mainimage/cloggy임시.jpg" class="logoimg">
+</div>
 <div id="popupWindow1" style="text-align: left;">
 제1조(목적)<br>
 이 약관은 (전자상거래 사업자)가 운영하는 cloggy(이하 “몰”이라 한다)에서 제공하는 인터넷 관련 서비스(이하 “서비스”라 한다)를 이용함에 있어 사이버 몰과 이용자의 권리․의무 및 책임사항을 규정함을 목적으로 합니다.<br>
@@ -205,7 +226,7 @@
 </div>
 <br>
 <div style="text-align: center;">
-<button onclick="closePopup();">확인</button>
-</div>
+	<button onclick="closePopup();" style="background-color: transparent; border: 0; margin-bottom: 3rem; background-color: buttonface; font-weight: 400; width: 150px; border-radius: 0; border: 0; font-size: 14px; height: 30px; font-weight: bold;">확인</button>
+  </div>
 </body>
 </html>

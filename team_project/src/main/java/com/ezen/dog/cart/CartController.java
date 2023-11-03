@@ -31,69 +31,69 @@ public class CartController {
 	public String addToCart(@RequestParam("product_id") int product_id, @RequestParam("quantity") int quantity,
 			@RequestParam("optId") int optId, HttpServletRequest request, HttpServletResponse response, HttpSession session) {
 		
-		// íšŒì›ì •ë³´ ê°€ì ¸ì˜¤ê¸°
+		// È¸¿øÁ¤º¸ °¡Á®¿À±â
 		MemberDTO mdto = (MemberDTO) session.getAttribute("member");
 		String userId = null;
 		Cservice cs = sqlSession.getMapper(Cservice.class);
 
-		// ë¡œê·¸ì¸ ìƒíƒœ
+		// ·Î±×ÀÎ »óÅÂ
 		if (mdto != null) { 
 			userId = mdto.getUserId();
 
-			// ì¹´íŠ¸ì— ì´ë¯¸ ì €ì¥ëœ ìƒí’ˆì¸ì§€ ì²´í¬í•˜ëŠ” ë©”ì„œë“œ!
+			// Ä«Æ®¿¡ ÀÌ¹Ì ÀúÀåµÈ »óÇ°ÀÎÁö Ã¼Å©ÇÏ´Â ¸Ş¼­µå!
 			int hasitem = cs.checkcart(userId, product_id, optId);
-			System.out.println("ì¥ë°”êµ¬ë‹ˆ ìˆ˜ëŸ‰ :" + hasitem);
+			System.out.println("Àå¹Ù±¸´Ï ¼ö·® :" + hasitem);
 
-			if (hasitem > 0) { // ì¥ë°”êµ¬ë‹ˆì— ìˆëŠ” ìƒí’ˆì¼ ê²½ìš° ìˆ˜ëŸ‰ ì¦ê°€ method í˜¸ì¶œ
+			if (hasitem > 0) { // Àå¹Ù±¸´Ï¿¡ ÀÖ´Â »óÇ°ÀÏ °æ¿ì ¼ö·® Áõ°¡ method È£Ãâ
 				cs.increasequantity(userId, product_id, quantity, optId);
-				return "success"; // ìƒí’ˆ ìˆ˜ëŸ‰ ì¦ê°€ ì„±ê³µ
-			} else { // ì—†ëŠ” ìƒí’ˆì¼ ê²½ìš° ì‹ ê·œ ì¶”ê°€
+				return "success"; // »óÇ° ¼ö·® Áõ°¡ ¼º°ø
+			} else { // ¾ø´Â »óÇ°ÀÏ °æ¿ì ½Å±Ô Ãß°¡
 				cs.addcart(userId, product_id, quantity, optId);
-				return "success"; // ìƒí’ˆ ì¶”ê°€ ì„±ê³µ
+				return "success"; // »óÇ° Ãß°¡ ¼º°ø
 			}
 
-		} else { // ë¹„ë¡œê·¸ì¸ ìƒíƒœ 
-			//ì¿ í‚¤ ìœ ë¬´ ì¡°íšŒ
+		} else { // ºñ·Î±×ÀÎ »óÅÂ 
+			//ÄíÅ° À¯¹« Á¶È¸
 			Cookie[] cookies = request.getCookies();
 			String ckid = null;
 			boolean foundCkid = false;
 
-			//ì¿ í‚¤ ê²€ì‚¬~!
+			//ÄíÅ° °Ë»ç~!
 			for (Cookie cookie : cookies) {
 				  if(cookie.getName().equals("ckid")){
 				   ckid = cookie.getValue();
 				   foundCkid = true;
-				   break; // ì´ë¯¸ ì¿ í‚¤ë¥¼ ì°¾ì•˜ìœ¼ë¯€ë¡œ ë£¨í”„ ì¢…ë£Œ	
+				   break; // ÀÌ¹Ì ÄíÅ°¸¦ Ã£¾ÒÀ¸¹Ç·Î ·çÇÁ Á¾·á	
 				  }
 			}
 			
-			//ckidê°€ ì´ë¯¸ ìˆëŠ” ê²½ìš°~
+			//ckid°¡ ÀÌ¹Ì ÀÖ´Â °æ¿ì~
 			if(foundCkid){
-				// ì¹´íŠ¸ì— ì´ë¯¸ ì €ì¥ëœ ìƒí’ˆì¸ì§€ ì²´í¬í•˜ëŠ” ë©”ì„œë“œ!
+				// Ä«Æ®¿¡ ÀÌ¹Ì ÀúÀåµÈ »óÇ°ÀÎÁö Ã¼Å©ÇÏ´Â ¸Ş¼­µå!
 				int hasitem = cs.checkcartwithcookie(ckid, product_id, optId);
-				System.out.println("ì¥ë°”êµ¬ë‹ˆ ìˆ˜ëŸ‰ :" + hasitem);
+				System.out.println("Àå¹Ù±¸´Ï ¼ö·® :" + hasitem);
 					
-				if (hasitem > 0) { // ì¥ë°”êµ¬ë‹ˆì— ìˆëŠ” ìƒí’ˆì¼ ê²½ìš° ìˆ˜ëŸ‰ ì¦ê°€ method í˜¸ì¶œ
+				if (hasitem > 0) { // Àå¹Ù±¸´Ï¿¡ ÀÖ´Â »óÇ°ÀÏ °æ¿ì ¼ö·® Áõ°¡ method È£Ãâ
 					cs.increasequantitywithcookie(ckid, product_id, quantity, optId);
-					return "success"; // ìƒí’ˆ ìˆ˜ëŸ‰ ì¦ê°€ ì„±ê³µ
-				} else { // ì—†ëŠ” ìƒí’ˆì¼ ê²½ìš° ì‹ ê·œ ì¶”ê°€
+					return "success"; // »óÇ° ¼ö·® Áõ°¡ ¼º°ø
+				} else { // ¾ø´Â »óÇ°ÀÏ °æ¿ì ½Å±Ô Ãß°¡
 					cs.addcartwithcookie(ckid, product_id, quantity, optId);
-					return "success"; // ìƒí’ˆ ì¶”ê°€ ì„±ê³µ
+					return "success"; // »óÇ° Ãß°¡ ¼º°ø
 				}
-			   }//ckid ì—†ì„ ë•Œ(ë¹„ë¡œê·¸ì¸ ìƒíƒœ ìµœì´ˆ ì €ì¥) : ì¿ í‚¤ ì‹ ê·œ ìƒì„±
+			   }//ckid ¾øÀ» ¶§(ºñ·Î±×ÀÎ »óÅÂ ÃÖÃÊ ÀúÀå) : ÄíÅ° ½Å±Ô »ı¼º
 				
 			else {  
-			    // ì¿ í‚¤ê°€ ì—†ëŠ” ê²½ìš°, ìƒˆë¡œìš´ ì¿ í‚¤ ì•„ì´ë”” ìƒì„±
-			    ckid = generateRandomString(); // ì¿ í‚¤ ì•„ì´ë”” ìƒì„± ë©”ì„œë“œë¥¼ êµ¬í˜„í•´ì•¼ í•©ë‹ˆë‹¤.
-			    // ëœë¤ ë¬¸ìì—´ë¡œ ckid ìƒì„±
+			    // ÄíÅ°°¡ ¾ø´Â °æ¿ì, »õ·Î¿î ÄíÅ° ¾ÆÀÌµğ »ı¼º
+			    ckid = generateRandomString(); // ÄíÅ° ¾ÆÀÌµğ »ı¼º ¸Ş¼­µå¸¦ ±¸ÇöÇØ¾ß ÇÕ´Ï´Ù.
+			    // ·£´ı ¹®ÀÚ¿­·Î ckid »ı¼º
 			    Cookie cookie = new Cookie("ckid", ckid);
-			    cookie.setMaxAge(365 * 24 * 60 * 60); // ì¿ í‚¤ ìœ íš¨ê¸°ê°„ ì„¤ì • (ì˜ˆ: 1ë…„)
-			    cookie.setPath("/"); // ì¿ í‚¤ì˜ ê²½ë¡œ ì„¤ì •
-			    // ì„œë²„ -> í´ë¼ì´ì–¸íŠ¸(ë¸Œë¼ìš°ì €)ë¡œ ì¿ í‚¤ ì „ì†¡, ì €ì¥
+			    cookie.setMaxAge(365 * 24 * 60 * 60); // ÄíÅ° À¯È¿±â°£ ¼³Á¤ (¿¹: 1³â)
+			    cookie.setPath("/"); // ÄíÅ°ÀÇ °æ·Î ¼³Á¤
+			    // ¼­¹ö -> Å¬¶óÀÌ¾ğÆ®(ºê¶ó¿ìÀú)·Î ÄíÅ° Àü¼Û, ÀúÀå
 			    response.addCookie(cookie);
-			    // ckid ê°’ì„ ì‚¬ìš©í•˜ì—¬ DBì— ì €ì¥
+			    // ckid °ªÀ» »ç¿ëÇÏ¿© DB¿¡ ÀúÀå
 			    cs.addcartwithcookie(ckid, product_id, quantity, optId);
-			    System.out.println("ì¿ í‚¤ ê°’:" + ckid);			    
+			    System.out.println("ÄíÅ° °ª:" + ckid);			    
 
 			    return "success";
 			}
@@ -101,7 +101,7 @@ public class CartController {
 	}
 
 	private String generateRandomString() {
-		// ì›í•˜ëŠ” ë°©ì‹ìœ¼ë¡œ ì¿ í‚¤ ì•„ì´ë”” ìƒì„± (ì˜ˆ: ëœë¤ ë¬¸ìì—´, ì‹œê°„ ì •ë³´ ë“±ì„ í™œìš©)
+		// ¿øÇÏ´Â ¹æ½ÄÀ¸·Î ÄíÅ° ¾ÆÀÌµğ »ı¼º (¿¹: ·£´ı ¹®ÀÚ¿­, ½Ã°£ Á¤º¸ µîÀ» È°¿ë)
 		String ckid = RandomStringUtils.random(6, true, true);
 
 		return ckid;
@@ -113,23 +113,23 @@ public class CartController {
 		MemberDTO mdto = (MemberDTO) session.getAttribute("member");
 		Cservice cs = sqlSession.getMapper(Cservice.class);
 		if (mdto != null) {
-			// Sessionì— ì €ì¥ë˜ì–´ìˆëŠ” ì‚¬ìš©ì ID ê°€ì ¸ì˜¤ê¸°
+			// Session¿¡ ÀúÀåµÇ¾îÀÖ´Â »ç¿ëÀÚ ID °¡Á®¿À±â
 			String userId = mdto.getUserId();
 
-			// ì œí’ˆDBì— ì ‘ê·¼í•´ì„œ product_idë¡œ ìƒí’ˆ ì •ë³´ ê°€ì ¸ì˜¤ê¸°
+			// Á¦Ç°DB¿¡ Á¢±ÙÇØ¼­ product_id·Î »óÇ° Á¤º¸ °¡Á®¿À±â
 			ArrayList<CartProductDTO> list = cs.cartout(userId);
 
 			mo.addAttribute("list", list);
 			
 
 			return "cart-out";
-		} else {// ë¡œê·¸ì¸ ê°’ì´ ì—†ëŠ” ê²½ìš° (ì¿ í‚¤ë¡œ ì €ì¥í•œ ê²½ìš°)
+		} else {// ·Î±×ÀÎ °ªÀÌ ¾ø´Â °æ¿ì (ÄíÅ°·Î ÀúÀåÇÑ °æ¿ì)
 			Cookie[] cookies = request.getCookies();
 			String ckvalue = null;
 			for (Cookie cookie : cookies) {
 				if (cookie.getName().equals("ckid")) {
 					ckvalue = cookie.getValue();
-					System.out.println("ì¿ í‚¤ ê°’:" + ckvalue);
+					System.out.println("ÄíÅ° °ª:" + ckvalue);
 					ArrayList<CartProductDTO> list = cs.cartoutwithcookie(ckvalue);
 					mo.addAttribute("list", list);
 					break;
@@ -141,16 +141,16 @@ public class CartController {
 
 	@RequestMapping(value = "/deletefromcart")
 	public String deletefromcart(HttpServletRequest request, HttpSession session) {
-		// ë‚˜ë¨¸ì§€ ì½”ë“œëŠ” ê·¸ëŒ€ë¡œ ìœ ì§€
+		// ³ª¸ÓÁö ÄÚµå´Â ±×´ë·Î À¯Áö
 		MemberDTO mdto = (MemberDTO) session.getAttribute("member");
 		Cservice cs = sqlSession.getMapper(Cservice.class);
 		String productIds = request.getParameter("productIds");
 		String optIds = request.getParameter("optIds");
-		System.out.println("!!!!ì œí’ˆë²ˆí˜¸!!!!" + productIds);// í™•ì¸ìš©
+		System.out.println("!!!!Á¦Ç°¹øÈ£!!!!" + productIds);// È®ÀÎ¿ë
 		String[] ProductIdss = productIds.split(",");
 		String[] optIdss = optIds.split(",");
 
-		if (mdto != null) { // ë¡œê·¸ì¸ ìƒíƒœì¼ ê²½ìš°
+		if (mdto != null) { // ·Î±×ÀÎ »óÅÂÀÏ °æ¿ì
 			String userId = mdto.getUserId();
 
 			for (int i = 0; i < ProductIdss.length; i++) {
@@ -159,13 +159,13 @@ public class CartController {
 				cs.cartdelete(userId, product_id, opt_id);
 			}
 			return "redirect:/cart-out";
-		} else {
+		} else { //ºñ·Î±×ÀÎ »óÅÂ
 			Cookie[] cookies = request.getCookies();
 			String ckvalue = null;
 			for (Cookie cookie : cookies) {
 				if (cookie.getName().equals("ckid")) {
 					ckvalue = cookie.getValue();
-					break; // ì´ë¯¸ ì¿ í‚¤ë¥¼ ì°¾ì•˜ìœ¼ë¯€ë¡œ ë£¨í”„ ì¢…ë£Œ
+					break; // ÀÌ¹Ì ÄíÅ°¸¦ Ã£¾ÒÀ¸¹Ç·Î ·çÇÁ Á¾·á
 				}
 			}
 			for (int i = 0; i < ProductIdss.length; i++) {
@@ -193,7 +193,7 @@ public class CartController {
 			for (Cookie cookie : cookies) {
 				if (cookie.getName().equals("ckid")) {
 					ckvalue = cookie.getValue();
-					break; // ì´ë¯¸ ì¿ í‚¤ë¥¼ ì°¾ì•˜ìœ¼ë¯€ë¡œ ë£¨í”„ ì¢…ë£Œ
+					break; // ÀÌ¹Ì ÄíÅ°¸¦ Ã£¾ÒÀ¸¹Ç·Î ·çÇÁ Á¾·á
 				}
 			}
 		cs.deleteall(ckvalue);
@@ -206,23 +206,23 @@ public class CartController {
 	@RequestMapping(value = "/changeqty", method = RequestMethod.POST)
 	public String changeqty(@RequestParam("product_id") int product_id, @RequestParam("quantity") int quantity,
 			HttpSession session, HttpServletRequest request) {
-		// íšŒì›ì •ë³´ ê°€ì ¸ì˜¤ê¸°
+		// È¸¿øÁ¤º¸ °¡Á®¿À±â
 		MemberDTO mdto = (MemberDTO) session.getAttribute("member");
 
 		Cservice cs = sqlSession.getMapper(Cservice.class);
 
-		if (mdto != null) { // ë¡œê·¸ì¸ ìƒíƒœì¼ ê²½ìš°
+		if (mdto != null) { // ·Î±×ÀÎ »óÅÂÀÏ °æ¿ì
 			String userId = mdto.getUserId();
 			cs.changeqty(userId, product_id, quantity);
-			return "success"; // ìƒí’ˆ ìˆ˜ëŸ‰ ì¦ê°€ ì„±ê³µ
+			return "success"; // »óÇ° ¼ö·® Áõ°¡ ¼º°ø
 
-		} else { // ë¹„ë¡œê·¸ì¸ ìƒíƒœì¼ ê²½ìš° : ì¿ í‚¤ë¡œ ì €ì¥ëœ ìƒíƒœ
+		} else { // ºñ·Î±×ÀÎ »óÅÂÀÏ °æ¿ì : ÄíÅ°·Î ÀúÀåµÈ »óÅÂ
 			Cookie[] cookies = request.getCookies();
 			String ckvalue = null;
 			for (Cookie cookie : cookies) {
 				if (cookie.getName().equals("ckid")) {
 					ckvalue = cookie.getValue();
-					break; // ì´ë¯¸ ì¿ í‚¤ë¥¼ ì°¾ì•˜ìœ¼ë¯€ë¡œ ë£¨í”„ ì¢…ë£Œ
+					break; // ÀÌ¹Ì ÄíÅ°¸¦ Ã£¾ÒÀ¸¹Ç·Î ·çÇÁ Á¾·á
 				}
 			}
 			cs.changeqtyforcookie(ckvalue, product_id, quantity);

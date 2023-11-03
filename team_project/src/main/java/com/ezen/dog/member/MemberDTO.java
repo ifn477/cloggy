@@ -7,8 +7,8 @@ public class MemberDTO {
 	String password,userName;
 	int age;
 	String gender,email,phone,address,enroll_date,last_update,userInputKey;
-	private boolean customCheck;
-
+	String membership_id;
+	
 	public MemberDTO() {
 		super();
 	}
@@ -113,18 +113,14 @@ public class MemberDTO {
 	}
 
 
-	public boolean isCustomCheck() {
-		return customCheck;
+	public String getMembership_id() {
+		return membership_id;
 	}
 
 
-	public void setCustomCheck(boolean customCheck) {
-		this.customCheck = customCheck;
+	public void setMembership_id(String membership_id) {
+		this.membership_id = membership_id;
 	}
-
-
-	
-	
 	
 	
 	
