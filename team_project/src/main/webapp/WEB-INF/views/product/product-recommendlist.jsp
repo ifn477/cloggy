@@ -37,7 +37,7 @@ caption {
 </tr>
 <c:forEach items="${list}" var="recommendproduct">
 <tr> <td><input type="checkbox" class="box" value="${recommendproduct.product_id }" name="recommend_select_product"></td> 
-	 <td><img alt="추천상품썸네일" src="/dog/image/${recommendproduct.p_thumbnail }" style="height: 50px;"></td> 
+	 <td><img alt="추천상품썸네일" src="${recommendproduct.p_thumbnail }" style="height: 50px;"></td> 
 	 <td>${recommendproduct.p_name}</td> <td>${recommendproduct.p_price}</td> </tr>
 <tr>
      <input type="hidden" value="${product_id }" name="product_id">

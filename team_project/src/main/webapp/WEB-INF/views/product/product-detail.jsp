@@ -81,10 +81,10 @@
 }
 
 .thumbnail img {
-	max-width: 130%;
-	max-height: 130%;
-	object-fit: cover;
-	margin-right: 30px;
+	width: 100%; 
+	height: 100%; 
+	object-fit: cover; 
+	padding-left: 5px;"
 }
 
 .order-area {
@@ -297,9 +297,9 @@
 							value="${pdetail.product_id}"></td>
 					</tr>
 					<!-- 썸네일(상단 왼쪽) -->
-					<div class="thumbnail-area">
+					<div class="thumbnail-area" style="padding-right: 20px;">
 						<div class="thumbnail">
-							<img alt="상품썸네일" src="${pdetail.p_thumbnail}">
+							<img alt="상품썸네일" src="${pdetail.p_thumbnail}" >
 						</div>
 					</div>
 

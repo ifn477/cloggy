@@ -58,7 +58,7 @@
 .like-check {
     position: absolute;
     right: 1rem;
-    top: 18.5rem; /* 원하는 위치에 따라 top 값을 조절하세요. */
+    top: 17em; /* 원하는 위치에 따라 top 값을 조절하세요. */
     z-index: 1; /* 다른 내용 위에 나타나도록 z-index 값을 설정합니다. */
     height: 20px;
 }

@@ -35,7 +35,7 @@
 .product_thumbnail {
     position: relative;
     width: 300px;
-    height: 350px;
+    height: 300px;
     background-color: white;
     display: flex;
     justify-content: center;
@@ -57,8 +57,8 @@
 /* 찜하기 */
 .like-check {
     position: absolute;
-    right: 1rem;
-    top: 18.5rem; /* 원하는 위치에 따라 top 값을 조절하세요. */
+    right: 1.5rem;
+    top: 15rem;
     z-index: 1; /* 다른 내용 위에 나타나도록 z-index 값을 설정합니다. */
     height: 20px;
 }
@@ -121,21 +121,19 @@
 .best_product_thumbnail{
 	position: relative;
     width: 350px;
-    height: 400px;
+    height: 350px;
     background-color: white;
 }
 .best_product_thumbnail_image{
     max-width: 350px;
-    max-height: 400px;
+    max-height: 350px;
     overflow: hidden;
 }
 .best_product_thumbnail_image img {
-	padding-top: 2rem;
-	padding-right: 4rem;
     width: auto;
     height: auto;
-    width: 120%;
-    height: 120%;
+    width: 100%;
+    height: 100%;
 	text-align: center;
 }
 .best_product_price{
@@ -148,7 +146,6 @@
 	font-family: 'Noto Sans KR', sans-serif;
 	font-weight: 400;
 	font-size: 20px;
-    width: 80%;
     text-align: center;
     margin: 0 auto;
 	text-decoration: none;
@@ -157,6 +154,9 @@
 }
 .best_product_name{
 	padding-top: 10px;
+	width: 85%;
+    text-align: center;
+    margin: 0 auto;
 }
 
 /* 상품리스트 */
@@ -244,7 +244,7 @@ var mySwiper = new Swiper('#best-product-slide', {
      	<div class="product_thumbnail">
          <a href="product-detail?product_id=${pout.product_id}&userId=${member.userId}">
          	<div class="image-container">
-         		<img alt="상품썸네일" src="${pout.p_thumbnail}" width="300px;" height="350px;">
+         		<img alt="상품썸네일" src="${pout.p_thumbnail}" width="300px;" height="300px;">
          	</div>
          </a>
      	</div>
