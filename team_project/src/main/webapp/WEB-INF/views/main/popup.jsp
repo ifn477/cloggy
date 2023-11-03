@@ -8,7 +8,7 @@
 </head>
 <body>
 <form name="pop"> 
-	<img alt="무료배송" src="/dog/image/shippingpopup.jpg">
+	<img alt="무료배송" src="/dog/image/shippingpopup.jpg"><br>
 	<input type="checkbox" name="Notice" value="">오늘 하루동안 보지 않기 
 	<input type="button" value="닫기" onclick="closeWin()">
 </form> 

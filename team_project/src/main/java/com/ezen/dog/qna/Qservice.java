@@ -3,6 +3,8 @@ package com.ezen.dog.qna;
 
 import java.util.ArrayList;
 
+import com.ezen.dog.product.ProductPageDTO;
+
 public interface Qservice {
 	public void qnainsert(String q_userId,String q_title,String q_content,boolean q_secret);
 	public ArrayList<QnaDTO> qnaout();
@@ -16,5 +18,6 @@ public interface Qservice {
 	public ArrayList<QnaDTO> qnasearchqtitle(String spvalue);
 	public ArrayList<QnaDTO> qnasearchuserId(String spvalue);
 	public ArrayList<QnaDTO> qnasearchqcontent(String spvalue);
-	
+	public int cntnotice();
+	public ArrayList<QnaDTO> selectnotice(ProductPageDTO dto);
 }
