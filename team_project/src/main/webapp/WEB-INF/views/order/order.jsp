@@ -155,7 +155,7 @@ input {
       <th style="width:15%">상품구매금액</th>
  <c:forEach items="${ list}" var="order">
    <tr>
-      <td><img src="/dog/image/${order.p_thumbnail}" width="100px"></td>
+      <td><img src="${order.p_thumbnail}" width="100px"></td>
       <td class="pname">${order.p_name} <br>
          <c:choose>
          <c:when test="${order.opt_id == 0}"> [옵션: 없음] </c:when>
