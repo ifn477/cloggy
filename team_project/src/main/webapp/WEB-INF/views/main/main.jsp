@@ -300,7 +300,7 @@ body{
 
 	<!-- 상품명 -->
     	<div class="new-product-name">
-	        <a href="product-detail?product_id=${newitem.product_id }" style="text-decoration: none; color: #463528;">
+	        <a href="product-detail?product_id=${newitem.product_id }&userId=${member.userId}" style="text-decoration: none; color: #463528;">
 	         <p class="new-product-name2" style="width: 250px; text-align: center; margin: 0 auto;">${newitem.p_name}</p>
 	        </a>
         </div>
