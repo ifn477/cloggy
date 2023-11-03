@@ -86,7 +86,7 @@ body{
 .best_product_thumbnail{
 	position: relative;
     width: 380px;
-    height: 450px;
+    height: 380px;
     background-color: white;
 }
 .best_product_thumbnail_image{
@@ -256,12 +256,12 @@ body{
 <div class="best-product">
 <div class="swiper-container" id="best-product-slide">
   <ul class="swiper-wrapper">
-    <c:forEach items="${bestlist}" var="best">
+    <c:forEach items="${bestlist}" var="best" begin="0" end="9">
       <li class="swiper-slide product-item">
         <div class="best_product_thumbnail">
           <a href="product-detail?product_id=${best.product_id}&userId=${member.userId}">
           	<div class="best_product_thumbnail_image">
-            	<img alt="썸네일 자리" src="/dog/image/${best.p_thumbnail}">
+            	<img alt="썸네일 자리" src="${best.p_thumbnail}">
           	</div>
           </a>
         </div>
@@ -277,7 +277,7 @@ body{
     </c:forEach>
   </ul>
 </div>
-<div class="swiper-scrollbar" style="position: relative; top: 100px; width: 40%; text-align: center; margin: 0 auto;"></div>
+<div class="swiper-scrollbar" style="position: relative; top: 70px; width: 40%; text-align: center; margin: 0 auto;"></div>
 </div>
 </div>
 
@@ -294,13 +294,13 @@ body{
 	<!-- 썸네일 -->
     	<div class="product_thumbnail">
 	        <a href="product-detail?product_id=${newitem.product_id}&userId=${member.userId}">
-	        	<img alt="상품썸네일" src="/dog/image/${newitem.p_thumbnail}" width="300px;">
+	        	<img alt="상품썸네일" src="${newitem.p_thumbnail}" width="300px;" height="300px;">
 	        </a>
     	</div>
 
 	<!-- 상품명 -->
     	<div class="new-product-name">
-	        <a href="product-detail?product_id=${newitem.product_id }" style="text-decoration: none; color: #463528;">
+	        <a href="product-detail?product_id=${newitem.product_id }&userId=${member.userId}" style="text-decoration: none; color: #463528;">
 	         <p class="new-product-name2" style="width: 250px; text-align: center; margin: 0 auto;">${newitem.p_name}</p>
 	        </a>
         </div>

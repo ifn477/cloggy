@@ -84,11 +84,11 @@ p {
                 <div class="product_item">
                     <div class="product_thumbnail">
                         <a href="product-detail?product_id=${pout.product_id}&userId=${member.userId}">
-                            <img alt="상품썸네일" src="/dog/image/${pout.p_thumbnail}" width="80px;" height="90px;">
+                            <img alt="상품썸네일" src="${pout.p_thumbnail}" width="80px;" height="90px;">
                         </a>
                     </div>
                     <div class="product_name_price">
-                        <a href="product-detail?product_id=${pout.product_id }">
+                        <a href="product-detail?product_id=${pout.product_id }&userId=${member.userId}">
                             <strong>${pout.p_name}</strong>
                         </a><br>
                     <div class="product_price">

@@ -81,10 +81,10 @@
 }
 
 .thumbnail img {
-	max-width: 130%;
-	max-height: 130%;
-	object-fit: cover;
-	margin-right: 30px;
+	width: 100%; 
+	height: 100%; 
+	object-fit: cover; 
+	padding-left: 5px;"
 }
 
 .order-area {
@@ -102,8 +102,7 @@
 
 .product-price {
 	font-size: 20px;
-	padding-bottom: 20px;
-	padding-top: 70px;
+	padding-top: 40px;
 }
 
 .options-container {
@@ -117,7 +116,7 @@
 	margin: 0;
 	cursor: pointer;
 	opacity: 0.8;
-	padding-top: 30px;
+	padding-top: 55px;
 	padding-bottom: 70px;
 	padding-right: 5px;
 }
@@ -204,7 +203,7 @@
 	display: inline-block;
 	font-family: 'Noto Sans KR', sans-serif;
 	font-size: 20px;
-	margin-bottom: 30px;
+	margin-top: 30px;
 	border-radius: 20px;
 }
 /* 수정버튼 */
@@ -297,9 +296,9 @@
 							value="${pdetail.product_id}"></td>
 					</tr>
 					<!-- 썸네일(상단 왼쪽) -->
-					<div class="thumbnail-area">
+					<div class="thumbnail-area" style="padding-right: 20px;">
 						<div class="thumbnail">
-							<img alt="상품썸네일" src="${pdetail.p_thumbnail}">
+							<img alt="상품썸네일" src="${pdetail.p_thumbnail}" >
 						</div>
 					</div>
 
@@ -478,10 +477,24 @@
 							<img alt="상세페이지" src="${pdetail.p_image}"
 								style="margin-top: 50px;">
 						</div>
-						<button id="toggleButton">자세히보기</button>
-						<div class="product-info">
-							<div class="info">${pdetail.p_info}</div>
-						</div>
+						<c:choose>
+							<c:when test="${not empty pdetail.p_info}">
+								<button id="toggleButton">자세히보기</button>
+								<div class="product-info">
+									<div class="info">${pdetail.p_info}</div>
+								</div>
+							</c:when>
+							<c:otherwise>
+								<script>
+									var product-info = document
+											.getElementById("product-info");
+									if (product-info) {
+										product-info.style.height = "5px";
+									}
+								</script>
+								<p class="no-info" style="color: white;">상품설명란</p>
+							</c:otherwise>
+						</c:choose>
 					</div>
 				</div>
 
@@ -527,14 +540,6 @@
 </script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
-		/* 쿠키 생성 및 저장 */
-		function onPageLoad() {
-		   var url = window.location.href;
-		   var product_Id = getProduct_IDFromURL(url);
-		   console.log("product_Id::" + product_Id);
-
-
-
 	/* 쿠키 생성 및 저장 */
 	function onPageLoad() {
 		var url = window.location.href;
@@ -600,42 +605,41 @@
 		return null;
 	}
 	/*찜하기*/
-	$(document).ready(function () {
-	    $('.container_box').on('click', '.likeAddButton, .likeDeleteButton', function () {
-	        var button = $(this);
-	        var isLikeButton = button.hasClass('likeAddButton');
-	        var productId = button.data('productid');
-	        var userId = button.data('userid');
-	        var url = isLikeButton ? 'like-add' : 'like-delete';
+$(document).ready(function () {
+    $('.container_box').on('click', '.likeAddButton, .likeDeleteButton', function () {
+        var button = $(this);
+        var isLikeButton = button.hasClass('likeAddButton');
+        var productId = button.data('productid');
+        var userId = button.data('userid');
+        var url = isLikeButton ? 'like-add' : 'like-delete';
 
-		        var memberLoginState = ${loginstate};
-		        if (!memberLoginState) {
-		            alert('로그인 후 이용해 주세요.');
-		            return;
-		        }
-		        
-		        $.ajax({
-		            type: 'POST',
-		            url: url,
-		            data: {
-		                product_id: productId,
-		                userId: userId
-		            },
-		            success: function (response) {
-		                var buttonParent = button.closest('.likecheck');
-		                if (isLikeButton) {
-		                    buttonParent.html('<button class="likeDeleteButton" data-productid="' + productId + '" data-userid="' + userId + '"><img alt="찜해제" src="/dog/image/Footprint_full_pink_s.png" width="50px" height="50px"></button>');
-		                } else {
-		                    buttonParent.html('<button class="likeAddButton" data-productid="' + productId + '" data-userid="' + userId + '"><img alt="찜하기" src="/dog/image/Footprint_s.png" width="50px" height="50px"></button>');
-		                }
-		            },
-		            error: function (error) {
-		                console.error('오류 발생', error);
-		            }
-		        });
-		    });
-		});
-
+        var memberLoginState = ${loginstate};
+        if (!memberLoginState) {
+            alert('로그인 후 이용해 주세요.');
+            return;
+        }
+        
+        $.ajax({
+            type: 'POST',
+            url: url,
+            data: {
+                product_id: productId,
+                userId: userId
+            },
+            success: function (response) {
+                var buttonParent = button.closest('.likecheck');
+                if (isLikeButton) {
+                    buttonParent.html('<button class="likeDeleteButton" data-productid="' + productId + '" data-userid="' + userId + '"><img alt="찜해제" src="/dog/image/Footprint_full_pink_s.png" width="50px" height="50px"></button>');
+                } else {
+                    buttonParent.html('<button class="likeAddButton" data-productid="' + productId + '" data-userid="' + userId + '"><img alt="찜하기" src="/dog/image/Footprint_s.png" width="50px" height="50px"></button>');
+                }
+            },
+            error: function (error) {
+                console.error('오류 발생', error);
+            }
+        });
+    });
+});
 	/*장바구니*/
 	$(document)
 			.ready(
@@ -664,8 +668,6 @@
 											updateTotalPrice(); // total_price 업데이트 함수 호출
 										});
 
-
-
 						function formatNumberWithCommas(number) {
 							return number.toString().replace(
 									/\B(?=(\d{3})+(?!\d))/g, ",")
@@ -677,7 +679,6 @@
 							var quantityValue = parseInt($("#quantity")
 									.text(), 10);
 							var priceValue = parseFloat($("#price").text()
-
 									.replace(/[^0-9.-]+/g, ""));
 
 							var totalPrice = quantityValue * priceValue;
@@ -700,7 +701,6 @@
 								updateTotalPrice();
 							}
 						});
-
 
 						$("#addToCart")
 								.click(
@@ -749,7 +749,8 @@
 
 													});
 										});
-					}) ;
+					});
+
 
 	//url 공유하기
 	function clip() {

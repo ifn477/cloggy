@@ -151,7 +151,7 @@ button {
 								<tr>
 									<td rowspan="2"><input type="checkbox" name="check-one"
 										class="check-one"></td>
-									<td rowspan="2"><img src="/dog/image/${cart.p_thumbnail}"
+									<td rowspan="2"><img src="${cart.p_thumbnail}"
 										width="100px"></td>
 									<td><div class="pname">${cart.p_name}</div> <input
 										type="hidden" name="product_id" value="${cart.product_id}">
@@ -195,7 +195,7 @@ button {
 			</tr>
 			<tr>
 				<td class="totalprice"><fmt:formatNumber pattern="#,##0원">${totalprice}</fmt:formatNumber></td>
-				<c:set var="shipping" value="${totalprice < 30000 ? 2500 : 0}" />
+				<c:set var="shipping" value="${totalprice < 30000 ? 3000 : 0}" />
 				<td class="shipping"><fmt:formatNumber pattern="#,##0원">${shipping}</fmt:formatNumber></td>
 				<c:set var="finalprice" value="${totalprice + shipping}" />
 				<td class="finalprice"><fmt:formatNumber pattern="#,##0원">${finalprice}</fmt:formatNumber>
@@ -422,7 +422,7 @@ button {
 								var totalprice = parseFloat($(".totalprice")
 										.text().replace(/[^0-9.-]+/g, ""));
 								var shipping = totalprice == 0 ? 0
-										: totalprice < 30000 ? 2500 : 0;
+										: totalprice < 30000 ? 3000 : 0;
 								var formattedShipping = formatNumberWithCommas(shipping);
 								$(".shipping").text(formattedShipping); // Update the shipping element
 

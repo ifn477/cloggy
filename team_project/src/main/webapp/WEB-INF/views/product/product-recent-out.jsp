@@ -86,7 +86,7 @@ p{
         <div class="product_item">
           <div class="product_thumbnail">
             <a href="product-detail?product_id=${rout.product_id}&userId=${member.userId}">
-              <img alt="상품썸네일" src="/dog/image/${rout.p_thumbnail}" width="145px;" height="160px;">
+              <img alt="상품썸네일" src="${rout.p_thumbnail}" width="145px;" height="160px;">
             </a>
             	<div class="product_name_price">          
           <div class="product_name" style="font-weight: 600;">

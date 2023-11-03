@@ -155,7 +155,7 @@ input {
       <th style="width:15%">상품구매금액</th>
  <c:forEach items="${ list}" var="order">
    <tr>
-      <td><img src="/dog/image/${order.p_thumbnail}" width="100px"></td>
+      <td><img src="${order.p_thumbnail}" width="100px"></td>
       <td class="pname">${order.p_name} <br>
          <c:choose>
          <c:when test="${order.opt_id == 0}"> [옵션: 없음] </c:when>
@@ -195,10 +195,11 @@ input {
    <tr>
       <td>${totalPrice}</td>
       <td>${shipping}</td>
-<%--       <td>${totalPrice+shipping}</td> --%>
-	  <td><div id="finalprice">${totalPrice}</div></td>
+      <c:set var="shippingintot" value="${totalPrice + shipping}"/>
+	  <td><div id="finalprice">${shippingintot}</div></td>
          <input name="totalprice" type="hidden" value="${totalPrice }" id="totalprice">
          <input name="shipping" type="hidden" value="${shipping }" id="shipping">
+         <input name="shipping" type="hidden" value="${shippingintot }" id="shippingintot">
    </tr>
    <tr>
         <td colspan="3">
@@ -321,7 +322,7 @@ function kakakoPayorder() {
          var add2 = $(".address2_input").val();
          var add3 = $(".address3_input").val();
       
-      var finaltotalprice = totalprice - (totalprice * selectcoupon/100.0);
+     var finaltotalprice = shippingintot - (shippingintot * selectcoupon/100.0);
          
          
       var today = new Date();
@@ -423,7 +424,7 @@ function inicisPay() {
       var add2 = $(".address2_input").val();
       var add3 = $(".address3_input").val();
 
-      var finaltotalprice = totalprice - (totalprice * selectcoupon/100.0);
+      var finaltotalprice = shippingintot - (shippingintot * selectcoupon/100.0);
       
    var today = new Date();
    var hours = today.getHours(); // 시
