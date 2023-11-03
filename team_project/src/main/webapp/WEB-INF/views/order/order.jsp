@@ -312,6 +312,7 @@ function kakakoPayorder() {
 
       
       var totalprice = document.getElementById("totalprice").value;
+      var shippingintot = document.getElementById("shippingintot").value;
       var selectcoupon = $("#selectcoupon").val();
       var shipping = document.getElementById("shipping").value;
       var userId = $("#userId").val();
