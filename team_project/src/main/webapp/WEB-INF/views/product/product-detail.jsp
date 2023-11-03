@@ -203,7 +203,7 @@
 	display: inline-block;
 	font-family: 'Noto Sans KR', sans-serif;
 	font-size: 20px;
-	margin-bottom: 30px;
+	margin-top: 30px;
 	border-radius: 20px;
 }
 /* 수정버튼 */
@@ -477,10 +477,24 @@
 							<img alt="상세페이지" src="${pdetail.p_image}"
 								style="margin-top: 50px;">
 						</div>
-						<button id="toggleButton">자세히보기</button>
-						<div class="product-info">
-							<div class="info">${pdetail.p_info}</div>
-						</div>
+						<c:choose>
+							<c:when test="${not empty pdetail.p_info}">
+								<button id="toggleButton">자세히보기</button>
+								<div class="product-info">
+									<div class="info">${pdetail.p_info}</div>
+								</div>
+							</c:when>
+							<c:otherwise>
+								<script>
+									var product-info = document
+											.getElementById("product-info");
+									if (product-info) {
+										product-info.style.height = "5px";
+									}
+								</script>
+								<p class="no-info" style="color: white;">상품설명란</p>
+							</c:otherwise>
+						</c:choose>
 					</div>
 				</div>
 
