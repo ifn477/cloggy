@@ -73,7 +73,7 @@
                 <div class="product_item">
                     <div class="product_thumbnail">
                         <a href="product-detail?product_id=${pout.product_id}&userId=${member.userId}">
-                            <img alt="상품썸네일" src="/dog/image/${pout.p_thumbnail}" width="200px;" height="250px;">
+                            <img alt="상품썸네일" src="${pout.p_thumbnail}" width="200px;" height="200px;">
                         </a>
                     </div>
                     <div class="product_name">
@@ -100,7 +100,7 @@
                 <div class="product_item">
                     <div class="product_thumbnail">
                         <a href="product-detail?product_id=${pout.product_id}">
-                            <img alt="상품썸네일" src="/dog/image/${pout.p_thumbnail}" width="200px;" height="250px;">
+                            <img alt="상품썸네일" src="${pout.p_thumbnail}" width="200px;" height="200px;">
                         </a>
                     </div>
                     <div class="product_name">
