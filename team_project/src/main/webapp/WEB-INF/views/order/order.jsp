@@ -348,7 +348,7 @@ function kakakoPayorder() {
          
    
     var IMP = window.IMP;
-    IMP.init("imp55581632");
+    IMP.init("상점번호를 입력하세요");
     
     IMP.request_pay(
         {
@@ -450,7 +450,7 @@ function inicisPay() {
       
 
 var IMP = window.IMP;
-IMP.init("imp55581632");
+IMP.init("상점번호를 입력하세요");
 
 IMP.request_pay(
     {
