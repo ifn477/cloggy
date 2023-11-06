@@ -7,8 +7,8 @@ public class MemberDTO {
 	String password,userName;
 	int age;
 	String gender,email,phone,address,enroll_date,last_update,userInputKey;
+	String membership_id;
 	
-
 	public MemberDTO() {
 		super();
 	}
@@ -111,5 +111,17 @@ public class MemberDTO {
 	public void setUserInputKey(String userInputKey) {
 		this.userInputKey = userInputKey;
 	}
+
+
+	public String getMembership_id() {
+		return membership_id;
+	}
+
+
+	public void setMembership_id(String membership_id) {
+		this.membership_id = membership_id;
+	}
+	
+	
 	
 }

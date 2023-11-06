@@ -1,29 +1,21 @@
 package com.ezen.dog.login;
 
-import java.io.IOException;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Locale;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.apache.ibatis.jdbc.SQL;
 import org.apache.ibatis.session.SqlSession;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.quartz.LocalDataSourceJobStore;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.ezen.dog.member.MMailSend;
 import com.ezen.dog.member.MemberDTO;	
+
 
 @Controller
 public class LoginController {
@@ -31,25 +23,37 @@ public class LoginController {
 	@Autowired
 	SqlSession sqlSession;
 	
-	// 로그인 폼
+	//  慣      
 	@RequestMapping(value = "/login-input")
-	public String logininput() {
+	public String logininput(HttpServletRequest request, Model mo) {
+		
+	    Cookie[] cookies = request.getCookies();
+	    if (cookies != null) {
+	        for (Cookie cookie : cookies) {
+	            if (cookie.getName().equals("rememberedUserId")) {
+	                String rememberedUserId = cookie.getValue();
+	                mo.addAttribute("rememberedUserId", rememberedUserId);
+	                break;
+	            }
+	        }
+	    }
+		
 		return "login-input";
 	}
 	
-	// 로그인
+	//  慣   
 	@RequestMapping(value = "/login",method = RequestMethod.POST)
 	public String login(HttpServletRequest request) {
 		String userId = request.getParameter("userId");
 		String password = request.getParameter("password");
-		Lservice ms = sqlSession.getMapper(Lservice.class);
-		MemberDTO mdto =ms.login(userId,password);
+		Lservice ls = sqlSession.getMapper(Lservice.class);
+		MemberDTO mdto =ls.login(userId,password);
 		HttpSession hs = request.getSession();
 		
 		if(mdto!=null){
 		hs.setAttribute("member",mdto);
 		hs.setAttribute("loginstate",true);
-		hs.setMaxInactiveInterval(60*30);
+		hs.setMaxInactiveInterval(60*60);
 		return "redirect:main";
 		}
 		else{
@@ -58,19 +62,19 @@ public class LoginController {
 		return "login-input";
 		}
 	}
-	//ReqeustParam으로 code값 받아오기
+	//ReqeustParam     code    騁틸   
 	@RequestMapping(value = "/kakaoLogin", method = RequestMethod.GET)
 	public String kakaoLogin(@RequestParam(value = "code", required = false) String code,HttpServletRequest request) throws Throwable {
 		KakaoLoginService service = new KakaoLoginService();
 		
-		//code로 Token값 받아오기
+		//code   Token    騁틸   
 		String access_Token = service.getAccessToken(code);
-		//Token값으로 사용자 정보 가져오기
+		//Token                          
 		HashMap<String, Object> userInfo = service.getUserInfo(access_Token);
 		String nickname = (String)userInfo.get("nickname");
 		String email = (String)userInfo.get("email");
 		
-		//사용자 정보 중 이름과, 이메일을 사용하여 회원여부 확인 후 로그인 
+		//               見   ,  見          臼  회       확       慣    
 		Lservice ls = sqlSession.getMapper(Lservice.class);
 		MemberDTO mdto = ls.kakaologin(nickname,email);
 		if(mdto!=null){
@@ -94,7 +98,7 @@ public class LoginController {
 		String name = (String)userInfo.get("name");
 		String email = (String)userInfo.get("email");
 		
-		//사용자 정보 중 이름과, 이메일을 사용하여 회원여부 확인 후 로그인 
+		//               見   ,  見          臼  회       확       慣    
 		Lservice ls = sqlSession.getMapper(Lservice.class);
 		MemberDTO mdto = ls.naverlogin(name,email);
 		if(mdto!=null){
@@ -106,7 +110,7 @@ public class LoginController {
 		return "redirect:main";
 	}
 
-	// 로그아웃
+	//  慣類틸 
 	@RequestMapping(value = "/logout")
 	public String logout(HttpServletRequest request) {
 		HttpSession hs =request.getSession();
@@ -115,13 +119,13 @@ public class LoginController {
 		return "redirect:/";
 	}
 	
-	// 아이디 찾기 폼
+	//    絹  찾     
 	@RequestMapping(value = "/id-searchForm")
 	public String idsearch() {
 		return "id-searchForm";
 	}
 	
-	// 아이디 찾기 뷰
+	//    絹  찾     
 	@RequestMapping(value="id-searchView")
 	public String idsearchView(HttpServletRequest request, Model mo) {
 		String userName = request.getParameter("userName");
@@ -140,13 +144,13 @@ public class LoginController {
 		}
 	}
 	
-	// 비밀번호 찾기 폼
+	//   橘 호 찾     
 	@RequestMapping(value = "/pw-searchForm")
 	public String pwsearch() {
 		return "pw-searchForm";
 	}
 	
-	// 비밀번호 찾기 뷰
+	//   橘 호 찾     
 	@RequestMapping(value = "/pw-searchView")
 	public String pwsearchView(HttpServletRequest request, Model mo) {
 		String userId = request.getParameter("userId");

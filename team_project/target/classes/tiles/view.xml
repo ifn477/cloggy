@@ -21,25 +21,47 @@
 		<put-attribute name="body" value="/WEB-INF/views/main/info.jsp"/>
 	</definition>
 	
-
-<!-- 상품 -->
-
 	<definition name="error" extends="baseLayout">
 		<put-attribute name="title" value="에러창"/>
 		<put-attribute name="body" value="/WEB-INF/views/main/error.jsp"/>
 	</definition>
 	
-
+	<definition name="product-searchView" extends="baseLayout">
+		<put-attribute name="title" value="전체검색결과"/>
+		<put-attribute name="body" value="/WEB-INF/views/product/product-searchView.jsp"/>
+	</definition>
+	
 	<definition name="product-input" extends="baseLayout">
 		<put-attribute name="title" value="상품입력"/>
 		<put-attribute name="body" value="/WEB-INF/views/product/product-input.jsp"/>
 	</definition>
 	
 	<definition name="product-out" extends="baseLayout">
-		<put-attribute name="title" value="상품리스트"/>
+		<put-attribute name="title" value="관리자상품리스트"/>
 		<put-attribute name="body" value="/WEB-INF/views/product/product-out.jsp"/>
 	</definition>
 	
+	<definition name="best-product-out" extends="baseLayout">
+		<put-attribute name="title" value="best♥"/>
+		<put-attribute name="body" value="/WEB-INF/views/product/best-product-out.jsp"/>
+	</definition>
+	
+	<definition name="product-user-out" extends="baseLayout">
+		<put-attribute name="title" value="사용자상품리스트"/>
+		<put-attribute name="body" value="/WEB-INF/views/product/product-user-out.jsp"/>
+	</definition>
+	
+	<definition name="product-like-out" extends="baseLayout">
+		<put-attribute name="title" value="사용자상품리스트"/>
+		<put-attribute name="body" value="/WEB-INF/views/product/product-like-out.jsp"/>
+	</definition>
+	
+	
+	<definition name="product-recent-out" extends="baseLayout">
+		<put-attribute name="title" value="사용자상품리스트"/>
+		<put-attribute name="body" value="/WEB-INF/views/product/product-recent-out.jsp"/>
+	</definition>
+
 	<definition name="product-detail" extends="baseLayout">
 		<put-attribute name="title" value="상품페이지"/>
 		<put-attribute name="body" value="/WEB-INF/views/product/product-detail.jsp"/>
@@ -51,7 +73,11 @@
 	</definition>
 	
 
-
+	<definition name="info" extends="baseLayout">
+		<put-attribute name="title" value="회사정보"/>
+		<put-attribute name="body" value="/WEB-INF/views/main/info.jsp"/>
+	</definition>
+	
 	
 <!-- 	문의 -->
 	<definition name="qna-input" extends="baseLayout">
@@ -85,35 +111,43 @@
 	</definition>
 	
 
+	
+<!-- 회원 -->
+
 	<definition name="member-input" extends="baseLayout">
 		<put-attribute name="title" value="회원입력"/>
 		<put-attribute name="body" value="/WEB-INF/views/member/member-input.jsp"/>
 	</definition>
-	
 
+	
 		<definition name="login-input" extends="baseLayout">
 		<put-attribute name="title" value="로그인폼"/>
 		<put-attribute name="body" value="/WEB-INF/views/login/login-input.jsp"/>
 	</definition>
 	
 	<definition name="id-searchForm" extends="baseLayout">
-		<put-attribute name="title" value="메인화면"/>
+		<put-attribute name="title" value="아이디찾기폼"/>
 		<put-attribute name="body" value="/WEB-INF/views/login/id-searchForm.jsp"/>
 	</definition>
 
 	<definition name="id-searchView" extends="baseLayout">
-		<put-attribute name="title" value="메인화면"/>
+		<put-attribute name="title" value="아이디찾기뷰"/>
 		<put-attribute name="body" value="/WEB-INF/views/login/id-searchView.jsp"/>
 	</definition>	
 
 	<definition name="pw-searchForm" extends="baseLayout">
-		<put-attribute name="title" value="메인화면"/>
+		<put-attribute name="title" value="비밀번호찾기폼"/>
 		<put-attribute name="body" value="/WEB-INF/views/login/pw-searchForm.jsp"/>
 	</definition>
 
 		<definition name="memberinput" extends="baseLayout">
 		<put-attribute name="title" value="회원입력"/>
 		<put-attribute name="body" value="/WEB-INF/views/member/memberinput.jsp"/>
+	</definition>
+	
+	<definition name="mybaby-input" extends="baseLayout">
+		<put-attribute name="title" value="회원입력"/>
+		<put-attribute name="body" value="/WEB-INF/views/member/mybaby-input.jsp"/>
 	</definition>
 
 	<definition name="member-out" extends="baseLayout">
@@ -131,23 +165,28 @@
 		<put-attribute name="body" value="/WEB-INF/views/member/member-searchForm.jsp"/>
 	</definition>	
 
-	<definition name="order" extends="baseLayout">
-		<put-attribute name="title" value="결제"/>
-		<put-attribute name="body" value="/WEB-INF/views/pay/order.jsp"/>
+	<definition name="member-terms1" extends="baseLayout">
+		<put-attribute name="title" value="회원가입약관1"/>
+		<put-attribute name="body" value="/WEB-INF/views/member/member-terms1.jsp"/>
 	</definition>	
-	
-	<definition name="naverpay" extends="baseLayout">
-		<put-attribute name="title" value="네이버간편결제"/>
-		<put-attribute name="body" value="/WEB-INF/views/pay/naverpay.jsp"/>
+
+	<definition name="member-terms2" extends="baseLayout">
+		<put-attribute name="title" value="회원가입약관2"/>
+		<put-attribute name="body" value="/WEB-INF/views/member/member-terms2.jsp"/>
 	</definition>	
 	
 	<definition name="member-info" extends="baseLayout">
-		<put-attribute name="title" value="메인화면"/>
+		<put-attribute name="title" value="회원개인정보"/>
 		<put-attribute name="body" value="/WEB-INF/views/member/member-info.jsp"/>
 	</definition>
 	
+	<definition name="member-modifySelfForm" extends="baseLayout">
+		<put-attribute name="title" value="회원개인정보수정"/>
+		<put-attribute name="body" value="/WEB-INF/views/member/member-modifySelfForm.jsp"/>
+	</definition>
+	
 	<definition name="jusoPopup" extends="baseLayout">
-		<put-attribute name="title" value="메인화면"/>
+		<put-attribute name="title" value="도로명주소팝업"/>
 		<put-attribute name="body" value="/WEB-INF/views/juso/jusoPopup.jsp"/>
 	</definition>
 
@@ -170,5 +209,98 @@
 		<put-attribute name="body" value="/WEB-INF/views/main/cart-out.jsp"/>
 	</definition>	
 
+<!-- 쿠폰 -->
+	<definition name="coupon-input" extends="baseLayout">
+		<put-attribute name="title" value="쿠폰입력"/>
+		<put-attribute name="body" value="/WEB-INF/views/coupon/coupon-input.jsp"/>
+	</definition>	
+
+	<definition name="coupon-out" extends="baseLayout">
+		<put-attribute name="title" value="쿠폰조회"/>
+		<put-attribute name="body" value="/WEB-INF/views/coupon/coupon-out.jsp"/>
+	</definition>	
+
+	<definition name="coupon-downloadform" extends="baseLayout">
+		<put-attribute name="title" value="쿠폰다운로드"/>
+		<put-attribute name="body" value="/WEB-INF/views/coupon/coupon-downloadform.jsp"/>
+	</definition>	
+
+	<definition name="coupon-list" extends="baseLayout">
+		<put-attribute name="title" value="쿠폰리스트"/>
+		<put-attribute name="body" value="/WEB-INF/views/coupon/coupon-list.jsp"/>
+	</definition>	
+
+	<definition name="coupon-modifyform" extends="baseLayout">
+		<put-attribute name="title" value="쿠폰수정폼"/>
+		<put-attribute name="body" value="/WEB-INF/views/coupon/coupon-modifyform.jsp"/>
+	</definition>	
+	
+<!-- 주문-->
+	
+	<definition name="order" extends="baseLayout">
+		<put-attribute name="title" value="결제입력"/>
+		<put-attribute name="body" value="/WEB-INF/views/order/order.jsp"/>
+	</definition>
+	
+	<definition name="order-completed" extends="baseLayout">
+		<put-attribute name="title" value="결제완료"/>
+		<put-attribute name="body" value="/WEB-INF/views/order/order-completed.jsp"/>
+	</definition>
+
+	<definition name="orderlistout" extends="baseLayout">
+		<put-attribute name="title" value="주문내역"/>
+		<put-attribute name="body" value="/WEB-INF/views/order/orderlistout.jsp"/>
+	</definition>
+	
+	<definition name="order-detail" extends="baseLayout">
+		<put-attribute name="title" value="주문상세"/>
+		<put-attribute name="body" value="/WEB-INF/views/order/order-detail.jsp"/>
+	</definition>
+	
+<!-- 	공지사항 -->
+	<definition name="notice-input" extends="baseLayout">
+		<put-attribute name="title" value="공지등록"/>
+		<put-attribute name="body" value="/WEB-INF/views/notice/notice-input.jsp"/>
+	</definition>	
+
+	<definition name="notice-detail" extends="baseLayout">
+		<put-attribute name="title" value="공지상세"/>
+		<put-attribute name="body" value="/WEB-INF/views/notice/notice-detail.jsp"/>
+	</definition>
+
+	<definition name="notice-modifyForm" extends="baseLayout">
+		<put-attribute name="title" value="공지수정"/>
+		<put-attribute name="body" value="/WEB-INF/views/notice/notice-modifyForm.jsp"/>
+	</definition>
+
+	<definition name="notice-out" extends="baseLayout">
+		<put-attribute name="title" value="공지목록"/>
+		<put-attribute name="body" value="/WEB-INF/views/notice/notice-out.jsp"/>
+	</definition>
+
+	<definition name="notice-searchview" extends="baseLayout">
+		<put-attribute name="title" value="공지목록"/>
+		<put-attribute name="body" value="/WEB-INF/views/notice/notice-searchview.jsp"/>
+	</definition>		
+	
+
+	<definition name="mypage" extends="baseLayout">
+		<put-attribute name="title" value="마이페이지"/>
+		<put-attribute name="body" value="/WEB-INF/views/main/mypage.jsp"/>
+	</definition>		
+	
+	
+<!-- 	우리아이 -->
+
+	<definition name="mybaby-input" extends="baseLayout">
+		<put-attribute name="title" value="우리아이입력"/>
+		<put-attribute name="body" value="/WEB-INF/views/member/mybaby-input.jsp"/>
+	</definition>
+
+	<definition name="mybaby-modifyForm" extends="baseLayout">
+		<put-attribute name="title" value="우리아이수정"/>
+		<put-attribute name="body" value="/WEB-INF/views/member/mybaby-modifyForm.jsp"/>
+	</definition>
+	
 	
 </tiles-definitions>
