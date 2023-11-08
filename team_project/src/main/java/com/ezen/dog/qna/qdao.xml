@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ezen.dog.qna.Qservice">
+
+<insert id="qnainsert">
+insert into qna(q_number,USERID,q_title,q_content,q_secret,q_groups) 
+values (q_number_seq.nextval,#{param1},#{param2},#{param3},#{param4},q_number_seq.currval)
+</insert>
+
+<select id="qnaout" resultType="com.ezen.dog.qna.QnaDTO">
+select * from qna
+order by q_groups desc,q_step asc
+</select>
+
+<select id="qnadetail" resultType="com.ezen.dog.qna.QnaDTO">
+select * from qna where q_number=#{param1}
+</select>
+
+<select id="qnareplyview" resultType="com.ezen.dog.qna.QnaDTO">
+select * from qna where q_number=#{param1}
+</select>
+
+<insert id="qnainsertreply">
+insert into qna (q_number,userId,q_title,q_content,q_groups,q_step,q_indent)
+	values (q_number_seq.nextval,#{param2},#{param3},#{param4},#{param5},#{param6},#{param7})
+</insert>
+
+<update id="qnastepup">
+<![CDATA[ 
+update qna set q_step=q_step+1 where q_groups = #{param1} and q_step > #{param2}
+]]>
+</update>
+
+<select id="qnamodifydata" resultType="com.ezen.dog.qna.QnaDTO">
+select * from qna where q_number = #{param1}
+</select>
+
+<update id="qnamodifysave">
+update qna set q_title=#{param3}, q_content=#{param4} where q_number=#{param1} and userId=#{param2}
+</update>
+
+<delete id="qnadelete">
+delete from qna where q_number=#{param1}
+</delete>
+
+<select id="qnasearchqtitle" resultType="com.ezen.dog.qna.QnaDTO">
+select * from qna where q_title like '%'|| #{param1} ||'%'
+</select>
+<select id="qnasearchuserId" resultType="com.ezen.dog.qna.QnaDTO">
+select * from qna where userId like '%'|| #{param1} ||'%'
+</select>
+<select id="qnasearchqcontent" resultType="com.ezen.dog.qna.QnaDTO">
+select * from qna where q_content like '%'|| #{param1} ||'%'
+</select>
+
+<!-- 페이징처리 -->
+<select id="cntnotice" resultType="int">
+   select count(*) from qna
+</select>
+
+<!-- 페이징처리에서 게시글 조회 -->
+<select id="selectnotice" resultType="com.ezen.dog.qna.QnaDTO">
+   select * from (
+   select rownum rn,A.* from(  
+   select *from qna order by q_groups DESC,q_step asc)A)
+   where rn between #{start} AND #{end}
+</select>
+
+
+
+</mapper>
