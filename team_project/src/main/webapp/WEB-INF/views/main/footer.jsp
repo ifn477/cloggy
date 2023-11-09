@@ -106,7 +106,7 @@
     if (d.getElementById(id)) return;
     js = d.createElement(s); js.id = id;
     js.src = 'https://t1.kakaocdn.net/kakao_js_sdk/2.4.0/kakao.channel.min.js';
-    js.integrity = 'sha384-bg2pMhokxyx1zeEM2ol2hJtBagKMjRIZDVI/KITe+j2U5K+Or6HPY1lWDWY8ubEN';
+    js.integrity = '인증 번호를 입력하세요.';
     js.crossOrigin = 'anonymous';
     fjs.parentNode.insertBefore(js, fjs);
   })(document, 'script', 'kakao-js-sdk');

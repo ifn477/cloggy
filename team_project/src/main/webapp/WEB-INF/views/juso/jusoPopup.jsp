@@ -12,7 +12,7 @@
 <script language="javascript">
 function init(){
 	var url = location.href;
-	var confmKey = "U01TX0FVVEgyMDIzMDkyODIwNTIxMTExNDEzNjQ=";
+	var confmKey = "클라이언트 키를 입력하세요.";
 	var resultType = "4";
 	var inputYn= "<%=inputYn%>";
 	

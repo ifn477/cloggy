@@ -5,7 +5,7 @@
 <mapper namespace="com.ezen.dog.member.Mservice">
 
 <insert id="membersave">
-insert into member values(#{param1},0,#{param2},#{param3},#{param4},#{param5},#{param6},sysdate,sysdate)
+insert into member values(#{param1},0,#{param2},#{param3},#{param4},#{param5},#{param6},sysdate,sysdate,0,0)
 </insert>
 
 <select id="memberout" resultType="com.ezen.dog.member.MemberDTO">

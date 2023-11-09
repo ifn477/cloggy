@@ -71,8 +71,8 @@ public class LMailSend {
 	      
 	    javax.mail.PasswordAuthentication pa;
 	    public MyAuthentication(){
-	        String id = "test9987@naver.com";
-	        String pw = "test9987@";
+	        String id = "이메일 주소";
+	        String pw = "이메일 비밀번호";
 	 
 	        pa = new javax.mail.PasswordAuthentication(id, pw);
 	    }
