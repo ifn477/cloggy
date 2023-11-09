@@ -236,36 +236,36 @@
 	<!-- 찜하기 -->
 	<div class="like-check">
 		<c:choose>
-		<c:when test="${empty likelist}">
-							<button class="likeAddButton"
-											data-productid="${pout.product_id}"
-											data-userid="${member.userId}">
-											<img alt="찜하기" src="/dog/image/Footprint_s.png" width="40px"
-												height="40px">
-										</button>
-									</c:when>
-									<c:otherwise>
-										<c:choose>
-											<c:when test="${fn:contains(likelist, pout.product_id)}">
-												<button class="likeDeleteButton"
-													data-productid="${pout.product_id}"
-													data-userid="${member.userId}">
-													<img alt="찜해제" src="/dog/image/Footprint_full_pink_s.png"
-														width="40px" height="40px">
-												</button>
-											</c:when>
-											<c:otherwise>
-												<button class="likeAddButton"
-													data-productid="${pout.product_id}"
-													data-userid="${member.userId}">
-													<img alt="찜하기" src="/dog/image/Footprint_s.png"
-														width="40px" height="40px">
-												</button>
-											</c:otherwise>
-										</c:choose>
-									</c:otherwise>
-								</c:choose>
-							</div>
+			<c:when test="${empty likelist}">
+				<button class="likeAddButton"
+					data-productid="${pout.product_id}"
+					data-userid="${member.userId}">
+					<img alt="찜하기" src="/dog/image/Footprint_s.png" width="40px"
+						height="40px">
+				</button>
+			</c:when>
+			<c:otherwise>
+				<c:choose>
+					<c:when test="${fn:contains(likelist, pout.product_id)}">
+						<button class="likeDeleteButton"
+							data-productid="${pout.product_id}"
+							data-userid="${member.userId}">
+							<img alt="찜해제" src="/dog/image/Footprint_full_pink_s.png"
+								width="40px" height="40px">
+						</button>
+					</c:when>
+					<c:otherwise>
+						<button class="likeAddButton"
+							data-productid="${pout.product_id}"
+							data-userid="${member.userId}">
+							<img alt="찜하기" src="/dog/image/Footprint_s.png" width="40px"
+								height="40px">
+						</button>
+					</c:otherwise>
+				</c:choose>
+			</c:otherwise>
+		</c:choose>
+	</div>
 	<!-- 찜하기 end -->					
 							
 	<!-- 상품명 -->
