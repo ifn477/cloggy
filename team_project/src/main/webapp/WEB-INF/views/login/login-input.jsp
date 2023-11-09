@@ -69,11 +69,11 @@
 				<hr>
 				<br> <span style="font-size: small;">사용중이신 SNS로 간편하게
 					로그인하세요!</span> &nbsp; &nbsp; &nbsp; <a
-					href="https://kauth.kakao.com/oauth/authorize?client_id=4b174c23998fabfa7c3c09869f3e67a7&redirect_uri=http://localhost:8333/dog/kakaoLogin&response_type=code">
+					href="https://kauth.kakao.com/oauth/authorize?client_id=앱키를 입력하세요&redirect_uri=uri를 입력하세요&response_type=code">
 					<img alt="카카오 로그인" src="/dog/image/kakao.png"
 					style="margin-bottom: 5px;" height="30"> &nbsp;
 				</a> <a
-					href="https://nid.naver.com/oauth2.0/authorize?client_id=ubDhsR6U_ZDLZ2KMrD59&redirect_uri=http://localhost:8333/dog/naverlogin&response_type=code">
+					href="https://nid.naver.com/oauth2.0/authorize?client_id=앱키를 입력하세요&redirect_uri=uri를 입력하세요&response_type=code">
 					<img alt="네이버 로그인" src="/dog/image/naver.png" height="30">
 				</a>
 			</div>

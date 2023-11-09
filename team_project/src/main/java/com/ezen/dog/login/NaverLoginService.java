@@ -32,9 +32,9 @@ public class NaverLoginService {
 			StringBuilder sb = new StringBuilder();
 			sb.append("grant_type=authorization_code");
 
-			sb.append("&client_id=ubDhsR6U_ZDLZ2KMrD59");
-			sb.append("&client_secret=_mLjqONPd9");
-			sb.append("&redirect_uri=http://localhost:8333/dog/naverlogin");
+			sb.append("&client_id=키를 입력하세요");
+			sb.append("&client_secret=시크릿키를 입력하세요");
+			sb.append("&redirect_uri=uri를 입력하세요");
 
 			sb.append("&code=" + authorize_code);
 			bw.write(sb.toString());

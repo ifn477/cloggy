@@ -521,7 +521,7 @@
 <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.4.0/kakao.min.js"
   integrity="sha384-mXVrIX2T/Kszp6Z0aEWaA8Nm7J6/ZeWXbL8UpGRjKwWe56Srd/iyNmWMBhcItAjH" crossorigin="anonymous"></script>
 <script>
-  Kakao.init('3eebd9335d1049afaa57ca1a1e68a170'); // 사용하려는 앱의 JavaScript 키 입력
+  Kakao.init('스크립트 앱키를 입력하세요'); // 사용하려는 앱의 JavaScript 키 입력
 </script>
 <script>
   Kakao.Share.createDefaultButton({

@@ -32,8 +32,8 @@ public class KakaoLoginService{
 			StringBuilder sb = new StringBuilder();
 			sb.append("grant_type=authorization_code");
 
-			sb.append("&client_id=4b174c23998fabfa7c3c09869f3e67a7");
-			sb.append("&redirect_uri=http://localhost:8333/dog/kakaoMember");
+			sb.append("&client_id=앱키를 입력하세요");
+			sb.append("&redirect_uri=uri를 입력하세요");
 
 			sb.append("&code=" + authorize_code);
 			bw.write(sb.toString());

@@ -29,7 +29,7 @@ public class Membercontroller {
 	@Autowired
 	SqlSession sqlSession;
 	
-	static String imgPath = "C:\\Users\\dywlr\\git\\team_project_1024\\team_project\\src\\main\\webapp\\image";
+	static String imgPath = "C:\\Users\\이한솔\\git\\team_project_11088\\team_project\\src\\main\\webapp\\image";
 	
 	@RequestMapping(value = "/mybaby-input")
 	public String mybaby()
