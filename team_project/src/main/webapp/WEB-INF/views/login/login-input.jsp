@@ -90,7 +90,7 @@
 	</c:if>
 	
 		function redirectToKakaoLogin() {
-			window.location.href = "https://kauth.kakao.com/oauth/authorize?client_id=4b174c23998fabfa7c3c09869f3e67a7&redirect_uri=http://localhost:8333/dog/kakaoMember&response_type=code";
+			window.location.href = "https://kauth.kakao.com/oauth/authorize?client_id=앱키를 입력하세요&redirect_uri=uri를 입력하세요&response_type=code";
 		}
 
 		$(document)
