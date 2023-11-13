@@ -60,22 +60,22 @@ public class CouponController {
 		int c_stock = Integer.parseInt(request.getParameter("c_stock"));
 		String userId = request.getParameter("userId");
 		CouponService couponservice = sqlSession.getMapper(CouponService.class);
-		//À¯Àú°¡ ÄíÆù ¹ŞÀº ÀÌ·ÂÀÌ ÀÖ´ÂÁö È®ÀÎ
+		//ìœ ì €ê°€ ì¿ í° ë°›ì€ ì´ë ¥ì´ ìˆëŠ”ì§€ í™•ì¸
 		int coupon_yesno = couponservice.couponyesno(c_code, userId);
-		//ÄíÆù ¹ŞÀº ÀÌ·ÂÀÌ ¾øÀ¸¸é Á¤º¸ ´Ù ÀÔ·Â
+		//ì¿ í° ë°›ì€ ì´ë ¥ì´ ì—†ìœ¼ë©´ ì •ë³´ ë‹¤ ì…ë ¥
 		if(coupon_yesno == 0) {
 	    couponservice.coupondownload(c_code, userId, c_enddate, c_stock);
-	    return "redirect:coupon-downloadform";
+	    return "ok";
 		}
-		//¹ŞÀº ÀûÀÌ ÀÖÀ¸¸é À¯Àú º¸À¯ ÄíÆù +1
+		//ë°›ì€ ì ì´ ìˆìœ¼ë©´ ìœ ì € ë³´ìœ  ì¿ í° +1
 		else {
 			int coupon_stock_ok = couponservice.couponstockok(c_code, userId);
 			if(coupon_stock_ok == 1) {
 			couponservice.couponuserstock(c_code, userId);
-			return "redirect:coupon-downloadform";
+			return "ok";
 			}
 			else {
-				return "main";
+				return "no";
 			}
 		}
 	}
@@ -89,21 +89,13 @@ public class CouponController {
 		return "coupon-list";
 	}
 
-	@RequestMapping(value = "/coupon-list-popup")
-	public String couponlistpopup(HttpServletRequest request, Model mo) {
-		String userId = request.getParameter("userId");
-		CouponService couponservice = sqlSession.getMapper(CouponService.class);
-		list = couponservice.couponlist(userId);
-		mo.addAttribute("list", list);
-		return "coupon-list-popup";
-	}
 	
 	@RequestMapping(value = "/coupondiscount")
 	public String coupondiscount(HttpServletRequest request, Model mo) {
 		String selectcoupon = request.getParameter("selectcoupon");
 		CouponService couponservice = sqlSession.getMapper(CouponService.class);
 		int c_discount = couponservice.coupondiscount(selectcoupon);
-		System.out.println("##ÇÒÀÎÀ²##:"+c_discount);
+		System.out.println("##í• ì¸ìœ¨##:"+c_discount);
 //		int discount_price = (int)(price -(price * c_discount/100.0));
 		mo.addAttribute("coupon", c_discount);
 		return "order";
