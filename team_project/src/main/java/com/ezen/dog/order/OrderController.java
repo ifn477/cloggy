@@ -69,15 +69,15 @@ public class OrderController {
 	
     @ResponseBody
     @RequestMapping(value = "/couponin", method = RequestMethod.POST)
-    public String couponin(@RequestParam("totalprice") int totalprice, @RequestParam("discount") int discount, @RequestParam("shipping") int shipping) {
-      int producttotalprice = (int) (totalprice - (totalprice * discount/100.0));
-      int finaltotalprice = producttotalprice + shipping;
+    public String couponin(@RequestParam("totalprice") int producttotalprice, @RequestParam("discount") int discount, @RequestParam("shipping") int shipping) {
+      int totalprice = producttotalprice + shipping;
+      int finaltotalprice = (int) (totalprice - (totalprice * discount/100.0));
       return Integer.toString(finaltotalprice); // 결과를 문자열로 반환
     }
 	
 	@ResponseBody
 	@RequestMapping(value = "/ordersave",method = RequestMethod.POST)
-	public String orderitem(String add1,String add2,String add3,int totalprice,String userId,int shipping,int ordermemo,String phone,String addressee,int selectcoupon,HttpServletRequest request,Model mo) {
+	public String orderitem(String add1,String add2,String add3,int totalprice,String userId,int shipping,int ordermemo,String phone,String addressee,int selectcoupon,int selectcouponcode,HttpServletRequest request,Model mo) {
 
 		String productIds = request.getParameter("productIds");
 		String prices = request.getParameter("prices");
@@ -107,6 +107,8 @@ public class OrderController {
 
 		String address = add1+add2+add3;	
 		os.inserto(address,totalprice,userId,shipping,ordermemo,phone,addressee,orderid,selectcoupon);
+		CouponService couponservice = sqlSession.getMapper(CouponService.class);
+		couponservice.usecoupon(userId, selectcouponcode);
 		
 		ArrayList<OrderitemDTO>list = os.ordercompleted(orderid, userId);
 		mo.addAttribute("list", list);
