@@ -107,7 +107,12 @@
                 userId: userId
             },
             success: function (response) {
-                alert('쿠폰 다운로드 성공');
+            	if(response == "ok"){
+	                alert('쿠폰 다운로드 성공');
+            	}
+            	else{
+	                alert('제한된 쿠폰 수량을 다 받았습니다');
+            	}
             },
             error: function (error) {
                 console.error('오류 발생', error);
