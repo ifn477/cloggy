@@ -65,11 +65,10 @@ delete from coupon where C_ENDDATE < sysdate
 </delete>
 <delete id="userdeletecoupon">
 <![CDATA[
-delete from coupon where C_ENDDATE < sysdate
+delete from coupondownload where C_ENDDATE < sysdate
 ]]>
 </delete>
-
-<!-- <update id="couponout"> -->
-<!-- update coupondownload set c_stock = c_stock-1 where c_code=#{param1} and userid=#{param2} -->
-<!-- </update> -->
+<delete id="usecoupon">
+delete from coupondownload where userid=#{param1} and c_code=#{param2}
+</delete>
 </mapper>
