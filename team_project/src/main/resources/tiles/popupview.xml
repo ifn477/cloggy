@@ -20,6 +20,12 @@
 		<put-attribute name="body" value="/WEB-INF/views/main/closePopup.jsp"/>
 	</definition>
 
+<!-- 추천상품리스트 -->
+	<definition name="product-recommendlist" extends="popupbaseLayout">
+		<put-attribute name="title" value="팝업창"/>
+		<put-attribute name="body" value="/WEB-INF/views/product/product-recommendlist.jsp"/>
+	</definition>
+	
 <!-- 리뷰작성 팝업 -->
 	<definition name="review-input" extends="popupbaseLayout">
 		<put-attribute name="title" value="리뷰 작성"/>
