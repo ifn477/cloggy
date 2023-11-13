@@ -58,12 +58,31 @@ public class ProductController {
 	
 	//상품추천리스트
 	@RequestMapping(value = "/product-recommendlist")
-	public String productrecommendlist(HttpServletRequest request, Model mo) {
+	public String productrecommendlist(HttpServletRequest request, Model mo,ProductPageDTO dto) {
 		String product_id = request.getParameter("product_id");
 		PService ps = sqlSession.getMapper(PService.class);
 		list = ps.productrecommendlist();
 		mo.addAttribute("list", list);
 		mo.addAttribute("product_id", product_id);
+		
+	    String nowPage=request.getParameter("nowPage");
+	    String cntPerPage=request.getParameter("cntPerPage");
+	    PService notice = sqlSession.getMapper(PService.class);
+	    int total=notice.cntnotice();
+	    if(nowPage==null && cntPerPage == null) {
+	       nowPage="1";
+	       cntPerPage="20";
+	    }
+	    else if(nowPage==null) {
+	       nowPage="1";
+	    }
+	    else if(cntPerPage==null) {
+	       cntPerPage="5";
+	    }      
+	    dto=new ProductPageDTO(total,Integer.parseInt(nowPage),Integer.parseInt(cntPerPage));
+	    mo.addAttribute("recommendpaging",dto);
+	    mo.addAttribute("list",notice.selectnotice(dto));
+	    
 		return "product-recommendlist";
 	}
 	
