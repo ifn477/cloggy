@@ -753,18 +753,17 @@ $(document).ready(function () {
 
 
 	//url 공유하기
+	//내장 클립보드 api사용
 	function clip() {
-
-		var url = '';
-		var textarea = document.createElement("textarea");
-		document.body.appendChild(textarea);
-		url = window.document.location.href;
-		textarea.value = url;
-		textarea.select();
-		document.execCommand("copy");
-		document.body.removeChild(textarea);
-		alert("URL이 복사되었습니다.")
-	}
+		  var url = window.location.href; // 현재 페이지의 URL 가져오기
+		  navigator.clipboard.writeText(url) // URL을 클립보드에 복사
+		    .then(function() {
+		      alert("URL이 복사되었습니다.");
+		    })
+		    .catch(function(error) {
+		      console.error("클립보드 복사 실패: ", error);
+		    });
+		}
 	
 	//상세설명 접었다 피기
     const productInfo = document.querySelector(".product-info");
