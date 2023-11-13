@@ -17,4 +17,5 @@ public interface CouponService {
 	public void couponout(int c_code,String userId);
 	public void deletecoupon();
 	public void userdeletecoupon();
+	public void usecoupon(String userId, int selectcouponcode);	
 }
