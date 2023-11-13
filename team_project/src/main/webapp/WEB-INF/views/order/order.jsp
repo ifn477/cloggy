@@ -208,7 +208,7 @@ input {
 		<select name="selectcoupon" id="selectcoupon" style="font-size: 15px;">
 			<option value="0">쿠폰사용안함</option>
 			<c:forEach items="${couponlist}" var="couponlist">
-				<option value="${couponlist.c_discount}">${couponlist.c_name}/${couponlist.c_discount}% 할인</option>
+				<option value="${couponlist.c_discount}" value2="${couponlist.c_code}">${couponlist.c_name}/${couponlist.c_discount}% 할인</option>
 			</c:forEach>
 		</select>
 		<button id="couponbnt" style="font-size: 15px; height: 25px; border: none;">쿠폰적용</button>
@@ -314,6 +314,7 @@ function kakakoPayorder() {
       var totalprice = document.getElementById("totalprice").value;
       var shippingintot = document.getElementById("shippingintot").value;
       var selectcoupon = $("#selectcoupon").val();
+      var selectcoupon_code = $("#selectcoupon > option:selected").attr("value2");	
       var shipping = document.getElementById("shipping").value;
       var userId = $("#userId").val();
       var ordermemo = $("#ordermemo").val();
@@ -384,7 +385,8 @@ function kakakoPayorder() {
                        "shipping": shipping,
                        "ordermemo": ordermemo,
                        "phone": phone,
-                       "addressee": addressee
+                       "addressee": addressee,
+		       "selectcouponcode": selectcoupon_code,
              
                        
                     },
@@ -416,6 +418,7 @@ function inicisPay() {
    
    var totalprice = document.getElementById("totalprice").value;
    var selectcoupon = $("#selectcoupon").val();
+   var selectcoupon_code = $("#selectcoupon > option:selected").attr("value2");
    var shipping = document.getElementById("shipping").value;
    var userId = $("#userId").val();
    var ordermemo = $("#ordermemo").val();
@@ -486,7 +489,8 @@ IMP.request_pay(
                    "shipping": shipping,
                    "ordermemo": ordermemo,
                    "phone": phone,
-                   "addressee": addressee
+                   "addressee": addressee,
+		   "selectcouponcode": selectcoupon_code,
          
                    
                 },
