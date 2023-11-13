@@ -96,6 +96,11 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
     function downloadCoupon(couponCode, endDate, stock, userId) {
+	var memberLoginState = ${loginstate};
+        if (!memberLoginState) {
+            alert('로그인 후 이용해 주세요.');
+            return;
+        }
         // 여기에 AJAX 요청을 보내고 성공하면 알림창을 표시합니다.
         $.ajax({
             type: 'POST',
