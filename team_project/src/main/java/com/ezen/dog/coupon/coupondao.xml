@@ -68,7 +68,7 @@ delete from coupon where C_ENDDATE < sysdate
 delete from coupondownload where C_ENDDATE < sysdate
 ]]>
 </delete>
-<delete id="usecoupon">
-delete from coupondownload where userid=#{param1} and c_code=#{param2}
-</delete>
+<update id="usecoupon">
+update coupondownload set c_user_stock = c_user_stock-1 where userid=#{param1} and c_code=#{param2}
+</update>
 </mapper>
