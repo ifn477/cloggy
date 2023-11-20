@@ -62,19 +62,19 @@ public class LoginController {
 		return "login-input";
 		}
 	}
-	//ReqeustParam     code    ޾ƿ   
+	//ReqeustParam으로 code값 받기
 	@RequestMapping(value = "/kakaoLogin", method = RequestMethod.GET)
 	public String kakaoLogin(@RequestParam(value = "code", required = false) String code,HttpServletRequest request) throws Throwable {
 		KakaoLoginService service = new KakaoLoginService();
 		
-		//code   Token    ޾ƿ   
+		//code를 보내서 토큰 얻기  
 		String access_Token = service.getAccessToken(code);
-		//Token                          
+		//토큰보내서 회원정보 가져오기                          
 		HashMap<String, Object> userInfo = service.getUserInfo(access_Token);
 		String nickname = (String)userInfo.get("nickname");
 		String email = (String)userInfo.get("email");
 		
-		//               ̸   ,  ̸          Ͽ  ȸ       Ȯ       α    
+		//회원의 이름과 이메일이 일치하면 로그인    
 		Lservice ls = sqlSession.getMapper(Lservice.class);
 		MemberDTO mdto = ls.kakaologin(nickname,email);
 		if(mdto!=null){
@@ -98,7 +98,7 @@ public class LoginController {
 		String name = (String)userInfo.get("name");
 		String email = (String)userInfo.get("email");
 		
-		//               ̸   ,  ̸          Ͽ  ȸ       Ȯ       α    
+		
 		Lservice ls = sqlSession.getMapper(Lservice.class);
 		MemberDTO mdto = ls.naverlogin(name,email);
 		if(mdto!=null){
