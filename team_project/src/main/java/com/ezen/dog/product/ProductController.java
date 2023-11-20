@@ -263,7 +263,7 @@ public class ProductController {
 		return "product-modifyForm";
 	}
 
-	//占쏙옙품 占쏙옙占쏙옙占쏙옙占쏙옙
+	//상품수정
 	@RequestMapping(value = "/product-modifyView", method = RequestMethod.POST)
 	public String productmodifyView(MultipartHttpServletRequest multi) throws IllegalStateException, IOException {
 		int category1_id = Integer.parseInt(multi.getParameter("category1_id"));
@@ -287,7 +287,7 @@ public class ProductController {
 		return "redirect:product-out";
 	}
 	
-	//占쏙옙품占쏙옙占쏙옙
+	//상품삭제
 	@RequestMapping(value = "/product-delete")
 	public String productdelete(HttpServletRequest request) {
 		int product_id = Integer.parseInt(request.getParameter("product_id"));
@@ -297,7 +297,7 @@ public class ProductController {
 		return "redirect:product-out";
 	}
 
-	// �긽�뭹 �쟾泥닿��깋
+	// 전체검색
 	@RequestMapping(value="/search-all", method = RequestMethod.POST )
 	public String searchall(HttpServletRequest request, Model mo) {
 		String p_name = request.getParameter("p_name");
